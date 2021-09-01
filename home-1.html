@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>FoodKa - Food Ordering, Delivery & Restuarent Template</title>
+    <title>FoodMonster</title>
     <!--fivicon icon-->
     <link rel="icon" href="assets/img/fevicon.png">
 
@@ -63,29 +63,22 @@
                         <span class="icon-right"></span>
                     </button>
                 </div>
+                <div class="logo">
+                    <a class="main-logo" href="home-1.html"><img src="assets/img/logo.png" alt="img"></a>
+                </div>
                 <div class="collapse navbar-collapse" id="themefie_main_menu">
                     <ul class="navbar-nav menu-open">
                         <li class="current-menu-item menu-item-has-children">
-                            <a href="home-1.html">HOME</a>
+                            <a href="home-1.html">訂餐</a>
                             <ul class="sub-menu ps-0">
-                                <li><a href="home-1.html">Home 01</a></li>
-                                <li><a href="home-2.html">Home 02</a></li>
-                                <li><a href="home-3.html">Home 03</a></li>
-                            </ul>
-                        </li>
-                        <li class="current-menu-item menu-item-has-children">
-                            <a href="#">PAGES</a>
-                            <ul class="sub-menu ps-0">
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="blog-details.html">Blog Details</a></li>
-                                <li><a href="menu.html">Menu</a></li>
-                                <li><a href="menu-list.html">Menu List</a></li>
                                 <li><a href="shop.html">Shop</a></li>
-                                <li><a href="single-product.html">Shop Details</a></li>
+                                <li><a href="menu.html">Menu</a></li>
                                 <li><a href="cart.html">Cart</a></li>
                                 <li><a href="checkout.html">Checkout</a></li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="blog.html">食記</a>
                         </li>
                         <li>
                             <a href="about.html">ABOUT US</a>
@@ -94,9 +87,6 @@
                             <a href="contact.html">CONTACTS</a>
                         </li>
                     </ul>
-                </div>
-                <div class="logo">
-                    <a class="main-logo" href="home-1.html"><img src="assets/img/FoodMonsterLogo.png" style="width: 167px;height: 50px;" alt="img"></a>
                 </div>
                 <div class="nav-right-part nav-right-part-mobile">
                     <ul>
@@ -113,9 +103,10 @@
                     <ul>
                         <li><a class="search" href="#"><i class="ri-search-line"></i></a>
                         </li>
-                        <li class="phone-contact"><i class="ri-phone-fill float-start"></i>
-                            +997 509 153 849
+                        <li class="phone-contact">
+                            <a href="#">sign in</a>
                         </li>
+                        <li class="menu-cart"><a href="#">小鈴鐺 <span>4</span></a></li>
                         <li class="menu-cart"><a href="cart.html">CART <span>1</span></a></li>
                         <li>49.50 $</li>
                     </ul>
@@ -126,20 +117,21 @@
     <!-- navbar end -->
 
     <!-- Banner Area Start-->
-    <section class="banner-area">
+    <section class="banner-area banner-area-2">
         <div class="banner-thumb">
-            <img src="assets/img/banner/banner.png" alt="img">
+            <!-- <img src="assets/img//home-3/banner-bg.png" alt="img"> -->
         </div>
-        <div class="banner-bg-img"></div>
-        <div class="banner-shape-1"><img src="assets/img/banner/shape-1.png" alt="img"></div>
-        <div class="banner-shape-2"><img src="assets/img/banner/shape-2.png" alt="img"></div>
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-8 align-self-center">
+                <div class="col-lg-8 align-self-center">
                     <div class="banner-inner text-center">
-                        <h3>Do not miss it!</h3>
-                        <h1>Pizza tastes better than skinny feels.</h1>
-                        <a class="btn btn-secondary" href="shop.html">GET IT NOW</a>
+                        <h1>在您附近的熱門外送美食</h1>
+                        <form>
+                            <div class="single-input-wrap mb-0 with-btn">
+                                <input type="email" placeholder="想吃點什麼">
+                                <button class="btn btn-base">Search your location</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -1105,27 +1097,7 @@
     </section>
     <!-- product Area End -->
 
-    <!-- subscribe Area Start-->
-    <section class="subscribe-area pd-bottom-150" style="background-image: url(assets/img/other/location.png);">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-8 col-lg-9 col-md-10">
-                    <div class="section-title text-center">
-                        <h3 class="sub-title text-secondary">Our Location</h3>
-                        <h2 class="title text-white">Find foodka stores in your area</h2>
-                        <form>
-                            <div class="single-input-wrap mb-0 with-btn">
-                                <input type="email" placeholder="Zip code or state providence">
-                                <button class="btn btn-base">SEE LOCATION</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- subscribe Area End -->
+  
 
     <!-- testimonial Area Start-->
     <section class="testimonial-area text-center">

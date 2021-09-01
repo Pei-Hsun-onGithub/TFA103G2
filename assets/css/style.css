@@ -1886,7 +1886,8 @@ ul.side-navbar-items li a:hover {
   display: flex;
 }
 .navbar-area .nav-container .logo a img {
-  height: auto;
+  width: 167px;
+  height: 50px;
 }
 .navbar-area .nav-container .logo .sticky-logo {
   display: none;
@@ -4292,6 +4293,10 @@ ul.side-navbar-items li a:hover {
 
 .banner-area-2 {
   background: #FAF7F2;
+  
+  
+  
+
 }
 .banner-area-2 .banner-inner {
   padding: 250px 0;
