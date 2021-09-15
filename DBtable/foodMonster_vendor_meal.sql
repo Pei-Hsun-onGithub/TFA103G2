@@ -42,7 +42,7 @@ CREATE TABLE Meal (
 	launchdate     		TIMESTAMP,
 	launchdays    		INT,
     mealdescription     VARCHAR(150),
-    mealimg    			BLOB,
+    mealimg    			MEDIUMBLOB,
     restaurantid    	INT NOT NULL,
 	CONSTRAINT Meal_restaurantid_FK FOREIGN KEY (restaurantid) REFERENCES Restaurant (restaurantid),
 	CONSTRAINT Meal_mealid_PK PRIMARY KEY (mealid)
@@ -65,11 +65,11 @@ INSERT INTO Style (styletype) VALUES ('日式');
 
 # 彈性休假
 CREATE TABLE ElasticDayoff (
-	dayofftid		INT AUTO_INCREMENT NOT NULL,
+	dayoffid		INT AUTO_INCREMENT NOT NULL,
 	restaurantid  	INT  NOT NULL,
     newWeeklyleave 	CHAR(7),
     CONSTRAINT ElasticDayoff_restaurantid_FK FOREIGN KEY (restaurantid) REFERENCES Restaurant (restaurantid),
-	CONSTRAINT ElasticDayoff_dayofftid_PK PRIMARY KEY (dayofftid)
+	CONSTRAINT ElasticDayoff_dayoffid_PK PRIMARY KEY (dayoffid)
 ) AUTO_INCREMENT = 40;
 
 INSERT INTO ElasticDayoff (restaurantid, newWeeklyleave) VALUES (7001,'0011000');
