@@ -27,6 +27,67 @@
 
 </head>
 <body>
+    <header class="navbar-area ">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container nav-container">
+                <div class="responsive-mobile-menu">
+                    <button class="menu toggle-btn d-block d-lg-none" data-target="#themefie_main_menu" 
+                    aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-left"></span>
+                        <span class="icon-right"></span>
+                    </button>
+                </div>
+                <div class="logo">
+                    <a class="main-logo" href="home-1.html"><img src="assets/img/logo.png" alt="img"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="themefie_main_menu">
+                    <ul class="navbar-nav menu-open">
+                        <li class="current-menu-item menu-item-has-children">
+                            <a href="home-1.html">訂餐</a>
+                            <ul class="sub-menu ps-0">
+                                <li><a href="shop.html">Shop</a></li>
+                                <li><a href="menu.html">Menu</a></li>
+                                <li><a href="cart.html">Cart</a></li>
+                                <li><a href="checkout.html">Checkout</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="blog.html">食記</a>
+                        </li>
+                        <li>
+                            <a href="about.html">ABOUT US</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">CONTACTS</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="nav-right-part nav-right-part-mobile">
+                    <ul>
+                        <li><a class="search" href="#"><i class="ri-search-line"></i></a>
+                        </li>
+                        <li class="phone-contact d-md-block d-none"><i class="ri-phone-fill float-start"></i>
+                            +997 509 153 849
+                        </li>
+                        <li class="menu-cart"><a href="cart.html">CART <span>1</span></a></li>
+                        <li>49.50 $</li>
+                    </ul>
+                </div>
+                <div class="nav-right-part nav-right-part-desktop">                    
+                    <ul>
+                        <li><a class="search" href="#"><i class="ri-search-line"></i></a>
+                        </li>
+                        <li class="phone-contact">
+                            <a href="#">sign in</a>
+                        </li>
+                        <li class="menu-cart"><a href="#">小鈴鐺 <span>4</span></a></li>
+                        <li class="menu-cart"><a href="cart.html">CART <span>1</span></a></li>
+                        <li>49.50 $</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
     <div class="checkout-area pd-top-120 pd-bottom-120">
         <div class="container">
             <div class="row justify-content-center">
@@ -36,26 +97,29 @@
                         </h5>
                         <form class="default-form-wrap style-2">
                             <div class="row">
-                                
-                                <div class="col-md-12">
-                                    <label>商品名稱</label>
-                                    <div class="single-input-wrap">
-                                        <input type="text" class="form-control" placeholder="Type Your Country">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>商品名稱</label>
+                                        <div class="single-input-wrap">
+                                            <input type="text" class="form-control" placeholder="Type Your Country">
+                                        </div>
                                     </div>
-                                </div>
+    
+                                    <div class="col-md-4">
+                                        <label>商品類型</label>
+                                            <div class="single-input-wrap">
+                                                <select class=" myclass-select" id="inputGroupSelect01">
+                                                    <option selected>Choose...</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                  </select>
+                                            </div>
+                                        
+                                    </div>
 
-                                <div class="col-md-12">
-                                    <label>商品類型</label>
-                                    <div class="col-md-12">
-                                        <select class="single-input-wrap myclass-select" id="inputGroupSelect01">
-                                            <option selected>Choose...</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                          </select>
-                                    </div>
-                                    
                                 </div>
+                               
 
                                 <div class="col-md-12">
                                     <label>店家地址</label>
@@ -63,12 +127,96 @@
                                         <input type="text" class="form-control" placeholder="Type Your Country">
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <label>價格</label>
+                                        <div class="single-input-wrap">
+                                            <input type="text" class="form-control" placeholder="Type Your Country">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>上架天數</label>
+                                        <div class="single-input-wrap">
+                                            <select class=" myclass-select" id="inputGroupSelect01">
+                                                <option selected>Choose...</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                              </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                              
                                 <div class="col-md-12">
-                                    <label>Country</label>
-                                    <div class="single-input-wrap">
-                                        <input type="text" class="form-control" placeholder="Type Your Country">
+                                    <label>上架日期</label>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="single-input-wrap">
+                                                <select class=" myclass-select2" id="inputGroupSelect01">
+                                                    <option selected>Choose...</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                  </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="single-input-wrap">
+                                                <select class=" myclass-select2" id="inputGroupSelect01">
+                                                    <option selected>Choose...</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                  </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="single-input-wrap">
+                                                <select class=" myclass-select2" id="inputGroupSelect01">
+                                                    <option selected>Choose...</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                  </select>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
+                                <div>
+                                    <label>圖片上傳</label>
+                                    <div>
+                                        <input type="file" class="form-control" >
+                                    </div>
+                                </div>
+                        
+                                <div class="col-md-12">
+                                    <label>商品介紹</label>
+                                    <div class="col-md-12">
+                                        <div class="single-textarea-wrap">
+                                            <textarea rows="4" placeholder="商品介紹..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="button" class="btn btn-base" id="btn_submit">確認</button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="reset" class="btn btn-base">重填</button>
+                                        </div>
+                                        <div class="col-md-2">
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                                
                                
                             </div>
                         </form>
