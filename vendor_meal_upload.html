@@ -23,10 +23,18 @@
 
     <!--Google Fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
-
+    <style>
+       .justify-content-center .my-aside-left{
+            border: solid 1px green;
+        }
+        div.checkout-area div.my-container-wrapper .my-aside-left{
+            border: solid 1px blue;
+        }
+    </style>
 
 </head>
 <body>
+   
     <header class="navbar-area ">
         <nav class="navbar navbar-expand-lg">
             <div class="container nav-container">
@@ -88,10 +96,25 @@
             </div>
         </nav>
     </header>
-    <div class="checkout-area pd-top-120 pd-bottom-120">
+    <div class="shop-details-area pd-top-100">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-7">
+                <div class="col-md-3">
+                    
+
+                    <div class="widget widget_categories style-2">
+                        <h4 class="widget-title">Categories</h4>
+                            <ul>
+                                <li><a href="#"><img src="assets/img/category/1.png" alt="img"> Ramen <span>(5)</span></a></li>
+                                <li><a href="#"><img src="assets/img/category/2.png" alt="img"> Pizza <span>(9)</span> </a></li>
+                                <li><a href="#"><img src="assets/img/category/3.png" alt="img"> Burger <span>(18)</span></a></li>
+                                <li><a href="#"><img src="assets/img/category/4.png" alt="img"> French fries <span>(14)</span></a></li>
+                                <li><a href="#"><img src="assets/img/category/5.png" alt="img"> Fast food <span>(10)</span></a></li>
+                                <li><a href="#"><img src="assets/img/category/6.png" alt="img"> Soft drinks <span>(28)</span></a></li>
+                            </ul>
+                    </div>
+                </div>
+                <div class="col-md-9">
                     <div class="bill-payment-wrap">
                         <h5>餐點資料
                         </h5>
@@ -220,65 +243,11 @@
                                
                             </div>
                         </form>
-                    </div>                    
-                </div>
-                <div class="col-lg-5">
-                    <div class="order-area">
-                        <h5 class="title">Your order</h5>
-                        <div class="order-product">
-                            <div class="thumb">
-                                <img src="assets/img/widget/01.png" alt="img">
-                            </div>
-                            <div class="details">
-                                <h6>All Season Gulliver Pizza</h6>
-                                <ul>
-                                    <li><span>Select Size: </span>Large</li>
-                                    <li><span>Select Crust: </span>Double Crust</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <ul class="amount">
-                            <li>Subtotal<span>$50.00</span></li>
-                            <li class="total">Total<span>$50.00</span></li>
-                        </ul>
-                        <div class="peyment-method">
-                            <h6>Check payments</h6>
-                            <ul class="card-area">
-                                <li>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                        </label>
-                                    </div>
-                                    <div class="details">
-                                        <h6>Credit Cart <img src="assets/img/icon/peyment-card.png" alt="img"></h6>
-                                        <p>Pay with visa, Anex, MasterCard, Maestro,Discover and many other credit and debit credit vai paypal</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                        </label>
-                                    </div>
-                                    <div class="details">
-                                        <h6>PayPal <img src="assets/img/icon/paypal-card.png" alt="img"></h6>
-                                        <p>Pay easily, fast and secure with PayPal.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <a class="btn btn-secondary w-100" href="#"> PLACE ORDER</a>
-                    </div>                
+                    </div>  
                 </div>
             </div>
         </div>
     </div>
-
-        
-    </div>   
-
-
 
   <!-- all plugins here -->
   <script src="assets/js/jquery.3.6.min.js"></script>
