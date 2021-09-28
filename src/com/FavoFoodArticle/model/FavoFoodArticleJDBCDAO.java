@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import util.Util;
+
+import util.copy.Util;
+
 
 public class FavoFoodArticleJDBCDAO implements FavoFoodArticleDAO_interface {
 	
