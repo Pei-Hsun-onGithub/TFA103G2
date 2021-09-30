@@ -1,4 +1,4 @@
-package com.FavoFoodArticle.model;
+package com.favofoodarticle.model;
 
 import java.util.List;
 

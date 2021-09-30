@@ -1,4 +1,4 @@
-package com.FavoFoodArticle.model;
+package com.favofoodarticle.model;
 
 public class FavoFoodArticleVO {
 	private Integer userId;
