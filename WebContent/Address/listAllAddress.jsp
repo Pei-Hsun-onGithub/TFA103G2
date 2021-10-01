@@ -3,11 +3,11 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.address.model.*"%>
 
+
 <%
 	AddressDAO dao = new AddressDAO();
 	List<AddressVO> list = dao.getAll();
-    pageContext.setAttribute("list",list);
-    
+    pageContext.setAttribute("list",list);   
 %>
 
 <!DOCTYPE html>
@@ -56,7 +56,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>所有員工資料 - listAllAddress_byDAO.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4> 
+		 <h4><a href="<%=request.getContextPath()%>/address/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -82,7 +82,7 @@
 		<th>狀態</th>
 	</tr>
 	
-	<%@ include file="page1.file" %> 
+	<%@ include file="page\page1.file" %> 
 	
 	<c:forEach var="AddressVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 	
@@ -95,22 +95,22 @@
 			<td>${AddressVO.buildingName}</td>
 			<td>${AddressVO.note}</td>
 			<td>${AddressVO.sta}</td>
-<!-- 						<td> -->
-<%-- 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;"> --%>
-<!-- 			     <input type="submit" value="修改"> -->
-<%-- 			     <input type="hidden" name="empno"  value="${empVO.empno}"> --%>
-<!-- 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM> -->
-<!-- 			</td> -->
-<!-- 			<td> -->
-<%-- 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/emp/emp.do" style="margin-bottom: 0px;"> --%>
-<!-- 			     <input type="submit" value="刪除"> -->
-<%-- 			     <input type="hidden" name="empno"  value="${empVO.empno}"> --%>
-<!-- 			     <input type="hidden" name="action" value="delete"></FORM> -->
-<!-- 			</td> -->
+						<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/address/address.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="修改">
+			     <input type="hidden" name="deliveryAddId"  value="${AddressVO.deliveryAddId}">
+			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			</td>
+			<td>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/address/address.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="刪除">
+			     <input type="hidden" name="deliveryAddId"  value="${AddressVO.deliveryAddId}">
+			     <input type="hidden" name="action" value="delete"></FORM>
+			</td>
 		</tr>
 	</c:forEach>
 </table>
 
-<%@ include file="page2.file" %>
+<%@ include file="page\page2.file" %>
 </body>
 </html>

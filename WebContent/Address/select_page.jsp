@@ -94,9 +94,9 @@
 
 <h3>員工管理</h3>
 
-<!-- <ul> -->
+<ul>
   <li><a href='<%=request.getContextPath()%>/address/addAddress.jsp'>Add</a> a new Address.</li>
-<!-- </ul> -->
+</ul>
 
 </body>
 </html>
