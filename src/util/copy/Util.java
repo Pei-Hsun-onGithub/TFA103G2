@@ -4,17 +4,17 @@ public class Util {
 	
 	public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	
-	// MySQL 8.0.13以後只需保留serverTimezone設定即可
+	// MySQL 8.0.13隞亙���靽�erverTimezone閮剖��
 	public static final String URL = 
 			"jdbc:mysql://localhost:3306/fm01?"
-//			+ "useSSL=false&"                   // 不使用加密連線 (需有憑證才行)
-//			+ "rewriteBatchedStatements=true&"  // 批次更新需要此資訊
-			+ "serverTimezone=Asia/Taipei";     // 設定時區資訊
-//			+ "allowPublicKeyRetrieval=true&"   // 配合MySQL 8以後版本對密碼儲存機制的設定
-//			+ "useUnicode=true&"                // 使用Unicode編碼 (中文才不會亂碼)
-//			+ "characterEncoding=utf-8";        // 字元採用UTF-8設定
+//			+ "useSSL=false&"                   // 銝蝙������蝺� (���������)
+//			+ "rewriteBatchedStatements=true&"  // �甈⊥���閬迨鞈��
+			+ "serverTimezone=Asia/Taipei";     // 閮剖���鞈��
+//			+ "allowPublicKeyRetrieval=true&"   // ���ySQL 8隞亙��撠�Ⅳ�摮���身摰�
+//			+ "useUnicode=true&"                // 雿輻Unicode蝺函Ⅳ (銝剜�����Ⅳ)
+//			+ "characterEncoding=utf-8";        // 摮��UTF-8閮剖��
 	
 	public static final String USER = "root";
 	
-	public static final String PASSWORD = "123456";
+	public static final String PASSWORD = "password";
 }
