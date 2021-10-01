@@ -3,7 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.address.model.*"%>
 
-
+2
 <%
 	AddressDAO dao = new AddressDAO();
 	List<AddressVO> list = dao.getAll();
