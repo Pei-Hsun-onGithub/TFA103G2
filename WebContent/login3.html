@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zxx">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,8 @@
     <link rel="icon" href="assets/img/fevicon.png">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="assets/css/animate.min.css">       //動畫
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="assets/css/animate.min.css"> //動畫
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/magnific.min.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
     <link rel="stylesheet" href="assets/css/nice-select.min.css">
@@ -21,19 +22,20 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <!-- new css -->
-    <link rel="stylesheet" href="assets/css/yeh.css">
+    <link rel="stylesheet" href="assets/css/yeh3.css">
 
     <!--Google Fonts-->
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
-    
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap"
+        rel="stylesheet">
     <style>
-        .test{
+        .test {
             margin-top: 52px;
         }
     </style>
 
 </head>
+
 <body class='sc5'>
     <!-- preloader area start -->
     <!-- preloader area end -->
@@ -59,82 +61,98 @@
                 <div class="col-lg-6 align-self-center">
                     <div class="banner-inner text-center">
 
-                        <!---------------------------------- new  ---------------------------------->
-                        
+                        <!-- new  -->
                         <div class="panel-group">
                             <input type="radio" name="panel-radio" id="radio1" class="panel-control" checked>
                             <input type="radio" name="panel-radio" id="radio2" class="panel-control">
                             <div class="tab-group">
-                              <label for="radio1" class="active">會員</label>
-                              <label for="radio2">廠商</label>
+                                <label for="radio1" class="active">tab1</label>
+                                <label for="radio2">tab2</label>
                             </div>
                             <div class="content-group">
-
                                 <!---------------------------------- table內帳號輸入 ---------------------------------->
-                                <form class="content content1" action="javascript:;" method="post">
-                                    <div id="right" class="two-thirds">
-                                        <fieldset>
-                                            <!--<div class="fie">-->
+                                <div class="content content1">
+                                    <form class="login" action="javascript:;" method="post">
+                                        <div id="left" class="one-thirds"></div>
+                                        <!--one-thirds-->
+                                        <div id="right" class="two-thirds">
+                                            <fieldset>
+                                                <!--<div class="fie">-->
                                                 <h1 class="lgd">登入帳號</h1>
-                                                <p>直接輸入您的會員帳號密碼登入</p>
-                                <!--1-->        <input type="username" id="username" class="username_email" name="username" placeholder="您的電子郵件地址" required>
-                                <!--2-->        <input type="password" id="password" class="password1" name="password" placeholder="您的密碼" required>
-                                <!--3-->        <input type="button" value="登入" class="btn" id="submit" onclick="myFormCheck()"/>
-                                <!--4-->        <div id="rmbr">
-                                <!--4.1-->          <input type="checkbox" id="remberme" name="remberme" required>
-                                <!--4.2-->          <label for="remberme" id="remberme0">記住我</label>
+                                                <p>直接輸入您的 **** 會員帳號密碼登入</p>
+                                                <!--1--> <input type="username" id="username" class="username_email"
+                                                    name="username" placeholder="您的電子郵件地址" required>
+                                                <!--2--> <input type="password" id="password" class="password1"
+                                                    name="password" placeholder="您的密碼" required>
+                                                <!--3--> <input type="button" value="登入" class="btn" id="submit"
+                                                    onclick="myFormCheck()" />
+                                                <!--4-->
+                                                <div id="rmbr">
+                                                    <!--4.1--> <input type="checkbox" id="remberme" name="remberme"
+                                                        required>
+                                                    <!--4.2--> <label for="remberme" id="remberme0">記住我</label>
                                                 </div>
                                                 <div id="sign">
                                                     <a href="javascript:;" id="member_btn">忘記密碼?</a>
                                                     <a href="javascript:;" id="register">註冊</a>
                                                 </div>
-                                                <!-- <p class="member_btn">您可以使用以下帳號密碼直接登入為 會員</p> -->
+                                                <p class="member_btn">您可以使用以下帳號密碼直接登入為 會員</p>
                                                 <div class="img_btn">
                                                     <div class="c_btn facebook-btn fb">
-                                                        <a href="javascript:;" ><img src="img/facebook.png" alt=""></a>
+                                                        <a href="javascript:;"><img src="img/facebook.png" alt=""></a>
                                                     </div>
                                                     <div class="c_btn google-btn go">
-                                                        <a href="javascript:;" ><img src="img/google.png" alt=""></a>
+                                                        <a href="javascript:;"><img src="img/google.png" alt=""></a>
                                                     </div>
                                                 </div>
-                                            <!--</div>-->
-                                        </fieldset>
-                                    </div><!--two-thirds-->
-                                </form>
-                                 <!---------------------------------- table內帳號輸入2 ---------------------------------->
-                                <form class="content content2" action="javascript:;" method="post">
-                                    <div id="right" class="two-thirds">
-                                        <fieldset>
-                                            <!--<div class="fie">-->
-                                                <h1 class="lgd" style="color:red">登入帳號</h1>
-                                                <p>直接輸入您的廠商帳號密碼登入</p>
-                                <!--1-->        <input type="username" id="username" class="username_email" name="usernam1" placeholder="您的電子郵件地址" required>
-                                <!--2-->        <input type="password" id="password" class="password1" name="password1" placeholder="您的密碼" required>
-                                <!--3-->        <input type="button" value="登入" class="btn" id="submit1" onclick="myFormCheck()"/>
-                                <!--4-->        <div id="rmbr">
-                                <!--4.1-->          <input type="checkbox" id="remberme" name="remberme" required>
-                                <!--4.2-->          <label for="remberme" id="remberme0">記住我</label>
+                                                <!--</div>-->
+                                            </fieldset>
+                                        </div>
+                                        <!--two-thirds-->
+                                    </form>
+                                </div>
+                                <!---------------------------------- table內帳號輸入2 ---------------------------------->
+                                <div class="content content2">
+                                    <form class="login" action="javascript:;" method="post">
+                                        <div id="right" class="two-thirds">
+                                            <fieldset>
+                                                <!--<div class="fie">-->
+                                                <h1 class="lgd">登入帳號</h1>
+                                                <p>直接輸入您的 **** 廠商帳號密碼登入</p>
+                                                <!--1--> <input type="username" id="username" class="username_email"
+                                                    name="username" placeholder="您的電子郵件地址" required>
+                                                <!--2--> <input type="password" id="password" class="password1"
+                                                    name="password" placeholder="您的密碼" required>
+                                                <!--3--> <input type="button" value="登入" class="btn" id="submit"
+                                                    onclick="myFormCheck()" />
+                                                <!--4-->
+                                                <div id="rmbr">
+                                                    <!--4.1--> <input type="checkbox" id="remberme" name="remberme"
+                                                        required>
+                                                    <!--4.2--> <label for="remberme" id="remberme0">記住我</label>
                                                 </div>
                                                 <div id="sign">
                                                     <a href="javascript:;" id="member_btn">忘記密碼?</a>
                                                     <a href="javascript:;" id="register">註冊</a>
                                                 </div>
-                                                <!-- <p class="member_btn">您可以使用以下帳號密碼直接登入為 會員</p> -->
+                                                <p class="member_btn">您可以使用以下帳號密碼直接登入為 會員</p>
                                                 <div class="img_btn">
                                                     <div class="c_btn facebook-btn fb">
-                                                        <a href="javascript:;" ><img src="img/facebook.png" alt=""></a>
+                                                        <a href="javascript:;"><img src="img/facebook.png" alt=""></a>
                                                     </div>
                                                     <div class="c_btn google-btn go">
-                                                        <a href="javascript:;" ><img src="img/google.png" alt=""></a>
+                                                        <a href="javascript:;"><img src="img/google.png" alt=""></a>
                                                     </div>
                                                 </div>
-                                            <!--</div>-->
-                                        </fieldset>
-                                    </div><!--two-thirds-->
-                                </form>
+                                                <!--</div>-->
+                                            </fieldset>
+                                        </div>
+                                        <!--two-thirds-->
+                                    </form>
+                                </div>
                             </div>
-                          </div>
-                          
+                        </div>
+
                         <!----------------------------------  end  ---------------------------------->
 
                         <nav aria-label="breadcrumb">
@@ -144,11 +162,14 @@
                     </div>
                 </div>
             </div>
+
+
+
         </div>
     </section>
-    <!-- bredcrumb Area End --> 
+    <!-- bredcrumb Area End -->
 
-   
+
 
     <!-- footer area start -->
     <footer class="footer-area pd-top-25">
@@ -163,24 +184,24 @@
                     </div>
                     <div class="col-md-6">
                         <ul class="social-area text-md-end text-center mt-md-0 mt-2">
-                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li> 
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li> 
-                            <li><a href="#"><i class="fab fa-behance"></i></a></li> 
-                            <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li> 
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                            <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-    <!-- footer area end -->    
+    <!-- footer area end -->
 
     <!-- back-to-top end -->
     <div class="back-to-top">
         <span class="back-top"><i class="fas fa-angle-double-up"></i></span>
     </div>
 
-    
+
 
     <!-- all plugins here -->
     <script src="assets/js/jquery.3.6.min.js"></script>
@@ -200,7 +221,8 @@
     <!-- main js  -->
     <script src="assets/js/main.js"></script>
     <!-- new js   -->
-    <script src="assets/js/yeh.js"></script>
+    <script src="assets/js/yeh3.js"></script>
 
 </body>
+
 </html>
