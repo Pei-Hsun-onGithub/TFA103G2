@@ -2,9 +2,6 @@ package com.address.model;
 
 import java.util.List;
 
-import com.address.model.AddressVO;
-
-
 public class AddressService {
 
 	private AddressDAO_interface dao;

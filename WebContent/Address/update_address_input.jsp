@@ -3,7 +3,7 @@
 <%@ page import="com.address.model.*"%>
 
 <%
-  addressVO addressVO = (AddressVO) request.getAttribute("addressVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
+AddressVO addressVO = (AddressVO) request.getAttribute("addressVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
 --<%= addressVO==null %>--${addressVO.deptno}-- 
 <html>
@@ -68,44 +68,58 @@
 <FORM METHOD="post" ACTION="address.do" name="form1">
 <table>
 	<tr>
-		<td>員工編號:<font color=red><b>*</b></font></td>
-		<td><%=addressVO.getEmpno()%></td>
+		<td>外送地址編號:<font color=red><b>*</b></font></td>
+		<td><%=addressVO.getDeliveryAddId()%></td>
 	</tr>
 	<tr>
-		<td>員工姓名:</td>
-		<td><input type="TEXT" name="ename" size="45" value="<%=addressVO.getEname()%>" /></td>
+		<td>會員編號:</td>
+		<td><input type="TEXT" name="ename" size="45" value="<%=addressVO.getUserId()%>" /></td>
 	</tr>
 	<tr>
-		<td>職位:</td>
-		<td><input type="TEXT" name="job" size="45"	value="<%=addressVO.getJob()%>" /></td>
+		<td>取餐人姓名:</td>
+		<td><input type="TEXT" name="job" size="45"	value="<%=addressVO.getCustomerName()%>" /></td>
 	</tr>
 	<tr>
-		<td>雇用日期:</td>
-		<td><input name="hiredate" id="f_date1" type="text" ></td>
+		<td>連絡電話:</td>
+		<td><input type="TEXT" name="sal" size="45"	value="<%=addressVO.getDeliverPhone()%>" /></td>
 	</tr>
 	<tr>
-		<td>薪水:</td>
-		<td><input type="TEXT" name="sal" size="45"	value="<%=addressVO.getSal()%>" /></td>
+		<td>地址:</td>
+		<td><input type="TEXT" name="sal" size="45"	value="<%=addressVO.getDeliverAddress()%>" /></td>
 	</tr>
 	<tr>
-		<td>獎金:</td>
-		<td><input type="TEXT" name="comm" size="45" value="<%=addressVO.getComm()%>" /></td>
+		<td>大樓:</td>
+		<td><input type="TEXT" name="comm" size="45" value="<%=addressVO.getBuildingName()%>" /></td>
 	</tr>
+	<tr>
+		<td>備註:</td>
+		<td><input type="TEXT" name="comm" size="45" value="<%=addressVO.getNote()%>" /></td>
+	</tr>
+	<tr>
+		<td>狀態:</td>
+		<td><input type="TEXT" name="comm" size="45" value="<%=addressVO.getSta()%>" /></td>
+	</tr>
+	
+	
+<!-- 		<tr> -->
+<!-- 		<td>連絡電話日期:</td> -->
+<!-- 		<td><input name="hiredate" id="f_date1" type="text" ></td> -->
+<!-- 	</tr> -->
 
-	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" />
-	<tr>
-		<td>部門:<font color=red><b>*</b></font></td>
-		<td><select size="1" name="deptno">
-			<c:forEach var="deptVO" items="${deptSvc.all}">
-				<option value="${deptVO.deptno}" ${(addressVO.deptno==deptVO.deptno)?'selected':'' } >${deptVO.dname}
-			</c:forEach>
-		</select></td>
-	</tr>
+<%-- 	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" /> --%>
+<!-- 	<tr> -->
+<!-- 		<td>部門:<font color=red><b>*</b></font></td> -->
+<!-- 		<td><select size="1" name="deptno"> -->
+<%-- 			<c:forEach var="deptVO" items="${deptSvc.all}"> --%>
+<%-- 				<option value="${deptVO.deptno}" ${(addressVO.deptno==deptVO.deptno)?'selected':'' } >${deptVO.dname} --%>
+<%-- 			</c:forEach> --%>
+<!-- 		</select></td> -->
+<!-- 	</tr> -->
 
 </table>
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="empno" value="<%=addressVO.getEmpno()%>">
+<input type="hidden" name="empno" value="<%=addressVO.getDeliveryAddId()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 
@@ -127,13 +141,13 @@
 </style>
 
 <script>
-        $.datetimepicker.setLocale('zh');
-        $('#f_date1').datetimepicker({
-           theme: '',              //theme: 'dark',
- 	       timepicker:false,       //timepicker:true,
- 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
- 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
- 		   value: '<%=addressVO.getHiredate()%>', // value:   new Date(),
+//         $.datetimepicker.setLocale('zh');
+//         $('#f_date1').datetimepicker({
+//            theme: '',              //theme: 'dark',
+//  	       timepicker:false,       //timepicker:true,
+//  	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+//  	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+<%--  		   value: '<%=addressVO.getHiredate()%>', // value:   new Date(), --%>
            //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
            //startDate:	            '2017/07/10',  // 起始日
            //minDate:               '-1970-01-01', // 去除今日(不含)之前

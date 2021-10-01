@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
-<%@ page import="com.Address.model.*"%>
+<%@ page import="com.address.model.*"%>
 
 <%
 	AddressDAO dao = new AddressDAO();
@@ -81,7 +81,9 @@
 		<th>³Æµù</th>
 		<th>ª¬ºA</th>
 	</tr>
+	
 	<%@ include file="page1.file" %> 
+	
 	<c:forEach var="AddressVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>">
 	
 		<tr>

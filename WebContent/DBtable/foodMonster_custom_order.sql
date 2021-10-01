@@ -20,10 +20,11 @@ VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12);
 
 CREATE TABLE MemberInfo(
 	userid  INT NOT NULL,
+	ename  VARCHAR(5) NOT NULL,
     CONSTRAINT MemberInfo_userid_PK PRIMARY KEY (userid)
 ) ;
-INSERT INTO MemberInfo (userid)  
-VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12);
+INSERT INTO MemberInfo (userid,ename)  
+VALUES (1, '陳國恩'),(2, '林思倫'),(3, '王子純'),(4, '張苑迪'),(5, '昌逸禎'),(6, '王威廷'),(7, '梁瑋蓁'),(8, '徐怡婷'),(9, '陳宗翰'),(10, '胡威廷'),(11, '蔡吉友'),(12, '陳冠軒');
 
 CREATE TABLE Restaurant(
 	restaurantid  INT NOT NULL,
@@ -178,8 +179,3 @@ CREATE TABLE FavoRestaurant (
 ) ;
 
 INSERT INTO FavoRestaurant (userid, restaurantid) VALUES (1,1);
-
-
-
-
-	 
