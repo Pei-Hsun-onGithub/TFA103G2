@@ -11,4 +11,3 @@ public interface RsOrderDAO_interface {
 	public List<RsOrderVO> getAll();
 
 }
-//sdasdsassss
