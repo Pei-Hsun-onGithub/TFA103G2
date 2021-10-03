@@ -192,7 +192,8 @@ div.card-body ul.my-form-wrapper li a {
 									</div>
 								</form>
 							</li>
-							<li><a class="btn btn-primary" href="#">查詢全部</a></li>
+<%-- 							<%=request.getContextPath()%> --%>
+							<li><a class="btn btn-primary" href="/TFA103G2/meal/meal.do?action=getAll">查詢全部</a></li>
 						</ul>
 
 						<div style="overflow: hidden;">

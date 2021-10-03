@@ -1,5 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.meal.model.*" %>
+
+
+
+
+<jsp:useBean id="list" scope="request" type="java.util.List<MealVO>" />
 
 <html>
 <head>
@@ -73,24 +80,38 @@ section.work-area{
 		<div class="container my-content">
 		
 			<div class="row justify-content-center">
-				<!-- add content here  -->
-
 				<table id="table_id" class="display">
 					<thead>
 						<tr>
-							<th>Column 1</th>
-							<th>Column 2</th>
+							<th>餐點編號</th>
+							<th>狀態</th>
+							<th>餐點名稱</th>
+							<th>餐點類型</th>
+							<th>單價</th>
+							<th>上市日期</th>
+							<th>上市天數</th>
+							<th>餐點描述</th>
+							<th>餐點照片</th>
+							<th>餐聽編號</th>
 						</tr>
 					</thead>
 					<tbody>
+	
+					<c:forEach var="mealVO" items="${list}">
 						<tr>
-							<td>Row 1 Data 1</td>
-							<td>Row 1 Data 2</td>
+							<td>${mealVO.mealId}</td>
+							<td>${mealVO.sta}</td>
+							<td>${mealVO.mealName}</td>
+							<td>${mealVO.mealType}</td>
+							<td>${mealVO.unitPrice}</td>
+							<td>${mealVO.launchDate}</td>
+							<td>${mealVO.launchDays}</td>
+							<td>${mealVO.mealDescription}</td>
+							<td>${mealVO.mealImg}</td>
+							<td>${mealVO.restaurantId}</td>
+							
 						</tr>
-						<tr>
-							<td>Row 2 Data 1</td>
-							<td>Row 2 Data 2</td>
-						</tr>
+					</c:forEach>
 					</tbody>
 				</table>
 			</div>
