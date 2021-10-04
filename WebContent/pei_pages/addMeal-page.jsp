@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>SelectPage</title>
+<title>AddMealPage</title>
 <!--fivicon icon-->
 <link rel="icon" href="../assets/img/fevicon.png">
 
@@ -69,8 +69,6 @@ div.card-body ul.my-form-wrapper li a {
 	line-height: normal;
 	border-radius: 10px;
 }
-
-
 </style>
 
 </head>
@@ -112,123 +110,128 @@ div.card-body ul.my-form-wrapper li a {
 							<!-- using active | disabled  -->
 							<li class="nav-item"><a class="nav-link model1 active"
 								aria-current="true" href="#">Meal</a></li>
-							<li class="nav-item "><a class="nav-link model2" href="#">model2</a>
-							</li>
-							<li class="nav-item"><a class="nav-link model3" href="#">model3</a>
-							</li>
 						</ul>
 					</div>
 					<div class="card-body model1-body active">
-						<h5 class="card-title">com.meal.model</h5>
+						<h5 class="card-title">新增一筆餐點</h5>
 
 						<div style="overflow: hidden;">
-							<h4 class="my-query-title" style="float: left;">資料查詢</h4>
+							<h4 class="my-query-title" style="float: left;">新增餐點</h4>
 
 						</div>
 
 						<br>
-						<!--          findMealById                    -->
-						<ul class="my-form-wrapper">
-							<li>
-								<form class="row row-cols-xxl-auto align-items-center">
 
-									<div class="row">
-										<label for="inputPassword" class="col-sm-3 col-form-label">輸入餐點編號
-											(如 : 502)</label>
-										<div class="col-sm-2">
-											<input type="text" class="form-control" name="mealId">
-										</div>
-										<div class="col-sm-7">
-											<button type="button" class="btn btn-info my-btn">送出</button>
-											<input type="hidden" name="action" value="getOne_For_Display">
-											<input type="submit" hidden>
-										</div>
-									</div>
-								</form>
-							</li>
+						<!--         新增一筆Meal資料                   -->
+						<form class="row row-cols-xxl-auto align-items-center"
+							method="post" action="#">
 
-							<li>
-								<form class="row row-cols-xxl-auto align-items-center">
+							<div class="row">
+								<label for="inputPassword" class="col-sm-3 col-form-label">餐點名稱
+								</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" name="mealId">
+								</div>
+								<div class="col-sm-7"></div>
+							</div>
 
-									<div class="row">
-										<label class="col-sm-3 col-form-label">選擇餐點編號</label>
-										<div class="col-sm-2">
-											<select class="form-select"
-												aria-label="Default select example">
-												<option selected>502</option>
-												<option value="1">One</option>
-												<option value="2">Two</option>
-												<option value="3">Three</option>
-											</select>
-										</div>
-										<div class="col-sm-7">
-											<button type="button" class="btn btn-info my-btn">送出</button>
-											<input type="hidden" name="action" value="getOne_For_Display">
-											<input type="submit" hidden>
-										</div>
-									</div>
-								</form>
-							</li>
+							<div class="row">
+								<label for="inputPassword" class="col-sm-3 col-form-label">餐點狀態
+								</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" name="mealId">
+								</div>
+								<div class="col-sm-7"></div>
+							</div>
 
-							<li>
-								<form class="row row-cols-xxl-auto align-items-center">
+							<div class="row">
+								<label class="col-sm-3 col-form-label">餐點類型</label>
+								<div class="col-sm-2">
+									<select class="form-select" aria-label="Default select example">
+										<option selected>日式</option>
+										<option value="1">One</option>
+										<option value="2">Two</option>
+										<option value="3">Three</option>
+									</select>
+								</div>
+								<div class="col-sm-7"></div>
+							</div>
 
-									<div class="row">
-										<label class="col-sm-3 col-form-label">選擇餐點名稱</label>
-										<div class="col-sm-2">
-											<select class="form-select"
-												aria-label="Default select example">
-												<option selected>鹹酥雞</option>
-												<option value="1">One</option>
-												<option value="2">Two</option>
-												<option value="3">Three</option>
-											</select>
-										</div>
-										<div class="col-sm-7">
-											<button type="button" class="btn btn-info my-btn">送出</button>
-											<input type="hidden" name="action" value="getOne_For_Display">
-											<input type="submit" hidden>
-										</div>
-									</div>
-								</form>
-							</li>
-<%-- 							<%=request.getContextPath()%> --%>
-							<li><a class="btn btn-primary" href="/TFA103G2/meal/meal.do?action=getAll">查詢全部</a></li>
-						</ul>
+							<div class="row">
+								<label for="inputPassword" class="col-sm-3 col-form-label">單價</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" name="mealId">
+								</div>
+								<div class="col-sm-7"></div>
+							</div>
 
-						<div style="overflow: hidden;">
-							<h4 class="my-query-title" style="float: left;">餐點管理</h4>
-							<br>
-							<br>
-							<ul class="my-form-wrapper">
-								<li>
-									<a class="btn btn-primary my-btn" href="addMeal-page.jsp">新增餐點</a>
-								</li>
-							</ul>
-							
-						</div>
+							<div class="row">
+								<label for="inputPassword" class="col-sm-3 col-form-label">上市日期</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" name="mealId">
+								</div>
+								<div class="col-sm-7"></div>
+							</div>
 
+							<div class="row">
+								<label for="inputPassword" class="col-sm-3 col-form-label">上市天數</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" name="mealId">
+								</div>
+								<div class="col-sm-7"></div>
+							</div>
+
+							<div class="row">
+								<label for="inputPassword" class="col-sm-3 col-form-label">餐點描述</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" name="mealId">
+								</div>
+								<div class="col-sm-7"></div>
+							</div>
+
+							<div class="row">
+								<label for="inputPassword" class="col-sm-3 col-form-label">餐點照片</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" name="mealId">
+								</div>
+								<div class="col-sm-7"></div>
+							</div>
+
+							<div class="row">
+								<label for="inputPassword" class="col-sm-3 col-form-label">餐廳</label>
+								<div class="col-sm-2">
+									<input type="text" class="form-control" name="mealId">
+								</div>
+								<div class="col-sm-7"></div>
+							</div>
+							<%--         送出的按鈕                --%>
+
+							<div class="row">
+								<div class="col-sm-3">
+									<input type="hidden" name="action" value="insert">
+									<input type="submit" class="btn btn-primary" value="送出">
+								</div>
+								<div class="col-sm-3"></div>
+								<div class="col-sm-6"></div>
+							</div>
+
+
+						</form>
 
 					</div>
 
-					<div class="card-body model2-body">
-						<h5 class="card-title">Model2</h5>
-					</div>
+					<!-- 					<div class="card-body model2-body"> -->
+					<!-- 						<h5 class="card-title">Model2</h5> -->
+					<!-- 					</div> -->
 
-					<div class="card-body model3-body">
-						<h5 class="card-title">Model3</h5>
-					</div>
+					<!-- 					<div class="card-body model3-body"> -->
+					<!-- 						<h5 class="card-title">Model3</h5> -->
+					<!-- 					</div> -->
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- Content Area End -->
-
-
-
-
-
-
 
 
 	<!-- all plugins here -->

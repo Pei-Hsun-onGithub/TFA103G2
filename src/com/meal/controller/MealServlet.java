@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.meal.model.MealDAO_interface;
 import com.meal.model.MealJDBCDAO;
+import com.meal.model.MealService;
 import com.meal.model.MealVO;
 
 public class MealServlet extends HttpServlet {
@@ -38,8 +39,8 @@ public class MealServlet extends HttpServlet {
 		
 		if("getAll".equals(action)) {
 			
-			MealDAO_interface mealDAO = new MealJDBCDAO();
-			List<MealVO> list = mealDAO.getAll();
+			MealService service = new MealService();
+			List<MealVO> list = service.getAll();
 			req.setAttribute("list", list);
 			
 			RequestDispatcher toView =  req.getRequestDispatcher("/pei_pages/listAll.jsp");
