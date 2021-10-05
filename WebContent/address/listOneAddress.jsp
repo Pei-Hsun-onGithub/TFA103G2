@@ -5,7 +5,7 @@
 <%
   AddressVO addressVO = (AddressVO) request.getAttribute("addressVO"); //AddressServlet.java(Concroller), 存入req的addressVO物件
 %>
-3
+
 <html>
 <head>
 <title>員工資料 - listOneAddress.jsp</title>
