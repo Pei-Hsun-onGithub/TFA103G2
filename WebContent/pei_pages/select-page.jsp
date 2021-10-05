@@ -8,21 +8,21 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>SelectPage</title>
 <!--fivicon icon-->
-<link rel="icon" href="../assets/img/fevicon.png">
+<link rel="icon" href="<%=request.getContextPath()%>/assets/img/fevicon.png">
 
 <!-- Stylesheet -->
-<link rel="stylesheet" href="../assets/css/animate.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/animate.min.css">
 
-<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="../assets/css/magnific.min.css">
-<link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
-<link rel="stylesheet" href="../assets/css/nice-select.min.css">
-<link rel="stylesheet" href="../assets/css/owl.min.css">
-<link rel="stylesheet" href="../assets/css/slick-slide.min.css">
-<link rel="stylesheet" href="../assets/css/fontawesome.min.css">
-<link rel="stylesheet" href="../assets/css/remixicon/remixicon.css">
-<link rel="stylesheet" href="../assets/css/style.css">
-<link rel="stylesheet" href="../assets/css/responsive.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/magnific.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/jquery-ui.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/nice-select.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/owl.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/slick-slide.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/fontawesome.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/remixicon/remixicon.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/responsive.css">
 
 
 <!--Google Fonts-->
@@ -31,7 +31,7 @@
 	rel="stylesheet">
 
 <link rel="stylesheet" type="text/css"
-	href="../vendors/DataTables/datatables.css">
+	href="<%=request.getContextPath()%>/vendors/DataTables/datatables.css">
 <style>
 section.breadcrumb-area {
 	height: 80px;
@@ -83,7 +83,7 @@ div.card-body ul.my-form-wrapper li a {
 			<div class="container nav-container">
 				<div class="logo">
 					<a class="main-logo" href="home-1.html"><img
-						src="../assets/img/logo.png" alt="img"></a>
+						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
 				</div>
 			</div>
 		</nav>
@@ -232,27 +232,27 @@ div.card-body ul.my-form-wrapper li a {
 
 
 	<!-- all plugins here -->
-	<script src="../assets/js/jquery.3.6.min.js"></script>
-	<script src="../assets/js/bootstrap.min.js"></script>
-	<script src="../assets/js/imageloded.min.js"></script>
-	<script src="../assets/js/counterup.js"></script>
-	<script src="../assets/js/waypoint.js"></script>
-	<script src="../assets/js/magnific.min.js"></script>
-	<script src="../assets/js/isotope.pkgd.min.js"></script>
-	<script src="../assets/js/jquery-ui.min.js"></script>
-	<script src="../assets/js/nice-select.min.js"></script>
-	<script src="../assets/js/fontawesome.min.js"></script>
-	<script src="../assets/js/owl.min.js"></script>
-	<script src="../assets/js/slick-slider.min.js"></script>
-	<script src="../assets/js/wow.min.js"></script>
-	<script src="../assets/js/tweenmax.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/imageloded.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/counterup.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/waypoint.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/magnific.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/owl.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/tweenmax.min.js"></script>
 	<!-- main js  -->
-	<script src="../assets/js/main.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 	<!-- new js   -->
-	<script src="../assets/js/main.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 
 	<script type="text/javascript" charset="utf8"
-		src="../vendors/DataTables/datatables.js"></script>
+		src="<%=request.getContextPath()%>/vendors/DataTables/datatables.js"></script>
 
 	<script>
 		$(document).ready(function() {

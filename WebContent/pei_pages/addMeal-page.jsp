@@ -8,31 +8,39 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>AddMealPage</title>
 <!--fivicon icon-->
-<link rel="icon" href="../assets/img/fevicon.png">
+<link rel="icon" href="<%=request.getContextPath()%>/assets/img/fevicon.png">
 
 <!-- Stylesheet -->
-<link rel="stylesheet" href="../assets/css/animate.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/animate.min.css">
 
-<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="../assets/css/magnific.min.css">
-<link rel="stylesheet" href="../assets/css/jquery-ui.min.css">
-<link rel="stylesheet" href="../assets/css/nice-select.min.css">
-<link rel="stylesheet" href="../assets/css/owl.min.css">
-<link rel="stylesheet" href="../assets/css/slick-slide.min.css">
-<link rel="stylesheet" href="../assets/css/fontawesome.min.css">
-<link rel="stylesheet" href="../assets/css/remixicon/remixicon.css">
-<link rel="stylesheet" href="../assets/css/style.css">
-<link rel="stylesheet" href="../assets/css/responsive.css">
-
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/magnific.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/jquery-ui.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/nice-select.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/owl.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/slick-slide.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/fontawesome.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/remixicon/remixicon.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/responsive.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 
 <!--Google Fonts-->
 <link
 	href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" type="text/css"
-	href="../vendors/DataTables/datatables.css">
+
 <style>
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
+
 section.breadcrumb-area {
 	height: 80px;
 }
@@ -81,7 +89,7 @@ div.card-body ul.my-form-wrapper li a {
 			<div class="container nav-container">
 				<div class="logo">
 					<a class="main-logo" href="home-1.html"><img
-						src="../assets/img/logo.png" alt="img"></a>
+						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
 				</div>
 			</div>
 		</nav>
@@ -124,20 +132,20 @@ div.card-body ul.my-form-wrapper li a {
 
 						<!--         新增一筆Meal資料                   -->
 						<form class="row row-cols-xxl-auto align-items-center"
-						method="post" action="/TFA103G2/meal/meal.do" enctype="multipart/form-data">
+							method="post" action="/TFA103G2/meal/meal.do"
+							enctype="multipart/form-data">
 
 							<div class="row">
-								<label class="col-sm-3 col-form-label">餐點名稱
-								</label>
+								<label class="col-sm-3 col-form-label">餐點名稱 </label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="mealName" value="一蘭拉麵">
+									<input type="text" class="form-control" name="mealName"
+										value="一蘭拉麵">
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
 
 							<div class="row">
-								<label  class="col-sm-3 col-form-label">餐點狀態
-								</label>
+								<label class="col-sm-3 col-form-label">餐點狀態 </label>
 								<div class="col-sm-2">
 									<input type="text" class="form-control" name="sta" value="3">
 								</div>
@@ -147,11 +155,12 @@ div.card-body ul.my-form-wrapper li a {
 							<div class="row">
 								<label class="col-sm-3 col-form-label">餐點類型</label>
 								<div class="col-sm-2">
-									<select class="form-select" aria-label="Default select example" name="mealType">
+									<select class="form-select" aria-label="Default select example"
+										name="mealType">
 										<option value="日式" selected>日式</option>
-										<option >One</option>
-										<option >Two</option>
-										<option >Three</option>
+										<option>One</option>
+										<option>Two</option>
+										<option>Three</option>
 									</select>
 								</div>
 								<div class="col-sm-7"></div>
@@ -160,7 +169,8 @@ div.card-body ul.my-form-wrapper li a {
 							<div class="row">
 								<label class="col-sm-3 col-form-label">單價</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="unitPrice" value="250">
+									<input type="text" class="form-control" name="unitPrice"
+										value="250">
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
@@ -168,7 +178,7 @@ div.card-body ul.my-form-wrapper li a {
 							<div class="row">
 								<label class="col-sm-3 col-form-label">上市日期</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="launchDate" value="2021-10-05 12:34:33">
+									<input type="text" id="f_date1" class="form-control" name="launchDate">
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
@@ -176,7 +186,8 @@ div.card-body ul.my-form-wrapper li a {
 							<div class="row">
 								<label class="col-sm-3 col-form-label">上市天數</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="launchDays" value="67">
+									<input type="text" class="form-control" name="launchDays"
+										value="67">
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
@@ -184,7 +195,8 @@ div.card-body ul.my-form-wrapper li a {
 							<div class="row">
 								<label class="col-sm-3 col-form-label">餐點描述</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="mealDescription" value="排隊美食">
+									<input type="text" class="form-control" name="mealDescription"
+										value="排隊美食">
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
@@ -192,7 +204,7 @@ div.card-body ul.my-form-wrapper li a {
 							<div class="row">
 								<label class="col-sm-3 col-form-label">餐點照片</label>
 								<div class="col-sm-2">
-									<input type="file" class="form-control" name="myUploadImg" >
+									<input type="file" class="form-control" name="myUploadImg">
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
@@ -200,7 +212,8 @@ div.card-body ul.my-form-wrapper li a {
 							<div class="row">
 								<label class="col-sm-3 col-form-label">餐廳</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="restaurantId" value="7003">
+									<input type="text" class="form-control" name="restaurantId"
+										value="7003">
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
@@ -208,8 +221,8 @@ div.card-body ul.my-form-wrapper li a {
 
 							<div class="row">
 								<div class="col-sm-3">
-									<input type="hidden" name="action" value="insert">
-									<input type="submit" class="btn btn-primary" value="送出">
+									<input type="hidden" name="action" value="insert"> <input
+										type="submit" class="btn btn-primary" value="送出">
 								</div>
 								<div class="col-sm-3"></div>
 								<div class="col-sm-6"></div>
@@ -235,60 +248,55 @@ div.card-body ul.my-form-wrapper li a {
 
 
 	<!-- all plugins here -->
-	<script src="../assets/js/jquery.3.6.min.js"></script>
-	<script src="../assets/js/bootstrap.min.js"></script>
-	<script src="../assets/js/imageloded.min.js"></script>
-	<script src="../assets/js/counterup.js"></script>
-	<script src="../assets/js/waypoint.js"></script>
-	<script src="../assets/js/magnific.min.js"></script>
-	<script src="../assets/js/isotope.pkgd.min.js"></script>
-	<script src="../assets/js/jquery-ui.min.js"></script>
-	<script src="../assets/js/nice-select.min.js"></script>
-	<script src="../assets/js/fontawesome.min.js"></script>
-	<script src="../assets/js/owl.min.js"></script>
-	<script src="../assets/js/slick-slider.min.js"></script>
-	<script src="../assets/js/wow.min.js"></script>
-	<script src="../assets/js/tweenmax.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/imageloded.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/counterup.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/waypoint.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/magnific.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/owl.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/tweenmax.min.js"></script>
 	<!-- main js  -->
-	<script src="../assets/js/main.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 	<!-- new js   -->
-	<script src="../assets/js/main.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 
-	<script type="text/javascript" charset="utf8"
-		src="../vendors/DataTables/datatables.js"></script>
+	<!-- 永志老師的DateTimePicker -->>
+	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 	<script>
 		$(document).ready(function() {
 
-			/*********************  啟動DataTable  **********************************/
-			$('#table_id').DataTable();
 
-			/********************  切換tab分頁  ********************************/
-			$("div.card .card-header .nav-link").on("click", function(e) {
-
-				/***************** 切換tab按鈕 ***************************/
-				if ($("div.card .card-header .nav-link").hasClass("active"))
-					$("div.card .card-header .nav-link").removeClass("active");
-				$(this).addClass("active");
-
-				/***************** 切換tab頁面內容****************************/
-
-				if ($("div.card div.card-body").hasClass("active"))
-					$("div.card div.card-body").removeClass("active");
-
-				let indexOfModelClass = 1;
-				/* 切換到 model1*/
-				if ("model1" === e.currentTarget.classList[indexOfModelClass])
-					$("div.card div.model1-body").addClass("active");
-				/* 切換到 model2*/
-				if ("model2" === e.currentTarget.classList[indexOfModelClass])
-					$("div.card div.model2-body").addClass("active");
-				/* 切換到 model3*/
-				if ("model3" === e.currentTarget.classList[indexOfModelClass])
-					$("div.card div.model3-body").addClass("active");
+			$.datetimepicker.setLocale('zh');
+			$('#f_date1').datetimepicker({
+				theme : '', //theme: 'dark',
+				timepicker : false, //timepicker:true,
+				step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
+				format : 'Y-m-d H:i:s', //format:'Y-m-d H:i:s',
+				value : '2021-12-12 12:33:33', // value:   new Date(),
+			//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+			//startDate:	            '2017/07/10',  // 起始日
+			//minDate:               '-1970-01-01', // 去除今日(不含)之前
+			//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 			});
 
 		});
 	</script>
+	
+
+
+
+
+
+
 </body>
 </html>
