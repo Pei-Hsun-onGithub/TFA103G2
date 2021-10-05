@@ -5,7 +5,7 @@
 <%
   AddressVO addressVO = (AddressVO) request.getAttribute("addressVO");
 %>
-1
+
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
