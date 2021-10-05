@@ -31,9 +31,9 @@ public class MealService {
 		eachMeal.setMealImg(mealImg);
 		eachMeal.setRestaurantId(restaurantId);
 		
-		this.dao.insert(eachMeal);
 		
-		return eachMeal;
+		return this.dao.insert(eachMeal);
+		
 	}
 	
 	

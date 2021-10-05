@@ -124,22 +124,22 @@ div.card-body ul.my-form-wrapper li a {
 
 						<!--         新增一筆Meal資料                   -->
 						<form class="row row-cols-xxl-auto align-items-center"
-							method="post" action="#">
+						method="post" action="/TFA103G2/meal/meal.do" enctype="multipart/form-data">
 
 							<div class="row">
-								<label for="inputPassword" class="col-sm-3 col-form-label">餐點名稱
+								<label class="col-sm-3 col-form-label">餐點名稱
 								</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="mealId">
+									<input type="text" class="form-control" name="mealName" value="一蘭拉麵">
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
 
 							<div class="row">
-								<label for="inputPassword" class="col-sm-3 col-form-label">餐點狀態
+								<label  class="col-sm-3 col-form-label">餐點狀態
 								</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="mealId">
+									<input type="text" class="form-control" name="sta" value="3">
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
@@ -147,60 +147,60 @@ div.card-body ul.my-form-wrapper li a {
 							<div class="row">
 								<label class="col-sm-3 col-form-label">餐點類型</label>
 								<div class="col-sm-2">
-									<select class="form-select" aria-label="Default select example">
-										<option selected>日式</option>
-										<option value="1">One</option>
-										<option value="2">Two</option>
-										<option value="3">Three</option>
+									<select class="form-select" aria-label="Default select example" name="mealType">
+										<option value="日式" selected>日式</option>
+										<option >One</option>
+										<option >Two</option>
+										<option >Three</option>
 									</select>
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
 
 							<div class="row">
-								<label for="inputPassword" class="col-sm-3 col-form-label">單價</label>
+								<label class="col-sm-3 col-form-label">單價</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="mealId">
+									<input type="text" class="form-control" name="unitPrice" value="250">
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
 
 							<div class="row">
-								<label for="inputPassword" class="col-sm-3 col-form-label">上市日期</label>
+								<label class="col-sm-3 col-form-label">上市日期</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="mealId">
+									<input type="text" class="form-control" name="launchDate" value="2021-10-05 12:34:33">
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
 
 							<div class="row">
-								<label for="inputPassword" class="col-sm-3 col-form-label">上市天數</label>
+								<label class="col-sm-3 col-form-label">上市天數</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="mealId">
+									<input type="text" class="form-control" name="launchDays" value="67">
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
 
 							<div class="row">
-								<label for="inputPassword" class="col-sm-3 col-form-label">餐點描述</label>
+								<label class="col-sm-3 col-form-label">餐點描述</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="mealId">
+									<input type="text" class="form-control" name="mealDescription" value="排隊美食">
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
 
 							<div class="row">
-								<label for="inputPassword" class="col-sm-3 col-form-label">餐點照片</label>
+								<label class="col-sm-3 col-form-label">餐點照片</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="mealId">
+									<input type="file" class="form-control" name="myUploadImg" >
 								</div>
 								<div class="col-sm-7"></div>
 							</div>
 
 							<div class="row">
-								<label for="inputPassword" class="col-sm-3 col-form-label">餐廳</label>
+								<label class="col-sm-3 col-form-label">餐廳</label>
 								<div class="col-sm-2">
-									<input type="text" class="form-control" name="mealId">
+									<input type="text" class="form-control" name="restaurantId" value="7003">
 								</div>
 								<div class="col-sm-7"></div>
 							</div>

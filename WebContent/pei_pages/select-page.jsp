@@ -133,7 +133,7 @@ div.card-body ul.my-form-wrapper li a {
 								<form class="row row-cols-xxl-auto align-items-center">
 
 									<div class="row">
-										<label for="inputPassword" class="col-sm-3 col-form-label">輸入餐點編號
+										<label  class="col-sm-3 col-form-label">輸入餐點編號
 											(如 : 502)</label>
 										<div class="col-sm-2">
 											<input type="text" class="form-control" name="mealId">
