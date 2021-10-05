@@ -44,13 +44,17 @@ public class MealJDBCDAO implements MealDAO_interface {
 	}
 
 	@Override
-	public void insert(MealVO mealVO) {
+	public MealVO insert(MealVO mealVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_STMT);
+			
+			String[] cols = { "mealid" };
+			
+			pstmt = con.prepareStatement(INSERT_STMT, cols);
 
 			pstmt.setInt(1, mealVO.getSta());
 			pstmt.setString(2, mealVO.getMealName());
@@ -64,10 +68,26 @@ public class MealJDBCDAO implements MealDAO_interface {
 
 			pstmt.executeUpdate();
 
+			rs = pstmt.getGeneratedKeys();
+			
+			if (rs.next()) {
+				Integer key = rs.getInt(1); // 只支援欄位索引值取得自增主鍵值
+				mealVO.setMealId(key);
+//				System.out.println("自增主鍵值 = " + key + "(剛新增成功的餐點編號)");
+			} 
+			
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -84,6 +104,8 @@ public class MealJDBCDAO implements MealDAO_interface {
 				}
 			}
 		}
+		
+		return mealVO;
 	}
 
 	@Override
