@@ -1,0 +1,232 @@
+.profile {
+  width:180px;
+  height:80px;
+  position:absolute;
+  left:200px;
+  top:120px;
+  border-bottom: 1px solid lightgray;
+}
+.profile img {
+  margin-bottom: 45px;
+  width:50px;
+  height:50px;
+  /* border: 1px black solid; */
+  /* display: inline-block; */
+}
+.profile ul {
+  display: inline-block;
+}
+
+.profile .nickname {
+  font-size: 20px;
+  font-weight:bold;
+  list-style: none;
+}
+
+.profile .edit {
+  font-size: 15px;
+  color: gray;
+  list-style: none;
+}
+
+.memberlist {
+  font-size: 20px;
+  position:absolute;
+  left:200px;
+  top:230px;
+}
+.memberlist ul {
+  padding:0px;
+}
+
+.memberlist li {
+  width:180px;
+  margin:0 auto;
+  border-top: 1px lightgray solid;
+  border-bottom: 1px lightgray solid;
+  list-style: none;
+  padding-left: 10px;
+}
+
+.memberlist li.two {
+  background-color: rgba(88, 169, 175, 1);
+  color: white;
+  font-weight:bold;
+}
+
+.content {
+  position:absolute;
+  background-color: #f5f4f3;
+  left:450px;
+  top:120px;
+  width:1000px;
+  height: 550px;
+  border: 1px lightgray solid;
+}
+
+.title {
+  width: 1000px;
+  height: 80px;
+  background-color: rgba(88, 169, 175, 1);
+}
+
+.title div.titlebigname {
+  width: 1000px;
+  height:35px;
+  font-size:25px;
+  padding-top: 8px;
+  padding-left: 20px;
+  /* line-height:40px; */
+  color:white;
+}
+
+.title div.titlesmallname {
+  width: 1000px;
+  height:30px;
+  padding-top: 8px;
+  padding-left: 22px;
+  color:white;
+}
+
+.information {
+  width:1000px;
+  height: 450px;
+  margin-top: 50px;
+  /* border: 1px black solid; */
+}
+
+/* .editpic {
+  width:400px;
+  height: 250px;
+  border-left: 1px lightgray solid;
+  margin-top: 60px;
+} */
+
+.information .nowpassword {
+  height:100px;
+  position:relative;
+  left:280px;
+  top:40px;
+  display: flex;
+  /* border: 1px black solid; */
+}
+
+.information .newpassword {
+  height:100px;
+  position:relative;
+  left:280px;
+  top:40px;
+  display: flex;
+  /* border: 1px black solid; */
+}
+
+.information .newpassword2 {
+  height:100px;
+  position:relative;
+  left:280px;
+  top:40px;
+  display: flex;
+  /* border: 1px black solid; */
+}
+
+.information .storebutton {
+  /* height:100px; */
+  /* position:relative;
+  left:280px;
+  top:40px; */
+  display: inline;
+  margin-left: 420px;
+  /* border: 1px black solid; */
+}
+
+.information .backbutton {
+  /* height:100px; */
+  /* position:relative;
+  left:280px;
+  top:40px; */
+  display: inline;
+  margin-left: 20px;
+  /* border: 1px black solid; */
+}
+
+.nowpassword .lebel1 {
+  width:120px;
+  height: 30px;
+  font-size: 16px;
+  color:gray;
+  text-align: right;
+}
+.nowpassword .input1 {
+  padding-left: 20px;
+}
+
+.newpassword .lebel2{
+  width:120px;
+  height: 30px;
+  font-size: 16px;
+  color:gray;
+  text-align: right;
+}
+
+.newpassword .input2{
+  padding-left: 20px;
+}
+
+.newpassword2 .lebel3{
+  width:120px;
+  height: 30px;
+  font-size: 16px;
+  color:gray;
+  text-align: right;
+}
+
+.newpassword2 .input3{
+  padding-left: 20px;
+}
+
+.input1 input {
+  font-size: 16px;
+  border-color:lightgray;
+  background-color: #f5f4f3;
+  width:300px;
+}
+
+.input2 input {
+  font-size: 16px;
+  border-color:lightgray;
+  background-color: #f5f4f3;
+  width:300px;
+}
+
+.input3 input {
+  font-size: 16px;
+  border-color:lightgray;
+  background-color: #f5f4f3;
+  width:300px;
+}
+
+.storebutton button {
+  background-color: rgba(88, 169, 175, 1);
+   border: none;
+   color: white;
+   padding: 5px 25px;
+   text-align: center;
+   text-decoration: none;
+   font-size: 20px;
+   /* margin-left:  200px; */
+ }
+
+.backbutton button {
+  background-color: white;
+   border: none;
+   color: rgba(88, 169, 175, 1);
+   padding: 5px 25px;
+   text-align: center;
+   text-decoration: none;
+   font-size: 20px;
+   /* margin-left:  300px; */
+}
+
+.total {
+  zoom:80%;
+  }
