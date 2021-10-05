@@ -1,0 +1,324 @@
+.profile {
+  width:180px;
+  height:80px;
+  position:absolute;
+  left:200px;
+  top:120px;
+  border-bottom: 1px solid lightgray;
+}
+.profile img {
+  margin-bottom: 45px;
+  width:50px;
+  height:50px;
+  /* border: 1px black solid; */
+  /* display: inline-block; */
+}
+.profile ul {
+  display: inline-block;
+}
+
+.profile .nickname {
+  font-size: 20px;
+  font-weight:bold;
+  list-style: none;
+}
+
+.profile .edit {
+  font-size: 15px;
+  color: gray;
+  list-style: none;
+}
+
+.memberlist {
+  font-size: 20px;
+  position:absolute;
+  left:200px;
+  top:230px;
+}
+.memberlist ul {
+  padding:0px;
+}
+
+.memberlist li {
+  width:180px;
+  margin:0 auto;
+  border-top: 1px lightgray solid;
+  border-bottom: 1px lightgray solid;
+  list-style: none;
+  padding-left: 10px;
+}
+
+.memberlist li.one {
+  background-color: rgba(88, 169, 175, 1);
+  color: white;
+  font-weight:bold;
+}
+
+.content {
+  position:absolute;
+  background-color: #f5f4f3;
+  left:450px;
+  top:120px;
+  width:1000px;
+  height: 550px;
+  border: 1px lightgray solid;
+}
+
+.title {
+  width: 1000px;
+  height: 80px;
+  background-color: rgba(88, 169, 175, 1);
+}
+
+.title div.titlebigname {
+  width: 1000px;
+  height:35px;
+  font-size:25px;
+  padding-top: 8px;
+  padding-left: 20px;
+  /* line-height:40px; */
+  color:white;
+}
+
+.title div.titlesmallname {
+  width: 1000px;
+  height:30px;
+  padding-top: 8px;
+  padding-left: 22px;
+  color:white;
+}
+
+.editarea{
+  display: flex;
+}
+
+.information {
+  width:600px;
+  height: 450px;
+  margin-top: 30px;
+  /* border: 1px black solid; */
+}
+
+.editpic {
+  width:400px;
+  height: 250px;
+  border-left: 1px lightgray solid;
+  margin-top: 60px;
+}
+
+.information .account {
+  width:450px;
+  height:60px;
+  position:relative;
+  left:50px;
+  top:40px;
+  display: flex;
+  /* border: 1px black solid; */
+}
+
+.information .name {
+  width:450px;
+  height:60px;
+  position:relative;
+  left:50px;
+  top:40px;
+  display: flex;
+  /* border: 1px black solid; */
+}
+
+.information .phone {
+  width:450px;
+  height:60px;
+  position:relative;
+  left:50px;
+  top:40px;
+  display: flex;
+  /* border: 1px black solid; */
+}
+
+.information .gender {
+  width:450px;
+  height:60px;
+  position:relative;
+  left:50px;
+  top:40px;
+  display: flex;
+  /* border: 1px black solid; */
+}
+
+.information .birthday {
+  width:450px;
+  height:60px;
+  position:relative;
+  left:50px;
+  top:40px;
+  display: flex;
+  /* border: 1px black solid; */
+}
+
+.information .storebutton {
+  width:450px;
+  height:60px;
+  position:relative;
+  left:50px;
+  top:40px;
+  /* border: 1px black solid; */
+}
+
+.account .lebel1 {
+  width:100px;
+  height: 30px;
+  font-size: 16px;
+  color:gray;
+  text-align: right;
+}
+.account .input1 {
+  padding-left: 20px;
+}
+
+.name .lebel2{
+  width:100px;
+  height: 30px;
+  font-size: 16px;
+  color:gray;
+  text-align: right;
+}
+
+.name .input2{
+  padding-left: 20px;
+}
+
+.phone .lebel3{
+  width:100px;
+  height: 30px;
+  font-size: 16px;
+  color:gray;
+  text-align: right;
+}
+
+.phone .input3{
+  padding-left: 20px;
+}
+
+.gender .lebel4{
+  width:100px;
+  height: 30px;
+  font-size: 16px;
+  color:gray;
+  text-align: right;
+}
+
+.gender .input4{
+  padding-left: 20px;
+}
+
+.birthday .lebel5{
+  width:100px;
+  height: 30px;
+  font-size: 16px;
+  color:gray;
+  text-align: right;
+}
+
+.birthday .input5{
+  padding-left: 20px;
+}
+
+.input2 input {
+  font-size: 16px;
+  border-color:lightgray;
+  background-color: #f5f4f3;
+  width:300px;
+}
+
+.input5 input {
+  font-size: 16px;
+  background-color: #f5f4f3
+  border: none;
+}
+
+.storebutton button {
+  background-color: rgba(88, 169, 175, 1);
+   border: none;
+   color: white;
+   padding: 5px 25px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 20px;
+   margin-left:  120px;
+}
+
+.account button{
+  border: none;
+  outline:none;
+  color: #65a;
+  background: none;
+  font-size: 16px;
+  padding: 0;
+  text-decoration: underline;
+  margin-left:  10px;
+  height: 0px;
+}
+
+.phone button {
+  border: none;
+  outline:none;
+  color: #65a;
+  background: none;
+  font-size: 16px;
+  padding: 0;
+  text-decoration: underline;
+  margin-left:  10px;
+  height: 0px;
+}
+
+.editpic .pic {
+  width:200px;
+  height: 100px;
+  position:relative;
+  left:100px;
+  top:10px;
+  /* border: 1px black solid; */
+}
+
+.editpic .selectbutton {
+  width:200px;
+  position:relative;
+  left:100px;
+  top:20px;
+  /* margin:auto auto; */
+  /* border: 1px black solid; */
+}
+
+.editpic .selectbutton button {
+  background-color: rgba(88, 169, 175, 1);
+   border: none;
+   color: white;
+   padding: 5px 10px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 20px;
+   margin-left: 50px;
+}
+
+.editpic .pic img {
+  display:block;
+  margin:auto;
+  width:50%;
+}
+
+.editpic .illustrate {
+  width:200px;
+  position:relative;
+  left:100px;
+  top:30px;
+  margin-left: 25px;
+  /* margin:auto auto; */
+  /* border: 1px black solid; */
+}
+
+.total {
+  zoom:80%;
+  }
