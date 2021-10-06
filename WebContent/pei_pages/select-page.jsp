@@ -82,7 +82,7 @@ div.card-body ul.my-form-wrapper li a {
 		<nav class="navbar navbar-expand-lg">
 			<div class="container nav-container">
 				<div class="logo">
-					<a class="main-logo" href="home-1.html"><img
+					<a class="main-logo" href="#"><img
 						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
 				</div>
 			</div>
@@ -90,13 +90,13 @@ div.card-body ul.my-form-wrapper li a {
 	</header>
 	<!-- navbar end -->
 
-	<!-- bredcrumb Area Start-->
+	<!-- breadcrumb Area Start-->
 	<section class="breadcrumb-area">
 		<div class="container">
 			<div class="row justify-content-center"></div>
 		</div>
 	</section>
-	<!-- bredcrumb Area End -->
+	<!-- breadcrumb Area End -->
 
 
 
@@ -202,7 +202,7 @@ div.card-body ul.my-form-wrapper li a {
 							<br>
 							<ul class="my-form-wrapper">
 								<li>
-									<a class="btn btn-primary my-btn" href="addMeal-page.jsp">新增餐點</a>
+									<a class="btn btn-primary my-btn" href="addOneMeal.jsp">新增餐點</a>
 								</li>
 							</ul>
 							

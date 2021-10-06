@@ -36,7 +36,9 @@ public class MealService {
 		
 	}
 	
-	
+	public MealVO findMealByPrimaryKey(Integer mealId) {
+		return dao.findByPrimaryKey(mealId);
+	}
 	public List<MealVO> getAll() {
 		
 		return this.dao.getAll();

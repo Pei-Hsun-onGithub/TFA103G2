@@ -56,7 +56,7 @@ section.work-area{
 		<nav class="navbar navbar-expand-lg">
 			<div class="container nav-container">
 				<div class="logo">
-					<a class="main-logo" href="home-1.html"><img
+					<a class="main-logo" href="/TFA103G2/pei_pages/select-page.jsp"><img
 						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
 				</div>
 			</div>

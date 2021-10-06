@@ -131,5 +131,21 @@ public class MealServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		
+		/*************************   修改一筆資料    **************************************/
+		
+		if("getOne_For_Update".equals(action)) {
+			
+			// 1. 抓取頁面送來的PK值
+			Integer mealid = new Integer(req.getParameter("mealId"));
+			MealService service = new MealService();
+			MealVO mealVO = service.findMealByPrimaryKey(mealid);
+			
+			req.setAttribute("UpdatingMealVO", mealVO);
+			RequestDispatcher toListOneView =  req.getRequestDispatcher("/pei_pages/updateOneMeal.jsp");
+			toListOneView.forward(req, res);
+			
+		}
+		
 	}
 }
