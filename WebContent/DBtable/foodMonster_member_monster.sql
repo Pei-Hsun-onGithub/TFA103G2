@@ -2,13 +2,12 @@ CREATE DATABASE IF NOT EXISTS fm01;
 
 use fm01;
 
-DROP TABLE IF EXISTS MemberInfo;
 DROP TABLE IF EXISTS AchieveProgress;
 DROP TABLE IF EXISTS Achieve;
-DROP TABLE IF EXISTS MonsterBook;
+DROP TABLE IF EXISTS MemberInfo;
 DROP TABLE IF EXISTS LevelExp;
+DROP TABLE IF EXISTS MonsterBook;
 
-select * from AchieveProgress;
 
 # 怪獸圖鑑
 CREATE TABLE MonsterBook (
