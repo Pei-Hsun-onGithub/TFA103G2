@@ -37,7 +37,7 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/responsive.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+	href="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.css" />
 
 <!--Google Fonts-->
 <link
@@ -211,8 +211,7 @@ div.card-body ul.my-form-wrapper li a {
 								<label class="col-sm-3 col-form-label">上市日期</label>
 								<div class="col-sm-3">
 									<input type="text" id="f_date1" class="form-control"
-										name="launchDate"
-										value="<%=(mealVO == null) ? "2021-06-07 12:12:00" : mealVO.getLaunchDate()%>">
+										name="launchDate">
 								</div>
 								<div class="col-sm-6"></div>
 							</div>
@@ -308,9 +307,9 @@ div.card-body ul.my-form-wrapper li a {
 
 	<!-- 永志老師的DateTimePicker -->
 	>
-	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+	<script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.js"></script>
 	<script
-		src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+		src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 	<script>
 		$(document).ready(function() {

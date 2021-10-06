@@ -37,7 +37,7 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/responsive.css">
 <link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+	href="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.css" />
 
 <!--Google Fonts-->
 <link
@@ -159,6 +159,7 @@ div.card-body ul.my-form-wrapper li a {
 
 							<%
 								MealVO mealVO = (MealVO) request.getAttribute("UpdatingMealVO");
+								
 							%>
 
 
@@ -166,8 +167,9 @@ div.card-body ul.my-form-wrapper li a {
 							<div class="row">
 								<label class="col-sm-3 col-form-label">餐點編號 </label>
 								<div class="col-sm-3">
-									<input type="text" disabled class="form-control"
-										name="mealName" value="${UpdatingMealVO.mealId}">
+									<p style="text-align: left;margin-left: 10px;"><%= mealVO.getMealId() %></p>
+									<input type="text" class="form-control" 
+										name="mealId" value="<%= mealVO.getMealId() %>" hidden>
 								</div>
 								<div class="col-sm-6"></div>
 							</div>
@@ -219,8 +221,7 @@ div.card-body ul.my-form-wrapper li a {
 								<label class="col-sm-3 col-form-label">上市日期</label>
 								<div class="col-sm-3">
 									<input type="text" id="f_date1" class="form-control"
-										name="launchDate"
-										value="<%=(mealVO == null) ? "2021-06-07 12:12:00" : mealVO.getLaunchDate()%>">
+										name="launchDate">
 								</div>
 								<div class="col-sm-6"></div>
 							</div>
@@ -264,8 +265,8 @@ div.card-body ul.my-form-wrapper li a {
 
 							<div class="row">
 								<div class="col-sm-3">
-									<input type="hidden" name="action" value="insert"> <input
-										type="submit" class="btn btn-primary" value="送出">
+									<input type="hidden" name="action" value="update"> <input
+										type="submit" class="btn btn-primary" value="送出更新">
 								</div>
 								<div class="col-sm-3"></div>
 								<div class="col-sm-6"></div>
@@ -315,10 +316,10 @@ div.card-body ul.my-form-wrapper li a {
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 
 	<!-- 永志老師的DateTimePicker -->
-	>
-	<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+	
+	<script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.js"></script>
 	<script
-		src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+		src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 	<script>
 		$(document).ready(function() {
