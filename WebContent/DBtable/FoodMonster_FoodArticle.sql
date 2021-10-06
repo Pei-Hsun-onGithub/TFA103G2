@@ -1,4 +1,7 @@
+CREATE DATABASE IF NOT EXISTS fm01;
+
 use fm01;
+
 Drop table if exists MemberInFo;#測試
 Drop table if exists Restaurant;#測試
 Drop table if exists FavoFoodArticle;
@@ -46,8 +49,7 @@ values(1111,55590,'賣噹噹好好吃',now(),'薯條酥脆,炸雞好辣哈哈哈
 		picno int not null auto_increment primary key,
         articleno int,
         pic mediumblob
-        #constraint PictureBase_userid_FK foreign key(userid) references MemberInFo (userid),
-		#constraint PictureBase_articleno_FK foreign key(articleno)references FoodArticle (restaurantid),
+		constraint PictureBase_articleno_FK foreign key(articleno)references FoodArticle (articleno),
         
 	);
     

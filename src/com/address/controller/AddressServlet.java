@@ -117,7 +117,7 @@ public class AddressServlet extends HttpServlet {
 //================================================================================================================		
 
 		if ("update".equals(action)) { // 來自update_address_input.jsp的請求
-			System.out.println("update");
+//System.out.println("update");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -128,7 +128,7 @@ public class AddressServlet extends HttpServlet {
 
 				try {
 					String a = req.getParameter("deliveryAddId").trim();
-					System.out.println(a);
+//	System.out.println(a);
 					Integer deliveryAddId = new Integer(req.getParameter("deliveryAddId").trim());
 //					System.out.println(deliveryAddId);
 				} catch (Exception e) {
@@ -145,7 +145,7 @@ public class AddressServlet extends HttpServlet {
 				}
 
 				String customerName = req.getParameter("customerName");
-				System.out.println(customerName);
+//	System.out.println(customerName);
 				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (customerName == null || customerName.trim().length() == 0) {
 					errorMsgs.add("取餐人姓名: 請勿空白");
@@ -163,7 +163,7 @@ public class AddressServlet extends HttpServlet {
 				}
 
 				String deliverAddress = req.getParameter("deliverAddress");
-				System.out.println(deliverAddress);
+//				System.out.println(deliverAddress);
 				String AddressReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{1,100}$";
 				if (deliverAddress == null || deliverAddress.trim().length() == 0) {
 					errorMsgs.add("地址: 請勿空白");
@@ -172,17 +172,17 @@ public class AddressServlet extends HttpServlet {
 				}
 
 				String buildingName = req.getParameter("buildingName");
-				System.out.println(buildingName);
+//				System.out.println(buildingName);
 
 				String note = req.getParameter("note");
-				System.out.println(note);
+//				System.out.println(note);
 
 				Integer sta = new Integer(req.getParameter("sta").trim());
 				// 因為是get get都是字串。數字回來要轉型，所以用new。
-				System.out.println(sta);
+//				System.out.println(sta);
 
 				Integer deliveryAddId = new Integer(req.getParameter("deliveryAddId").trim());
-				System.out.println(deliveryAddId);
+//				System.out.println(deliveryAddId);
 
 				AddressVO addressVO = new AddressVO();
 				addressVO.setUserId(userId);
@@ -196,7 +196,7 @@ public class AddressServlet extends HttpServlet {
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					System.out.println(errorMsgs.size());
+//					System.out.println(errorMsgs.size());
 					System.out.println("hahaha");
 					req.setAttribute("addressVO", addressVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req.getRequestDispatcher("/address/update_address_input.jsp");
@@ -211,7 +211,7 @@ public class AddressServlet extends HttpServlet {
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 				req.setAttribute("addressVO", addressVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				System.out.println("transfor");
+//	System.out.println("transfor");
 				String url = "/address/listOneAddress.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
@@ -306,7 +306,7 @@ System.out.println("7.sta="+sta);
 // Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					System.out.println(errorMsgs.size());
-					System.out.println("hahaha");
+//System.out.println("hahaha");
 					req.setAttribute("addressVO", addressVO); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req.getRequestDispatcher("/address/addAddress.jsp");
 					failureView.forward(req, res);
