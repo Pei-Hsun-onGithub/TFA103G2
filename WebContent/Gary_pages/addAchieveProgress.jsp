@@ -1,15 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.address.model.*"%>
+<%@ page import="com.achieveprogress.model.*"%>
 
 <%
-  AddressVO addressVO = (AddressVO) request.getAttribute("addressVO");
+  AchieveProgress achieveprogress = (AchieveProgress) request.getAttribute("achieveprogress");
 %>
 
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>員工資料新增 - addAddress.jsp</title>
+<title>成就進度新增 - addAchieveProgress.jsp</title>
 
 <style>
   table#table-1 {
@@ -48,8 +48,8 @@
 
 <table id="table-1">
 	<tr><td>
-		 <h3>員工資料新增 - addAddress.jsp</h3></td><td>
-		 <h4><a href="<%=request.getContextPath()%>/address/select_page.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
+		 <h3>成就進度新增 - addAchieveProgress.jsp</h3></td><td>
+		 <h4><a href="<%=request.getContextPath()%>/Gary_pages/select_page.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -65,54 +65,48 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="address.do" name="form1">
-<table>
+<jsp:useBean id="AchieveSvc" scope="page" class="com.achieve.model.AchieveService" />
+<jsp:useBean id="MemberInfoSvc" scope="page" class="com.memberinfo.model.MemberInfoService" />
 
+<FORM METHOD="post" ACTION="achieveprogress.do" name="form1">
+<table>
 	<tr>
-		<td>會員編號:</td>
-		<td><input type="TEXT" name="userId" size="45"
-			 value="<%= (addressVO==null)? "1" : addressVO.getUserId()%>" /></td>
+		<td>選擇會員編號:</td>
+		<td><select size="1" name="userid">
+         	<c:forEach var="memberinfo" items="${MemberInfoSvc.all}" > 
+          	<option value="${memberinfo.userId}">${memberinfo.userId}
+         	</c:forEach>   
+       		</select>
+		</td>
+	</tr>
+		<tr>
+		<td>選擇成就編號:</td>
+		<td><select size="1" name="achiid">
+         	<c:forEach var="achieve" items="${AchieveSvc.all}" > 
+          	<option value="${achieve.achiId}">${achieve.achiId}
+         	</c:forEach>   
+       		</select>
+		</td>
 	</tr>
 	<tr>
-		<td>取餐人姓名:</td>
-		<td><input type="TEXT" name="customerName" size="45"
-			 value="<%= (addressVO==null)? "羅文凱" : addressVO.getCustomerName()%>" /></td>
+		<td>當前食記完成:</td>
+		<td><input type="TEXT" name="currentarticle" size="45"
+			 value="<%= (achieveprogress==null)? "" : achieveprogress.getCurrentArticle()%>" /></td>
 	</tr>
 	<tr>
-		<td>連絡電話:</td>
-		<td><input type="TEXT" name="deliverPhone" size="45"
-			 value="<%= (addressVO==null)? "0928825252" : addressVO.getDeliverPhone()%>" /></td>
+		<td>當前訂單完成:</td>
+		<td><input type="TEXT" name="currentorder" size="45"
+			 value="<%= (achieveprogress==null)? "" : achieveprogress.getCurrentOrder()%>" /></td>
 	</tr>
 	<tr>
-		<td>地址:</td>
-		<td><input type="TEXT" name="deliverAddress" size="45"
-			 value="<%= (addressVO==null)? "台北市大安區新生南路一段六樓" : addressVO.getDeliverAddress()%>" /></td>
-	</tr>
-	<tr>
-		<td>大樓:</td>
-		<td><input type="TEXT" name="buildingName" size="45"
-			 value="<%= (addressVO==null)? "無" : addressVO.getBuildingName()%>" /></td>
-	</tr>
-	<tr>
-		<td>備註:</td>
-		<td><input type="TEXT" name="note" size="45"
-			 value="<%= (addressVO==null)? "null" : addressVO.getNote()%>" /></td>
+		<td>開始挑戰日期:</td>
+		<td><input name="begindate" id="date1" type="text"></td>
 	</tr>
 	<tr>
 		<td>狀態:</td>
 		<td><input type="TEXT" name="sta" size="45"
-			 value="<%= (addressVO==null)? "1" : addressVO.getSta()%>" /></td>
+			 value="<%= (achieveprogress==null)? "" : achieveprogress.getCurrentOrder()%>" /></td>
 	</tr>
-
-<%-- 	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" /> --%>
-<!-- 	<tr> -->
-<!-- 		<td>部門:<font color=red><b>*</b></font></td> -->
-<!-- 		<td><select size="1" name="deptno"> -->
-<%-- 			<c:forEach var="deptVO" items="${deptSvc.all}"> --%>
-<%-- 				<option value="${deptVO.deptno}" ${(addressVO.deptno==deptVO.deptno)? 'selected':'' } >${deptVO.dname} --%>
-<%-- 			</c:forEach> --%>
-<!-- 		</select></td> -->
-<!-- 	</tr> -->
 
 </table>
 <br>
@@ -124,17 +118,17 @@
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
-<%-- 
-//   java.sql.Date hiredate = null;
-//   try {
-// 	    hiredate = addressVO.getHiredate();
-//    } catch (Exception e) {
-// 	    hiredate = new java.sql.Date(System.currentTimeMillis());
-//    }
- --%>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<% 
+  java.sql.Date begindate = null;
+  try {
+	    begindate = achieveprogress.getBeginDate();
+   } catch (Exception e) {
+	    begindate = new java.sql.Date(System.currentTimeMillis());
+   }
+%>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Gary_pages/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath()%>/Gary_pages/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/Gary_pages/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
   .xdsoft_datetimepicker .xdsoft_datepicker {
@@ -147,12 +141,12 @@
 
 <script>
         $.datetimepicker.setLocale('zh');
-//         $('#f_date1').datetimepicker({
-// 	       theme: '',              //theme: 'dark',
-// 	       timepicker:false,       //timepicker:true,
-// 	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
-// 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
-<%-- 		   value: '<%=hiredate%>', // value:   new Date(), --%>
+        $('#date1').datetimepicker({
+	       theme: '',              //theme: 'dark',
+	       timepicker:false,       //timepicker:true,
+	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+		   value: '<%=begindate%>', // value:   new Date(),
            //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
            //startDate:	            '2017/07/10',  // 起始日
            //minDate:               '-1970-01-01', // 去除今日(不含)之前

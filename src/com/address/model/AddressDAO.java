@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 import util.Util;
@@ -37,7 +38,7 @@ public class AddressDAO implements AddressDAO_interface{
 		try {
 
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			pstmt = con.prepareStatement(INSERT);
+			pstmt = con.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS);
 
 			pstmt.setInt(1, addressVO.getUserId());
 			pstmt.setString(2, addressVO.getCustomerName());
@@ -233,6 +234,7 @@ public class AddressDAO implements AddressDAO_interface{
 				adre.setDeliverAddress(rs.getString("deliverAddress"));
 				adre.setBuildingName(rs.getString("buildingName"));
 				adre.setNote(rs.getString("note"));
+				adre.setSta(rs.getInt("sta"));
 				addresList.add(adre);
 			}
 

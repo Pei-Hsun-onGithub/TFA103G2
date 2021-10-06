@@ -5,7 +5,7 @@
 <%
 AddressVO addressVO = (AddressVO) request.getAttribute("addressVO"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
 %>
---<%= addressVO==null %>--${addressVO.deptno}-- 
+--<%= addressVO==null %>
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
@@ -65,61 +65,48 @@ AddressVO addressVO = (AddressVO) request.getAttribute("addressVO"); //EmpServle
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="address.do" name="form1">
+<FORM METHOD="post" ACTION="/TFA103G2/address/address.do" name="form1">
 <table>
 	<tr>
 		<td>外送地址編號:<font color=red><b>*</b></font></td>
-		<td><%=addressVO.getDeliveryAddId()%></td>
+		<td><input type="hidden" name="deliveryAddId" size="45" value="<%=addressVO.getDeliveryAddId()%>" />${addressVO.getDeliveryAddId()}</td>
 	</tr>
 	<tr>
-		<td>會員編號:</td>
-		<td><input type="TEXT" name="ename" size="45" value="<%=addressVO.getUserId()%>" /></td>
+		<td>會員編號:<font color=red><b>*</b></font></td></td>
+		<td><input type="hidden" name="userId" size="45" value="<%=addressVO.getUserId()%>" />${addressVO.getUserId()}</td>
 	</tr>
 	<tr>
 		<td>取餐人姓名:</td>
-		<td><input type="TEXT" name="job" size="45"	value="<%=addressVO.getCustomerName()%>" /></td>
+		<td><input type="TEXT" name="customerName" size="45"	value="<%=addressVO.getCustomerName()%>" /></td>
 	</tr>
 	<tr>
 		<td>連絡電話:</td>
-		<td><input type="TEXT" name="sal" size="45"	value="<%=addressVO.getDeliverPhone()%>" /></td>
+		<td><input type="TEXT" name="deliverPhone" size="45"	value="<%=addressVO.getDeliverPhone()%>" /></td>
 	</tr>
 	<tr>
 		<td>地址:</td>
-		<td><input type="TEXT" name="sal" size="45"	value="<%=addressVO.getDeliverAddress()%>" /></td>
+		<td><input type="TEXT" name="deliverAddress" size="45"	value="<%=addressVO.getDeliverAddress()%>" /></td>
 	</tr>
 	<tr>
 		<td>大樓:</td>
-		<td><input type="TEXT" name="comm" size="45" value="<%=addressVO.getBuildingName()%>" /></td>
+		<td><input type="TEXT" name="buildingName" size="45" value="<%=addressVO.getBuildingName()%>" /></td>
 	</tr>
 	<tr>
 		<td>備註:</td>
-		<td><input type="TEXT" name="comm" size="45" value="<%=addressVO.getNote()%>" /></td>
+		<td><input type="TEXT" name="note" size="45" value="<%=addressVO.getNote()%>" /></td>
 	</tr>
 	<tr>
 		<td>狀態:</td>
-		<td><input type="TEXT" name="comm" size="45" value="<%=addressVO.getSta()%>" /></td>
+		<td><input type="TEXT" name="sta" size="45" value="<%=addressVO.getSta()%>" /></td>
 	</tr>
 	
 	
-<!-- 		<tr> -->
-<!-- 		<td>連絡電話日期:</td> -->
-<!-- 		<td><input name="hiredate" id="f_date1" type="text" ></td> -->
-<!-- 	</tr> -->
 
-<%-- 	<jsp:useBean id="deptSvc" scope="page" class="com.dept.model.DeptService" /> --%>
-<!-- 	<tr> -->
-<!-- 		<td>部門:<font color=red><b>*</b></font></td> -->
-<!-- 		<td><select size="1" name="deptno"> -->
-<%-- 			<c:forEach var="deptVO" items="${deptSvc.all}"> --%>
-<%-- 				<option value="${deptVO.deptno}" ${(addressVO.deptno==deptVO.deptno)?'selected':'' } >${deptVO.dname} --%>
-<%-- 			</c:forEach> --%>
-<!-- 		</select></td> -->
-<!-- 	</tr> -->
 
 </table>
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="empno" value="<%=addressVO.getDeliveryAddId()%>">
+<input type="hidden" name="address" value="<%=addressVO.getDeliveryAddId()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 
