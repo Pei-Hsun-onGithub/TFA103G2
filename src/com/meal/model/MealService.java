@@ -54,12 +54,18 @@ public class MealService {
 	}
 
 	public MealVO findMealByPrimaryKey(Integer mealId) {
-		return dao.findByPrimaryKey(mealId);
+		return this.dao.findByPrimaryKey(mealId);
 	}
 
 	public List<MealVO> getAll() {
 
 		return this.dao.getAll();
+	}
+	
+	public void deleteMeal(Integer mealId) {
+		
+		this.dao.delete(mealId);
+		
 	}
 
 }

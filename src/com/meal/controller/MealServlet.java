@@ -113,7 +113,6 @@ public class MealServlet extends HttpServlet {
 				byte[] mealImg = null;
 				Part part = req.getPart("myUploadImg");
 				if (part.getSize() > 0) {
-					System.out.println(part.getSize());
 					InputStream in = part.getInputStream();
 					mealImg = new byte[in.available()];
 					in.read(mealImg);
@@ -142,7 +141,7 @@ public class MealServlet extends HttpServlet {
 
 			// 1. 抓取頁面送來的PK值
 			Integer mealid = new Integer(req.getParameter("mealId"));
-//			System.out.println("getOneForUdate: mealId : " + mealid);
+
 			MealService service = new MealService();
 			MealVO mealVO = service.findMealByPrimaryKey(mealid);
 
@@ -232,6 +231,24 @@ public class MealServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		}
+		
+		/************************ 刪除一筆資料 *********************************************/
+		
+		if("delete".equals(action)) {
+			MealService service = new MealService();
+			// 1. 抓取頁面送來的PK值
+
+			Integer mealid = new Integer(req.getParameter("mealId"));
+			
+			// 2.刪除資料庫檔案
+			service.deleteMeal(mealid);
+			
+			// 3.展示層反映結果
+			
+			req.setAttribute("list", service.getAll());
+			RequestDispatcher toListallView = req.getRequestDispatcher("/pei_pages/listAllMeal.jsp");
+			toListallView.forward(req, res);
 		}
 
 	}

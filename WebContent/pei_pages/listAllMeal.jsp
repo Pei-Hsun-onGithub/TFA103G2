@@ -145,10 +145,12 @@ input.my-btn {
 									</FORM>
 								</td>
 								<td>
-									<FORM METHOD="post" ACTION="#" style="margin-bottom: 0px;">
-										<input type="submit" class="btn btn-warning my-btn" value="刪除"> 
-										<input type="hidden" name="mealId" value="${mealVO.mealId}"> 
-										<input type="hidden" name="action" value="delete">
+									<FORM METHOD="post" ACTION="/TFA103G2/meal/meal.do?action=delete" style="margin-bottom: 0px;">
+										
+										<input type="submit" class="btn btn-warning my-btn" id="my-delete-submit" value="刪除"> 
+										<input type="hidden" name="mealId" value="${mealVO.mealId}">  
+										
+										
 									</FORM>
 								</td>
 
@@ -198,7 +200,10 @@ input.my-btn {
 	<script>
 		$(document).ready(function() {
 			$('#table_id').DataTable();
+			
 		});
+		
+		
 	</script>
 </body>
 </html>
