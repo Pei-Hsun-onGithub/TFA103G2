@@ -8,11 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import util.copy.Util;
 
-
-public class FavoFoodArticleDAO implements FavoFoodArticleDAO_interface {
+public class FavoFoodArticleJDBCDAO implements FavoFoodArticleDAO_interface {
 	
 	public static final String INSERT_STMT = "INSERT INTO FavoFoodArticle (userId, articleNo) VALUES(?, ?)";
 	//public static final String UPDATE = "UPDATE FavoFoodArticle SET msgDate=?, articledate=?, msgContext=?, sta=? where articleno=? && userId=? ";
@@ -29,7 +27,7 @@ public class FavoFoodArticleDAO implements FavoFoodArticleDAO_interface {
 	}
 
 	@Override
-	public void insert(FavoFoodArticleVO favofooar) {
+	public void add(FavoFoodArticleVO favofooar) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -159,7 +157,7 @@ public class FavoFoodArticleDAO implements FavoFoodArticleDAO_interface {
 	}
 
 	@Override
-	public List<FavoFoodArticleVO> getAll() {
+	public List<FavoFoodArticleVO> getall() {
 		List<FavoFoodArticleVO> favofooarList = new ArrayList<>();
 		FavoFoodArticleVO favofooar = null;
 		Connection con = null;
