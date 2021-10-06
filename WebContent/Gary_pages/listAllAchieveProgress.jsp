@@ -93,13 +93,15 @@
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Gary_pages/achieveprogress.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="­×§ï">
-			     <input type="hidden" name="userid"  value="${achieveprogress.userId}">
+			     <input type="hidden" name="userid"  value="${AchieveProgress.userId}">
+			     <input type="hidden" name="achiid"  value="${AchieveProgress.achiId}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Gary_pages/achieveprogress.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="§R°£">
-			     <input type="hidden" name="userid"  value="${achieveprogress.userId}">
+			     <input type="hidden" name="userid"  value="${AchieveProgress.userId}">
+			     <input type="hidden" name="achiid"  value="${AchieveProgress.achiId}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>
 		</tr>

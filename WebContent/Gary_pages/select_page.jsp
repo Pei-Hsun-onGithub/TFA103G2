@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.achieveprogress.model.*" %>
+<%@ page import="com.memberinfo.model.*" %>
+<%@ page import="com.achieve.model.*" %>
 
 <html>
 <head>
@@ -64,20 +66,21 @@
     </FORM>
   </li>
 
-  <jsp:useBean id="AchieveProgressSvc" scope="page" class="com.achieveprogress.model.AchieveProgressService" />
+  <jsp:useBean id="AchieveSvc" scope="page" class="com.achieve.model.AchieveService" />
+  <jsp:useBean id="MemberInfoSvc" scope="page" class="com.memberinfo.model.MemberInfoService" />
    
   <li>
-     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/achieveprogress/achieveprogress.do" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/Gary_pages/achieveprogress.do" >
        <b>選擇會員編號:</b>
-       <select size="1" name="achieveprogress">
-         <c:forEach var="achieveprogress" items="${AchieveProgressSvc.all}" > 
-          <option value="${achieveprogress.userId}">${achieveprogress.userId}
+       <select size="1" name="userid">
+         <c:forEach var="memberinfo" items="${MemberInfoSvc.all}" > 
+          <option value="${memberinfo.userId}">${memberinfo.userId}
          </c:forEach>   
        </select>
        <b>選擇成就編號:</b>
-       <select size="1" name="achieveprogress">
-         <c:forEach var="achieveprogress" items="${AchieveProgressSvc.all}" > 
-          <option value="${achieveprogress.achiId}">${achieveprogress.achiId}
+       <select size="1" name="achiid">
+         <c:forEach var="achieve" items="${AchieveSvc.all}" > 
+          <option value="${achieve.achiId}">${achieve.achiId}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">

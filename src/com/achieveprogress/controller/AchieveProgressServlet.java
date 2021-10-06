@@ -22,7 +22,7 @@ public class AchieveProgressServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
-
+			System.out.println("hello");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -30,9 +30,15 @@ public class AchieveProgressServlet extends HttpServlet {
 
 			try {
 				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String str = req.getParameter("userId");
-				if (str == null || (str.trim()).length() == 0) {
+				String str1 = req.getParameter("userid");
+				System.out.println("userid=" + str1);
+				if (str1 == null || (str1.trim()).length() == 0) {
 					errorMsgs.add("請輸入會員編號");
+				}
+				String str2 = req.getParameter("achiid");
+				System.out.println("userid=" + str2);
+				if (str2 == null || (str2.trim()).length() == 0) {
+					errorMsgs.add("請輸入成就編號");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -45,8 +51,8 @@ public class AchieveProgressServlet extends HttpServlet {
 				Integer userId = null;
 				Integer achiId = null;
 				try {
-					userId = new Integer(str);
-					achiId = new Integer(str);
+					userId = new Integer(str1);
+					achiId = new Integer(str2);
 				} catch (Exception e) {
 					errorMsgs.add("格式不正確");
 				}
@@ -73,9 +79,9 @@ public class AchieveProgressServlet extends HttpServlet {
 				}
 				
 				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("achieveprogress", achieveprogress); // 資料庫取出的empVO物件,存入req
+				req.setAttribute("achieveprogress", achieveprogress); // 資料庫取出的AchieveProgressVO物件,存入req
 				String url = "/Gary_pages/listOneAchieveProgress.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneAchieveProgress.jsp
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理*************************************/
@@ -87,8 +93,8 @@ public class AchieveProgressServlet extends HttpServlet {
 			}
 		}
 		
-		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp的請求
-
+		if ("getOne_For_Update".equals(action)) { // 來自listAllAchieveProgress.jsp的請求
+			System.out.println("hello");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -96,21 +102,24 @@ public class AchieveProgressServlet extends HttpServlet {
 			
 			try {
 				/***************************1.接收請求參數****************************************/
-				Integer userId = new Integer(req.getParameter("userId"));
-				Integer achiId = new Integer(req.getParameter("achiId"));
-				
+				Integer userId = new Integer(req.getParameter("userid"));
+				System.out.println("userId"+userId);
+				Integer achiId = new Integer(req.getParameter("achiid"));
+				System.out.println("achiid"+achiId);
 				/***************************2.開始查詢資料****************************************/
 				AchieveProgressService achieveprogressSvc = new AchieveProgressService();
 				AchieveProgress achieveprogress = achieveprogressSvc.getOneAchieveProgress(userId, achiId);
+				System.out.println("xxx"+achieveprogress);
 								
 				/***************************3.查詢完成,準備轉交(Send the Success view)************/
-				req.setAttribute("achieveprogress", achieveprogress);         // 資料庫取出的empVO物件,存入req
+				req.setAttribute("achieveprogress", achieveprogress);         // 資料庫取出的AchieveProgressVO物件,存入req
 				String url = "/Gary_pages/update_AchieveProgress_input.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_AchieveProgress_input.jsp
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
+				System.out.println("updateError");
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/Gary_pages/listAllAchieveProgress.jsp");
@@ -127,18 +136,18 @@ public class AchieveProgressServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 		
 			try {
-				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				Integer userId = new Integer(req.getParameter("userId").trim());
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/				
+				Integer userId = new Integer(req.getParameter("userid").trim());
 				
-				Integer achiId = new Integer(req.getParameter("achiId").trim());
+				Integer achiId = new Integer(req.getParameter("achiid").trim());
 				
-				Integer currentArticle = new Integer(req.getParameter("currentArticle").trim());
+				Integer currentArticle = new Integer(req.getParameter("currentarticle").trim());
 				
-				Integer currentOrder = new Integer(req.getParameter("currentOrder").trim());
+				Integer currentOrder = new Integer(req.getParameter("currentorder").trim());
 								
 				java.sql.Date beginDate = null;
 				try {
-					beginDate = java.sql.Date.valueOf(req.getParameter("beginDate").trim());
+					beginDate = java.sql.Date.valueOf(req.getParameter("begindate").trim());
 				} catch (IllegalArgumentException e) {
 					beginDate = new java.sql.Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
@@ -156,7 +165,7 @@ public class AchieveProgressServlet extends HttpServlet {
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("achieveprogress", achieveprogress); // 含有輸入格式錯誤的empVO物件,也存入req
+					req.setAttribute("achieveprogress", achieveprogress); // 含有輸入格式錯誤的AchieveProgressVO物件,也存入req
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/Gary_pages/update_AchieveProgress_input.jsp");
 					failureView.forward(req, res);
@@ -165,25 +174,25 @@ public class AchieveProgressServlet extends HttpServlet {
 				
 				/***************************2.開始修改資料*****************************************/
 				AchieveProgressService achieveprogressSvc = new AchieveProgressService();
-				achieveprogress = achieveprogressSvc.updateAchieveProgress(empno, ename, job, hiredate, sal,comm, deptno);
+				achieveprogress = achieveprogressSvc.updateAchieveProgress(userId, achiId, currentArticle, currentOrder, beginDate, sta);
 				
 				/***************************3.修改完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("empVO", empVO); // 資料庫update成功後,正確的的empVO物件,存入req
-				String url = "/emp/listOneEmp.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+				req.setAttribute("achieveprogress", achieveprogress); // 資料庫update成功後,正確的的AchieveProgressVO物件,存入req
+				String url = "/Gary_pages/listOneAchieveProgress.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneAchieveProgress.jsp
 				successView.forward(req, res);
 
 				/***************************其他可能的錯誤處理*************************************/
 			} catch (Exception e) {
 				errorMsgs.add("修改資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/emp/update_emp_input.jsp");
+						.getRequestDispatcher("/Gary_pages/update_AchieveProgress_input.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-        if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
-			
+        if ("insert".equals(action)) { // 來自addAchieveProgress.jsp的請求  
+			System.out.println("hello");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -191,83 +200,93 @@ public class AchieveProgressServlet extends HttpServlet {
 
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-				String ename = req.getParameter("ename");
-				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
-				if (ename == null || ename.trim().length() == 0) {
-					errorMsgs.add("員工姓名: 請勿空白");
-				} else if(!ename.trim().matches(enameReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("員工姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
-	            }
-				
-				String job = req.getParameter("job").trim();
-				if (job == null || job.trim().length() == 0) {
-					errorMsgs.add("職位請勿空白");
-				}
-				
-				java.sql.Date hiredate = null;
+				Integer userId = null;
 				try {
-					hiredate = java.sql.Date.valueOf(req.getParameter("hiredate").trim());
+					userId = new Integer(req.getParameter("userid").trim());
+					System.out.println("userId"+userId);
+				} catch (NumberFormatException e) {
+					userId = 0;
+					errorMsgs.add("請填會員編號");
+				}
+				Integer achiId = null;
+				try {
+					achiId = new Integer(req.getParameter("achiid").trim());
+					System.out.println("achiId"+achiId);
+				} catch (NumberFormatException e) {
+					achiId = 0;
+					errorMsgs.add("請填成就編號");
+				}
+				Integer currentArticle = null;
+				try {
+					currentArticle = new Integer(req.getParameter("currentarticle").trim());
+					System.out.println("currentarticle"+currentArticle);
+				} catch (NumberFormatException e) {
+					currentArticle = 0;
+					errorMsgs.add("請填當前文章數量");
+				}
+				Integer currentOrder = null;
+				try {
+					currentOrder = new Integer(req.getParameter("currentorder").trim());
+					System.out.println("currenOrder"+currentOrder);
+				} catch (NumberFormatException e) {
+					currentOrder = 0;
+					errorMsgs.add("請填當前訂單數量");
+				}
+				java.sql.Date beginDate = null;
+				try {
+					beginDate = java.sql.Date.valueOf(req.getParameter("begindate").trim());
+					System.out.println("begindate"+beginDate);
 				} catch (IllegalArgumentException e) {
-					hiredate=new java.sql.Date(System.currentTimeMillis());
+					beginDate = new java.sql.Date(System.currentTimeMillis());
 					errorMsgs.add("請輸入日期!");
 				}
-				
-				Double sal = null;
+				Integer sta = null;
 				try {
-					sal = new Double(req.getParameter("sal").trim());
+					sta = new Integer(req.getParameter("sta").trim());
+					System.out.println("sta"+sta);
 				} catch (NumberFormatException e) {
-					sal = 0.0;
-					errorMsgs.add("薪水請填數字.");
+					sta = 0;
+					errorMsgs.add("請填狀態編號");
 				}
 				
-				Double comm = null;
-				try {
-					comm = new Double(req.getParameter("comm").trim());
-				} catch (NumberFormatException e) {
-					comm = 0.0;
-					errorMsgs.add("獎金請填數字.");
-				}
-				
-				Integer deptno = new Integer(req.getParameter("deptno").trim());
-
-				EmpVO empVO = new EmpVO();
-				empVO.setEname(ename);
-				empVO.setJob(job);
-				empVO.setHiredate(hiredate);
-				empVO.setSal(sal);
-				empVO.setComm(comm);
-				empVO.setDeptno(deptno);
+				AchieveProgress achieveprogress = new AchieveProgress();
+				achieveprogress.setUserId(userId);
+				achieveprogress.setAchiId(achiId);
+				achieveprogress.setCurrentArticle(currentArticle);
+				achieveprogress.setCurrentOrder(currentOrder);
+				achieveprogress.setBeginDate(beginDate);
+				achieveprogress.setSta(sta);
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("empVO", empVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					req.setAttribute("achieveprogress", achieveprogress); // 含有輸入格式錯誤的AchieveProgressVO物件,也存入req
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/emp/addEmp.jsp");
+							.getRequestDispatcher("/Gary_pages/addAchieveProgress.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 				
 				/***************************2.開始新增資料***************************************/
-				EmpService empSvc = new EmpService();
-				empVO = empSvc.addEmp(ename, job, hiredate, sal, comm, deptno);
+				AchieveProgressService achieveprogressSvc = new AchieveProgressService();
+				achieveprogress = achieveprogressSvc.addAchieveProgress(userId, achiId, currentArticle, currentOrder, beginDate, sta);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/emp/listAllEmp.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				String url = "/Gary_pages/listAllAchieveProgress.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllAchieveProgress.jsp
 				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/emp/addEmp.jsp");
+						.getRequestDispatcher("/Gary_pages/addAchieveProgress.jsp");
 				failureView.forward(req, res);
 			}
 		}
 		
 		
-		if ("delete".equals(action)) { // 來自listAllEmp.jsp
-
+		if ("delete".equals(action)) { // 來自listAllAchieveProgress.jsp
+		System.out.println("hello");	
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -275,14 +294,16 @@ public class AchieveProgressServlet extends HttpServlet {
 	
 			try {
 				/***************************1.接收請求參數***************************************/
-				Integer empno = new Integer(req.getParameter("empno"));
-				
+				Integer userId = new Integer(req.getParameter("userid"));
+//				System.out.println(userId);
+				Integer achiId = new Integer(req.getParameter("achiid"));
+				System.out.println(achiId);
 				/***************************2.開始刪除資料***************************************/
-				EmpService empSvc = new EmpService();
-				empSvc.deleteEmp(empno);
+				AchieveProgressService achieveprogressSvc = new AchieveProgressService();
+				achieveprogressSvc.deleteAchieveProgress(userId, achiId);
 				
 				/***************************3.刪除完成,準備轉交(Send the Success view)***********/								
-				String url = "/emp/listAllEmp.jsp";
+				String url = "/Gary_pages/listAllAchieveProgress.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 				
@@ -290,7 +311,7 @@ public class AchieveProgressServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("刪除資料失敗:"+e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/emp/listAllEmp.jsp");
+						.getRequestDispatcher("/Gary_pages/listAllAchieveProgress.jsp");
 				failureView.forward(req, res);
 			}
 		}

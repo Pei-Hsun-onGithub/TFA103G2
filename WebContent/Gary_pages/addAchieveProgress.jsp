@@ -65,17 +65,38 @@
 	</ul>
 </c:if>
 
+<jsp:useBean id="AchieveSvc" scope="page" class="com.achieve.model.AchieveService" />
+<jsp:useBean id="MemberInfoSvc" scope="page" class="com.memberinfo.model.MemberInfoService" />
+
 <FORM METHOD="post" ACTION="achieveprogress.do" name="form1">
 <table>
 	<tr>
+		<td>選擇會員編號:</td>
+		<td><select size="1" name="userid">
+         	<c:forEach var="memberinfo" items="${MemberInfoSvc.all}" > 
+          	<option value="${memberinfo.userId}">${memberinfo.userId}
+         	</c:forEach>   
+       		</select>
+		</td>
+	</tr>
+		<tr>
+		<td>選擇成就編號:</td>
+		<td><select size="1" name="achiid">
+         	<c:forEach var="achieve" items="${AchieveSvc.all}" > 
+          	<option value="${achieve.achiId}">${achieve.achiId}
+         	</c:forEach>   
+       		</select>
+		</td>
+	</tr>
+	<tr>
 		<td>當前食記完成:</td>
 		<td><input type="TEXT" name="currentarticle" size="45"
-			 value="<%= (achieveprogress==null)? "30" : achieveprogress.getCurrentArticle()%>" /></td>
+			 value="<%= (achieveprogress==null)? "" : achieveprogress.getCurrentArticle()%>" /></td>
 	</tr>
 	<tr>
 		<td>當前訂單完成:</td>
 		<td><input type="TEXT" name="currentorder" size="45"
-			 value="<%= (achieveprogress==null)? "30" : achieveprogress.getCurrentOrder()%>" /></td>
+			 value="<%= (achieveprogress==null)? "" : achieveprogress.getCurrentOrder()%>" /></td>
 	</tr>
 	<tr>
 		<td>開始挑戰日期:</td>
@@ -84,7 +105,7 @@
 	<tr>
 		<td>狀態:</td>
 		<td><input type="TEXT" name="sta" size="45"
-			 value="<%= (achieveprogress==null)? "3" : achieveprogress.getCurrentOrder()%>" /></td>
+			 value="<%= (achieveprogress==null)? "" : achieveprogress.getCurrentOrder()%>" /></td>
 	</tr>
 
 </table>
