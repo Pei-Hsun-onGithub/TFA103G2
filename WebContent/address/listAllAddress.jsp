@@ -99,7 +99,8 @@
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/address/address.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="н╫зя">
 			     <input type="hidden" name="deliveryAddId"  value="${AddressVO.deliveryAddId}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			     <input type="hidden" name="action"	value="getOne_For_Update">
+			  </FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/address/address.do" style="margin-bottom: 0px;">

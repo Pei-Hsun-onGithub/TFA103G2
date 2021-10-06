@@ -54,7 +54,7 @@
   
   
   <li>
-    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/address/Address.do" >
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/address/address.do" >
         <b>請輸入外送地址編號 (如1):</b>
         <input type="text" name="deliveryAddId">
         <input type="hidden" name="action" value="getOne_For_Display">
@@ -67,9 +67,9 @@
   <li>
      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/address/address.do" >
        <b>選擇會員編號:</b>
-       <select size="1" name="address">
+       <select size="1" name="deliveryAddId">
          <c:forEach var="addressVO" items="${AddressSvc.all}" > 
-          <option value="${addressVO.deliveryAddId}">${addressVO.deliveryAddId}
+          <option value="${addressVO.deliveryAddId}">${addressVO.userId}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">

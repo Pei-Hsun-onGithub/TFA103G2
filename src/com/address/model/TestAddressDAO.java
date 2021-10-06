@@ -19,16 +19,16 @@ public class TestAddressDAO {
 //		dao.insert(add1);
 //	
 		// 修改
-//		AddressVO add2 = new AddressVO();
-//		add2.setUserId(1);
-//		add2.setCustomerName("月亮");
-//		add2.setDeliverPhone("0222983345");
-//		add2.setDeliverAddress("台北市");
-//		add2.setBuildingName("火大樓");
-//		add2.setNote("我要加辣");
-//		add2.setSta(1);
-//		add2.setDeliveryAddid(5);
-//		dao.update(add2);
+		AddressVO add2 = new AddressVO();
+		add2.setUserId(1);
+		add2.setCustomerName("月亮");
+		add2.setDeliverPhone("0222983345");
+		add2.setDeliverAddress("台北市");
+		add2.setBuildingName("火大樓");
+		add2.setNote("我要加辣");
+		add2.setSta(1);
+		add2.setDeliveryAddId(1);
+		dao.update(add2);
 		
 		// 刪除
 //		dao.delete(2);
@@ -47,18 +47,18 @@ public class TestAddressDAO {
 //		System.out.println("---------------------------------------------");
 
 		// 查詢
-		List<AddressVO> list = dao.getAll();
-		for (AddressVO add4 : list) {
-			System.out.print(add4.getDeliveryAddId() + ",");
-			System.out.print(add4.getUserId() + ",");
-			System.out.print(add4.getCustomerName() + ",");
-			System.out.print(add4.getDeliverPhone() + ",");
-			System.out.print(add4.getDeliverAddress() + ",");
-			System.out.print(add4.getBuildingName() + ",");
-			System.out.print(add4.getNote() +  ",");
-			System.out.println(add4.getSta() + ",");
-			System.out.println();
-		}
+//		List<AddressVO> list = dao.getAll();
+//		for (AddressVO add4 : list) {
+//			System.out.print(add4.getDeliveryAddId() + ",");
+//			System.out.print(add4.getUserId() + ",");
+//			System.out.print(add4.getCustomerName() + ",");
+//			System.out.print(add4.getDeliverPhone() + ",");
+//			System.out.print(add4.getDeliverAddress() + ",");
+//			System.out.print(add4.getBuildingName() + ",");
+//			System.out.print(add4.getNote() +  ",");
+//			System.out.println(add4.getSta() + ",");
+//			System.out.println();
+//		}
 	}
 }
 

@@ -70,37 +70,37 @@
 
 	<tr>
 		<td>會員編號:</td>
-		<td><input type="TEXT" name="job" size="45"
+		<td><input type="TEXT" name="userId" size="45"
 			 value="<%= (addressVO==null)? "1" : addressVO.getUserId()%>" /></td>
 	</tr>
 	<tr>
 		<td>取餐人姓名:</td>
-		<td><input type="TEXT" name="sal" size="45"
+		<td><input type="TEXT" name="customerName" size="45"
 			 value="<%= (addressVO==null)? "羅文凱" : addressVO.getCustomerName()%>" /></td>
 	</tr>
 	<tr>
 		<td>連絡電話:</td>
-		<td><input type="TEXT" name="sal" size="45"
-			 value="<%= (addressVO==null)? "0228825252" : addressVO.getDeliverPhone()%>" /></td>
+		<td><input type="TEXT" name="deliverPhone" size="45"
+			 value="<%= (addressVO==null)? "0928825252" : addressVO.getDeliverPhone()%>" /></td>
 	</tr>
 	<tr>
 		<td>地址:</td>
-		<td><input type="TEXT" name="comm" size="45"
+		<td><input type="TEXT" name="deliverAddress" size="45"
 			 value="<%= (addressVO==null)? "台北市大安區新生南路一段六樓" : addressVO.getDeliverAddress()%>" /></td>
 	</tr>
 	<tr>
 		<td>大樓:</td>
-		<td><input type="TEXT" name="comm" size="45"
+		<td><input type="TEXT" name="buildingName" size="45"
 			 value="<%= (addressVO==null)? "無" : addressVO.getBuildingName()%>" /></td>
 	</tr>
 	<tr>
 		<td>備註:</td>
-		<td><input type="TEXT" name="comm" size="45"
+		<td><input type="TEXT" name="note" size="45"
 			 value="<%= (addressVO==null)? "null" : addressVO.getNote()%>" /></td>
 	</tr>
 	<tr>
 		<td>狀態:</td>
-		<td><input type="TEXT" name="comm" size="45"
+		<td><input type="TEXT" name="sta" size="45"
 			 value="<%= (addressVO==null)? "1" : addressVO.getSta()%>" /></td>
 	</tr>
 
