@@ -2,11 +2,8 @@ package com.meal.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,8 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import com.meal.model.MealDAO_interface;
-import com.meal.model.MealJDBCDAO;
+
 import com.meal.model.MealService;
 import com.meal.model.MealVO;
 
@@ -59,7 +55,7 @@ public class MealServlet extends HttpServlet {
 		if ("insert".equals(action)) {
 
 			Map<String, String> errMsgs = new LinkedHashMap<String, String>();
-
+			req.setAttribute("errMsgs", errMsgs);
 			MealService service = new MealService();
 			// 1. 抓取表單資料，錯誤資料處理
 			try {
@@ -72,6 +68,14 @@ public class MealServlet extends HttpServlet {
 				} else if (mealName.trim().length() == 0) {
 					errMsgs.put(mealName, "請輸入資料，不要空白");
 				}
+				
+				if(!errMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/emp/addOneMeal.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+				
 				Integer sta = null;
 				try {
 					sta = new Integer(req.getParameter("sta"));
@@ -108,11 +112,15 @@ public class MealServlet extends HttpServlet {
 				// 圖片上傳
 				byte[] mealImg = null;
 				Part part = req.getPart("myUploadImg");
+				if (part.getSize() > 0) {
+					System.out.println(part.getSize());
+					InputStream in = part.getInputStream();
+					mealImg = new byte[in.available()];
+					in.read(mealImg);
+					in.close();
 
-				InputStream in = part.getInputStream();
-				mealImg = new byte[in.available()];
-				in.read(mealImg);
-				in.close();
+				}
+			
 
 				// 2. 持久化
 				MealVO mealVO = service.addMeal(sta, mealName, mealType, unitPrice, launchDate, launchDays,
@@ -148,17 +156,11 @@ public class MealServlet extends HttpServlet {
 
 		if ("update".equals(action)) {
 
-			
 			MealService service = new MealService();
 			// 1. 抓取頁面送來的PK值
-			Integer mealid = null;
-			try {
-				
-					mealid = new Integer(req.getParameter("mealId"));
-				} catch(Exception e) {
-					System.out.println("我錯了");
-				}
-			
+
+			Integer mealid = new Integer(req.getParameter("mealId"));
+
 			Map<String, String> errMsgs = new LinkedHashMap<String, String>();
 
 			// 1. 抓取表單資料，錯誤資料處理
@@ -207,19 +209,21 @@ public class MealServlet extends HttpServlet {
 
 				// 圖片上傳
 				byte[] mealImg = null;
-				
+
 				Part part = req.getPart("myUploadImg");
-				InputStream in = part.getInputStream();
-				mealImg = new byte[in.available()];
-				in.read(mealImg);
-				in.close();
+				if (part.getSize() > 0) {
+					InputStream in = part.getInputStream();
+					mealImg = new byte[in.available()];
+					in.read(mealImg);
+					in.close();
+				}
 
 				// 2. 持久化
 				MealVO mealVO = service.updateMeal(mealid, sta, mealName, mealType, unitPrice, launchDate, launchDays,
 						mealDescription, mealImg, restaurantId);
 
 				// 3. 轉交至展示層
-				
+
 				req.setAttribute("list", service.getAll());
 				RequestDispatcher toListallView = req.getRequestDispatcher("/pei_pages/listAllMeal.jsp");
 				toListallView.forward(req, res);
@@ -227,7 +231,6 @@ public class MealServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 
 		}
 

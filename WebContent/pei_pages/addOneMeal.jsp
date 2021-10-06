@@ -190,9 +190,9 @@ div.card-body ul.my-form-wrapper li a {
 										<option
 											value="<%=(mealVO == null) ? "日式" : mealVO.getMealType()%>"
 											selected>日式</option>
-										<option>One</option>
-										<option>Two</option>
-										<option>Three</option>
+										<option>火鍋</option>
+										<option>中式</option>
+										<option>地中海</option>
 									</select>
 								</div>
 								<div class="col-sm-6"></div>

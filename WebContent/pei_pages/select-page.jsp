@@ -8,21 +8,33 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>SelectPage</title>
 <!--fivicon icon-->
-<link rel="icon" href="<%=request.getContextPath()%>/assets/img/fevicon.png">
+<link rel="icon"
+	href="<%=request.getContextPath()%>/assets/img/fevicon.png">
 
 <!-- Stylesheet -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/animate.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/animate.min.css">
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/magnific.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/jquery-ui.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/nice-select.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/owl.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/slick-slide.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/fontawesome.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/remixicon/remixicon.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/responsive.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/magnific.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/jquery-ui.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/nice-select.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/owl.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/slick-slide.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/fontawesome.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/remixicon/remixicon.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/responsive.css">
 
 
 <!--Google Fonts-->
@@ -69,8 +81,6 @@ div.card-body ul.my-form-wrapper li a {
 	line-height: normal;
 	border-radius: 10px;
 }
-
-
 </style>
 
 </head>
@@ -133,8 +143,8 @@ div.card-body ul.my-form-wrapper li a {
 								<form class="row row-cols-xxl-auto align-items-center">
 
 									<div class="row">
-										<label  class="col-sm-3 col-form-label">輸入餐點編號
-											(如 : 502)</label>
+										<label class="col-sm-3 col-form-label">輸入餐點編號 (如 :
+											502)</label>
 										<div class="col-sm-2">
 											<input type="text" class="form-control" name="mealId">
 										</div>
@@ -146,42 +156,26 @@ div.card-body ul.my-form-wrapper li a {
 									</div>
 								</form>
 							</li>
+							
+							<jsp:useBean id="mealSvc" scope="page"
+								class="com.meal.model.MealService" />
+								
+						
 
 							<li>
-								<form class="row row-cols-xxl-auto align-items-center">
 
-									<div class="row">
-										<label class="col-sm-3 col-form-label">選擇餐點編號</label>
-										<div class="col-sm-2">
-											<select class="form-select"
-												aria-label="Default select example">
-												<option selected>502</option>
-												<option value="1">One</option>
-												<option value="2">Two</option>
-												<option value="3">Three</option>
-											</select>
-										</div>
-										<div class="col-sm-7">
-											<button type="button" class="btn btn-info my-btn">送出</button>
-											<input type="hidden" name="action" value="getOne_For_Display">
-											<input type="submit" hidden>
-										</div>
-									</div>
-								</form>
-							</li>
-
-							<li>
 								<form class="row row-cols-xxl-auto align-items-center">
 
 									<div class="row">
 										<label class="col-sm-3 col-form-label">選擇餐點名稱</label>
 										<div class="col-sm-2">
 											<select class="form-select"
-												aria-label="Default select example">
-												<option selected>鹹酥雞</option>
-												<option value="1">One</option>
-												<option value="2">Two</option>
-												<option value="3">Three</option>
+												aria-label="Default select example" name="mealName">
+
+												<c:forEach var="mealVO" items="${mealSvc.all}">
+													<option value="${mealVO.mealId}">${mealVO.mealName}
+												</c:forEach>
+
 											</select>
 										</div>
 										<div class="col-sm-7">
@@ -192,20 +186,19 @@ div.card-body ul.my-form-wrapper li a {
 									</div>
 								</form>
 							</li>
-<%-- 							<%=request.getContextPath()%> --%>
-							<li><a class="btn btn-primary" href="/TFA103G2/meal/meal.do?action=getAll">查詢全部</a></li>
+							<%-- 							<%=request.getContextPath()%> --%>
+							<li><a class="btn btn-primary"
+								href="/TFA103G2/meal/meal.do?action=getAll">查詢全部</a></li>
 						</ul>
 
 						<div style="overflow: hidden;">
 							<h4 class="my-query-title" style="float: left;">餐點管理</h4>
-							<br>
-							<br>
+							<br> <br>
 							<ul class="my-form-wrapper">
-								<li>
-									<a class="btn btn-primary my-btn" href="addOneMeal.jsp">新增餐點</a>
+								<li><a class="btn btn-primary my-btn" href="addOneMeal.jsp">新增餐點</a>
 								</li>
 							</ul>
-							
+
 						</div>
 
 
@@ -238,12 +231,16 @@ div.card-body ul.my-form-wrapper li a {
 	<script src="<%=request.getContextPath()%>/assets/js/counterup.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/waypoint.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/magnific.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/owl.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/tweenmax.min.js"></script>
 	<!-- main js  -->
