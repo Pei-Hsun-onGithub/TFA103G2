@@ -11,10 +11,12 @@ public class AchieveProgressService {
 		dao = new AchieveProgressDAOImpl();
 	}
 	
-	public AchieveProgress addAchieveProgress (int currentArticle, int currentOrder, Date beginDate, int sta) {
+	public AchieveProgress addAchieveProgress (int userId, int achiId, int currentArticle, int currentOrder, Date beginDate, int sta) {
 		
 		AchieveProgress achieveprogress = new AchieveProgress();
 		
+		achieveprogress.setUserId(userId);
+		achieveprogress.setAchiId(achiId);
 		achieveprogress.setCurrentArticle(currentArticle);
 		achieveprogress.setCurrentOrder(currentOrder);
 		achieveprogress.setBeginDate(beginDate);
@@ -24,10 +26,12 @@ public class AchieveProgressService {
 		return achieveprogress;
 	}
 	
-	public AchieveProgress updateAchieveProgress (int currentArticle, int currentOrder, Date beginDate, int sta) {
+	public AchieveProgress updateAchieveProgress (int userId, int achiId, int currentArticle, int currentOrder, Date beginDate, int sta) {
 		
 		AchieveProgress achieveprogress = new AchieveProgress();
 		
+		achieveprogress.setUserId(userId);
+		achieveprogress.setAchiId(achiId);
 		achieveprogress.setCurrentArticle(currentArticle);
 		achieveprogress.setCurrentOrder(currentOrder);
 		achieveprogress.setBeginDate(beginDate);

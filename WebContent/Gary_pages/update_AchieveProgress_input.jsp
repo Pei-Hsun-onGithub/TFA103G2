@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.achieveprogress.model.*"%>
+<%@ page import="com.achieve.model.*"%>
+<%@ page import="com.memberinfo.model.*"%>
 
 <%
 AchieveProgress achieveprogress = (AchieveProgress) request.getAttribute("achieveprogress"); //EmpServlet.java (Concroller) 存入req的empVO物件 (包括幫忙取出的empVO, 也包括輸入資料錯誤時的empVO物件)
@@ -65,27 +67,28 @@ AchieveProgress achieveprogress = (AchieveProgress) request.getAttribute("achiev
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="emp.do" name="form1">
+<jsp:useBean id="AchieveSvc" scope="page" class="com.achieve.model.AchieveService" />
+<jsp:useBean id="MemberInfoSvc" scope="page" class="com.memberinfo.model.MemberInfoService" />
+
+<FORM METHOD="post" ACTION="achieveprogress.do" name="form1">
 <table>
 	<tr>
-		<td>會員編號:</td>
-		<td><input type="TEXT" name="userid" size="45" 
-			 value="<%= (achieveprogress==null)? "1" : achieveprogress.getUserId()%>" /></td>
+		<td>會員編號:<font color=red><b>*</b></font></td>
+		<td><%=achieveprogress.getUserId()%></td>
 	</tr>
 	<tr>
-		<td>成就編號:</td>
-		<td><input type="TEXT" name="achiid" size="45"
-			 value="<%= (achieveprogress==null)? "1" : achieveprogress.getAchiId()%>" /></td>
+		<td>成就編號:<font color=red><b>*</b></font></td>
+		<td><%=achieveprogress.getAchiId()%></td>
 	</tr>
 	<tr>
 		<td>當前食記完成:</td>
 		<td><input type="TEXT" name="currentarticle" size="45"
-			 value="<%= (achieveprogress==null)? "30" : achieveprogress.getCurrentArticle()%>" /></td>
+			 value="<%=achieveprogress.getCurrentArticle()%>" /></td>
 	</tr>
 	<tr>
 		<td>當前訂單完成:</td>
 		<td><input type="TEXT" name="currentorder" size="45"
-			 value="<%= (achieveprogress==null)? "30" : achieveprogress.getCurrentOrder()%>" /></td>
+			 value="<%=achieveprogress.getCurrentOrder()%>" /></td>
 	</tr>
 	<tr>
 		<td>開始挑戰日期:</td>
@@ -94,22 +97,24 @@ AchieveProgress achieveprogress = (AchieveProgress) request.getAttribute("achiev
 	<tr>
 		<td>狀態:</td>
 		<td><input type="TEXT" name="sta" size="45"
-			 value="<%= (achieveprogress==null)? "3" : achieveprogress.getCurrentOrder()%>" /></td>
+			 value="<%=achieveprogress.getSta()%>" /></td>
 	</tr>
 
 </table>
 <br>
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
+<input type="hidden" name="action" value="update">
+<input type="hidden" name="userid" value="<%=achieveprogress.getUserId()%>">
+<input type="hidden" name="achiid" value="<%=achieveprogress.getAchiId()%>">
+<input type="submit" value="送出修改"></FORM>
 </body>
 
 
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/Gary_pages/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath()%>/Gary_pages/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/Gary_pages/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
   .xdsoft_datetimepicker .xdsoft_datepicker {
