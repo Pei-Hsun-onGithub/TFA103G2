@@ -1,12 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.List" %>
-<%@ page import="com.meal.model.*" %>
+<%@ page import="java.util.List"%>
+<%@ page import="com.meal.model.*"%>
 
 
 
 
-<jsp:useBean id="list" scope="request" type="java.util.List<MealVO>" />
+
 
 <html>
 <head>
@@ -15,21 +15,33 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>ListAll</title>
 <!--fivicon icon-->
-<link rel="icon" href="<%=request.getContextPath()%>/assets/img/fevicon.png">
+<link rel="icon"
+	href="<%=request.getContextPath()%>/assets/img/fevicon.png">
 
 <!-- Stylesheet -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/animate.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/animate.min.css">
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/magnific.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/jquery-ui.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/nice-select.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/owl.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/slick-slide.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/fontawesome.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/remixicon/remixicon.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/responsive.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/magnific.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/jquery-ui.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/nice-select.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/owl.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/slick-slide.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/fontawesome.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/remixicon/remixicon.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/responsive.css">
 
 
 <!--Google Fonts-->
@@ -37,14 +49,26 @@
 	href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap"
 	rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/vendors/DataTables/datatables.css">
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/vendors/DataTables/datatables.css">
 <style>
 section.breadcrumb-area {
 	height: 80px;
 }
 
-section.work-area{
+section.work-area {
 	margin-top: 50px;
+}
+
+input.my-btn {
+
+	padding: 0px 10px;
+	width: 53px;
+	height: 30px;
+	line-height: 10px;
+	border-radius: 10px;
+	
+
 }
 </style>
 
@@ -57,7 +81,7 @@ section.work-area{
 		<nav class="navbar navbar-expand-lg">
 			<div class="container nav-container">
 				<div class="logo">
-					<a class="main-logo" href="home-1.html"><img
+					<a class="main-logo" href="/TFA103G2/pei_pages/select-page.jsp"><img
 						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
 				</div>
 			</div>
@@ -78,7 +102,7 @@ section.work-area{
 	<!-- Content Area Start -->
 	<section class="work-area">
 		<div class="container my-content">
-		
+
 			<div class="row justify-content-center">
 				<table id="table_id" class="display">
 					<thead>
@@ -93,25 +117,45 @@ section.work-area{
 							<th>餐點描述</th>
 							<th>餐點照片</th>
 							<th>餐聽編號</th>
+							<th>修改</th>
+							<th>刪除</th>
 						</tr>
 					</thead>
 					<tbody>
-	
-					<c:forEach var="mealVO" items="${list}">
-						<tr>
-							<td>${mealVO.mealId}</td>
-							<td>${mealVO.sta}</td>
-							<td>${mealVO.mealName}</td>
-							<td>${mealVO.mealType}</td>
-							<td>${mealVO.unitPrice}</td>
-							<td>${mealVO.launchDate}</td>
-							<td>${mealVO.launchDays}</td>
-							<td>${mealVO.mealDescription}</td>
-							<td>${mealVO.mealImg}</td>
-							<td>${mealVO.restaurantId}</td>
-							
-						</tr>
-					</c:forEach>
+
+						<jsp:useBean id="list" scope="request"
+							type="java.util.List<MealVO>" />
+
+						<c:forEach var="mealVO" items="${list}">
+							<tr>
+								<td>${mealVO.mealId}</td>
+								<td>${mealVO.sta}</td>
+								<td>${mealVO.mealName}</td>
+								<td>${mealVO.mealType}</td>
+								<td>${mealVO.unitPrice}</td>
+								<td>${mealVO.launchDate}</td>
+								<td>${mealVO.launchDays}</td>
+								<td>${mealVO.mealDescription}</td>
+								<td>${mealVO.mealImg}</td>
+								<td>${mealVO.restaurantId}</td>
+								<td>
+									<FORM METHOD="post" ACTION="/TFA103G2/meal/meal.do?action=getOne_For_Update" style="margin-bottom: 0px;">
+										<input type="submit" class="btn btn-warning my-btn" value="修改"> 
+										<input type="hidden" name="mealId" value="${mealVO.mealId}"> 
+									</FORM>
+								</td>
+								<td>
+									<FORM METHOD="post" ACTION="/TFA103G2/meal/meal.do?action=delete" style="margin-bottom: 0px;">
+										
+										<input type="submit" class="btn btn-warning my-btn" id="my-delete-submit" value="刪除"> 
+										<input type="hidden" name="mealId" value="${mealVO.mealId}">  
+										
+										
+									</FORM>
+								</td>
+
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -133,12 +177,16 @@ section.work-area{
 	<script src="<%=request.getContextPath()%>/assets/js/counterup.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/waypoint.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/magnific.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/owl.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/tweenmax.min.js"></script>
 	<!-- main js  -->
@@ -150,11 +198,12 @@ section.work-area{
 		src="<%=request.getContextPath()%>/vendors/DataTables/datatables.js"></script>
 
 	<script>
-	
-	$(document).ready( function () {
-	    $('#table_id').DataTable();
-	} );
-	
+		$(document).ready(function() {
+			$('#table_id').DataTable();
+			
+		});
+		
+		
 	</script>
 </body>
 </html>
