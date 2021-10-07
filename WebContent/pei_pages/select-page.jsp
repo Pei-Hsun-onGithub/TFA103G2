@@ -140,18 +140,19 @@ div.card-body ul.my-form-wrapper li a {
 						<!--          findMealById                    -->
 						<ul class="my-form-wrapper">
 							<li>
-								<form class="row row-cols-xxl-auto align-items-center">
+								<form class="row row-cols-xxl-auto align-items-center" method="post" action="/TFA103G2/meal/meal.do">
 
 									<div class="row">
 										<label class="col-sm-3 col-form-label">輸入餐點編號 (如 :
 											502)</label>
 										<div class="col-sm-2">
-											<input type="text" class="form-control" name="mealId">
+											<input type="text" class="form-control" name="mealId" value="534">
 										</div>
 										<div class="col-sm-7">
-											<button type="button" class="btn btn-info my-btn">送出</button>
+											
+											<button type="button" class="btn btn-info my-btn" id="my-getByPK-btn">送出</button>
 											<input type="hidden" name="action" value="getOne_For_Display">
-											<input type="submit" hidden>
+											<input type="submit" hidden id="my-getByPK-submit">
 										</div>
 									</div>
 								</form>
@@ -159,18 +160,16 @@ div.card-body ul.my-form-wrapper li a {
 							
 							<jsp:useBean id="mealSvc" scope="page"
 								class="com.meal.model.MealService" />
-								
-						
 
 							<li>
 
-								<form class="row row-cols-xxl-auto align-items-center">
+								<form class="row row-cols-xxl-auto align-items-center" action="/TFA103G2/meal/meal.do">
 
 									<div class="row">
 										<label class="col-sm-3 col-form-label">選擇餐點名稱</label>
 										<div class="col-sm-2">
 											<select class="form-select"
-												aria-label="Default select example" name="mealName">
+												aria-label="Default select example" name="mealId">
 
 												<c:forEach var="mealVO" items="${mealSvc.all}">
 													<option value="${mealVO.mealId}">${mealVO.mealName}
@@ -179,18 +178,22 @@ div.card-body ul.my-form-wrapper li a {
 											</select>
 										</div>
 										<div class="col-sm-7">
-											<button type="button" class="btn btn-info my-btn">送出</button>
+											<button type="button" class="btn btn-info my-btn" id="my-getByName-btn">送出</button>
 											<input type="hidden" name="action" value="getOne_For_Display">
-											<input type="submit" hidden>
+											<input type="submit" hidden id="my-getByName-submit">
 										</div>
 									</div>
 								</form>
 							</li>
-							<%-- 							<%=request.getContextPath()%> --%>
+							
+							
+							<!--       查全部按鈕                 -->
 							<li><a class="btn btn-primary"
-								href="/TFA103G2/meal/meal.do?action=getAll">查詢全部</a></li>
+								href="<%=request.getContextPath()%>/meal/meal.do?action=getAll">查詢全部</a></li>
 						</ul>
 
+
+							<!--       新增一筆Meal按鈕                 -->
 						<div style="overflow: hidden;">
 							<h4 class="my-query-title" style="float: left;">餐點管理</h4>
 							<br> <br>
@@ -204,6 +207,8 @@ div.card-body ul.my-form-wrapper li a {
 
 					</div>
 
+					<!-- 切換分頁	 -->>
+					
 					<div class="card-body model2-body">
 						<h5 class="card-title">Model2</h5>
 					</div>
@@ -280,6 +285,15 @@ div.card-body ul.my-form-wrapper li a {
 				/* 切換到 model3*/
 				if ("model3" === e.currentTarget.classList[indexOfModelClass])
 					$("div.card div.model3-body").addClass("active");
+			});
+			
+			
+			$('button#my-getByPK-btn').on("click", function() {
+				document.getElementById("my-getByPK-submit").click();
+			});
+			
+			$('button#my-getByName-btn').on("click", function() {
+				document.getElementById("my-getByName-submit").click();
 			});
 
 		});
