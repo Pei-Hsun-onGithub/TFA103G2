@@ -91,7 +91,7 @@ public class MealServlet extends HttpServlet {
 
 		if ("insert".equals(action)) {
 
-			Map<String, String> errMsgs = new LinkedHashMap<String, String>();
+			List<String> errMsgs = new LinkedList<String>();
 			req.setAttribute("errMsgs", errMsgs);
 			MealService service = new MealService();
 			// 1. 抓取表單資料，錯誤資料處理
@@ -101,22 +101,17 @@ public class MealServlet extends HttpServlet {
 				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 
 				if (!mealName.trim().matches(enameReg)) {
-					errMsgs.put(mealName, "請輸入正確中英文與0~9的數字");
-				} else if (mealName.trim().length() == 0) {
-					errMsgs.put(mealName, "請輸入資料，不要空白");
+					errMsgs.add("請輸入正確中英文與0~9的數字");
+				} else if (mealName == null || mealName.trim().length() == 0) {
+					errMsgs.add("請輸入資料，不要空白");
 				}
 
-				if (!errMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/pei_pages/addOneMeal.jsp");
-					failureView.forward(req, res);
-					return;// 程式中斷
-				}
 
 				Integer sta = null;
 				try {
-					sta = new Integer(req.getParameter("sta"));
+					sta = new Integer(req.getParameter("sta").trim());
 				} catch (NumberFormatException e) {
-					errMsgs.put("sta", "狀態請輸入數字");
+					errMsgs.add("狀態請輸入數字");
 				}
 				String mealType = req.getParameter("mealType");
 
@@ -124,7 +119,7 @@ public class MealServlet extends HttpServlet {
 				try {
 					unitPrice = new Integer(req.getParameter("unitPrice"));
 				} catch (NumberFormatException e) {
-					errMsgs.put("unitPrice", "單價請輸入數字");
+					errMsgs.add("單價請輸入數字");
 				}
 
 				Timestamp launchDate = java.sql.Timestamp.valueOf(req.getParameter("launchDate"));
@@ -133,7 +128,7 @@ public class MealServlet extends HttpServlet {
 				try {
 					launchDays = new Integer(req.getParameter("launchDays"));
 				} catch (NumberFormatException e) {
-					errMsgs.put("launchDays", "天數請輸入數字");
+					errMsgs.add("天數請輸入數字");
 				}
 
 				String mealDescription = req.getParameter("mealDescription");
@@ -142,7 +137,7 @@ public class MealServlet extends HttpServlet {
 				try {
 					restaurantId = new Integer(req.getParameter("restaurantId"));
 				} catch (NumberFormatException e) {
-					errMsgs.put("restaurantId", "餐廳編號請輸入數字");
+					errMsgs.add("餐廳編號請輸入數字");
 				}
 
 				// 圖片上傳
@@ -155,6 +150,22 @@ public class MealServlet extends HttpServlet {
 					in.close();
 
 				}
+				
+//				MealVO errMealVO = new MealVO();
+//				errMealVO.setMealName(mealName);
+//				errMealVO.setSta(sta);
+//				errMealVO.setUnitPrice(unitPrice);
+//				errMealVO.setLaunchDays(launchDays);
+//				errMealVO.setRestaurantId(restaurantId);
+				
+				if (!errMsgs.isEmpty()) {
+					RequestDispatcher failureView = req.getRequestDispatcher("/pei_pages/addOneMeal.jsp");
+//					req.setAttribute("UpdatingMealVO", errMealVO);
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
+				
+				
 
 				// 2. 持久化
 				MealVO mealVO = service.addMeal(sta, mealName, mealType, unitPrice, launchDate, launchDays,

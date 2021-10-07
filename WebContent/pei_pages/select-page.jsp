@@ -146,7 +146,7 @@ div.card-body ul.my-form-wrapper li a {
 										<label class="col-sm-3 col-form-label">輸入餐點編號 (如 :
 											502)</label>
 										<div class="col-sm-2">
-											<input type="text" class="form-control" name="mealId" value="534">
+											<input type="text" class="form-control" name="mealId">
 										</div>
 										<div class="col-sm-7">
 											

@@ -151,17 +151,29 @@ div.card-body ul.my-form-wrapper li a {
 
 						<br>
 
+<%
+		MealVO mealVO = (MealVO) request.getAttribute("UpdatingMealVO");
+						
+%>
+
+
+<%-- 錯誤表列 --%>
+<c:if test="${not empty errMsgs}">
+	<font style="color:red">請修正以下錯誤:</font>
+	<ul>
+		<c:forEach var="message" items="${errMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+	</ul>
+</c:if>
+
+
+
+
 						<!--         新增一筆Meal資料                   -->
 						<form class="row row-cols-xxl-auto align-items-center my-form"
 							method="post" action="/TFA103G2/meal/meal.do"
 							enctype="multipart/form-data">
-
-
-							<%
-								MealVO mealVO = (MealVO) request.getAttribute("UpdatingMealVO");
-							%>
-
-
 
 
 							<div class="row">
