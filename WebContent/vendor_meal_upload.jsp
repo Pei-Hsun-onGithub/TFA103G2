@@ -33,6 +33,10 @@
           top:15%;
           left:3%;
         } */
+        div.my-btn-wrapper{
+        
+        margin-top: 50px;
+        }
     </style>
 </head>
 <body>
@@ -224,7 +228,7 @@
                                 </div>
                                 <div class="col-md-12">
 
-                                    <div class="row">
+                                    <div class="row my-btn-wrapper">
                                         <div class="col-md-2">
                                         </div>
                                         <div class="col-md-4">
