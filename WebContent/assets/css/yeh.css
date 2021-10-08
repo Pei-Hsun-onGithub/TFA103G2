@@ -14,9 +14,8 @@
   position:relative;
 }
 .content-group {
-  border:1px solid #ccc;
-  padding: 20px;
-  background-color: #ccc;
+  padding: 5px;
+  background-color: #cc2829;
 }
 
 .content{display:none;}
@@ -73,12 +72,13 @@
   max-width: 400px;
   margin: 0px auto;/*center*/
   font-size: 20px;
-  border: 1px solid #fff;
+  
 }
 
 .lgd{
   font-size: 40px;
-  background-color: royalblue;
+  /* margin-top: 5px; */
+  
 }
 
 legend,input{

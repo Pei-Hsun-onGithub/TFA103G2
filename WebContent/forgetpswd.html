@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <!-- new css -->
-    <link rel="stylesheet" href="assets/css/yeh4.css">
+    <link rel="stylesheet" href="assets/css/forgetpswd.css">
 
     <!--Google Fonts-->
     <link
@@ -68,23 +68,33 @@
     <div class="panel-group">
         <input type="radio" name="panel-radio" id="radio1" class="panel-control" checked>
         <div class="content-group">
-
+            <div class="back-to-top">
+                <span class="back-top"><i class="fas fa-angle-double-up"></i></span>
+            </div>
+            <div class="overlay" style="border: 1px solid red;">
+                <article>
+                    <h1>這是 Modal 裡的標題</h1>
+                    <p>這是 Modal 段落</p>
+                    <button type="button" class="btn_modal_close">關閉</button>
+                </article>
+            </div>
             <!---------------------------------- table內帳號輸入 ---------------------------------->
             <form class="content content1" action="javascript:;" method="post">
                 <div id="right" class="two-thirds">
                     <fieldset>
                         <!--<div class="fie">-->
-                        <h1 class="lgd" style="color: black;">尋找你的密碼</h1>
+                        <h1 class="lgd" style="color: black;">尋找密碼</h1>
                         <p>輸入你電子郵件地址</p>
-                        <!--1--> <input type="username" id="username" class="username_email" name="username"placeholder="您的電子郵件地址" required>
-                        <!--3--> <input type="button" value="送出" class="btn" id="submit" onclick="myFormCheck()" padd/>
+                        <!--1--> <input type="username" id="username" class="username_email" name="username"
+                            placeholder="您的電子郵件地址" required>
+                        <!--3--> <input type="button" value="送出" class="btn" id="submit" onclick="myFormCheck()" padd />
                     </fieldset>
                 </div>
-            </form>   
-        </div>  
+            </form>
+        </div>
     </div>
     <!--two-thirds-->
-    
+
 
     <!----------------------------------  end  ---------------------------------->
     <!-- 
@@ -127,9 +137,6 @@
     <!-- footer area end -->
 
     <!-- back-to-top end -->
-    <div class="back-to-top">
-        <span class="back-top"><i class="fas fa-angle-double-up"></i></span>
-    </div>
 
 
 
@@ -151,7 +158,7 @@
     <!-- main js  -->
     <script src="assets/js/main.js"></script>
     <!-- new js   -->
-    <script src="assets/js/yeh.js"></script>
+    <script src="assets/js/forgetpswd.js"></script>
 
 </body>
 
