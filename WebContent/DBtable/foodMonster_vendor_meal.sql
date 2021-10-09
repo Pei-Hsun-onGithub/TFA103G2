@@ -41,7 +41,7 @@ CREATE TABLE Meal (
 	unitprice      		INT,
 	launchdate     		TIMESTAMP,
 	launchdays    		INT,
-    mealdescription     VARCHAR(150),
+    mealdescription     VARCHAR(500),
     mealimg    			MEDIUMBLOB,
     restaurantid    	INT NOT NULL,
 	CONSTRAINT Meal_restaurantid_FK FOREIGN KEY (restaurantid) REFERENCES Restaurant (restaurantid),
