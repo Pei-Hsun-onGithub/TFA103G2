@@ -119,6 +119,7 @@ public class MealServlet extends HttpServlet {
 				try {
 					unitPrice = new Integer(req.getParameter("unitPrice"));
 				} catch (NumberFormatException e) {
+					unitPrice = new Integer("0");
 					errMsgs.add("單價請輸入數字");
 				}
 
@@ -128,6 +129,7 @@ public class MealServlet extends HttpServlet {
 				try {
 					launchDays = new Integer(req.getParameter("launchDays"));
 				} catch (NumberFormatException e) {
+					launchDays = new Integer("30");
 					errMsgs.add("天數請輸入數字");
 				}
 
@@ -151,16 +153,21 @@ public class MealServlet extends HttpServlet {
 
 				}
 				
-//				MealVO errMealVO = new MealVO();
-//				errMealVO.setMealName(mealName);
-//				errMealVO.setSta(sta);
-//				errMealVO.setUnitPrice(unitPrice);
-//				errMealVO.setLaunchDays(launchDays);
-//				errMealVO.setRestaurantId(restaurantId);
 				
 				if (!errMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher("/pei_pages/addOneMeal.jsp");
-//					req.setAttribute("UpdatingMealVO", errMealVO);
+					
+					MealVO errMealVO = new MealVO();
+					errMealVO.setMealName(mealName);
+					errMealVO.setSta(sta);
+					errMealVO.setUnitPrice(unitPrice);
+					errMealVO.setLaunchDate(launchDate);
+					errMealVO.setLaunchDays(launchDays);
+					errMealVO.setRestaurantId(restaurantId);
+					errMealVO.setMealImg(mealImg);
+					errMealVO.setMealDescription(mealDescription);
+					
+					RequestDispatcher failureView = req.getRequestDispatcher("/vendor_meal_upload.jsp");
+					req.setAttribute("UpdatingMealVO", errMealVO);
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
