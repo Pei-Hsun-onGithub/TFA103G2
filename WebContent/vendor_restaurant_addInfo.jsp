@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>vendor_meal_upload</title>
+<title>vendor_meal_restaurant_addInfo</title>
 <!--fivicon icon-->
 <link rel="icon" href="assets/img/fevicon.png">
 
@@ -72,7 +72,6 @@ div.my-preview-img-container div.my-img-zone span {
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	
 }
 
 div.my-preview-img-container div.my-img-zone img.preview_img {
@@ -86,6 +85,18 @@ form .my-btn {
 	height: 36px;
 	line-height: 10px;
 	border-radius: 10px;
+}
+
+div.my-time-setting-block label {
+	margin-bottom: 0px;
+}
+
+div.my-time-setting-block label:after {
+	content: "";
+}
+
+div.my-time-setting-block-weekly-picker label.form-check-label:after {
+	content: "";
 }
 </style>
 </head>
@@ -152,13 +163,15 @@ form .my-btn {
 						<div class="widget widget_categories style-2">
 							<h4 class="widget-title">Categories</h4>
 							<ul>
-								<li><a href="<%=request.getContextPath()%>/vendor_restaurant_addInfo.jsp"><img
+								<li><a href="#"><img
 										src="<%=request.getContextPath()%>/assets/img/category/1.png"
 										alt="img"> 餐廳資料 <span>(5)</span></a></li>
-								<li><a href="#"><img
+								<li><a
+									href="<%=request.getContextPath()%>/vendor_meal_upload.jsp"><img
 										src="<%=request.getContextPath()%>/assets/img/category/2.png"
 										alt="img"> 餐點上架 <span>(9)</span> </a></li>
-								<li><a href="<%=request.getContextPath()%>/vendor_orderTracking_addInfo.jsp"><img
+								<li><a
+									href="<%=request.getContextPath()%>/vendor_orderTracking_addInfo.jsp"><img
 										src="<%=request.getContextPath()%>/assets/img/category/3.png"
 										alt="img"> 訂單追蹤 <span>(18)</span></a></li>
 								<li><a href="#"><img
@@ -177,7 +190,7 @@ form .my-btn {
 				</div>
 				<div class="col-md-9">
 					<div class="bill-payment-wrap">
-						<h5>餐點上架</h5>
+						<h5>餐聽資料</h5>
 
 
 						<!--         新增一筆Meal資料                   -->
@@ -189,165 +202,189 @@ form .my-btn {
 								MealVO mealVO = (MealVO) request.getAttribute("UpdatingMealVO");
 							%>
 
-							<%-- 錯誤表列 --%>
-							<c:if test="${not empty errMsgs}">
-								<font style="color: red">請修正以下錯誤:</font>
-								<ul>
-									<c:forEach var="message" items="${errMsgs}">
-										<li style="color: red">${message}</li>
-									</c:forEach>
-								</ul>
-							</c:if>
 
 
 							<div class="row">
-								<div class="row">
-									<div class="col-md-8">
-										<label>餐點名稱</label>
-										<div class="single-input-wrap">
+								<div class="col-md-5">
+									<label>餐廳名稱</label>
+									<div class="single-input-wrap">
 
-											<input type="text" class="form-control" name="mealName"
-												value="<%=(mealVO == null) ? "飛騨高山拉麵" : mealVO.getMealName()%>">
-										</div>
-									</div>
-
-									<div class="col-md-4">
-										<label>餐點類型</label>
-										<div class="single-input-wrap">
-											<select class="myclass-select myclass-select-lauchdays"
-												id="inputGroupSelect01" name="mealType">
-												<option
-													value="<%=(mealVO == null) ? "日式" : mealVO.getMealType()%>"
-													selected>日式</option>
-												<option value="火鍋">火鍋</option>
-												<option value="中式">中式</option>
-												<option value="地中海">地中海</option>
-											</select>
-										</div>
-
-									</div>
-
-								</div>
-
-
-								<div class="row">
-
-									<div class="col-md-5">
-
-										<!-- 隱藏的餐點狀態 START-->
-
-										<input type="hidden" class="form-control" name="sta"
-											value="<%=(mealVO == null) ? "1" : mealVO.getSta()%>">
-
-										<!-- 隱藏的餐點狀態 END -->
-
-										<!-- 隱藏的餐廳編號 START -->
-										<input type="hidden" class="form-control" name="restaurantId"
-											value="<%=(mealVO == null) ? "7002" : mealVO.getRestaurantId()%>">
-										<!-- 隱藏的餐廳編號 END -->
-
-
-										<div class="row">
-											<div class="col-md-6">
-												<label>單價</label>
-												<div class="single-input-wrap">
-													<input type="text" class="form-control" name="unitPrice"
-														value="<%=(mealVO == null) ? "369" : mealVO.getUnitPrice()%>">
-												</div>
-											</div>
-										</div>
-
-										<div class="col-md-12">
-											<label>上架日期</label>
-
-											<div class="row">
-												<div class="col-sm-10s single-input-wrap">
-													<input type="text" id="f_date1" class="form-control"
-														name="launchDate">
-												</div>
-
-											</div>
-
-										</div>
-
-
-										<div class="row">
-											<div class="col-md-6">
-												<label>上架天數</label>
-												<div class="single-input-wrap">
-													<select class="myclass-select myclass-select-lauchdays"
-														id="inputGroupSelect01" name="launchDays">
-														<option
-															value="<%=(mealVO == null) ? "30" : mealVO.getLaunchDays()%>"
-															selected>30</option>
-														<option value="45">45</option>
-														<option value="60">60</option>
-														<option value="90">90</option>
-													</select>
-												</div>
-											</div>
-										</div>
-
-
-
-
-
-
-
-									</div>
-
-									<!-- 圖片預覽區 -->
-									<div class="col-md-7 my-preview-img-container">
-										<div class="my-img-zone" id="preview">
-											<span>圖片預覽區</span>
-										</div>
-									</div>
-
-
-								</div>
-
-
-
-
-
-								<div>
-									<label>圖片上傳</label>
-									<div>
-									<button type="button" class="btn btn-warning my-btn" id="my-img-btn">選擇圖片</button>
-										<input type="file" id="p_file" class="form-control"
-											name="myUploadImg" hidden
-											value="<%=(mealVO == null) ? null : mealVO.getMealImg()%>">
+										<input type="text" class="form-control" name="mealName"
+											value="<%=(mealVO == null) ? "飛騨高山拉麵" : mealVO.getMealName()%>">
 									</div>
 								</div>
-
-
-								<div class="col-md-12">
-									<label>商品介紹</label>
-									<div class="col-md-12">
-										<div class="single-textarea-wrap">
-											<textarea maxlength="450" rows="4"
-												placeholder="商品介紹...(字數不超過450)" name="mealDescription"><%=(mealVO == null) ? "排隊美食" : mealVO.getMealDescription()%></textarea>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-12">
-
-									<div class="row my-btn-wrapper">
-										<div class="col-md-2"></div>
-										<div class="col-md-4">
-											<input type="hidden" name="action" value="insert">
-											<button type="submit" class="btn btn-base" id="btn_submit">確認</button>
-										</div>
-										<div class="col-md-4">
-											<button type="reset" class="btn btn-base">重填</button>
-										</div>
-										<div class="col-md-2"></div>
-
-									</div>
-								</div>
-
 
 							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									<label>營業時間</label>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-2 my-time-setting-block">
+									<label>OPEN</label>
+								</div>
+								<div class="col-md-10">
+									<div class="single-input-wrap">
+										<select class="myclass-select myclass-select-lauchdays"
+											id="inputGroupSelect01" name="launchDays">
+											<option
+												value="<%=(mealVO == null) ? "30" : mealVO.getLaunchDays()%>"
+												selected>30</option>
+											<option value="45">45</option>
+											<option value="60">60</option>
+											<option value="90">90</option>
+										</select>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="row">
+								<div class="col-md-2 my-time-setting-block">
+									<label>CLOSE</label>
+								</div>
+								<div class="col-md-10">
+									<div class="single-input-wrap">
+										<select class="myclass-select myclass-select-lauchdays"
+											id="inputGroupSelect01" name="launchDays">
+											<option
+												value="<%=(mealVO == null) ? "30" : mealVO.getLaunchDays()%>"
+												selected>30</option>
+											<option value="45">45</option>
+											<option value="60">60</option>
+											<option value="90">90</option>
+										</select>
+									</div>
+								</div>
+
+							</div>
+
+							<div class="row">
+								<div class="col-md-2 my-time-setting-block">
+									<label>每週公休</label>
+								</div>
+								<div class="col-md-10 my-time-setting-block-weekly-picker">
+
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox"
+											id="inlineCheckbox1" value="option1"> <label
+											class="form-check-label" for="inlineCheckbox1">Mon</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox"
+											id="inlineCheckbox2" value="option2"> <label
+											class="form-check-label" for="inlineCheckbox2">Tue</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox"
+											id="inlineCheckbox1" value="option1"> <label
+											class="form-check-label" for="inlineCheckbox1">Wed</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox"
+											id="inlineCheckbox2" value="option2"> <label
+											class="form-check-label" for="inlineCheckbox2">Thu</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox"
+											id="inlineCheckbox1" value="option1"> <label
+											class="form-check-label" for="inlineCheckbox1">Fri</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox"
+											id="inlineCheckbox2" value="option2"> <label
+											class="form-check-label" for="inlineCheckbox2">Sat</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="checkbox"
+											id="inlineCheckbox2" value="option2"> <label
+											class="form-check-label" for="inlineCheckbox2">Sun</label>
+									</div>
+								</div>
+
+							</div>
+
+
+							<div class="row">
+								<div class="col-md-5">
+									<label>店家地址</label>
+								</div>
+							</div>
+							
+							
+							<div class="row">
+								<div class="col-md-2 my-time-setting-block">
+									<label>縣市</label>
+								</div>
+								<div class="col-md-10">
+									<div class="single-input-wrap">
+										<select class="myclass-select myclass-select-lauchdays"
+											id="inputGroupSelect01" name="launchDays">
+											<option
+												value="<%=(mealVO == null) ? "30" : mealVO.getLaunchDays()%>"
+												selected>30</option>
+											<option value="45">45</option>
+											<option value="60">60</option>
+											<option value="90">90</option>
+										</select>
+									</div>
+								</div>
+
+							</div>
+							
+							<div class="row">
+								<div class="col-md-2 my-time-setting-block">
+									<label>地區</label>
+								</div>
+								<div class="col-md-10">
+									<div class="single-input-wrap">
+										<select class="myclass-select myclass-select-lauchdays"
+											id="inputGroupSelect01" name="launchDays">
+											<option
+												value="<%=(mealVO == null) ? "30" : mealVO.getLaunchDays()%>"
+												selected>30</option>
+											<option value="45">45</option>
+											<option value="60">60</option>
+											<option value="90">90</option>
+										</select>
+									</div>
+								</div>
+
+							</div>
+							
+							<div class="row">
+								<div class="col-md-2 my-time-setting-block">
+									<label>位置</label>
+								</div>
+								<div class="col-md-5">
+									<div class="single-input-wrap">
+
+										<input type="text" class="form-control" name="mealName"
+											value="<%=(mealVO == null) ? "飛騨高山拉麵" : mealVO.getMealName()%>">
+									</div>
+								</div>
+
+							</div>
+							
+							<div class="col-md-12">
+
+								<div class="row my-btn-wrapper">
+									<div class="col-md-2"></div>
+									<div class="col-md-4">
+										<input type="hidden" name="action" value="insert">
+										<button type="submit" class="btn btn-base" id="btn_submit">確認</button>
+									</div>
+									<div class="col-md-4">
+										<button type="reset" class="btn btn-base">重填</button>
+									</div>
+									<div class="col-md-2"></div>
+
+								</div>
+							</div>
+
 						</form>
 
 						<!-- form 結束 -->
@@ -409,12 +446,13 @@ form .my-btn {
 				timepicker : false, //timepicker:true,
 				step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
 				format : 'Y-m-d H:i:s', //format:'Y-m-d H:i:s',
-				value : '<%=launchDate%>', // value:   new Date(),
+				value : '<%=launchDate%>
+		', // value:   new Date(),
 							//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
 							//startDate:	            '2017/07/10',  // 起始日
 							//minDate:               '-1970-01-01', // 去除今日(不含)之前
 							//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-				});
+							});
 
 							/*                透過 File 取得預覽圖                 */
 							p_file_el
@@ -424,7 +462,7 @@ form .my-btn {
 												let file = this.files[0];
 												console.log(this);
 												console.log(file);
-												
+
 												let reader = new FileReader();
 												reader.readAsDataURL(file);
 												reader
@@ -435,13 +473,11 @@ form .my-btn {
 																	preview_el.innerHTML = img_tag;
 																});
 											});
-							
-							
-							
-			$('#my-img-btn').on("click", function(e) {
-				$('#p_file').click();
-			
-			});
+
+							$('#my-img-btn').on("click", function(e) {
+								$('#p_file').click();
+
+							});
 
 						});
 	</script>
