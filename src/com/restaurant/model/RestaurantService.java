@@ -32,10 +32,7 @@ public class RestaurantService {
 		restVO.setWeeklyLeave(weeklyLeave);
 		restVO.setSta(sta);
 		
-		// TODO 還沒自增主鍵綁定
-		this.dao.insert(restVO);
-		
-		return restVO;
+		return this.dao.insert(restVO);
 	}
 }
 

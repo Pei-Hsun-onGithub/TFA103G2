@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.restaurant.model.RestaurantService;
 import com.restaurant.model.RestaurantVO;
+import com.restaurantstyle.model.RestaurantStyleService;
+import com.restaurantstyle.model.RestaurantStyleVO;
+import com.style.model.StyleService;
 
 public class RestInsert extends Command {
 
@@ -36,10 +39,10 @@ public class RestInsert extends Command {
 //		System.out.println("restaurantName=" + restaurantName);
 		
 		
-		java.sql.Time openTime = java.sql.Time.valueOf(new StringBuffer(req.getParameter("openTime")).append(":00").toString());
+		java.sql.Time openTime = transformTimeAsSqlTimeFormat(req.getParameter("openTime"));
 //		System.out.println("openTime=" + openTime);
 		
-		java.sql.Time closeTime = java.sql.Time.valueOf(new StringBuffer(req.getParameter("closeTime")).append(":00").toString());
+		java.sql.Time closeTime = transformTimeAsSqlTimeFormat(req.getParameter("closeTime"));
 //		System.out.println("closeTime=" + closeTime);
 		
 		/**********  WeeklyLeave  ***********/
@@ -54,16 +57,7 @@ public class RestInsert extends Command {
 		days.add(req.getParameter("Sat"));
 		days.add(req.getParameter("Sun"));
 		
-		StringBuffer weeklyLeaveBuilder = new StringBuffer();
-		for(String day : days) {
-			if("on".equals(day)) 
-				// 不營業
-				weeklyLeaveBuilder.append("1");
-			else
-				//營業
-				weeklyLeaveBuilder.append("0");
-		}
-		String weeklyLeave = weeklyLeaveBuilder.toString();
+		String weeklyLeave = getWeeklyLeaveFrom(days);
 //		System.out.println("weeklyLeave=" + weeklyLeave);
 		
 		Integer dayoffId = new Integer(req.getParameter("dayoffId"));
@@ -75,13 +69,44 @@ public class RestInsert extends Command {
 		Integer sta = new Integer(req.getParameter("sta"));
 		
 		
+		
+		
 		// 2. 與持久層溝通
 		
 		RestaurantVO restVO = restSvc.addRestaurant(restaurantName, boss, phone, district, city, location, openTime, closeTime, dayoffId, weeklyLeave, sta);
-//		System.out.println("restVO=" + restVO);
+		System.out.println("restVO=" + restVO);
+		
+		Integer styleId = new Integer(req.getParameter("restaurantStyle"));
+		Integer restaurantId = restVO.getRestaurantId();
+		RestaurantStyleService restStyleSvc = new RestaurantStyleService();
+		
+		RestaurantStyleVO restStyleVO = restStyleSvc.addRestaurantStyle(restaurantId, styleId);
+		System.out.println("restStyleVO=" + restStyleVO);
+		
 		
 		// 3. 轉送頁面
 		
+	}
+	
+	
+	
+	
+	private java.sql.Time transformTimeAsSqlTimeFormat(String time) {
+		return java.sql.Time.valueOf(new StringBuffer(time).append(":00").toString());
+	}
+	
+	private String getWeeklyLeaveFrom(List<String> days) {
+		
+		StringBuffer weeklyLeaveBuilder = new StringBuffer();
+		for(String day : days) {
+			if("on".equals(day)) 
+				// 不營業
+				weeklyLeaveBuilder.append("1");
+			else
+				//營業
+				weeklyLeaveBuilder.append("0");
+		}
+		return weeklyLeaveBuilder.toString();
 	}
 
 	@Override

@@ -221,7 +221,7 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 
 
 							<%
-							RestaurantVO restVO = (RestaurantVO) request.getAttribute("UpdatingRestaurantVO");
+								RestaurantVO restVO = (RestaurantVO) request.getAttribute("UpdatingRestaurantVO");
 							%>
 
 
@@ -343,9 +343,9 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 											<option
 												value="<%=(restVO == null) ? "南投縣" : restVO.getDistrict()%>"
 												selected>南投縣</option>
-											<option value="45">花蓮市</option>
-											<option value="60">雲林縣</option>
-											<option value="90">嘉義縣</option>
+											<option value="花蓮市">花蓮市</option>
+											<option value="雲林縣">雲林縣</option>
+											<option value="嘉義縣">嘉義縣</option>
 										</select>
 									</div>
 								</div>
@@ -388,6 +388,9 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 
 
 
+							<jsp:useBean id="styleSvc" scope="page"
+								class="com.style.model.StyleService" />
+
 							<div class="row">
 								<div class="col-md-3">
 									<label>餐廳類型</label>
@@ -395,12 +398,10 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 
 										<select class="myclass-select myclass-select-lauchdays"
 											id="inputGroupSelect01" name="restaurantStyle">
-											<option
-												value="<%=(restVO == null) ? "日式" : "測試式"%>"
-												selected>日式</option>
-											<option value="45">45</option>
-											<option value="60">60</option>
-											<option value="90">90</option>
+											<c:forEach var="styleVO" items="${styleSvc.allStyle}">
+												<option value="${styleVO.styleId}">${styleVO.styleType}
+											</c:forEach>
+											
 										</select>
 									</div>
 								</div>
@@ -408,7 +409,8 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 								<div class="col-md-4">
 									<label style="visibility: hidden;">類型候選</label>
 									<div class="single-input-wrap">
-										<input type="text" class="form-control" name="restaurantStyle2"
+										<input type="text" class="form-control"
+											name="restaurantStyle2"
 											value="<%=(restVO == null) ? "中式" : "測試式2"%>
 											placeholder="最多3項">
 
@@ -504,7 +506,7 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 		src="<%=request.getContextPath()%>/vendors/dist/js/timepicker.js"></script>
 
 
-	
+
 
 
 	<script>
