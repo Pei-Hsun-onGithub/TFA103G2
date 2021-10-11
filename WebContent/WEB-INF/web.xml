@@ -52,6 +52,16 @@
 		<servlet-name>MealServlet</servlet-name>
 		<url-pattern>/meal/meal.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RestaurantServlet</servlet-name>
+		<servlet-class>com.restaurant.controller.RestaurantServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RestaurantServlet</servlet-name>
+		<url-pattern>/restaurant/restaurant.do</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>AchieveProgressServlet</servlet-name>
@@ -61,6 +71,18 @@
 		<servlet-name>AchieveProgressServlet</servlet-name>
 		<url-pattern>/Gary_pages/achieveprogress.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FoodArticleServlet</servlet-name>
+		<servlet-class>com.foodarticle.controller.FoodArticleServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>FoodArticleServlet</servlet-name>
+		<url-pattern>/article/fa.do</url-pattern>
+	</servlet-mapping>
+	
+	
 
 
 </web-app>

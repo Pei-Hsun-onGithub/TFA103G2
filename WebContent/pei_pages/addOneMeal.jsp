@@ -318,7 +318,7 @@ div.card-body ul.my-form-wrapper li a {
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 
 	<!-- 永志老師的DateTimePicker -->
-	>
+	
 	<script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.js"></script>
 	<script
 		src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
