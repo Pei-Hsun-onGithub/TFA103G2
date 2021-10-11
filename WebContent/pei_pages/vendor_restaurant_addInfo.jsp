@@ -309,6 +309,18 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 								</div>
 
 							</div>
+							
+							<div class="row">
+								<div class="col-md-2 my-time-setting-block">
+									<label>彈性休假日</label>
+								</div>
+								<div class="col-md-3">
+									<div class="single-input-wrap">
+										<input type="text" class="bs-timepicker">
+									</div>
+								</div>
+
+							</div>
 
 
 							<div class="row">
