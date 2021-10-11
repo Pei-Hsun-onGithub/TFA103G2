@@ -153,16 +153,16 @@ form .my-btn {
 						<div class="widget widget_categories style-2">
 							<h4 class="widget-title">Categories</h4>
 							<ul>
-								<li><a href="<%=request.getContextPath()%>/vendor_restaurant_addInfo.jsp"><img
+								<li><a href="<%=request.getContextPath()%>/pei_pages/vendor_restaurant_addInfo.jsp"><img
 										src="<%=request.getContextPath()%>/assets/img/category/1.png"
 										alt="img"> 餐廳資料 <span>(5)</span></a></li>
-								<li><a href="<%=request.getContextPath()%>/vendor_meal_upload.jsp"><img
+								<li><a href="<%=request.getContextPath()%>/pei_pages/vendor_meal_upload.jsp"><img
 										src="<%=request.getContextPath()%>/assets/img/category/2.png"
 										alt="img"> 餐點上架 <span>(9)</span> </a></li>
 								<li><a href="#"><img
 										src="<%=request.getContextPath()%>/assets/img/category/3.png"
 										alt="img"> 訂單追蹤 <span>(18)</span></a></li>
-								<li><a href="#"><img
+								<li><a href="<%=request.getContextPath()%>/meal/meal.do?action=getAll"><img
 										src="<%=request.getContextPath()%>/assets/img/category/4.png"
 										alt="img"> 歷史明細 <span>(14)</span></a></li>
 								<li><a href="#"><img

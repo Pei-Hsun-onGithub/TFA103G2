@@ -81,7 +81,7 @@ input.my-btn {
 		<nav class="navbar navbar-expand-lg">
 			<div class="container nav-container">
 				<div class="logo">
-					<a class="main-logo" href="/TFA103G2/pei_pages/select-page.jsp"><img
+					<a class="main-logo" href="<%=request.getContextPath()%>/pei_pages/vendor_meal_upload.jsp"><img
 						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
 				</div>
 			</div>

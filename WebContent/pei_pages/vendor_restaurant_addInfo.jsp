@@ -54,7 +54,7 @@
 	list-style: none;
 	font-size: 14px;
 	text-align: center;
-	background-color: #eafbdd;
+	background-color: white;
 	border: 1px solid #ccc;
 	border: 1px solid rgba(0, 0, 0, 0.15);
 	border-radius: 4px;
@@ -186,14 +186,14 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 										src="<%=request.getContextPath()%>/assets/img/category/1.png"
 										alt="img"> 餐廳資料 <span>(5)</span></a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/vendor_meal_upload.jsp"><img
+									href="<%=request.getContextPath()%>/pei_pages/vendor_meal_upload.jsp"><img
 										src="<%=request.getContextPath()%>/assets/img/category/2.png"
 										alt="img"> 餐點上架 <span>(9)</span> </a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/vendor_orderTracking_addInfo.jsp"><img
+									href="<%=request.getContextPath()%>/pei_pages/vendor_orderTracking_addInfo.jsp"><img
 										src="<%=request.getContextPath()%>/assets/img/category/3.png"
 										alt="img"> 訂單追蹤 <span>(18)</span></a></li>
-								<li><a href="#"><img
+								<li><a href="<%=request.getContextPath()%>/meal/meal.do?action=getAll"><img
 										src="<%=request.getContextPath()%>/assets/img/category/4.png"
 										alt="img"> 歷史明細 <span>(14)</span></a></li>
 								<li><a href="#"><img
@@ -245,7 +245,7 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 								<div class="col-md-2 my-time-setting-block">
 									<label>OPEN</label>
 								</div>
-								<div class="col-md-10">
+								<div class="col-md-3">
 									<div class="single-input-wrap">
 										<input type="text" class="bs-timepicker">
 									</div>
@@ -257,7 +257,7 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 								<div class="col-md-2 my-time-setting-block">
 									<label>CLOSE</label>
 								</div>
-								<div class="col-md-10">
+								<div class="col-md-3">
 									<div class="single-input-wrap">
 										<input type="text" class="bs-timepicker">
 									</div>
@@ -394,7 +394,8 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 									<div class="single-input-wrap">
 										<input type="text" class="form-control" name="mealName"
 											value="<%=(mealVO == null) ? "" : mealVO.getMealName()%>"
-											placeholder="最多3項">
+											placeholder="最多3項"> 
+										
 									</div>
 
 								</div>
