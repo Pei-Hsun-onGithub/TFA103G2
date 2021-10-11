@@ -110,4 +110,4 @@ CREATE TABLE RestaurantStyle (
 #INSERT INTO RestaurantStyle (restaurantid, styleid) VALUES (7001,53);
 #INSERT INTO RestaurantStyle (restaurantid, styleid) VALUES (7002,51);
 #INSERT INTO RestaurantStyle (restaurantid, styleid) VALUES (7002,55);
-#INSERT INTO RestaurantStyle (restaurantid, styleid) VALUES (7003,54？);
+#INSERT INTO RestaurantStyle (restaurantid, styleid) VALUES (7003,54);
