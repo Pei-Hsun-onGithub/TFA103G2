@@ -207,7 +207,7 @@ div.card-body ul.my-form-wrapper li a {
 
 					</div>
 
-					<!-- 切換分頁	 -->>
+					<!-- 切換分頁	 -->
 					
 					<div class="card-body model2-body">
 						<h5 class="card-title">Model2</h5>
