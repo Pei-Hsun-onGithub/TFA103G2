@@ -34,20 +34,39 @@
 	href="<%=request.getContextPath()%>/assets/css/style.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/responsive.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.css" />
+<!-- jquery timepicker -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/vendors/dist/css/timepicker.css">
+<script src="../dist/js/timepicker.js"></script>
+
 <!--Google Fonts-->
 <link
 	href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap"
 	rel="stylesheet">
 <style>
-/*    fix my aside left     */
-/* .my-aside-left-container .widget {
-          width: 280px;
-          position: fixed;
-          top:15%;
-          left:3%;
-        } */
+.timepicker {
+	position: absolute;
+	z-index: 1000;
+	float: left;
+	width: 160px;
+	padding-bottom: 5px;
+	margin: 2px 0 0 0;
+	list-style: none;
+	font-size: 14px;
+	text-align: center;
+	background-color: #eafbdd;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 4px;
+	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+	background-clip: padding-box;
+}
+
+.timepicker div.title {
+	display: none;
+}
+
 div.my-btn-wrapper {
 	margin-top: 50px;
 }
@@ -190,7 +209,7 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 				</div>
 				<div class="col-md-9">
 					<div class="bill-payment-wrap">
-						<h5>餐聽資料</h5>
+						<h5>餐廳資料</h5>
 
 
 						<!--         新增一筆Meal資料                   -->
@@ -210,7 +229,7 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="mealName"
-											value="<%=(mealVO == null) ? "飛騨高山拉麵" : mealVO.getMealName()%>">
+											value="<%=(mealVO == null) ? "欣葉日本料理" : mealVO.getMealName()%>">
 									</div>
 								</div>
 
@@ -228,15 +247,7 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 								</div>
 								<div class="col-md-10">
 									<div class="single-input-wrap">
-										<select class="myclass-select myclass-select-lauchdays"
-											id="inputGroupSelect01" name="launchDays">
-											<option
-												value="<%=(mealVO == null) ? "30" : mealVO.getLaunchDays()%>"
-												selected>30</option>
-											<option value="45">45</option>
-											<option value="60">60</option>
-											<option value="90">90</option>
-										</select>
+										<input type="text" class="bs-timepicker">
 									</div>
 								</div>
 
@@ -248,15 +259,7 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 								</div>
 								<div class="col-md-10">
 									<div class="single-input-wrap">
-										<select class="myclass-select myclass-select-lauchdays"
-											id="inputGroupSelect01" name="launchDays">
-											<option
-												value="<%=(mealVO == null) ? "30" : mealVO.getLaunchDays()%>"
-												selected>30</option>
-											<option value="45">45</option>
-											<option value="60">60</option>
-											<option value="90">90</option>
-										</select>
+										<input type="text" class="bs-timepicker">
 									</div>
 								</div>
 
@@ -313,8 +316,8 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 									<label>店家地址</label>
 								</div>
 							</div>
-							
-							
+
+
 							<div class="row">
 								<div class="col-md-2 my-time-setting-block">
 									<label>縣市</label>
@@ -325,16 +328,16 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 											id="inputGroupSelect01" name="launchDays">
 											<option
 												value="<%=(mealVO == null) ? "30" : mealVO.getLaunchDays()%>"
-												selected>30</option>
-											<option value="45">45</option>
-											<option value="60">60</option>
-											<option value="90">90</option>
+												selected>南投縣</option>
+											<option value="45">花蓮市</option>
+											<option value="60">雲林縣</option>
+											<option value="90">嘉義縣</option>
 										</select>
 									</div>
 								</div>
 
 							</div>
-							
+
 							<div class="row">
 								<div class="col-md-2 my-time-setting-block">
 									<label>地區</label>
@@ -345,7 +348,7 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 											id="inputGroupSelect01" name="launchDays">
 											<option
 												value="<%=(mealVO == null) ? "30" : mealVO.getLaunchDays()%>"
-												selected>30</option>
+												selected>中正區</option>
 											<option value="45">45</option>
 											<option value="60">60</option>
 											<option value="90">90</option>
@@ -354,7 +357,7 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 								</div>
 
 							</div>
-							
+
 							<div class="row">
 								<div class="col-md-2 my-time-setting-block">
 									<label>位置</label>
@@ -363,12 +366,72 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="mealName"
-											value="<%=(mealVO == null) ? "飛騨高山拉麵" : mealVO.getMealName()%>">
+											value="<%=(mealVO == null) ? "復興北路一段100號" : mealVO.getMealName()%>">
 									</div>
 								</div>
 
 							</div>
-							
+
+							<div class="row">
+								<div class="col-md-3">
+									<label>餐廳類型</label>
+									<div class="single-input-wrap">
+
+										<select class="myclass-select myclass-select-lauchdays"
+											id="inputGroupSelect01" name="launchDays">
+											<option
+												value="<%=(mealVO == null) ? "日式" : mealVO.getLaunchDays()%>"
+												selected>日式</option>
+											<option value="45">45</option>
+											<option value="60">60</option>
+											<option value="90">90</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="col-md-4">
+									<label style="visibility: hidden;">類型候選</label>
+									<div class="single-input-wrap">
+										<input type="text" class="form-control" name="mealName"
+											value="<%=(mealVO == null) ? "" : mealVO.getMealName()%>"
+											placeholder="最多3項">
+									</div>
+
+								</div>
+
+							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									<label>負責人</label>
+									<div class="single-input-wrap">
+
+										<input type="text" class="form-control" name="mealName"
+											value="<%=(mealVO == null) ? "劉德華" : mealVO.getMealName()%>">
+									</div>
+								</div>
+
+							</div>
+
+							<div class="row">
+								<div class="col-md-5">
+									<label>連絡電話</label>
+									<div class="single-input-wrap">
+
+										<input type="text" class="form-control" name="mealName"
+											value="<%=(mealVO == null) ? "0933345667" : mealVO.getMealName()%>">
+									</div>
+								</div>
+
+							</div>
+
+							<!-- 隱藏的餐廳狀態 START-->
+
+							<input type="hidden" class="form-control" name="sta"
+								value="<%=(mealVO == null) ? "1" : mealVO.getSta()%>">
+
+							<!-- 隱藏的餐廳狀態 END -->
+
 							<div class="col-md-12">
 
 								<div class="row my-btn-wrapper">
@@ -388,6 +451,9 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 						</form>
 
 						<!-- form 結束 -->
+
+
+
 					</div>
 				</div>
 			</div>
@@ -416,12 +482,9 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 	<!-- main js  -->
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 
-	<!-- 永志老師的DateTimePicker -->
-
+	<!-- jquery timepicker -->
 	<script
-		src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
+		src="<%=request.getContextPath()%>/vendors/dist/js/timepicker.js"></script>
 
 
 	<%
@@ -439,47 +502,15 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 
 			var p_file_el = document.getElementById("p_file");
 			var preview_el = document.getElementById("preview");
-			
-			$.datetimepicker.setLocale('zh');
-			$('#f_date1').datetimepicker({
-				theme : '', //theme: 'dark',
-				timepicker : false, //timepicker:true,
-				step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
-				format : 'Y-m-d H:i:s', //format:'Y-m-d H:i:s',
-				value : '<%=launchDate%>
-		', // value:   new Date(),
-							//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
-							//startDate:	            '2017/07/10',  // 起始日
-							//minDate:               '-1970-01-01', // 去除今日(不含)之前
-							//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
-							});
 
-							/*                透過 File 取得預覽圖                 */
-							p_file_el
-									.addEventListener(
-											"change",
-											function(e) {
-												let file = this.files[0];
-												console.log(this);
-												console.log(file);
+			$('.bs-timepicker').timepicker();
 
-												let reader = new FileReader();
-												reader.readAsDataURL(file);
-												reader
-														.addEventListener(
-																"load",
-																function(e) {
-																	let img_tag = "<img src=" + reader.result +  " \" class=\"preview_img\" >";
-																	preview_el.innerHTML = img_tag;
-																});
-											});
+			$('#my-img-btn').on("click", function(e) {
+				$('#p_file').click();
 
-							$('#my-img-btn').on("click", function(e) {
-								$('#p_file').click();
+			});
 
-							});
-
-						});
+		});
 	</script>
 </body>
 </html>
