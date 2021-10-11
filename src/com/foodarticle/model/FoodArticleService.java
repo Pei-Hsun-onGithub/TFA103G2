@@ -39,7 +39,7 @@ public class FoodArticleService {
 		foodArticleVO.setArticleDate(articleDate);
 		foodArticleVO.setArticleContent(articleContent);
 		foodArticleVO.setSta(sta);		
-		
+		dao.update(foodArticleVO);
 		return foodArticleVO;
 	}
 	

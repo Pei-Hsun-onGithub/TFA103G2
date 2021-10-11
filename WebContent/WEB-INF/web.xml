@@ -71,6 +71,18 @@
 		<servlet-name>AchieveProgressServlet</servlet-name>
 		<url-pattern>/Gary_pages/achieveprogress.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>FoodArticleServlet</servlet-name>
+		<servlet-class>com.foodarticle.controller.FoodArticleServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>FoodArticleServlet</servlet-name>
+		<url-pattern>/article/fa.do</url-pattern>
+	</servlet-mapping>
+	
+	
 
 
 </web-app>
