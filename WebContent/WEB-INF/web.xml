@@ -62,6 +62,16 @@
 		<servlet-name>RestaurantServlet</servlet-name>
 		<url-pattern>/restaurant/restaurant.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>RestaurantStyleServlet</servlet-name>
+		<servlet-class>com.restaurantstyle.controller.RestaurantStyleServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RestaurantStyleServlet</servlet-name>
+		<url-pattern>/restaurantstyle/restaurantstyle.do</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>AchieveProgressServlet</servlet-name>
