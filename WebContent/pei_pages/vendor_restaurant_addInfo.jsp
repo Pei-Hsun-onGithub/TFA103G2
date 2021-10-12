@@ -129,6 +129,21 @@ div.my-chooseType>ul>li {
 	display: inline-block;
 }
 
+div.my-chooseType ul li button{
+	width: 100px; 
+	height: 50px;
+	border-radius:5px;
+	background:white;
+	text-align: center;
+	vertical-align:middle;
+	border: 1px solid #198754;
+	color:#198754;
+	line-height:56px;
+	text-align: center;
+	margin-left: 3px;
+	font-weight: 600px;
+}
+
 </style>
 </head>
 <body>
@@ -409,8 +424,8 @@ div.my-chooseType>ul>li {
 									<label>餐廳類型</label>
 									<div class="single-input-wrap">
 
-										<select class="myclass-select myclass-select-lauchdays"
-											id="inputGroupSelect01" name="restaurantStyle">
+										<select class="myclass-select myclass-select-lauchdays" name="pickStyle"
+											id="inputGroupSelect01">
 											<c:forEach var="styleVO" items="${styleSvc.allStyle}">
 												<option value="${styleVO.styleId}">${styleVO.styleType}
 											</c:forEach>
@@ -425,19 +440,18 @@ div.my-chooseType>ul>li {
 										<!-- 放一些標籤上來 -->
 										<ul>
 											<li>
-												<button type="button" class="choose1" aria-label="Close"
-													style="width: 150px; height: 50px; border: 1px solid black;" hidden></button>
-												<input type="hidden" class="inchoose1" name="choose1">
+											
+												<button type="button" class="choose1" aria-label="Close" hidden></button>
+												<!-- 預設的選項為 50 -->
+												<input type="hidden" class="inchoose1" name="style1" value="50">
 											</li>
 											<li>
-												<button type="button" class="choose2" aria-label="Close"
-													style="width: 150px; height: 50px; border: 1px solid black;" name="choose2" hidden></button>
-												<input type="hidden" class="inchoose2" name="choose2">
+												<button type="button" class="choose2" aria-label="Close" hidden></button>
+												<input type="hidden" class="inchoose2" name="style2">
 											</li>
 											<li>
-												<button type="button" class="choose3" aria-label="Close"
-													style="width: 150px; height: 50px; border: 1px solid black;" name="choose3" hidden></button>
-												<input type="hidden" class="inchoose3" name="choose3">
+												<button type="button" class="choose3" aria-label="Close" hidden></button>
+												<input type="hidden" class="inchoose3" name="style3">
 											</li>
 										</ul>
 
@@ -550,20 +564,29 @@ div.my-chooseType>ul>li {
 							
 							/**************      將select選取到的option顯示出來      **********************/
 							$('.myclass-select-lauchdays').on("change",function(e) {
-								if($('button.choose1').is('[hidden]')) {
-									$('button.choose1').removeAttr("hidden");
-									$('button.choose1').text(this.value);
-									$('input.inchoose1').val(this.value);
+								var chosen = $("select[name='pickStyle'] :selected").text()
+								console.log(chosen);
+								if(chosen === $('input.inchoose1').val() || chosen === $('input.inchoose2').val()||
+										chosen === $('input.inchoose3').val()) {
 									
-								} else if($('button.choose2').is('[hidden]')) {
-									$('button.choose2').removeAttr("hidden");
-									$('button.choose2').text(this.value);
-									$('input.inchoose2').val(this.value);
-								} else if($('button.choose3').is('[hidden]')) {
-									$('button.choose3').removeAttr("hidden");
-									$('button.choose3').text(this.value);
-									$('input.inchoose3').val(this.value);
+									// doNothing!
+								} else {
+									if($('button.choose1').is('[hidden]')) {
+										$('button.choose1').removeAttr("hidden");
+										$('button.choose1').text(this.options[this.selectedIndex].text);
+										$('input.inchoose1').val(this.value);
+										
+									} else if($('button.choose2').is('[hidden]')) {
+										$('button.choose2').removeAttr("hidden");
+										$('button.choose2').text(this.options[this.selectedIndex].text);
+										$('input.inchoose2').val(this.value);
+									} else if($('button.choose3').is('[hidden]')) {
+										$('button.choose3').removeAttr("hidden");
+										$('button.choose3').text(this.options[this.selectedIndex].text);
+										$('input.inchoose3').val(this.value);
+									}
 								}
+							
 								
 
 							});
@@ -572,6 +595,7 @@ div.my-chooseType>ul>li {
 							$('button.choose1').on("click", function(e) {
 								
 								this.setAttribute("hidden", "");
+								$('button.choose1').text("");
 								$('input.inchoose1').val("");
 								
 							});
@@ -579,12 +603,14 @@ div.my-chooseType>ul>li {
 							$('button.choose2').on("click", function(e) {
 								
 								this.setAttribute("hidden", "");
+								$('button.choose2').text("");
 								$('input.inchoose2').val("");
 							});
 							
 							$('button.choose3').on("click", function(e) {
 	
 								this.setAttribute("hidden", "");
+								$('button.choose3').text("");
 								$('input.inchoose3').val("");
 });
 

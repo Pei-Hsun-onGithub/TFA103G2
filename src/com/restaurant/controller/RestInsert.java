@@ -69,12 +69,6 @@ public class RestInsert extends Command {
 		String phone = req.getParameter("phone");
 		Integer sta = new Integer(req.getParameter("sta"));
 		
-		String choose1 = req.getParameter("choose1");
-		String choose2 = req.getParameter("choose2");
-		String choose3 = req.getParameter("choose3");
-		System.out.println("choose1=" +choose1);
-		System.out.println("choose2=" +choose2);
-		System.out.println("choose3=" +choose3);
 		
 		
 		// 2. 與持久層溝通
@@ -83,7 +77,21 @@ public class RestInsert extends Command {
 //		System.out.println("restVO=" + restVO);
 		
 		// 擷取關聯類別RestaurantStyle所需的資料
-		Integer styleId = new Integer(req.getParameter("restaurantStyle"));
+//		Integer styleId = new Integer(req.getParameter("restaurantStyle"));
+		Integer styleId1 = null;
+		Integer styleId2 = null;
+		Integer styleId3 = null;
+		
+		if(!req.getParameter("style1").equals("")) {
+			 styleId1 = new Integer(req.getParameter("style1"));			
+		}
+		if(!req.getParameter("style2").equals("")) {
+			styleId2 = new Integer(req.getParameter("style2"));			
+		}
+		if(!req.getParameter("style3").equals("")) {
+			styleId3 = new Integer(req.getParameter("style3"));			
+		}
+	
 		Integer restaurantId = restVO.getRestaurantId();
 		
 		
@@ -92,9 +100,11 @@ public class RestInsert extends Command {
 		
 		req.setAttribute("action", "insert");
 		req.setAttribute("restaurantId", restaurantId);
-		req.setAttribute("styleId", styleId);
-		String restStyleServletURL = "/restaurantstyle/restaurantstyle.do";
-		RequestDispatcher toRestStyleServlet = req.getRequestDispatcher(restStyleServletURL);
+		req.setAttribute("styleId1", styleId1);
+		req.setAttribute("styleId2", styleId2);
+		req.setAttribute("styleId3", styleId3);
+		
+		RequestDispatcher toRestStyleServlet = req.getRequestDispatcher("/restaurantstyle/restaurantstyle.do");
 		toRestStyleServlet.forward(req, res);
 		
 		// 3.2  轉送頁面
