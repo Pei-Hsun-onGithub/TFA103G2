@@ -45,6 +45,9 @@
 	href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap"
 	rel="stylesheet">
 <style>
+* {
+	list-style: none;
+}
 .timepicker {
 	position: absolute;
 	z-index: 1000;
@@ -118,6 +121,29 @@ div.my-time-setting-block label:after {
 div.my-time-setting-block-weekly-picker label.form-check-label:after {
 	content: "";
 }
+
+div.my-chooseType>ul {
+	
+}
+div.my-chooseType>ul>li {
+	display: inline-block;
+}
+
+div.my-chooseType ul li button{
+	width: 100px; 
+	height: 50px;
+	border-radius:5px;
+	background:white;
+	text-align: center;
+	vertical-align:middle;
+	border: 1px solid #198754;
+	color:#198754;
+	line-height:56px;
+	text-align: center;
+	margin-left: 3px;
+	font-weight: 600px;
+}
+
 </style>
 </head>
 <body>
@@ -249,7 +275,8 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 								</div>
 								<div class="col-md-3">
 									<div class="single-input-wrap">
-										<input type="text" class="bs-timepicker" name="openTime">
+										<input type="text" class="bs-timepicker" name="openTime"
+											value="<%=(restVO == null) ? "08:00" : restVO.getOpenTime()%>">
 									</div>
 								</div>
 
@@ -261,7 +288,8 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 								</div>
 								<div class="col-md-3">
 									<div class="single-input-wrap">
-										<input type="text" class="bs-timepicker" name="closeTime">
+										<input type="text" class="bs-timepicker" name="closeTime"
+											value="<%=(restVO == null) ? "17:00" : restVO.getCloseTime()%>">
 									</div>
 								</div>
 
@@ -396,26 +424,38 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 									<label>餐廳類型</label>
 									<div class="single-input-wrap">
 
-										<select class="myclass-select myclass-select-lauchdays"
-											id="inputGroupSelect01" name="restaurantStyle">
+										<select class="myclass-select myclass-select-lauchdays" name="pickStyle"
+											id="inputGroupSelect01">
 											<c:forEach var="styleVO" items="${styleSvc.allStyle}">
 												<option value="${styleVO.styleId}">${styleVO.styleType}
 											</c:forEach>
-											
+
 										</select>
 									</div>
 								</div>
 
-								<div class="col-md-4">
+								<div class="col-md-9">
 									<label style="visibility: hidden;">類型候選</label>
-									<div class="single-input-wrap">
-										<input type="text" class="form-control"
-											name="restaurantStyle2"
-											value="<%=(restVO == null) ? "中式" : "測試式2"%>
-											placeholder="最多3項">
+									<div class="single-input-wrap my-chooseType">
+										<!-- 放一些標籤上來 -->
+										<ul>
+											<li>
+											
+												<button type="button" class="choose1" aria-label="Close" hidden></button>
+												<!-- 預設的選項為 50 -->
+												<input type="hidden" class="inchoose1" name="style1" value="50">
+											</li>
+											<li>
+												<button type="button" class="choose2" aria-label="Close" hidden></button>
+												<input type="hidden" class="inchoose2" name="style2">
+											</li>
+											<li>
+												<button type="button" class="choose3" aria-label="Close" hidden></button>
+												<input type="hidden" class="inchoose3" name="style3">
+											</li>
+										</ul>
 
 									</div>
-
 								</div>
 
 							</div>
@@ -512,17 +552,69 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 	<script>
 		$(document).ready(function() {
 
-			var p_file_el = document.getElementById("p_file");
-			var preview_el = document.getElementById("preview");
+							var p_file_el = document.getElementById("p_file");
+							var preview_el = document.getElementById("preview");
+							
+							$('.bs-timepicker').timepicker();
 
-			$('.bs-timepicker').timepicker();
+							$('#my-img-btn').on("click", function(e) {
+								$('#p_file').click();
 
-			$('#my-img-btn').on("click", function(e) {
-				$('#p_file').click();
+							});
+							
+							/**************      將select選取到的option顯示出來      **********************/
+							$('.myclass-select-lauchdays').on("change",function(e) {
+								var chosen = $("select[name='pickStyle'] :selected").text()
+								console.log(chosen);
+								if(chosen === $('input.inchoose1').val() || chosen === $('input.inchoose2').val()||
+										chosen === $('input.inchoose3').val()) {
+									
+									// doNothing!
+								} else {
+									if($('button.choose1').is('[hidden]')) {
+										$('button.choose1').removeAttr("hidden");
+										$('button.choose1').text(this.options[this.selectedIndex].text);
+										$('input.inchoose1').val(this.value);
+										
+									} else if($('button.choose2').is('[hidden]')) {
+										$('button.choose2').removeAttr("hidden");
+										$('button.choose2').text(this.options[this.selectedIndex].text);
+										$('input.inchoose2').val(this.value);
+									} else if($('button.choose3').is('[hidden]')) {
+										$('button.choose3').removeAttr("hidden");
+										$('button.choose3').text(this.options[this.selectedIndex].text);
+										$('input.inchoose3').val(this.value);
+									}
+								}
+							
+								
 
-			});
+							});
+							
+							/**************      將點選的button關閉並且去值      **********************/
+							$('button.choose1').on("click", function(e) {
+								
+								this.setAttribute("hidden", "");
+								$('button.choose1').text("");
+								$('input.inchoose1').val("");
+								
+							});
+							
+							$('button.choose2').on("click", function(e) {
+								
+								this.setAttribute("hidden", "");
+								$('button.choose2').text("");
+								$('input.inchoose2').val("");
+							});
+							
+							$('button.choose3').on("click", function(e) {
+	
+								this.setAttribute("hidden", "");
+								$('button.choose3').text("");
+								$('input.inchoose3').val("");
+});
 
-		});
+						});
 	</script>
 </body>
 </html>
