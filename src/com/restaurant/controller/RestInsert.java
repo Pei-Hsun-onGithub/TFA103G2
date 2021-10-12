@@ -69,7 +69,12 @@ public class RestInsert extends Command {
 		String phone = req.getParameter("phone");
 		Integer sta = new Integer(req.getParameter("sta"));
 		
-		
+		String choose1 = req.getParameter("choose1");
+		String choose2 = req.getParameter("choose2");
+		String choose3 = req.getParameter("choose3");
+		System.out.println("choose1=" +choose1);
+		System.out.println("choose2=" +choose2);
+		System.out.println("choose3=" +choose3);
 		
 		
 		// 2. »P«ù¤[¼h·¾³q

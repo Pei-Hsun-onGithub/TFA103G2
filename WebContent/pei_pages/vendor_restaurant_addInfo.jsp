@@ -45,6 +45,9 @@
 	href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap"
 	rel="stylesheet">
 <style>
+* {
+	list-style: none;
+}
 .timepicker {
 	position: absolute;
 	z-index: 1000;
@@ -118,6 +121,14 @@ div.my-time-setting-block label:after {
 div.my-time-setting-block-weekly-picker label.form-check-label:after {
 	content: "";
 }
+
+div.my-chooseType>ul {
+	
+}
+div.my-chooseType>ul>li {
+	display: inline-block;
+}
+
 </style>
 </head>
 <body>
@@ -249,7 +260,8 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 								</div>
 								<div class="col-md-3">
 									<div class="single-input-wrap">
-										<input type="text" class="bs-timepicker" name="openTime">
+										<input type="text" class="bs-timepicker" name="openTime"
+											value="<%=(restVO == null) ? "08:00" : restVO.getOpenTime()%>">
 									</div>
 								</div>
 
@@ -261,7 +273,8 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 								</div>
 								<div class="col-md-3">
 									<div class="single-input-wrap">
-										<input type="text" class="bs-timepicker" name="closeTime">
+										<input type="text" class="bs-timepicker" name="closeTime"
+											value="<%=(restVO == null) ? "17:00" : restVO.getCloseTime()%>">
 									</div>
 								</div>
 
@@ -401,21 +414,34 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 											<c:forEach var="styleVO" items="${styleSvc.allStyle}">
 												<option value="${styleVO.styleId}">${styleVO.styleType}
 											</c:forEach>
-											
+
 										</select>
 									</div>
 								</div>
 
-								<div class="col-md-4">
+								<div class="col-md-9">
 									<label style="visibility: hidden;">類型候選</label>
-									<div class="single-input-wrap">
-										<input type="text" class="form-control"
-											name="restaurantStyle2"
-											value="<%=(restVO == null) ? "中式" : "測試式2"%>
-											placeholder="最多3項">
+									<div class="single-input-wrap my-chooseType">
+										<!-- 放一些標籤上來 -->
+										<ul>
+											<li>
+												<button type="button" class="choose1" aria-label="Close"
+													style="width: 150px; height: 50px; border: 1px solid black;" hidden></button>
+												<input type="hidden" class="inchoose1" name="choose1">
+											</li>
+											<li>
+												<button type="button" class="choose2" aria-label="Close"
+													style="width: 150px; height: 50px; border: 1px solid black;" name="choose2" hidden></button>
+												<input type="hidden" class="inchoose2" name="choose2">
+											</li>
+											<li>
+												<button type="button" class="choose3" aria-label="Close"
+													style="width: 150px; height: 50px; border: 1px solid black;" name="choose3" hidden></button>
+												<input type="hidden" class="inchoose3" name="choose3">
+											</li>
+										</ul>
 
 									</div>
-
 								</div>
 
 							</div>
@@ -512,17 +538,57 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 	<script>
 		$(document).ready(function() {
 
-			var p_file_el = document.getElementById("p_file");
-			var preview_el = document.getElementById("preview");
+							var p_file_el = document.getElementById("p_file");
+							var preview_el = document.getElementById("preview");
+							
+							$('.bs-timepicker').timepicker();
 
-			$('.bs-timepicker').timepicker();
+							$('#my-img-btn').on("click", function(e) {
+								$('#p_file').click();
 
-			$('#my-img-btn').on("click", function(e) {
-				$('#p_file').click();
+							});
+							
+							/**************      將select選取到的option顯示出來      **********************/
+							$('.myclass-select-lauchdays').on("change",function(e) {
+								if($('button.choose1').is('[hidden]')) {
+									$('button.choose1').removeAttr("hidden");
+									$('button.choose1').text(this.value);
+									$('input.inchoose1').val(this.value);
+									
+								} else if($('button.choose2').is('[hidden]')) {
+									$('button.choose2').removeAttr("hidden");
+									$('button.choose2').text(this.value);
+									$('input.inchoose2').val(this.value);
+								} else if($('button.choose3').is('[hidden]')) {
+									$('button.choose3').removeAttr("hidden");
+									$('button.choose3').text(this.value);
+									$('input.inchoose3').val(this.value);
+								}
+								
 
-			});
+							});
+							
+							/**************      將點選的button關閉並且去值      **********************/
+							$('button.choose1').on("click", function(e) {
+								
+								this.setAttribute("hidden", "");
+								$('input.inchoose1').val("");
+								
+							});
+							
+							$('button.choose2').on("click", function(e) {
+								
+								this.setAttribute("hidden", "");
+								$('input.inchoose2').val("");
+							});
+							
+							$('button.choose3').on("click", function(e) {
+	
+								this.setAttribute("hidden", "");
+								$('input.inchoose3').val("");
+});
 
-		});
+						});
 	</script>
 </body>
 </html>
