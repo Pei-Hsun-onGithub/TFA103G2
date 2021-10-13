@@ -420,11 +420,11 @@ div.my-chooseType ul li button{
 								class="com.style.model.StyleService" />
 
 							<div class="row">
-								<div class="col-md-3">
-									<label>餐廳類型</label>
+								<div class="col-md-4">
+									<label>餐廳類型 (最多挑3項)</label>
 									<div class="single-input-wrap">
 
-										<select class="myclass-select myclass-select-lauchdays" name="pickStyle"
+										<select class="myclass-select myclass-select-lauchdays my-pickStyle" name="pickStyle"
 											id="inputGroupSelect01">
 											<c:forEach var="styleVO" items="${styleSvc.allStyle}">
 												<option value="${styleVO.styleId}">${styleVO.styleType}
@@ -434,7 +434,7 @@ div.my-chooseType ul li button{
 									</div>
 								</div>
 
-								<div class="col-md-9">
+								<div class="col-md-8">
 									<label style="visibility: hidden;">類型候選</label>
 									<div class="single-input-wrap my-chooseType">
 										<!-- 放一些標籤上來 -->
@@ -563,12 +563,15 @@ div.my-chooseType ul li button{
 							});
 							
 							/**************      將select選取到的option顯示出來      **********************/
-							$('.myclass-select-lauchdays').on("change",function(e) {
-								var chosen = $("select[name='pickStyle'] :selected").text()
-								console.log(chosen);
-								if(chosen === $('input.inchoose1').val() || chosen === $('input.inchoose2').val()||
-										chosen === $('input.inchoose3').val()) {
-									
+							$('.my-pickStyle').on("change",function(e) {
+								
+								var chosen = $("select[name='pickStyle'] :selected").text().trim();
+								var c1 = $('button.choose1').text().trim();
+								var c2 = $('button.choose2').text().trim();
+								var c3 = $('button.choose3').text().trim();
+								// 檯面上顯示的標籤不可以再被重複選取 
+								if( c1 === chosen || c2 === chosen || c3 ===chosen) {
+									//console.log("重複");
 									// doNothing!
 								} else {
 									if($('button.choose1').is('[hidden]')) {
