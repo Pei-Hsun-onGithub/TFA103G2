@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -70,22 +71,43 @@ public class RestInsert extends Command {
 		
 		
 		
-		
 		// 2. 與持久層溝通
 		
 		RestaurantVO restVO = restSvc.addRestaurant(restaurantName, boss, phone, district, city, location, openTime, closeTime, dayoffId, weeklyLeave, sta);
-		System.out.println("restVO=" + restVO);
+//		System.out.println("restVO=" + restVO);
 		
-		Integer styleId = new Integer(req.getParameter("restaurantStyle"));
+		// 擷取關聯類別RestaurantStyle所需的資料
+//		Integer styleId = new Integer(req.getParameter("restaurantStyle"));
+		Integer styleId1 = null;
+		Integer styleId2 = null;
+		Integer styleId3 = null;
+		
+		if(!req.getParameter("style1").equals("")) {
+			 styleId1 = new Integer(req.getParameter("style1"));			
+		}
+		if(!req.getParameter("style2").equals("")) {
+			styleId2 = new Integer(req.getParameter("style2"));			
+		}
+		if(!req.getParameter("style3").equals("")) {
+			styleId3 = new Integer(req.getParameter("style3"));			
+		}
+	
 		Integer restaurantId = restVO.getRestaurantId();
-		RestaurantStyleService restStyleSvc = new RestaurantStyleService();
-		
-		RestaurantStyleVO restStyleVO = restStyleSvc.addRestaurantStyle(restaurantId, styleId);
-		System.out.println("restStyleVO=" + restStyleVO);
 		
 		
-		// 3. 轉送頁面
 		
+		// 3.1 轉送資料到關聯類別RestaurantStyle的controller來將資料入庫
+		
+		req.setAttribute("action", "insert");
+		req.setAttribute("restaurantId", restaurantId);
+		req.setAttribute("styleId1", styleId1);
+		req.setAttribute("styleId2", styleId2);
+		req.setAttribute("styleId3", styleId3);
+		
+		RequestDispatcher toRestStyleServlet = req.getRequestDispatcher("/restaurantstyle/restaurantstyle.do");
+		toRestStyleServlet.forward(req, res);
+		
+		// 3.2  轉送頁面
 	}
 	
 	

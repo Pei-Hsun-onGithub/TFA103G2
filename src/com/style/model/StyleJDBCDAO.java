@@ -15,8 +15,8 @@ public class StyleJDBCDAO implements StyleDAO_interface {
 
 	public static final String driver = "com.mysql.cj.jdbc.Driver";
 	public static final String url = "jdbc:mysql://localhost:3306/fm01?serverTimezone=Asia/Taipei";
-	private static final String userid = "chou";
-	private static final String passwd = "chou79";
+	private static final String userid = "David";
+	private static final String passwd = "123456";
 
 	private static final String INSERT_STMT = "INSERT INTO Style (styletype) VALUES (?)";
 	private static final String UPDATE_STMT = "UPDATE Style SET styletype = ? WHERE styleid = ?";
