@@ -11,7 +11,7 @@ public class MemberInfoService {
 		dao = new MemberInfoDAOImpl();
 	}
 	
-	public MemberInfo addMemberInfo	(String email, String pwd, String userName, String gender, Date birthday, String phone,byte[] pic, Date registerDate, int gold, int feed, int monsterId, String monsterNickName, int lv, int exp, int sta) {
+	public MemberInfo addMemberInfo	(String email, String pwd, String userName, String gender, Date birthday, String phone,byte[] pic, Date registerDate, Integer gold, Integer feed, Integer monsterId, String monsterNickName, Integer lv, Integer exp, Integer sta) {
 		
 		MemberInfo memberinfo = new MemberInfo();
 		
@@ -35,7 +35,7 @@ public class MemberInfoService {
 		return memberinfo;
 	}
 	
-	public MemberInfo updateMemberInfo	(String email, String pwd, String userName, String gender, Date birthday, String phone,byte[] pic, Date registerDate, int gold, int feed, int monsterId, String monsterNickName, int lv, int exp, int sta) {
+	public MemberInfo updateMemberInfo	(String email, String pwd, String userName, String gender, Date birthday, String phone,byte[] pic, Date registerDate, Integer gold, Integer feed, Integer monsterId, String monsterNickName, Integer lv, Integer exp, Integer sta) {
 		
 		MemberInfo memberinfo = new MemberInfo();
 		
@@ -59,11 +59,11 @@ public class MemberInfoService {
 		return memberinfo;
 	}
 	
-	public void deleteMemberInfo(int userId) {
+	public void deleteMemberInfo(Integer userId) {
 		dao.delete(userId);
 	}
 	
-	public MemberInfo getOneMemberInfo(int userId) {
+	public MemberInfo getOneMemberInfo(Integer userId) {
 		return dao.findByPK(userId);
 	}
 	

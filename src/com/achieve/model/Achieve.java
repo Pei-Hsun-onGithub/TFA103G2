@@ -5,22 +5,22 @@ import java.sql.Date;
 
 public class Achieve implements Serializable {
 	
-	private int achiId;
+	private Integer achiId;
 	private String achiName;
 	private String descript;
 	private Date openDate;
-	private int validDays;
-	private int achiArticle;
-	private int achiOrder;
-	private int gainFeed;
-	private int gainGold;
+	private Integer validDays;
+	private Integer achiArticle;
+	private Integer achiOrder;
+	private Integer gainFeed;
+	private Integer gainGold;
 	private byte[] achiPic;
 	
 	public Achieve() {
 	} 
 	
-	public Achieve(int achiId, String achiName, String descript, Date openDate, int validDays, int achiArticle,
-			int achiOrder, int gainFeed, int gainGold, byte[] achiPic) {
+	public Achieve(Integer achiId, String achiName, String descript, Date openDate, Integer validDays, Integer achiArticle,
+			Integer achiOrder, Integer gainFeed, Integer gainGold, byte[] achiPic) {
 		this.achiId = achiId;
 		this.achiName = achiName;
 		this.descript = descript;
@@ -33,11 +33,11 @@ public class Achieve implements Serializable {
 		this.achiPic = achiPic;
 	}
 
-	public int getAchiId() {
+	public Integer getAchiId() {
 		return achiId;
 	}
 
-	public void setAchiId(int achiId) {
+	public void setAchiId(Integer achiId) {
 		this.achiId = achiId;
 	}
 
@@ -65,43 +65,43 @@ public class Achieve implements Serializable {
 		this.openDate = openDate;
 	}
 
-	public int getValidDays() {
+	public Integer getValidDays() {
 		return validDays;
 	}
 
-	public void setValidDays(int validDays) {
+	public void setValidDays(Integer validDays) {
 		this.validDays = validDays;
 	}
 
-	public int getAchiArticle() {
+	public Integer getAchiArticle() {
 		return achiArticle;
 	}
 
-	public void setAchiArticle(int achiArticle) {
+	public void setAchiArticle(Integer achiArticle) {
 		this.achiArticle = achiArticle;
 	}
 
-	public int getAchiOrder() {
+	public Integer getAchiOrder() {
 		return achiOrder;
 	}
 
-	public void setAchiOrder(int achiOrder) {
+	public void setAchiOrder(Integer achiOrder) {
 		this.achiOrder = achiOrder;
 	}
 
-	public int getGainFeed() {
+	public Integer getGainFeed() {
 		return gainFeed;
 	}
 
-	public void setGainFeed(int gainFeed) {
+	public void setGainFeed(Integer gainFeed) {
 		this.gainFeed = gainFeed;
 	}
 
-	public int getGainGold() {
+	public Integer getGainGold() {
 		return gainGold;
 	}
 
-	public void setGainGold(int gainGold) {
+	public void setGainGold(Integer gainGold) {
 		this.gainGold = gainGold;
 	}
 

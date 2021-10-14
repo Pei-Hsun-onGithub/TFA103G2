@@ -5,17 +5,17 @@ import java.sql.Date;
 
 public class AchieveProgress implements Serializable {
 	
-	private int userId;
-	private int achiId;
-	private int currentArticle;
-	private int currentOrder;
+	private Integer userId;
+	private Integer achiId;
+	private Integer currentArticle;
+	private Integer currentOrder;
 	private Date beginDate;
-	private int sta;
+	private Integer sta;
 	
 	public AchieveProgress() {
 	}
 
-	public AchieveProgress(int userId, int achiId, int currentArticle, int currentOrder, Date beginDate, int sta) {
+	public AchieveProgress(Integer userId, Integer achiId, Integer currentArticle, Integer currentOrder, Date beginDate, Integer sta) {
 		this.userId = userId;
 		this.achiId = achiId;
 		this.currentArticle = currentArticle;
@@ -24,35 +24,35 @@ public class AchieveProgress implements Serializable {
 		this.sta = sta;
 	}
 
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
-	public int getAchiId() {
+	public Integer getAchiId() {
 		return achiId;
 	}
 
-	public void setAchiId(int achiId) {
+	public void setAchiId(Integer achiId) {
 		this.achiId = achiId;
 	}
 
-	public int getCurrentArticle() {
+	public Integer getCurrentArticle() {
 		return currentArticle;
 	}
 
-	public void setCurrentArticle(int currentArticle) {
+	public void setCurrentArticle(Integer currentArticle) {
 		this.currentArticle = currentArticle;
 	}
 
-	public int getCurrentOrder() {
+	public Integer getCurrentOrder() {
 		return currentOrder;
 	}
 
-	public void setCurrentOrder(int currentOrder) {
+	public void setCurrentOrder(Integer currentOrder) {
 		this.currentOrder = currentOrder;
 	}
 
@@ -64,11 +64,11 @@ public class AchieveProgress implements Serializable {
 		this.beginDate = beginDate;
 	}
 
-	public int getSta() {
+	public Integer getSta() {
 		return sta;
 	}
 
-	public void setSta(int sta) {
+	public void setSta(Integer sta) {
 		this.sta = sta;
 	}
 	

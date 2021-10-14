@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class MonsterBook implements Serializable {
 	
-	private int monsterId;
-	private int minDemandLevel;
+	private Integer monsterId;
+	private Integer minDemandLevel;
 	private String monsterName;
 	private String monsterAbility;
 	private byte[] monsterPic;
@@ -13,7 +13,7 @@ public class MonsterBook implements Serializable {
 	public MonsterBook() {
 	}
 
-	public MonsterBook(int monsterId, int minDemandLevel, String monsterName, String monsterAbility,
+	public MonsterBook(Integer monsterId, Integer minDemandLevel, String monsterName, String monsterAbility,
 			byte[] monsterPic) {
 		this.monsterId = monsterId;
 		this.minDemandLevel = minDemandLevel;
@@ -22,19 +22,19 @@ public class MonsterBook implements Serializable {
 		this.monsterPic = monsterPic;
 	}
 
-	public int getMonsterId() {
+	public Integer getMonsterId() {
 		return monsterId;
 	}
 
-	public void setMonsterId(int monsterId) {
+	public void setMonsterId(Integer monsterId) {
 		this.monsterId = monsterId;
 	}
 
-	public int getMinDemandLevel() {
+	public Integer getMinDemandLevel() {
 		return minDemandLevel;
 	}
 
-	public void setMinDemandLevel(int minDemandLevel) {
+	public void setMinDemandLevel(Integer minDemandLevel) {
 		this.minDemandLevel = minDemandLevel;
 	}
 
