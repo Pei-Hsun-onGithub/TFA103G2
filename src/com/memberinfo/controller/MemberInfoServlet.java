@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 
 import com.memberinfo.model.*;
 
-public class EemberlnfoServlet extends HttpServlet {
+public class MemberInfoServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res)
 			throws ServletException, IOException {
@@ -209,9 +209,13 @@ public class EemberlnfoServlet extends HttpServlet {
         if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
 			
 			List<String> errorMsgs = new LinkedList<String>();
+			System.out.println("1="+errorMsgs);
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
+			
+			
+			
 
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
@@ -227,14 +231,14 @@ String email = req.getParameter("email");
 				String pwdlReg = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$";
 				if (pwd == null || pwd.trim().length() == 0) {
 					errorMsgs.add("密碼: 請勿空白");
-				} else if(!pwd.trim().matches(pwdlReg)) { //以下練習正則(規)表示式(regular-expression)
+				} else if(!pwd.trim().matches(pwdlReg)) { 
 					errorMsgs.add("密碼: 密碼長度至少應該設定 8 碼以上，而且要混合大小寫英文字母、數字和特殊符號");
 	            }
 				
 				String pwd2 = req.getParameter("pwd2");
 				if (pwd2 == null || pwd2.trim().length() == 0) {
-					errorMsgs.add("密碼: 請勿空白");
-				} else if(pwd2 != pwd) { //以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("密碼2: 請勿空白");
+				} else if(pwd.equals(pwd2) == false) { 
 					errorMsgs.add("密碼: 您兩次輸入密碼不一致");
 	            }
 				
@@ -255,19 +259,25 @@ String email = req.getParameter("email");
 	            }
 				
 				String gender = req.getParameter("gender");
-				
+				//System.out.println("gender="+gender);
 				String phone = req.getParameter("phone");
+				//System.out.println("phone="+phone);
 				String phoneReg = "^09\\d{2}(\\d{6}|-\\d{3}-\\d{3})$";
 				if (phone == null || phone.trim().length() == 0) {
 					errorMsgs.add("電話號碼: 請勿空白");
 				} else if(!phone.trim().matches(phoneReg)) { //以下練習正則(規)表示式(regular-expression)
-					errorMsgs.add("電話號碼:數字 , 且長度必需為10，開頭為09開頭");
+					errorMsgs.add("電話號碼:數字 , 且長度必需為10，開頭為09開頭");					
 	            }	
 				
-				java.sql.Date registerDate = registerDate.valueOf(LocalDateTime.now());
 				
+
+				java.sql.Date registerDate = new java.sql.Date(System.currentTimeMillis());
+				
+				MemberInfo memberInfo2 = new MemberInfo();
+				memberInfo2.setPwd(pwd2);
 				
 				MemberInfo memberInfo = new MemberInfo();
+				//System.out.println("memberInfo="+memberInfo);
 				memberInfo.setEmail(email);
 				memberInfo.setPwd(pwd);
 				memberInfo.setUserName(userName);
@@ -277,8 +287,9 @@ String email = req.getParameter("email");
 				memberInfo.setRegisterDate(registerDate);
 
 				// Send the use back to the form, if there were errors
+				
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("memberlnfo", memberInfo); // 含有輸入格式錯誤的empVO物件,也存入req
+					req.setAttribute("memberInfo", memberInfo); // 含有輸入格式錯誤的empVO物件,也存入req
 					RequestDispatcher failureView = req
 							.getRequestDispatcher("/login/Login-custome-regist.jsp");
 					failureView.forward(req, res);
@@ -286,17 +297,25 @@ String email = req.getParameter("email");
 				}
 				
 				/***************************2.開始新增資料***************************************/
-				MemberInfoService memberInfoServiceSvc = new MemberInfoService();
-				memberInfo = memberInfoServiceSvc.addMemberInfo(email, pwd, userName, gender, birthday, phone,null,);
+//				MemberInfoService memberInfoServiceSvc = new MemberInfoService();
+//				memberInfo = memberInfoServiceSvc.addMemberInfo(memberInfo);
+				
+				MemberInfoService memberInfoSvc = new MemberInfoService();
+				memberInfo = memberInfoSvc.addMemberInfo(email, pwd, userName, gender, birthday, phone,null,registerDate,0,0,1001,null,1,0,1);
+				System.out.println(memberInfo.toString());
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/pei_pages/vendor_meal_upload.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交vendor_meal_upload.jsp
+				//System.out.println("successView=" + successView);
 				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/
 			} catch (Exception e) {
-				errorMsgs.add(e.getMessage());
+//				e.printStackTrace();
+				errorMsgs.add("註冊失敗:"+e.getMessage());
+//				System.out.println("2="+errorMsgs);
+//				System.out.println(e);
 				RequestDispatcher failureView = req
 						.getRequestDispatcher("/login/Login-custome-regist.jsp");
 				failureView.forward(req, res);

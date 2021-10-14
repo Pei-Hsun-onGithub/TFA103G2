@@ -35,6 +35,14 @@ public class MemberInfoService {
 		return memberinfo;
 	}
 	
+
+	
+	public MemberInfo addMemberInfo(MemberInfo memberinfo) {
+		dao.add(memberinfo);
+		return memberinfo;
+	}
+	
+	
 	public MemberInfo updateMemberInfo	(String email, String pwd, String userName, String gender, Date birthday, String phone,byte[] pic, Date registerDate, Integer gold, Integer feed, Integer monsterId, String monsterNickName, Integer lv, Integer exp, Integer sta) {
 		
 		MemberInfo memberinfo = new MemberInfo();
