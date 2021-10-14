@@ -12,7 +12,7 @@ import util.Util;
 
 public class LevelExpDAOImpl implements LevelExpDAO {
 	
-	private static final String INSERT_STMT = "INSERT INTO LEVELEXP(LV, EXPLOW, EXPUP) VALUES (?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO LEVELEXP( EXPLOW, EXPUP) VALUES ( ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE LEVELEXP SET EXPLOW = ?, EXPUP = ? WHERE LV = ?";
 	private static final String DELETE_STMT = "DELETE FROM LEVELEXP WHERE LV = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM LEVELEXP WHERE LV = ?";
@@ -36,9 +36,8 @@ public class LevelExpDAOImpl implements LevelExpDAO {
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, levelexp.getLv());
-			pstmt.setInt(2, levelexp.getExpLow());
-			pstmt.setInt(3, levelexp.getExpUp());
+			pstmt.setInt(1, levelexp.getExpLow());
+			pstmt.setInt(2, levelexp.getExpUp());
 		
 			pstmt.executeUpdate();
 

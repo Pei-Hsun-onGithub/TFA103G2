@@ -12,7 +12,7 @@ import util.Util;
 
 public class MonsterBookDAOImpl implements MonsterBookDAO {
 	
-	private static final String INSERT_STMT = "INSERT INTO MONSTERBOOK(MONSTERID, MINDEMANDLEVEL, MONSTERNAME, MONSTERABILITY, MONSTERPIC) VALUES (?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO MONSTERBOOK( MINDEMANDLEVEL, MONSTERNAME, MONSTERABILITY, MONSTERPIC) VALUES ( ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE MONSTERBOOK SET MINDEMANDLEVEL = ?, MONSTERNAME = ?, MONSTERABILITY = ?, MONSTERPIC = ? WHERE MONSTERID = ?";
 	private static final String DELETE_STMT = "DELETE FROM MONSTERBOOK WHERE MONSTERID = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM MONSTERBOOK WHERE MONSTERID = ?";
@@ -36,11 +36,10 @@ public class MonsterBookDAOImpl implements MonsterBookDAO {
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, monsterbook.getMonsterId());
-			pstmt.setInt(2, monsterbook.getMinDemandLevel());
-			pstmt.setString(3, monsterbook.getMonsterName());
-			pstmt.setString(4, monsterbook.getMonsterAbility());
-			pstmt.setBytes(5, monsterbook.getMonsterPic());
+			pstmt.setInt(1, monsterbook.getMinDemandLevel());
+			pstmt.setString(2, monsterbook.getMonsterName());
+			pstmt.setString(3, monsterbook.getMonsterAbility());
+			pstmt.setBytes(4, monsterbook.getMonsterPic());
 			
 			pstmt.executeUpdate();
 
