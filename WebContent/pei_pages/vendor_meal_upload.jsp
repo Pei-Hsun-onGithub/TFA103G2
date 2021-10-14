@@ -80,12 +80,13 @@ div.my-preview-img-container div.my-img-zone img.preview_img {
 	max-width: 100%;
 }
 
-form .my-btn {
+form div.my-img-btn-wrapper .my-btn {
 	padding: 0px 10px;
-	width: 56px;
-	height: 36px;
+	width: 100px;
+	height: 40px;
 	line-height: 10px;
 	border-radius: 10px;
+	margin-top: 0;
 }
 </style>
 </head>
@@ -310,13 +311,13 @@ form .my-btn {
 
 
 
-								<div>
+								<div class="my-img-btn-wrapper">
+
 									<label>圖片上傳</label>
 									<div>
 									<button type="button" class="btn btn-warning my-btn" id="my-img-btn">選擇圖片</button>
 										<input type="file" id="p_file" class="form-control"
-											name="myUploadImg" hidden
-											value="<%=(mealVO == null) ? null : mealVO.getMealImg()%>">
+											name="myUploadImg" hidden value="<%=(mealVO == null) ? null : mealVO.getMealImg()%>">
 									</div>
 								</div>
 

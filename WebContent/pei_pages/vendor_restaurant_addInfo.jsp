@@ -367,17 +367,11 @@ div.my-chooseType ul li button{
 								</div>
 								<div class="col-md-10">
 									<div class="single-input-wrap">
-										<select class="myclass-select myclass-select-lauchdays"
+										<select class="myclass-select myclass-select-lauchdays my-distrc-select"
 											id="inputGroupSelect01" name="district">
 											<c:forEach var="distr" items="<%= DistrictCityMapping.getDistrcs() %>">
 												<option value="${distr}">${distr}
 											</c:forEach>
-<!-- 											<option -->
-<%-- 												value="<%=(restVO == null) ? "南投縣" : restVO.getDistrict()%>" --%>
-<!-- 												selected>南投縣</option> -->
-<!-- 											<option value="花蓮市">花蓮市</option> -->
-<!-- 											<option value="雲林縣">雲林縣</option> -->
-<!-- 											<option value="嘉義縣">嘉義縣</option> -->
 										</select>
 									</div>
 								</div>
@@ -392,14 +386,9 @@ div.my-chooseType ul li button{
 								</div>
 								<div class="col-md-10">
 									<div class="single-input-wrap">
-										<select class="myclass-select myclass-select-lauchdays"
+										<select class="myclass-select myclass-select-lauchdays my-city-select"
 											id="inputGroupSelect01" name="city">
-											<option
-												value="<%=(restVO == null) ? "中正區" : restVO.getCity()%>"
-												selected>中正區</option>
-											<option value="45">45</option>
-											<option value="60">60</option>
-											<option value="90">90</option>
+											
 										</select>
 									</div>
 								</div>
@@ -624,6 +613,77 @@ div.my-chooseType ul li button{
 							});
 							
 							
+							/*********   縣市地區的操作     *************/
+							
+							// 滾出option
+							getCityOptions("桃園").forEach(addOptionsToSelect);
+							
+							$('select.my-distrc-select').on('change', function(e){
+								var selectedDistrict = this.options[this.selectedIndex].text.trim();
+								console.log(selectedDistrict);
+								if(selectedDistrict === "台北市") {
+									// 滾出city的option
+									deleteAllCurrentOptions();
+									getCityOptions("台北市").forEach(addOptionsToSelect);
+								}
+								
+							});
+							
+							function deleteAllCurrentOptions() {
+								$('select.my-city-select').empty();
+							}
+							
+							function getCityOptions(district) {
+								let dis = district.trim();
+								let cityOpts = [];
+								if("台北市" === dis){
+									cityOpts = 
+										['<option value="中正區">中正區</option>',
+										 '<option value="大同區">大同區</option>',	
+										];
+								}
+								
+								
+								if("桃園" === dis){
+									cityOpts = 
+										['<option value="桃園區">桃園區</option>',
+										 '<option value="龜山區">龜山區</option>',
+											];
+								}
+								
+								return cityOpts;
+							}
+							
+							function addOptionsToSelect(value) {
+								$('select.my-city-select').append(value);
+							}
+							
+// 						
+// 							taipeiCitys.add("中山區");
+// 							taipeiCitys.add("松山區");
+// 							taipeiCitys.add("大安區");
+// 							taipeiCitys.add("萬華區");
+// 							taipeiCitys.add("信義區");
+// 							taipeiCitys.add("士林區");
+// 							taipeiCitys.add("北投區");
+// 							taipeiCitys.add("內湖區");
+// 							taipeiCitys.add("南港區");
+// 							taipeiCitys.add("文山");
+							
+							
+							
+// 							touanCitys.add("");
+// 							touanCitys.add("龜山區");
+// 							touanCitys.add("八德區");
+// 							touanCitys.add("大溪區");
+// 							touanCitys.add("蘆竹區");
+// 							touanCitys.add("大園區");
+// 							touanCitys.add("龍潭區");
+// 							touanCitys.add("平鎮區");
+// 							touanCitys.add("楊梅區");
+// 							touanCitys.add("新屋區");
+// 							touanCitys.add("觀音區");
+// 							touanCitys.add("原住民區");
 
 						});
 	</script>
