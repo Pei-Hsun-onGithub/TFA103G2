@@ -7,9 +7,7 @@
 <%
     FoodArticleService faSvc = new FoodArticleService();
     List<FoodArticleVO> list = faSvc.getall();
-    pageContext.setAttribute("list",list);
-    
-    
+    pageContext.setAttribute("list",list);       
     
 %>
 
