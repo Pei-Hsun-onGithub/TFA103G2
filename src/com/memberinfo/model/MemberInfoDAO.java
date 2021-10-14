@@ -6,8 +6,8 @@ public interface MemberInfoDAO {
 	
 	void add(MemberInfo memberinfo);
 	void update(MemberInfo memberinfo);
-	void delete(int userId);
-	MemberInfo findByPK(int userId);
+	void delete(Integer userId);
+	MemberInfo findByPK(Integer userId);
 	List<MemberInfo> getAll();
 
 }

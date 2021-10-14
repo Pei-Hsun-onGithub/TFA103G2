@@ -129,7 +129,7 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 	}
 
 	@Override
-	public void delete(int userId) {
+	public void delete(Integer userId) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -165,7 +165,7 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 	}
 
 	@Override
-	public MemberInfo findByPK(int userId) {
+	public MemberInfo findByPK(Integer userId) {
 		MemberInfo mem = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;

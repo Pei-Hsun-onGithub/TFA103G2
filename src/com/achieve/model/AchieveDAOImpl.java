@@ -118,7 +118,7 @@ public class AchieveDAOImpl implements AchieveDAO {
 	}
 
 	@Override
-	public void delete(int achiId) {
+	public void delete(Integer achiId) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -154,7 +154,7 @@ public class AchieveDAOImpl implements AchieveDAO {
 	}
 
 	@Override
-	public Achieve findByPK(int achiId) {
+	public Achieve findByPK(Integer achiId) {
 		Achieve ach = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;

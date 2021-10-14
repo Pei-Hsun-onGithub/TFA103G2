@@ -110,7 +110,7 @@ public class AchieveProgressDAOImpl implements AchieveProgressDAO {
 	}
 
 	@Override
-	public void delete(int userId, int achiId) {
+	public void delete(Integer userId, Integer achiId) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -147,7 +147,7 @@ public class AchieveProgressDAOImpl implements AchieveProgressDAO {
 	}
 
 	@Override
-	public AchieveProgress findByPK(int userId, int achiId) {
+	public AchieveProgress findByPK(Integer userId, Integer achiId) {
 		AchieveProgress achp = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;

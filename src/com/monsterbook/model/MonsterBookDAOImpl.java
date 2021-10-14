@@ -107,7 +107,7 @@ public class MonsterBookDAOImpl implements MonsterBookDAO {
 	}
 
 	@Override
-	public void delete(int monsterId) {
+	public void delete(Integer monsterId) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -143,7 +143,7 @@ public class MonsterBookDAOImpl implements MonsterBookDAO {
 	}
 
 	@Override
-	public MonsterBook findByPK(int monsterId) {
+	public MonsterBook findByPK(Integer monsterId) {
 		MonsterBook mon = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;

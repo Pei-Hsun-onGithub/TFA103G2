@@ -10,7 +10,7 @@ public class MonsterBookService {
 		dao = new MonsterBookDAOImpl();
 	}
 	
-	public MonsterBook addMonsterBook (int minDemandLevel, String monsterName, String monsterAbility, byte[] monsterPic) {
+	public MonsterBook addMonsterBook (Integer minDemandLevel, String monsterName, String monsterAbility, byte[] monsterPic) {
 		
 		MonsterBook monsterbook = new MonsterBook();
 		
@@ -23,7 +23,7 @@ public class MonsterBookService {
 		return monsterbook;
 	}
 	
-	public MonsterBook updateMonsterBook (int minDemandLevel, String monsterName, String monsterAbility, byte[] monsterPic) {
+	public MonsterBook updateMonsterBook (Integer minDemandLevel, String monsterName, String monsterAbility, byte[] monsterPic) {
 		
 		MonsterBook monsterbook = new MonsterBook();
 		
@@ -36,11 +36,11 @@ public class MonsterBookService {
 		return monsterbook;
 	}
 	
-	public void deleteMonsterBook(int monsterId) {
+	public void deleteMonsterBook(Integer monsterId) {
 		dao.delete(monsterId);
 	}
 	
-	public MonsterBook getOneMonsterBook(int monsterId) {
+	public MonsterBook getOneMonsterBook(Integer monsterId) {
 		return dao.findByPK(monsterId);
 	}
 	

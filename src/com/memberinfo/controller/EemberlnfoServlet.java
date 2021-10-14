@@ -1,4 +1,4 @@
-package com.memberlnfo.controller;
+package com.memberinfo.controller;
 
 import java.io.*;
 import java.time.LocalDateTime;
