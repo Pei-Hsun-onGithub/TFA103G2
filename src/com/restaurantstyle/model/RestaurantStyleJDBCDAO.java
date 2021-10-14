@@ -16,8 +16,8 @@ public class RestaurantStyleJDBCDAO implements RestaurantStyleDAO_interface{
 
 	public static final String driver = "com.mysql.cj.jdbc.Driver";
 	public static final String url = "jdbc:mysql://localhost:3306/fm01?serverTimezone=Asia/Taipei";
-	private static final String userid = "chou";
-	private static final String passwd = "chou79";
+	private static final String userid = "David";
+	private static final String passwd = "123456";
 	
 	private static final String INSERT_STMT = "INSERT INTO RestaurantStyle (restaurantId, styleId) VALUES (?, ?)";
 	// 只有複合主鍵是否不需要update??

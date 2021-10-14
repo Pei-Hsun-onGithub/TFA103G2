@@ -1,3 +1,4 @@
+<%@page import="util.DistrictCityMapping"%>
 <%@page import="com.restaurant.model.RestaurantVO"%>
 <%@ page import="com.meal.model.MealVO"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -368,15 +369,20 @@ div.my-chooseType ul li button{
 									<div class="single-input-wrap">
 										<select class="myclass-select myclass-select-lauchdays"
 											id="inputGroupSelect01" name="district">
-											<option
-												value="<%=(restVO == null) ? "南投縣" : restVO.getDistrict()%>"
-												selected>南投縣</option>
-											<option value="花蓮市">花蓮市</option>
-											<option value="雲林縣">雲林縣</option>
-											<option value="嘉義縣">嘉義縣</option>
+											<c:forEach var="distr" items="<%= DistrictCityMapping.getDistrcs() %>">
+												<option value="${distr}">${distr}
+											</c:forEach>
+<!-- 											<option -->
+<%-- 												value="<%=(restVO == null) ? "南投縣" : restVO.getDistrict()%>" --%>
+<!-- 												selected>南投縣</option> -->
+<!-- 											<option value="花蓮市">花蓮市</option> -->
+<!-- 											<option value="雲林縣">雲林縣</option> -->
+<!-- 											<option value="嘉義縣">嘉義縣</option> -->
 										</select>
 									</div>
 								</div>
+								
+
 
 							</div>
 
@@ -615,7 +621,9 @@ div.my-chooseType ul li button{
 								this.setAttribute("hidden", "");
 								$('button.choose3').text("");
 								$('input.inchoose3').val("");
-});
+							});
+							
+							
 
 						});
 	</script>
