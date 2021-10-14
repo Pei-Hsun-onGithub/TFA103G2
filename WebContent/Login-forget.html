@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="zxx">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FoodKa - Food Ordering, Delivery & Restuarent Template</title>
     <!--fivicon icon-->
-    <link rel="icon" href="assets/img/fevicon.png">
+    <link rel="icon" href="assets/img/Image4.png">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="assets/css/animate.min.css">       //動畫
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"> 
     <link rel="stylesheet" href="assets/css/magnific.min.css">
     <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
     <link rel="stylesheet" href="assets/css/nice-select.min.css">
@@ -21,17 +22,23 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
     <!-- new css -->
-    <link rel="stylesheet" href="assets/css/yeh.css">
+    <link rel="stylesheet" href="assets/css/Login-forget.css">
 
     <!--Google Fonts-->
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap"
+        rel="stylesheet">
+
+
     <style>
-        .test{
-            margin-top: 52px;
+        div.overlay{
+            /* display:block !important; */
+            z-index:100;
         }
     </style>
 
 </head>
+
 <body class='sc5'>
     <!-- preloader area start -->
     <!-- preloader area end -->
@@ -51,29 +58,47 @@
     <!-- navbar end -->
 
     <!-- bredcrumb Area Start-->
-    <section class="breadcrumb-area test">
+    <!-- <section class="breadcrumb-area test">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6 align-self-center">
-                    <div class="banner-inner text-center">
+                    <div class="banner-inner text-center"> -->
 
-                        <!-- new  -->
-                        <div class="panel-group">
-                            <input type="radio" name="panel-radio" id="radio1" class="panel-control" checked>
-                            <input type="radio" name="panel-radio" id="radio2" class="panel-control">
-                            <div class="tab-group">
-                              <label for="radio1" class="active">tab1</label>
-                              <label for="radio2">tab2</label>
-                            </div>
-                            <div class="content-group">
-                                
-                              <div class="content content1">content1</div>
-                              <div class="content content2">content2</div>
-                            </div>
-                          </div>
+    <!---------------------------------- new  ---------------------------------->
 
-                        <!-- end  -->    
+    <div class="panel-group">
+        <input type="radio" name="panel-radio" id="radio1" class="panel-control" checked>
+        <div class="content-group">
+    <div class="back-to-top">
+        <span class="back-top"><i class="fas fa-angle-double-up"></i></span>
+    </div>
+    <div class="overlay" style="border: 1px solid red;">
+        <article>
+            <h1>驗證信已寄至您的信箱</h1>
+            <p></p>
+            <button type="button" class="btn_modal_close" 關閉></button>
+        </article>
+    </div>
+            <!---------------------------------- table內帳號輸入 ---------------------------------->
+            <form class="content content1" action="javascript:;" method="post">
+                <div id="right" class="two-thirds">
+                    <fieldset>
+                        <!--<div class="fie">-->
+                        <h1 class="lgd" style="color: black;">尋找密碼</h1>
+                        <p>輸入你電子郵件地址</p>
+                        <!--1--> <input type="username" id="username" class="username_email" name="username"
+                            placeholder="您的電子郵件地址" required>
+                        <!--3--> <input type="button" value="送出" class="btn" id="submit" onclick="myFormCheck()" padd />
+                    </fieldset>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--two-thirds-->
 
+
+    <!----------------------------------  end  ---------------------------------->
+    <!-- 
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                             </ul>
@@ -81,14 +106,11 @@
                     </div>
                 </div>
             </div>
-            
-
-            
         </div>
-    </section>
-    <!-- bredcrumb Area End --> 
+    </section> -->
+    <!-- bredcrumb Area End -->
 
-   
+
 
     <!-- footer area start -->
     <footer class="footer-area pd-top-25">
@@ -103,28 +125,25 @@
                     </div>
                     <div class="col-md-6">
                         <ul class="social-area text-md-end text-center mt-md-0 mt-2">
-                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li> 
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li> 
-                            <li><a href="#"><i class="fab fa-behance"></i></a></li> 
-                            <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li> 
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                            <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-    <!-- footer area end -->    
+    <!-- footer area end -->
 
     <!-- back-to-top end -->
-    <div class="back-to-top">
-        <span class="back-top"><i class="fas fa-angle-double-up"></i></span>
-    </div>
 
-    
+
 
     <!-- all plugins here -->
     <script src="assets/js/jquery.3.6.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/css/bootstrap.min.css"></script>
     <script src="assets/js/imageloded.min.js"></script>
     <script src="assets/js/counterup.js"></script>
     <script src="assets/js/waypoint.js"></script>
@@ -140,7 +159,23 @@
     <!-- main js  -->
     <script src="assets/js/main.js"></script>
     <!-- new js   -->
-    <script src="assets/js/main.js"></script>
+    <script src="assets/js/Login-forget.js"></script>
+    <!-- <script>
+        function myFormCheck(){
+            
+
+
+
+        console.log(1)
+        $("div.overlay").css("display", "block");
+
+        $("button.btn_modal_close").on("click", function(){
+            $("div.overlay").css("display", "none");
+        })
+    }
+
+    </script> -->
 
 </body>
+
 </html>
