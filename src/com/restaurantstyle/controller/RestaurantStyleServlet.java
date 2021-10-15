@@ -2,6 +2,7 @@ package com.restaurantstyle.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +49,8 @@ public class RestaurantStyleServlet extends HttpServlet {
 				RestaurantStyleVO restStyleVO = restStyleSvc.addRestaurantStyle(restaurantId, styleId3);
 			}
 			
-			
+			RequestDispatcher toView = req.getRequestDispatcher("/pei_pages/vendor_restaurant_addInfo.jsp");
+			toView.forward(req, res);
 //			System.out.println("restStyleVO=" + restStyleVO);
 		}
 	}

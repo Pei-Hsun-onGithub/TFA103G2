@@ -108,6 +108,8 @@ public class RestInsert extends Command {
 		toRestStyleServlet.forward(req, res);
 		
 		// 3.2  Âà°e­¶­±
+		
+		
 	}
 	
 	

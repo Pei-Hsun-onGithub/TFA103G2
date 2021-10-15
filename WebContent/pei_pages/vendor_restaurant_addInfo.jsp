@@ -492,7 +492,7 @@ div.my-chooseType ul li button{
 									<div class="col-md-2"></div>
 									<div class="col-md-4">
 										<input type="hidden" name="action" value="insert">
-										<button type="submit" class="btn btn-base" id="btn_submit">確認</button>
+										<button type="submit" class="btn btn-base" id="btn_submit">儲存</button>
 									</div>
 									<div class="col-md-4">
 										<button type="reset" class="btn btn-base">重填</button>
