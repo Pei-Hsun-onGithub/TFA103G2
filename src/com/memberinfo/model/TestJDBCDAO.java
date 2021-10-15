@@ -9,6 +9,9 @@ public class TestJDBCDAO {
 	public static void main(String[] args) throws IOException {
 		MemberInfoDAO dao = new MemberInfoDAOImpl();
 		
+		System.out.println(dao.selectEmail("Edwardwkins@teleworm.us"));
+		
+		
 		//·s¼W
 //		MemberInfo mem1 = new MemberInfo();
 //		byte[] data1 = getPictureByteArray("pictest/heart.png");
@@ -75,26 +78,26 @@ public class TestJDBCDAO {
 //		System.out.println("---------------------");
 		
 		//¬d¸ß
-		List<MemberInfo> list = dao.getAll();
-		for (MemberInfo mem : list) {
-			System.out.println(mem.getUserId() + ",");
-			System.out.println(mem.getEmail() + ",");
-			System.out.println(mem.getPwd() + ",");
-			System.out.println(mem.getUserName() + ",");
-			System.out.println(mem.getGender() + ",");
-			System.out.println(mem.getBirthday() + ",");
-			System.out.println(mem.getPhone() + ",");
-			System.out.println(mem.getPic() + ",");
-			System.out.println(mem.getRegisterDate() + ",");
-			System.out.println(mem.getGold() + ",");
-			System.out.println(mem.getFeed() + ",");
-			System.out.println(mem.getMonsterId() + ",");
-			System.out.println(mem.getMonsterNickName() + ",");
-			System.out.println(mem.getLv() + ",");
-			System.out.println(mem.getExp() + ",");
-			System.out.println(mem.getSta());
-			System.out.println();
-		}
+//		List<MemberInfo> list = dao.getAll();
+//		for (MemberInfo mem : list) {
+//			System.out.println(mem.getUserId() + ",");
+//			System.out.println(mem.getEmail() + ",");
+//			System.out.println(mem.getPwd() + ",");
+//			System.out.println(mem.getUserName() + ",");
+//			System.out.println(mem.getGender() + ",");
+//			System.out.println(mem.getBirthday() + ",");
+//			System.out.println(mem.getPhone() + ",");
+//			System.out.println(mem.getPic() + ",");
+//			System.out.println(mem.getRegisterDate() + ",");
+//			System.out.println(mem.getGold() + ",");
+//			System.out.println(mem.getFeed() + ",");
+//			System.out.println(mem.getMonsterId() + ",");
+//			System.out.println(mem.getMonsterNickName() + ",");
+//			System.out.println(mem.getLv() + ",");
+//			System.out.println(mem.getExp() + ",");
+//			System.out.println(mem.getSta());
+//			System.out.println();
+//		}
 		
 	}
 	public static byte[] getPictureByteArray(String path) throws IOException {

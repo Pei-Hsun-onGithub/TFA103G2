@@ -209,7 +209,7 @@ public class MemberInfoServlet extends HttpServlet {
         if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
 			
 			List<String> errorMsgs = new LinkedList<String>();
-			System.out.println("1="+errorMsgs);
+//			System.out.println("1="+errorMsgs);
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -219,13 +219,43 @@ public class MemberInfoServlet extends HttpServlet {
 
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-String email = req.getParameter("email");
+				
+
+				
+				
+				
+
+
+
+//				Integer empno = new Integer(req.getParameter("empno"));
+//				
+//				/***************************2.開始查詢資料****************************************/
+
+				
+				
+		
+//				System.out.println(MemberInfo3);
+				
+
+				String email = req.getParameter("email");
+				
+	
 				String emailReg = "^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z]+$";
 				if (email == null || email.trim().length() == 0) {
 					errorMsgs.add("電子郵件: 請勿空白");
 				} else if(!email.trim().matches(emailReg)) { //以下練習正則(規)表示式(regular-expression)
 					errorMsgs.add("電子郵件: 不符合電子郵件命名規範");
+	            } else {
+	            	MemberInfoService memberInfoSvc3 = new MemberInfoService();
+	            	boolean MemberInfo3 = memberInfoSvc3.findByEmail(email);
+	            	
+	            	if (MemberInfo3) {
+	            		System.out.println("有經過");
+	            		errorMsgs.add("此帳號已註冊");
+	            	}	            	
 	            }
+				
+				
 				
 				String pwd = req.getParameter("pwd");
 				String pwdlReg = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$";
@@ -243,6 +273,7 @@ String email = req.getParameter("email");
 	            }
 				
 				java.sql.Date birthday = null;
+				
 				try {
 					birthday = java.sql.Date.valueOf(req.getParameter("birthday").trim());
 				} catch (IllegalArgumentException e) {
@@ -259,9 +290,8 @@ String email = req.getParameter("email");
 	            }
 				
 				String gender = req.getParameter("gender");
-				//System.out.println("gender="+gender);
 				String phone = req.getParameter("phone");
-				//System.out.println("phone="+phone);
+
 				String phoneReg = "^09\\d{2}(\\d{6}|-\\d{3}-\\d{3})$";
 				if (phone == null || phone.trim().length() == 0) {
 					errorMsgs.add("電話號碼: 請勿空白");
@@ -302,7 +332,7 @@ String email = req.getParameter("email");
 				
 				MemberInfoService memberInfoSvc = new MemberInfoService();
 				memberInfo = memberInfoSvc.addMemberInfo(email, pwd, userName, gender, birthday, phone,null,registerDate,0,0,1001,null,1,0,1);
-				System.out.println(memberInfo.toString());
+//				System.out.println(memberInfo.toString());
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/pei_pages/vendor_meal_upload.jsp";
