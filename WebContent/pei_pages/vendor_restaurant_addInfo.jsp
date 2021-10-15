@@ -1,3 +1,4 @@
+<%@page import="com.restaurant.model.RestaurantService"%>
 <%@page import="util.DistrictCityMapping"%>
 <%@page import="com.restaurant.model.RestaurantVO"%>
 <%@ page import="com.meal.model.MealVO"%>
@@ -248,7 +249,7 @@ div.my-chooseType ul li button{
 
 
 							<%
-								RestaurantVO restVO = (RestaurantVO) request.getAttribute("UpdatingRestaurantVO");
+								RestaurantVO restVO = (RestaurantVO) request.getAttribute("restVO");
 							%>
 
 
@@ -296,6 +297,10 @@ div.my-chooseType ul li button{
 
 							</div>
 
+<%
+RestaurantService restSvc = new RestaurantService();
+%>
+
 							<div class="row">
 								<div class="col-md-2 my-time-setting-block">
 									<label>每週公休</label>
@@ -304,37 +309,37 @@ div.my-chooseType ul li button{
 
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox1" name="Mon"> <label
+											id="inlineCheckbox1" name="Mon" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.MON) %>> <label
 											class="form-check-label" for="inlineCheckbox1">Mon</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox2" name="Tue"> <label
+											id="inlineCheckbox2" name="Tue" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.TUE) %>> <label
 											class="form-check-label" for="inlineCheckbox2">Tue</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox1" name="Wed"> <label
+											id="inlineCheckbox1" name="Wed" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.WED) %>> <label
 											class="form-check-label" for="inlineCheckbox1">Wed</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox2" name="Thu"> <label
+											id="inlineCheckbox2" name="Thu" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.THUR) %>> <label
 											class="form-check-label" for="inlineCheckbox2">Thu</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox1" name="Fri"> <label
+											id="inlineCheckbox1" name="Fri" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.FRI) %>> <label
 											class="form-check-label" for="inlineCheckbox1">Fri</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox2" name="Sat"> <label
+											id="inlineCheckbox2" name="Sat" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.SAT) %>> <label
 											class="form-check-label" for="inlineCheckbox2">Sat</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox2" name="Sun"> <label
+											id="inlineCheckbox2" name="Sun" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.SUN) %>> <label
 											class="form-check-label" for="inlineCheckbox2">Sun</label>
 									</div>
 								</div>

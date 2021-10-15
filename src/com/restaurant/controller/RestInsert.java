@@ -96,7 +96,9 @@ public class RestInsert extends Command {
 		
 		
 		
-		// 3.1 轉送資料到關聯類別RestaurantStyle的controller來將資料入庫
+		// 3.1 轉送資料到關聯類別RestaurantStyle的controller來將資料入庫,由restaurantstyle的controller來forward到view
+		
+		req.setAttribute("restVO", restVO);
 		
 		req.setAttribute("action", "insert");
 		req.setAttribute("restaurantId", restaurantId);
@@ -107,7 +109,7 @@ public class RestInsert extends Command {
 		RequestDispatcher toRestStyleServlet = req.getRequestDispatcher("/restaurantstyle/restaurantstyle.do");
 		toRestStyleServlet.forward(req, res);
 		
-		// 3.2  轉送頁面
+		
 		
 		
 	}
