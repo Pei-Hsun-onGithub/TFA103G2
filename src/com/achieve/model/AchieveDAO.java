@@ -6,7 +6,7 @@ public interface AchieveDAO {
 	
 	void add(Achieve achieve);
 	void update(Achieve achieve);
-	void delete(int achiId);
-	Achieve findByPK(int achiId);
+	void delete(Integer achiId);
+	Achieve findByPK(Integer achiId);
 	List<Achieve> getAll();
 }

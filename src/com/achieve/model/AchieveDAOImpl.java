@@ -12,7 +12,7 @@ import util.Util;
 
 public class AchieveDAOImpl implements AchieveDAO {
 	
-	private static final String INSERT_STMT = "INSERT INTO ACHIEVE(ACHIID, ACHINAME, DESCRIPT, OPENDATE, VALIDDAYS, ACHIARTICLE, ACHIORDER, GAINFEED, GAINGOLD, ACHIPIC) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO ACHIEVE( ACHINAME, DESCRIPT, OPENDATE, VALIDDAYS, ACHIARTICLE, ACHIORDER, GAINFEED, GAINGOLD, ACHIPIC) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE ACHIEVE SET ACHINAME = ?, DESCRIPT = ?, OPENDATE = ?, VALIDDAYS = ?, ACHIARTICLE = ?, ACHIORDER = ?, GAINFEED = ?, GAINGOLD = ?, ACHIPIC = ? WHERE ACHIID = ?";
 	private static final String DELETE_STMT = "DELETE FROM ACHIEVE WHERE ACHIID = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM ACHIEVE WHERE ACHIID = ?";
@@ -36,16 +36,15 @@ public class AchieveDAOImpl implements AchieveDAO {
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, achieve.getAchiId());
-			pstmt.setString(2, achieve.getAchiName());
-			pstmt.setString(3, achieve.getDescript());
-			pstmt.setDate(4, achieve.getOpenDate());
-			pstmt.setInt(5, achieve.getValidDays());
-			pstmt.setInt(6, achieve.getAchiArticle());
-			pstmt.setInt(7, achieve.getAchiOrder());
-			pstmt.setInt(8, achieve.getGainFeed());
-			pstmt.setInt(9, achieve.getGainGold());
-			pstmt.setBytes(10, achieve.getAchiPic());
+			pstmt.setString(1, achieve.getAchiName());
+			pstmt.setString(2, achieve.getDescript());
+			pstmt.setDate(3, achieve.getOpenDate());
+			pstmt.setInt(4, achieve.getValidDays());
+			pstmt.setInt(5, achieve.getAchiArticle());
+			pstmt.setInt(6, achieve.getAchiOrder());
+			pstmt.setInt(7, achieve.getGainFeed());
+			pstmt.setInt(8, achieve.getGainGold());
+			pstmt.setBytes(9, achieve.getAchiPic());
 			
 
 			pstmt.executeUpdate();
@@ -118,7 +117,7 @@ public class AchieveDAOImpl implements AchieveDAO {
 	}
 
 	@Override
-	public void delete(int achiId) {
+	public void delete(Integer achiId) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -154,7 +153,7 @@ public class AchieveDAOImpl implements AchieveDAO {
 	}
 
 	@Override
-	public Achieve findByPK(int achiId) {
+	public Achieve findByPK(Integer achiId) {
 		Achieve ach = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;

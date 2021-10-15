@@ -4,40 +4,40 @@ import java.io.Serializable;
 
 public class LevelExp implements Serializable {
 	
-	private int Lv;
-	private int expLow;
-	private int expUp;
+	private Integer Lv;
+	private Integer expLow;
+	private Integer expUp;
 	
 	public LevelExp() {
 	}
 
-	public LevelExp(int lv, int expLow, int expUp) {
+	public LevelExp(Integer lv, Integer expLow, Integer expUp) {
 		Lv = lv;
 		this.expLow = expLow;
 		this.expUp = expUp;
 	}
 
-	public int getLv() {
+	public Integer getLv() {
 		return Lv;
 	}
 
-	public void setLv(int lv) {
+	public void setLv(Integer lv) {
 		Lv = lv;
 	}
 
-	public int getExpLow() {
+	public Integer getExpLow() {
 		return expLow;
 	}
 
-	public void setExpLow(int expLow) {
+	public void setExpLow(Integer expLow) {
 		this.expLow = expLow;
 	}
 
-	public int getExpUp() {
+	public Integer getExpUp() {
 		return expUp;
 	}
 
-	public void setExpUp(int expUp) {
+	public void setExpUp(Integer expUp) {
 		this.expUp = expUp;
 	}
 	

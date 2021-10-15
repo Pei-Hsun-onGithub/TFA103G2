@@ -6,8 +6,8 @@ public interface MonsterBookDAO {
 	
 	void add(MonsterBook monsterbook);
 	void update(MonsterBook monsterbook);
-	void delete(int monsterId);
-	MonsterBook findByPK(int monsterId);
+	void delete(Integer monsterId);
+	MonsterBook findByPK(Integer monsterId);
 	List<MonsterBook> getAll();
 
 }
