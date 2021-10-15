@@ -219,7 +219,28 @@ public class MemberInfoServlet extends HttpServlet {
 
 			try {
 				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
-String email = req.getParameter("email");
+				
+
+				
+				
+				
+
+
+
+//				Integer empno = new Integer(req.getParameter("empno"));
+//				
+//				/***************************2.開始查詢資料****************************************/
+
+				
+				
+				MemberInfoService memberInfoSvc3 = new MemberInfoService();
+				boolean MemberInfo3 = memberInfoSvc3.findByEmail("email");
+				
+				if (MemberInfo3 != false) {
+					errorMsgs.add("此帳號已註冊");
+				}
+
+				String email = req.getParameter("email");
 				String emailReg = "^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z]+$";
 				if (email == null || email.trim().length() == 0) {
 					errorMsgs.add("電子郵件: 請勿空白");
@@ -243,6 +264,7 @@ String email = req.getParameter("email");
 	            }
 				
 				java.sql.Date birthday = null;
+				
 				try {
 					birthday = java.sql.Date.valueOf(req.getParameter("birthday").trim());
 				} catch (IllegalArgumentException e) {
@@ -259,9 +281,8 @@ String email = req.getParameter("email");
 	            }
 				
 				String gender = req.getParameter("gender");
-				//System.out.println("gender="+gender);
 				String phone = req.getParameter("phone");
-				//System.out.println("phone="+phone);
+
 				String phoneReg = "^09\\d{2}(\\d{6}|-\\d{3}-\\d{3})$";
 				if (phone == null || phone.trim().length() == 0) {
 					errorMsgs.add("電話號碼: 請勿空白");
