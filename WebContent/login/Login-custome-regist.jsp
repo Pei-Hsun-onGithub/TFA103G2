@@ -3,8 +3,10 @@
 <%@ page import="com.memberinfo.model.*"%>
 
 <%
+
 	MemberInfo memberinfo = (MemberInfo) request.getAttribute("memberinfo");
 	MemberInfo memberinfo2 = (MemberInfo) request.getAttribute("memberinfo2");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -13,8 +15,10 @@
 <meta charset="BIG5">
 <title>Login-custom-register</title>
 <!--fivicon icon-->
+
 <link rel="icon"
 	href="<%=request.getContextPath()%>/assets/img/Image4.png">
+
 
 <!-- Stylesheet -->
 <link rel="stylesheet"
@@ -39,12 +43,14 @@
 	href="<%=request.getContextPath()%>/assets/css/style.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/responsive.css">
-	
+
+  
 <!-- new css -->
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/Login-custome.css">
 
 <!--Google Fonts-->
+
 <link rel="stylesheet"
 	href=https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap>
 
@@ -59,6 +65,7 @@
 }
 </style>
 
+
 </head>
 
 <body class='sc5'>
@@ -68,9 +75,11 @@
 		<nav class="navbar navbar-expand-lg">
 			<div class="container nav-container">
 				<div class="logo">
+
 					<a class="main-logo" 
 					href="<%=request.getContextPath()%>/home-1.html"><img
 						src="<%=request.getContextPath()%>/assets/img/logo.png"></a>
+
 				</div>
 			</div>
 		</nav>
@@ -82,60 +91,75 @@
 
 			<table>
 				<tr>
-					<td class="td1">·|­ûµù¥U</td>
+					<td class="td1">æœƒå“¡è¨»å†Š</td>
 					<td><input type="hidden" size="45" /></td>
 				</tr>
 				<tr>
-					<td class="td1">¹q¤l¶l¥ó:</td>
+					<td class="td1">é›»å­éƒµä»¶:</td>
 					<td><input type="TEXT" name="email" size="45"
+
+=======
 						value="<%=(memberinfo == null) ? "xxxx@xxxx.com" : memberinfo.getEmail()%>" /></td>
+
 				</tr>
 				<tr>
-					<td class="td1">±K½X:</td>
+					<td class="td1">å¯†ç¢¼:</td>
 					<td><input type="password" name="pwd" size="45"
+
 						value="<%=(memberinfo == null) ? "1qazZXCV@" : memberinfo.getPwd()%>" /></td>
+
 				</tr>
 				<tr>
-					<td class="td1">½Ğ¦A¦¸¿é¤J±K½X:</td>
+					<td class="td1">è«‹å†æ¬¡è¼¸å…¥å¯†ç¢¼:</td>
 					<td><input type="password" name="pwd2" size="45"
+
 						value="<%=(memberinfo2 == null) ? "1qazZXCV@" : memberinfo2.getPwd()%>" /></td>
+
 				</tr>
 				<tr>
 				<tr>
-					<td class="td1">©m¦W:</td>
+					<td class="td1">å§“å:</td>
 					<td><input type="TEXT" name="userName" size="45"
-						value="<%=(memberinfo == null) ? "ª÷«°ªZ" : memberinfo.getUserName()%>" /></td>
+
+						value="<%=(memberinfo == null) ? "é‡‘åŸæ­¦" : memberinfo.getUserName()%>" /></td>
+
 				</tr>
 				<tr>
-					<td class="td1">©Ê§O:</td>
+					<td class="td1">æ€§åˆ¥:</td>
 					<td><input type="TEXT" name="gender" size="45"
-						value="<%=(memberinfo == null) ? "¨k" : memberinfo.getGender()%>" /></td>
+
+						value="<%=(memberinfo == null) ? "ç”·" : memberinfo.getGender()%>" /></td>
 				</tr>
 				<tr>
-					<td class="td1">¥X¥Í¤é´Á:</td>
+					<td class="td1">å‡ºç”Ÿæ—¥æœŸ:</td>
 					<td><input name="birthday" id="f_date1" type="TEXT"></td>
+
 				</tr>
 				<tr>
-					<td class="td1">¤â¾÷:</td>
+					<td class="td1">æ‰‹æ©Ÿ:</td>
 					<td><input type="TEXT" name="phone" size="45"
+
 						value="<%=(memberinfo == null) ? "0987678567" : memberinfo.getPhone()%>" /></td>
+
 				</tr>
 			</table>
 			<br> <input type="hidden" name="action" value="insert">
-			<input type="submit" value="¥Ó½Ğ·|­û">
+			<input type="submit" value="ç”³è«‹æœƒå“¡">
 		</FORM>
 	</div>
 
-	<%-- ¿ù»~ªí¦C --%>
+	<%-- éŒ¯èª¤è¡¨åˆ— --%>
+
 	
 <c:if test="${not empty errorMsgs}">
-	<font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+	<font style="color:red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
 			<li style="color:red">${message}</li>
 		</c:forEach>
 	</ul>
 </c:if>
+
 
 
 
@@ -148,6 +172,7 @@
 	<script src="<%=request.getContextPath()%>/assets/js/counterup.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/waypoint.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/magnific.min.js"></script>
+
 	<script src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
@@ -171,7 +196,7 @@
  		}
  %>
 	
-	<!-- =========================================¥H¤U¬° datetimepicker ¤§¬ÛÃö³]©w========================================== -->
+	<!-- =========================================ä»¥ä¸‹ç‚º datetimepicker ä¹‹ç›¸é—œè¨­å®š========================================== -->
 <script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
 <script>
@@ -179,17 +204,18 @@
         $('#f_date1').datetimepicker({
            theme: '',              //theme: 'dark',
  	       timepicker:false,       //timepicker:true,
- 	       step: 1,                //step: 60 (³o¬Otimepickerªº¹w³]¶¡¹j60¤ÀÄÁ)
+ 	       step: 1,                //step: 60 (é€™æ˜¯timepickerçš„é è¨­é–“éš”60åˆ†é˜)
  	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
  		   value: '<%=birthday%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // ¥h°£¯S©w¤£§t
-           //startDate:	            '2017/07/10',  // °_©l¤é
-           //minDate:               '-1970-01-01', // ¥h°£¤µ¤é(¤£§t)¤§«e
-           maxDate:               '<%=birthday%>'  // ¥h°£¤µ¤é(¤£§t)¤§«á
+           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // å»é™¤ç‰¹å®šä¸å«
+           //startDate:	            '2017/07/10',  // èµ·å§‹æ—¥
+           //minDate:               '-1970-01-01', // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å‰
+           maxDate:               '<%=birthday%>'  // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å¾Œ
         });
 
         
 </script>
+
 
 
 
