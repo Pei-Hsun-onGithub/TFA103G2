@@ -261,7 +261,7 @@ div.my-chooseType ul li button{
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="restaurantName"
-											value="欣葉日本料理">
+											value="<%=(restVO == null) ? "欣葉日本料理" : restVO.getRestaurantName()%>">
 									</div>
 								</div>
 
@@ -287,7 +287,7 @@ pageContext.setAttribute("now", now);
 								<div class="col-md-3">
 									<div class="single-input-wrap">
 										<input type="text" class="bs-timepicker" name="openTime"
-											value=<fmt:formatDate value="${now}" pattern="HH:mm"/>>
+											value=<fmt:formatDate value="${(restVO == null) ? now : restVO.openTime}" pattern="HH:mm"/>>
 									</div>
 								</div>
 
@@ -301,7 +301,7 @@ pageContext.setAttribute("now", now);
 								<div class="col-md-3">
 									<div class="single-input-wrap">
 										<input type="text" class="bs-timepicker" name="closeTime"
-										value=<fmt:formatDate value="${now}" pattern="HH:mm"/>>
+										value=<fmt:formatDate value="${(restVO == null) ? now : restVO.closeTime}" pattern="HH:mm"/>>
 									</div>
 								</div>
 
@@ -319,37 +319,37 @@ RestaurantService restSvc = new RestaurantService();
 
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox1" name="Mon"> <label
+											id="inlineCheckbox1" name="Mon" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.MON) %>> <label
 											class="form-check-label" for="inlineCheckbox1">Mon</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox2" name="Tue"> <label
+											id="inlineCheckbox2" name="Tue" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.TUE) %>> <label
 											class="form-check-label" for="inlineCheckbox2">Tue</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox1" name="Wed"> <label
+											id="inlineCheckbox1" name="Wed" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.WED) %>> <label
 											class="form-check-label" for="inlineCheckbox1">Wed</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox2" name="Thu"> <label
+											id="inlineCheckbox2" name="Thu" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.THUR) %>> <label
 											class="form-check-label" for="inlineCheckbox2">Thu</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox1" name="Fri"> <label
+											id="inlineCheckbox1" name="Fri" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.FRI) %>> <label
 											class="form-check-label" for="inlineCheckbox1">Fri</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox2" name="Sat"> <label
+											id="inlineCheckbox2" name="Sat" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.SAT) %>> <label
 											class="form-check-label" for="inlineCheckbox2">Sat</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox2" name="Sun"> <label
+											id="inlineCheckbox2" name="Sun" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.SUN) %>> <label
 											class="form-check-label" for="inlineCheckbox2">Sun</label>
 									</div>
 								</div>
@@ -418,7 +418,7 @@ RestaurantService restSvc = new RestaurantService();
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="location"
-											value="復興北路一段100號">
+											value="<%=(restVO == null) ? "復興北路一段100號" : restVO.getLocation()%>">
 									</div>
 								</div>
 
@@ -476,7 +476,7 @@ RestaurantService restSvc = new RestaurantService();
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="boss"
-											value="劉德華">
+											value="<%=(restVO == null) ? "劉德華" : restVO.getBoss()%>">
 									</div>
 								</div>
 
@@ -488,7 +488,7 @@ RestaurantService restSvc = new RestaurantService();
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="phone"
-											value="0933345667">
+											value="<%=(restVO == null) ? "0933345667" : restVO.getPhone()%>">
 									</div>
 								</div>
 
@@ -497,7 +497,7 @@ RestaurantService restSvc = new RestaurantService();
 							<!-- 隱藏的餐廳狀態 START-->
 
 							<input type="hidden" class="form-control" name="sta"
-								value="1">
+								value="<%=(restVO == null) ? "1" : restVO.getSta()%>">
 
 							<!-- 隱藏的餐廳狀態 END -->
 
@@ -506,8 +506,8 @@ RestaurantService restSvc = new RestaurantService();
 								<div class="row my-btn-wrapper">
 									<div class="col-md-2"></div>
 									<div class="col-md-4">
-										<input type="hidden" name="action" value="insert">
-										<button type="submit" class="btn btn-base" id="btn_submit">新增</button>
+										<input type="hidden" name="action" value="update">
+										<button type="submit" class="btn btn-base" id="btn_submit">更新</button>
 									</div>
 									<div class="col-md-4">
 										<button type="reset" class="btn btn-base">重填</button>
