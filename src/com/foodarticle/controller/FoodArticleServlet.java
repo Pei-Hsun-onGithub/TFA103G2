@@ -4,9 +4,12 @@ import java.io.*;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 import com.foodarticle.model.*;
+import com.picturebase.model.PictureBaseVO;
 
+@MultipartConfig
 public class FoodArticleServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
@@ -17,6 +20,13 @@ public class FoodArticleServlet extends HttpServlet {
         		
 			req.setCharacterEncoding("UTF-8");
 			String action = req.getParameter("action");/*抓html的action屬性用字串變數接值*/
+			
+// 新增文章和圖片都是同一個form表單,同一個request,如果要分兩隻servlet可以寫如下程式,把第一隻servlet接收到的req&res傳到下一個servlet
+//			req.getRequestDispatcher("PictureBasesServlet的url").forward(req, res);
+			
+			
+	//		Collection<Part> parts = req.getParts();
+			
 			
 /*當user在前端按"送出"鍵,送請求進來,判斷user送的值有無符合設定*/
 			
@@ -30,6 +40,7 @@ public class FoodArticleServlet extends HttpServlet {
 					String str = req.getParameter("articleNo");
 						if(str==null || (str.trim()).length()==0) {
 							errorMsgs.add("請輸入文章編號");
+							System.out.println(str);
 						}
 						
 						if(!errorMsgs.isEmpty()) {
@@ -198,6 +209,7 @@ public class FoodArticleServlet extends HttpServlet {
 			}
 /*新增資料的請求*/			
 			if("insert".equals(action)) {
+				System.out.println("insert");
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
 				
@@ -205,6 +217,8 @@ public class FoodArticleServlet extends HttpServlet {
 					String userId =(req.getParameter("userId")).trim();
 					String rule1 = "^[1-9]{4}$";
 					Integer userIdCheck= null;
+System.out.println("userId");
+System.out.println(userId);
 					if(userId == null || (userId.length()) ==0 ) {
 						errorMsgs.add("會員id: 請勿空白");
 					}else if(!userId.matches(rule1)){
@@ -217,6 +231,7 @@ public class FoodArticleServlet extends HttpServlet {
 					Integer resIdCheck = null;
 					if(restaurantId == null || (restaurantId.length()) ==0 ) {
 						errorMsgs.add("餐廳id: 請勿空白");
+System.out.println(restaurantId);
 					}else if(!restaurantId.matches(rule2)){
 						errorMsgs.add("餐廳id只能是5個數字");
 					}else {
@@ -242,7 +257,7 @@ public class FoodArticleServlet extends HttpServlet {
 					}
 					
 					Integer sta = new Integer(req.getParameter("sta"));
-					
+					System.out.println(1);
 					FoodArticleVO faVO = new FoodArticleVO();
 					faVO.setUserId(userIdCheck);
 					faVO.setRestaurantId(resIdCheck);
@@ -251,13 +266,36 @@ public class FoodArticleServlet extends HttpServlet {
 					faVO.setArticleContent(articleContent);
 					faVO.setSta(sta);
 					
+					
+					/*新增圖片的請求*/	
+					
+					PictureBaseVO pbVO = new PictureBaseVO();
+					
+					byte[] pic=null;
+					Collection<Part> parts = req.getParts();
+					
+					for(Part part : parts) {
+						if(part.getSize()>0) {
+						InputStream imgIn = part.getInputStream();
+						pic = new byte[imgIn.available()];
+						imgIn.read(pic);
+						pbVO.setPic(pic);
+						}else {
+							errorMsgs.add("請新增最少一張圖片");
+						}
+						
+					}
+					
 		
 //			
 					
 					
 					if(!errorMsgs.isEmpty()) {
 					req.setAttribute("faVO", faVO);
-					RequestDispatcher failureView = req.getRequestDispatcher("/addFA.jsp");
+					req.setAttribute("pbVO", pbVO);
+					System.out.println("hello");
+					System.out.println(errorMsgs);
+					RequestDispatcher failureView = req.getRequestDispatcher("/article/addFA.jsp");
 					failureView.forward(req, res);
 					return;
 					}
@@ -269,8 +307,12 @@ public class FoodArticleServlet extends HttpServlet {
 					successView.forward(req,res);														
 					
 				}catch(Exception e){
+					System.out.println(2);
+					System.out.println(e);
+					e.printStackTrace();
 					errorMsgs.add("新增資料失敗"+e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/addFA.jsp");
+					System.out.println(errorMsgs);
+					RequestDispatcher failureView = req.getRequestDispatcher("/article/addFA.jsp");
 					failureView.forward(req, res);
 				}
 			}
