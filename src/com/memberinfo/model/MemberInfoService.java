@@ -78,4 +78,8 @@ public class MemberInfoService {
 	public List<MemberInfo> getAll() {
 		return dao.getAll();
 	}
+	
+	public boolean findByEmail(String email) {
+		return dao.selectEmail(email);
+	}
 }

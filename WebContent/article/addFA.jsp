@@ -1,15 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.foodarticle.model.*"%>
+<%@ page import="com.restaurant.*"%>
 
 <%
 	FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO");
 %>
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 <head>
 <meta charset="UTF-8">
-
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>add new FoodArticle</title>
@@ -333,20 +335,6 @@ button.check_ok {
 		articleDate = new java.sql.Date(System.currentTimeMillis());
 	  }
 %>
-
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-<style>
-  .xdsoft_datetimepicker .xdsoft_datepicker {
-           width:  300px;   /* width:  300px; */
-  }
-  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-           height: 151px;   /* height:  151px; */
-  }
-</style>
-
 <script>
 	
 	$(document).ready(function() {
@@ -379,7 +367,6 @@ button.check_ok {
 //        	var preview_img_el =document.getElementsByClassName("preview_img")[0];
 //         	console.log(preview_img_el);
 //         	console.log("hello");
-
  
         	
         	for(let i=0;i<this.files.length;i++){
