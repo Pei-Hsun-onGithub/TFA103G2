@@ -1,15 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.foodarticle.model.*"%>
+<%@ page import="com.restaurant.*"%>
 
 <%
 	FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO");
 %>
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 <head>
 <meta charset="UTF-8">
-
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>add new FoodArticle</title>
@@ -143,7 +145,6 @@ button.check_ok {
 }
 </style>
 
-
 </head>
 
 <body>
@@ -151,7 +152,7 @@ button.check_ok {
 	<header class="navbar-area ">
 		<nav class="navbar navbar-expand-lg">
 			
-			<!-- è¦ç”¨boostrapçš„æ ¼ç·šç³»çµ±è¦ä¸€å®šè¦æœ‰div class="container nav-container" -->			
+			<!-- ­n¥Îboostrapªº®æ½u¨t²Î­n¤@©w­n¦³div class="container nav-container" -->			
 			<div class="container nav-container">
 				
 				<div class="responsive-mobile-menu">
@@ -169,14 +170,14 @@ button.check_ok {
 				<div class="collapse navbar-collapse" id="themefie_main_menu">
 					<ul class="navbar-nav menu-open">
 						<li class="current-menu-item menu-item-has-children"><a
-							href="home-1.html">è¨‚é¤</a>
+							href="home-1.html">­qÀ\</a>
 							<ul class="sub-menu ps-0">
 								<li><a href="<%=request.getContextPath()%>/shop.html">Shop</a></li>
 								<li><a href="<%=request.getContextPath()%>/menu.html">Menu</a></li>
 								<li><a href="<%=request.getContextPath()%>/cart.html">Cart</a></li>
 								<li><a href="<%=request.getContextPath()%>/checkout.html">Checkout</a></li>
 							</ul></li>
-						<li><a href="<%=request.getContextPath()%>/blog.html">é£Ÿè¨˜</a>
+						<li><a href="<%=request.getContextPath()%>/blog.html">­¹°O</a>
 						</li>
 						<li><a href="<%=request.getContextPath()%>/about.html">ABOUT
 								US</a></li>
@@ -200,7 +201,7 @@ button.check_ok {
 						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
 						</li>
 						<li class="phone-contact"><a href="#">sign in</a></li>
-						<li class="menu-cart"><a href="#">å°éˆ´éº <span>4</span></a></li>
+						<li class="menu-cart"><a href="#">¤p¹aÅL <span>4</span></a></li>
 						<li class="menu-cart"><a
 							href="<%=request.getContextPath()%>/cart.html">CART <span>1</span></a></li>
 						<li>49.50 $</li>
@@ -212,19 +213,19 @@ button.check_ok {
 
 	<div class="main">
 		
-		<!-- è¦ç”¨boostrapçš„æ ¼ç·šç³»çµ±è¦ä¸€å®šè¦æœ‰div class="container nav-container" -->
+		<!-- ­n¥Îboostrapªº®æ½u¨t²Î­n¤@©w­n¦³div class="container nav-container" -->
 		<div class="container">
 			
-			<!-- è¦çµ¦row,å‘Šè¨´htmlæ©«åˆ—çš„ç¯„åœ -->
+			<!-- ­nµ¹row,§i¶Dhtml¾î¦Cªº½d³ò -->
 			<div class="row justify-content-center">
 
-				<!-- çµ¦æ ¼ç·šç¯„åœ,å†æŠŠå…ƒç´ æ”¾é€²æ ¼ç·šç¯„åœè£¡,å·¦+ä¸­é–“+å³=12 -->
+				<!-- µ¹®æ½u½d³ò,¦A§â¤¸¯À©ñ¶i®æ½u½d³ò¸Ì,¥ª+¤¤¶¡+¥k=12 -->
 				
-				<!-- å·¦é‚Š -->
+				<!-- ¥ªÃä -->
 				<div class="col-md-2">
 				  <c:if test="${not empty errorMsgs}">
 	                 <div style="margin-top:90px">
-	                 <font style="color:red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
+	                 <font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
 	                 <ul>
 		               <c:forEach var="message" items="${errorMsgs}">
 			           <li style="color:red">${message}</li>
@@ -238,25 +239,25 @@ button.check_ok {
 				
 				</div>
 				
-				<!-- ä¸­é–“ -->
+				<!-- ¤¤¶¡ -->
 				<div class="col-md-7">
 					<form class="article" method="post" action="fa.do" name="form1" enctype="multipart/form-data">
 					    
-					    <p class="p1">æœƒå“¡id</p>
+					    <p class="p1">·|­ûid</p>
 						<input class="res_input" name="userId">
 						
-						<p class="p1">é¸æ“‡é¤å»³</p>
+						<p class="p1">¿ï¾ÜÀ\ÆU</p>
 						<input class="res_input" name="restaurantId">
 
-						<p class="p1">æ¨™é¡Œ</p>
+						<p class="p1">¼ĞÃD</p>
 						<input class="title_input" type="TEXT" name="articleTitle"
 							size="30"
 							value="<%=(faVO == null) ? "" : faVO.getArticleTitle()%>" />
 
-						<p class="p1">ç™¼è¡¨æ—¥æœŸ</p>
+						<p class="p1">µoªí¤é´Á</p>
 						<input name="articleDate" id="f_date1" type="text">
 
-						<p class="p1">å…§å®¹</p>
+						<p class="p1">¤º®e</p>
 
 						<textarea class="editor" name="articleContent">
 			            <%=(faVO == null) ? "" : faVO.getArticleContent()%>
@@ -265,12 +266,12 @@ button.check_ok {
 						<input type="hidden" name="sta" size="2" value="1" />
 						 								
 						<div>
-						<button class="btn cancel" id="img_file">é¸æ“‡åœ–ç‰‡</button>
+						<button class="btn cancel" id="img_file">¿ï¾Ü¹Ï¤ù</button>
 						<input type="file" multiple id="add_file" style="display: none;" name="imgfile" >
 						</div>						
 
 <!-- 						<div class="preview_img"> -->
-<!-- 							<span class="text">é è¦½åœ–</span> -->
+<!-- 							<span class="text">¹wÄı¹Ï</span> -->
 <!-- 						</div> -->
 
 						<div class="row">
@@ -278,8 +279,8 @@ button.check_ok {
 							<div class="col-md-5">
 
 								<div>
-									<button type="reset" class="cancel">æ¸…é™¤</button>
-									<button type="submit" class="check_ok">é€å‡º</button>
+									<button type="reset" class="cancel">²M°£</button>
+									<button type="submit" class="check_ok">°e¥X</button>
 									<input type="hidden" name="action" value="insert">
 									
 									
@@ -296,7 +297,7 @@ button.check_ok {
 					</form>
 				</div>
 
-				<!-- å³é‚Š -->
+				<!-- ¥kÃä -->
 				<div class="col-md-3"></div>
 			</div>
 		</div>
@@ -334,55 +335,37 @@ button.check_ok {
 		articleDate = new java.sql.Date(System.currentTimeMillis());
 	  }
 %>
-
-
-
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-<style>
-  .xdsoft_datetimepicker .xdsoft_datepicker {
-           width:  300px;   /* width:  300px; */
-  }
-  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-           height: 151px;   /* height:  151px; */
-  }
-</style>
-
-
 <script>
 	
 	$(document).ready(function() {
         
-		/*=========è€å¸«çš„æ—¥æœŸæ§åˆ¶============*/
+		/*=========¦Ñ®vªº¤é´Á±±¨î============*/
 		$.datetimepicker.setLocale('zh');
         $('#f_date1').datetimepicker({
 	       theme: '',              //theme: 'dark',
 	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (é€™æ˜¯timepickerçš„é è¨­é–“éš”60åˆ†é˜)
+	       step: 1,                //step: 60 (³o¬Otimepickerªº¹w³]¶¡¹j60¤ÀÄÁ)
 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
 		   value: '<%=articleDate%>', // value:   new Date(),
-	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // å»é™¤ç‰¹å®šä¸å«
-	//startDate:	            '2017/07/10',  // èµ·å§‹æ—¥
-	//minDate:               '-1970-01-01', // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å‰
-	//maxDate:               '+1970-01-01'  // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å¾Œ
+	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // ¥h°£¯S©w¤£§t
+	//startDate:	            '2017/07/10',  // °_©l¤é
+	//minDate:               '-1970-01-01', // ¥h°£¤µ¤é(¤£§t)¤§«e
+	//maxDate:               '+1970-01-01'  // ¥h°£¤µ¤é(¤£§t)¤§«á
 	    });
         
-
+        /*============ÂIÀ»¿ï¾Ü¹Ï¤ùªºbuttonªº«ö¶s·|±a¨ìinput file©Ê½è============*/
         $('#img_file').on("click", function(e){
 			$('#add_file').click();
 			return false;
 		});
         
-        /*===============é è¦½åœ–=================*/
+        /*===============¹wÄı¹Ï=================*/
         
         var img_file_el = document.getElementById("add_file");
         img_file_el.addEventListener("change",function(e){
 //        	var preview_img_el =document.getElementsByClassName("preview_img")[0];
 //         	console.log(preview_img_el);
 //         	console.log("hello");
-
  
         	
         	for(let i=0;i<this.files.length;i++){
