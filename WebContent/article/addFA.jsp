@@ -3,119 +3,337 @@
 <%@ page import="com.foodarticle.model.*"%>
 
 <%
-FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO");
+	FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>add FoodArticle</title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>add new FoodArticle</title>
+
+<!--fivicon icon-->
+<link rel="icon" href="<%=request.getContextPath()%>/assets/img/fevicon.png">
+
+<!-- Stylesheet -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/animate.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/magnific.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/nice-select.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/jquery-ui.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/owl.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/slick-slide.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/fontawesome.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/remixicon/remixicon.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/responsive.css">
+
+<!--Google Fonts-->
+<link
+	href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap"
+	rel="stylesheet">
+	
+<!--Date choose-->
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.css" />
+
+
 
 <style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
+body {
+	margin: 0;
+	background-color: #faf7f2;
+}
 
-<style>
-  table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
+div.main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+form.article {
+	margin: 0 auto;
+	justify-content: center !important;
+	margin-top: 30px;
+	padding-top: 60px;
+}
+
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
+
+
+
+p.p1 {
+	margin: 0 auto;
+	font-size: 23px;
+}
+
+input.title_input {
+	width: 496px;
+	height: 40px;
+	margin: 5px auto;
+	border-radius: 10px;
+	border: none;
+}
+
+input[type="file"] {
+	display: block;
+}
+
+textarea.editor {
+	width: 700px;
+	height: 500px;
+	resize: none;
+	border-radius: 10px;
+	border: none;
+}
+
+
+div.preview_img {
+	margin-top: 5px;
+	border: solid 2px black;
+	width: 300px;
+	min-height: 200px;
+}
+
+div.preview_imgs span {
+	border: solid 2px red;
+}
+
+button.cancel {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	color: #fff;
+	background-color: rgb(206, 40, 41);
+	border: none;
+	height: 56px;
+	padding: 0 30px;
+	font-weight: 600;
+}
+
+button.check_ok {
+	margin-left: 40px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	color: #fff;
+	background-color: rgb(206, 40, 41);
+	border: none;
+	height: 56px;
+	padding: 0 30px;
+	font-weight: 600;
+}
 </style>
 
 </head>
-<body bgcolor='lightblue'>
 
-<table id="table-1">
-	<tr><td>
-		 <h3>¤å³¹·s¼W - addFA.jsp</h3></td><td>
-		 <h4><a href="select_pageFA.jsp">¦^­º­¶</a></h4>
-	</td></tr>
-</table>
+<body>
 
-<h3>¤å³¹·s¼W:</h3>
+	<header class="navbar-area ">
+		<nav class="navbar navbar-expand-lg">
+			
+			<!-- è¦ç”¨boostrapçš„æ ¼ç·šç³»çµ±è¦ä¸€å®šè¦æœ‰div class="container nav-container" -->			
+			<div class="container nav-container">
+				
+				<div class="responsive-mobile-menu">
+					<button class="menu toggle-btn d-block d-lg-none"
+						data-target="#themefie_main_menu" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="icon-left"></span> <span class="icon-right"></span>
+					</button>
+				</div>
+				<div class="logo">
+					<a class="main-logo"
+						href="<%=request.getContextPath()%>/home-1.html"><img
+						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
+				</div>
+				<div class="collapse navbar-collapse" id="themefie_main_menu">
+					<ul class="navbar-nav menu-open">
+						<li class="current-menu-item menu-item-has-children"><a
+							href="home-1.html">è¨‚é¤</a>
+							<ul class="sub-menu ps-0">
+								<li><a href="<%=request.getContextPath()%>/shop.html">Shop</a></li>
+								<li><a href="<%=request.getContextPath()%>/menu.html">Menu</a></li>
+								<li><a href="<%=request.getContextPath()%>/cart.html">Cart</a></li>
+								<li><a href="<%=request.getContextPath()%>/checkout.html">Checkout</a></li>
+							</ul></li>
+						<li><a href="<%=request.getContextPath()%>/blog.html">é£Ÿè¨˜</a>
+						</li>
+						<li><a href="<%=request.getContextPath()%>/about.html">ABOUT
+								US</a></li>
+						<li><a href="<%=request.getContextPath()%>/contact.html">CONTACTS</a>
+						</li>
+					</ul>
+				</div>
+				<div class="nav-right-part nav-right-part-mobile">
+					<ul>
+						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
+						</li>
+						<li class="phone-contact d-md-block d-none"><i
+							class="ri-phone-fill float-start"></i> +997 509 153 849</li>
+						<li class="menu-cart"><a
+							href="<%=request.getContextPath()%>/cart.html">CART <span>1</span></a></li>
+						<li>49.50 $</li>
+					</ul>
+				</div>
+				<div class="nav-right-part nav-right-part-desktop">
+					<ul>
+						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
+						</li>
+						<li class="phone-contact"><a href="#">sign in</a></li>
+						<li class="menu-cart"><a href="#">å°éˆ´éº <span>4</span></a></li>
+						<li class="menu-cart"><a
+							href="<%=request.getContextPath()%>/cart.html">CART <span>1</span></a></li>
+						<li>49.50 $</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
 
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
+	<div class="main">
+		
+		<!-- è¦ç”¨boostrapçš„æ ¼ç·šç³»çµ±è¦ä¸€å®šè¦æœ‰div class="container nav-container" -->
+		<div class="container">
+			
+			<!-- è¦çµ¦row,å‘Šè¨´htmlæ©«åˆ—çš„ç¯„åœ -->
+			<div class="row justify-content-center">
 
-<FORM METHOD="post" ACTION="fa.do" name="form1">
-<table>
-	<tr>
-		<td>·|­ûid:</td>
-		<td><input type="TEXT" name="userId" size="45" 
-			 value="<%= (faVO==null)? "" : faVO.getUserId()%>" /></td>
-	</tr>
-	<tr>
-		<td>À\ÆUid:</td>
-		<td><input type="TEXT" name="restaurantId" size="45"
-			 value="<%= (faVO==null)? "" : faVO.getRestaurantId()%>" /></td>
-	</tr>
-	<tr>
-		<td>¼ĞÃD:</td>
-		<td><input type="TEXT" name="articleTitle" size="45"
-			 value="<%= (faVO==null)? "" : faVO.getArticleTitle()%>" /></td>
-	</tr>
-	<tr>
-		<td>¤é´Á:</td>
-		<td><input name="articleDate" id="f_date1" type="text"></td>
-	</tr>
-	<tr>
-		<td>¤º®e:</td>
-		<td><input type="TEXT" name="articleContent" size="50"
-			 value="<%= (faVO==null)? "" : faVO.getArticleContent()%>" /></td>
-	</tr>
+				<!-- çµ¦æ ¼ç·šç¯„åœ,å†æŠŠå…ƒç´ æ”¾é€²æ ¼ç·šç¯„åœè£¡,å·¦+ä¸­é–“+å³=12 -->
+				
+				<!-- å·¦é‚Š -->
+				<div class="col-md-2">
+				  <c:if test="${not empty errorMsgs}">
+	                 <div style="margin-top:90px">
+	                 <font style="color:red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
+	                 <ul>
+		               <c:forEach var="message" items="${errorMsgs}">
+			           <li style="color:red">${message}</li>
+		          </c:forEach>
+	                 </ul>
+	                 </div>
+                  </c:if>
+					
+				
+				
+				
+				</div>
+				
+				<!-- ä¸­é–“ -->
+				<div class="col-md-7">
+					<form class="article" method="post" action="fa.do" name="form1" enctype="multipart/form-data">
+					    
+					    <p class="p1">æœƒå“¡id</p>
+						<input class="res_input" name="userId">
+						
+						<p class="p1">é¸æ“‡é¤å»³</p>
+						<input class="res_input" name="restaurantId">
+
+						<p class="p1">æ¨™é¡Œ</p>
+						<input class="title_input" type="TEXT" name="articleTitle"
+							size="30"
+							value="<%=(faVO == null) ? "" : faVO.getArticleTitle()%>" />
+
+						<p class="p1">ç™¼è¡¨æ—¥æœŸ</p>
+						<input name="articleDate" id="f_date1" type="text">
+
+						<p class="p1">å…§å®¹</p>
+
+						<textarea class="editor" name="articleContent">
+			            <%=(faVO == null) ? "" : faVO.getArticleContent()%>
+                        </textarea>
+
+						<input type="hidden" name="sta" size="2" value="1" />
+						 								
+						<div>
+						<button class="btn cancel" id="img_file">é¸æ“‡åœ–ç‰‡</button>
+						<input type="file" multiple id="add_file" style="display: none;" name="imgfile" >
+						</div>						
+
+<!-- 						<div class="preview_img"> -->
+<!-- 							<span class="text">é è¦½åœ–</span> -->
+<!-- 						</div> -->
+
+						<div class="row">
+							<div class="col-md-4"></div>
+							<div class="col-md-5">
+
+								<div>
+									<button type="reset" class="cancel">æ¸…é™¤</button>
+									<button type="submit" class="check_ok">é€å‡º</button>
+									<input type="hidden" name="action" value="insert">
+									
+									
+								</div>
+
+
+							</div>
+
+
+						</div>
+
+
+						
+					</form>
+				</div>
+
+				<!-- å³é‚Š -->
+				<div class="col-md-3"></div>
+			</div>
+		</div>
+	</div>
+
+	<script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/imageloded.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/counterup.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/waypoint.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/magnific.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/owl.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/tweenmax.min.js"></script>
 	
-	<tr>
-		<td>ª¬ºA:</td>
-		<td><input type="TEXT" name="sta" size="10"
-			 value="<%= (faVO==null)? "" : faVO.getSta()%>" /></td>
-	</tr>
+	
+	<!-- main js  -->
+	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>		
+    <script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
 	
 	
+			
 
-</table>
-<br>
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="°e¥X·s¼W"></FORM>
-
-
-
-</body>
-
-<% 
-  java.sql.Date articleDate = null;
-  try {
-	  articleDate = faVO.getArticleDate();
-   } catch (Exception e) {
-	   articleDate = new java.sql.Date(System.currentTimeMillis());
-   }
+<%
+	java.sql.Date articleDate = null;
+	try {
+		articleDate = faVO.getArticleDate();
+	} catch (Exception e) {
+		articleDate = new java.sql.Date(System.currentTimeMillis());
+	  }
 %>
+
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
@@ -130,20 +348,55 @@ FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO");
 </style>
 
 <script>
-        $.datetimepicker.setLocale('zh');
+	
+	$(document).ready(function() {
+        
+		/*=========è€å¸«çš„æ—¥æœŸæ§åˆ¶============*/
+		$.datetimepicker.setLocale('zh');
         $('#f_date1').datetimepicker({
 	       theme: '',              //theme: 'dark',
 	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (³o¬Otimepickerªº¹w³]¶¡¹j60¤ÀÄÁ)
+	       step: 1,                //step: 60 (é€™æ˜¯timepickerçš„é è¨­é–“éš”60åˆ†é˜)
 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
 		   value: '<%=articleDate%>', // value:   new Date(),
-           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // ¥h°£¯S©w¤£§t
-           //startDate:	            '2017/07/10',  // °_©l¤é
-           //minDate:               '-1970-01-01', // ¥h°£¤µ¤é(¤£§t)¤§«e
-           //maxDate:               '+1970-01-01'  // ¥h°£¤µ¤é(¤£§t)¤§«á
-        });
+	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // å»é™¤ç‰¹å®šä¸å«
+	//startDate:	            '2017/07/10',  // èµ·å§‹æ—¥
+	//minDate:               '-1970-01-01', // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å‰
+	//maxDate:               '+1970-01-01'  // å»é™¤ä»Šæ—¥(ä¸å«)ä¹‹å¾Œ
+	    });
         
+
+        /*============é»æ“Šé¸æ“‡åœ–ç‰‡çš„buttonçš„æŒ‰éˆ•æœƒå¸¶åˆ°input fileæ€§è³ª============*/
+        $('#img_file').on("click", function(e){
+			$('#add_file').click();
+			return false;
+		});
+        
+        /*===============é è¦½åœ–=================*/
+        
+        var img_file_el = document.getElementById("add_file");
+        img_file_el.addEventListener("change",function(e){
+//        	var preview_img_el =document.getElementsByClassName("preview_img")[0];
+//         	console.log(preview_img_el);
+//         	console.log("hello");
+
  
-        </script>     
+        	
+        	for(let i=0;i<this.files.length;i++){
+        		let reader = new FileReader();
+        		reader.readAsDataURL(this.files[i]);
+        		reader.addEventListener("load",function(){
+        			let img_tag = "<div class=\"preview_imgs\">"  +"<img src=" + reader.result +  " \" class=\"XXX\" >"+"</div>";
+        			img_file_el.insertAdjacentHTML("afterend", img_tag);
+        		})
+        		
+        	}
+        	
+        })
+        	                                
+	});
+</script>
+</body>
+
 </html>
 

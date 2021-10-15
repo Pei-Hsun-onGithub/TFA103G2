@@ -418,23 +418,17 @@ form div.my-img-btn-wrapper .my-btn {
 				});
 
 							/*                透過 File 取得預覽圖                 */
-							p_file_el
-									.addEventListener(
-											"change",
-											function(e) {
+							p_file_el.addEventListener("change",function(e) {
 												let file = this.files[0];
 												console.log(this);
 												console.log(file);
 												
 												let reader = new FileReader();
 												reader.readAsDataURL(file);
-												reader
-														.addEventListener(
-																"load",
-																function(e) {
-																	let img_tag = "<img src=" + reader.result +  " \" class=\"preview_img\" >";
-																	preview_el.innerHTML = img_tag;
-																});
+												reader.addEventListener("load",function(e) {
+													let img_tag = "<img src=" + reader.result +  " \" class=\"preview_img\" >";
+													preview_el.innerHTML = img_tag;
+												});
 											});
 							
 							

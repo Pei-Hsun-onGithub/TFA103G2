@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import util.Util;
 
 public class MemberInfoDAOImpl implements MemberInfoDAO {
 	
-	private static final String INSERT_STMT = "INSERT INTO MEMBERINFO(USERID, EMAIL, PWD, USERNAME, GENDER, BIRTHDAY, PHONE, PIC, REGISTERDATE, GOLD, FEED, MONSTERID, MONSTERNICKNAME, LV, EXP, STA) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
+	private static final String INSERT_STMT = "INSERT INTO MEMBERINFO(EMAIL, PWD, USERNAME, GENDER, BIRTHDAY, PHONE, PIC, REGISTERDATE, GOLD, FEED, MONSTERID, MONSTERNICKNAME, LV, EXP, STA) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE MEMBERINFO SET EMAIL = ?, PWD = ?, USERNAME = ?, GENDER = ?, BIRTHDAY = ?, PHONE = ?, PIC = ?, REGISTERDATE = ?, GOLD = ?, FEED = ?, MONSTERID = ?, MONSTERNICKNAME = ?, LV = ?, EXP = ?, STA = ? WHERE USERID = ?";
 	private static final String DELETE_STMT = "DELETE FROM MEMBERINFO WHERE USERID = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM MEMBERINFO WHERE USERID = ?";
@@ -36,22 +37,21 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, memberinfo.getUserId());
-			pstmt.setString(2, memberinfo.getEmail());
-			pstmt.setString(3, memberinfo.getPwd());
-			pstmt.setString(4, memberinfo.getUserName());
-			pstmt.setString(5, memberinfo.getGender());
-			pstmt.setDate(6, memberinfo.getBirthday());
-			pstmt.setString(7, memberinfo.getPhone());
-			pstmt.setBytes(8, memberinfo.getPic());
-			pstmt.setDate(9, memberinfo.getRegisterDate());
-			pstmt.setInt(10, memberinfo.getGold());
-			pstmt.setInt(11, memberinfo.getFeed());
-			pstmt.setInt(12, memberinfo.getMonsterId());
-			pstmt.setString(13, memberinfo.getMonsterNickName());
-			pstmt.setInt(14, memberinfo.getLv());
-			pstmt.setInt(15, memberinfo.getExp());
-			pstmt.setInt(16, memberinfo.getSta());
+			pstmt.setString(1, memberinfo.getEmail());
+			pstmt.setString(2, memberinfo.getPwd());
+			pstmt.setString(3, memberinfo.getUserName());
+			pstmt.setString(4, memberinfo.getGender());
+			pstmt.setDate(5, memberinfo.getBirthday());
+			pstmt.setString(6, memberinfo.getPhone());
+			pstmt.setBytes(7, memberinfo.getPic());
+			pstmt.setDate(8, memberinfo.getRegisterDate());
+			pstmt.setInt(9, memberinfo.getGold());
+			pstmt.setInt(10, memberinfo.getFeed());
+			pstmt.setInt(11, memberinfo.getMonsterId());
+			pstmt.setString(12, memberinfo.getMonsterNickName());
+			pstmt.setInt(13, memberinfo.getLv());
+			pstmt.setInt(14, memberinfo.getExp());
+			pstmt.setInt(15, memberinfo.getSta());
 		
 			pstmt.executeUpdate();
 
