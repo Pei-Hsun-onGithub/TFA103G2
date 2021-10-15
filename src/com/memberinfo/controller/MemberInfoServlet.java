@@ -209,7 +209,7 @@ public class MemberInfoServlet extends HttpServlet {
         if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
 			
 			List<String> errorMsgs = new LinkedList<String>();
-			System.out.println("1="+errorMsgs);
+//			System.out.println("1="+errorMsgs);
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -233,20 +233,29 @@ public class MemberInfoServlet extends HttpServlet {
 
 				
 				
-				MemberInfoService memberInfoSvc3 = new MemberInfoService();
-				boolean MemberInfo3 = memberInfoSvc3.findByEmail("email");
+		
+//				System.out.println(MemberInfo3);
 				
-				if (MemberInfo3 != false) {
-					errorMsgs.add("此帳號已註冊");
-				}
 
 				String email = req.getParameter("email");
+				
+	
 				String emailReg = "^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z]+$";
 				if (email == null || email.trim().length() == 0) {
 					errorMsgs.add("電子郵件: 請勿空白");
 				} else if(!email.trim().matches(emailReg)) { //以下練習正則(規)表示式(regular-expression)
 					errorMsgs.add("電子郵件: 不符合電子郵件命名規範");
+	            } else {
+	            	MemberInfoService memberInfoSvc3 = new MemberInfoService();
+	            	boolean MemberInfo3 = memberInfoSvc3.findByEmail(email);
+	            	
+	            	if (MemberInfo3) {
+	            		System.out.println("有經過");
+	            		errorMsgs.add("此帳號已註冊");
+	            	}	            	
 	            }
+				
+				
 				
 				String pwd = req.getParameter("pwd");
 				String pwdlReg = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$";
@@ -323,7 +332,7 @@ public class MemberInfoServlet extends HttpServlet {
 				
 				MemberInfoService memberInfoSvc = new MemberInfoService();
 				memberInfo = memberInfoSvc.addMemberInfo(email, pwd, userName, gender, birthday, phone,null,registerDate,0,0,1001,null,1,0,1);
-				System.out.println(memberInfo.toString());
+//				System.out.println(memberInfo.toString());
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/pei_pages/vendor_meal_upload.jsp";
