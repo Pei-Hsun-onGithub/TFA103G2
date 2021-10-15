@@ -11,7 +11,7 @@ public class AchieveService {
 		dao = new AchieveDAOImpl();
 	}
 	
-	public Achieve addAchieve (String achiName, String descript, Date openDate, int validDays, int achiArticle,	int achiOrder, int gainFeed, int gainGold, byte[] achiPic) {
+	public Achieve addAchieve (String achiName, String descript, Date openDate, Integer validDays, Integer achiArticle,	Integer achiOrder, Integer gainFeed, Integer gainGold, byte[] achiPic) {
 		
 		Achieve achieve = new Achieve();
 		
@@ -29,7 +29,7 @@ public class AchieveService {
 		return achieve;
 	}
 
-	public Achieve updateAchieve (String achiName, String descript, Date openDate, int validDays, int achiArticle,	int achiOrder, int gainFeed, int gainGold, byte[] achiPic) {
+	public Achieve updateAchieve (String achiName, String descript, Date openDate, Integer validDays, Integer achiArticle,	Integer achiOrder, Integer gainFeed, Integer gainGold, byte[] achiPic) {
 		
 		Achieve achieve = new Achieve();
 		
@@ -47,11 +47,11 @@ public class AchieveService {
 		return achieve;
 	}
 	
-	public void deleteAchieve(int achiId) {
+	public void deleteAchieve(Integer achiId) {
 		dao.delete(achiId);
 	}
 	
-	public Achieve getOneAchieve(int achiId) {
+	public Achieve getOneAchieve(Integer achiId) {
 		return dao.findByPK(achiId);
 	}
 	

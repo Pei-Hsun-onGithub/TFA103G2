@@ -6,8 +6,8 @@ public interface AchieveProgressDAO {
 	
 	void add(AchieveProgress achieveprogress);
 	void update(AchieveProgress achieveprogress);
-	void delete(int userId, int achiId);
-	AchieveProgress findByPK(int userId, int achiId);
+	void delete(Integer userId, Integer achiId);
+	AchieveProgress findByPK(Integer userId, Integer achiId);
 	List<AchieveProgress> getAll();
 
 }

@@ -1,17 +1,15 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.foodarticle.model.*"%>
-<%@ page import="com.restaurant.*"%>
 
 <%
 	FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO");
 %>
 <!DOCTYPE html>
-
-<html lang="en">
-
+<html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>add new FoodArticle</title>
@@ -144,6 +142,102 @@ button.check_ok {
 	font-weight: 600;
 }
 </style>
+=======
+<title>add FoodArticle</title>
+
+<style>
+  table#table-1 {
+	background-color: #CCCCFF;
+    border: 2px solid black;
+    text-align: center;
+  }
+  table#table-1 h4 {
+    color: red;
+    display: block;
+    margin-bottom: 1px;
+  }
+  h4 {
+    color: blue;
+    display: inline;
+  }
+</style>
+
+<style>
+  table {
+	width: 450px;
+	background-color: white;
+	margin-top: 1px;
+	margin-bottom: 1px;
+  }
+  table, th, td {
+    border: 0px solid #CCCCFF;
+  }
+  th, td {
+    padding: 1px;
+  }
+</style>
+
+</head>
+<body bgcolor='lightblue'>
+
+<table id="table-1">
+	<tr><td>
+		 <h3>文章新增 - addFA.jsp</h3></td><td>
+		 <h4><a href="select_pageFA.jsp">回首頁</a></h4>
+	</td></tr>
+</table>
+
+<h3>文章新增:</h3>
+
+<c:if test="${not empty errorMsgs}">
+	<font style="color:red">請修正以下錯誤:</font>
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+	</ul>
+</c:if>
+
+<FORM METHOD="post" ACTION="fa.do" name="form1">
+<table>
+	<tr>
+		<td>會員id:</td>
+		<td><input type="TEXT" name="userId" size="45" 
+			 value="<%= (faVO==null)? "" : faVO.getUserId()%>" /></td>
+	</tr>
+	<tr>
+		<td>餐廳id:</td>
+		<td><input type="TEXT" name="restaurantId" size="45"
+			 value="<%= (faVO==null)? "" : faVO.getRestaurantId()%>" /></td>
+	</tr>
+	<tr>
+		<td>標題:</td>
+		<td><input type="TEXT" name="articleTitle" size="45"
+			 value="<%= (faVO==null)? "" : faVO.getArticleTitle()%>" /></td>
+	</tr>
+	<tr>
+		<td>日期:</td>
+		<td><input name="articleDate" id="f_date1" type="text"></td>
+	</tr>
+	<tr>
+		<td>內容:</td>
+		<td><input type="TEXT" name="articleContent" size="50"
+			 value="<%= (faVO==null)? "" : faVO.getArticleContent()%>" /></td>
+	</tr>
+	
+	<tr>
+		<td>狀態:</td>
+		<td><input type="TEXT" name="sta" size="10"
+			 value="<%= (faVO==null)? "" : faVO.getSta()%>" /></td>
+	</tr>
+	
+	
+
+</table>
+<br>
+<input type="hidden" name="action" value="insert">
+<input type="submit" value="送出新增"></FORM>
+>>>>>>> e2416d499340288b1e43976d39b976a4e6802067
 
 </head>
 
@@ -335,6 +429,22 @@ button.check_ok {
 		articleDate = new java.sql.Date(System.currentTimeMillis());
 	  }
 %>
+<<<<<<< HEAD
+=======
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
+<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+
+<style>
+  .xdsoft_datetimepicker .xdsoft_datepicker {
+           width:  300px;   /* width:  300px; */
+  }
+  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+           height: 151px;   /* height:  151px; */
+  }
+</style>
+
+>>>>>>> e2416d499340288b1e43976d39b976a4e6802067
 <script>
 	
 	$(document).ready(function() {
@@ -353,6 +463,7 @@ button.check_ok {
 	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 	    });
         
+<<<<<<< HEAD
         /*============點擊選擇圖片的button的按鈕會帶到input file性質============*/
         $('#img_file').on("click", function(e){
 			$('#add_file').click();
@@ -366,6 +477,8 @@ button.check_ok {
 //        	var preview_img_el =document.getElementsByClassName("preview_img")[0];
 //         	console.log(preview_img_el);
 //         	console.log("hello");
+=======
+>>>>>>> e2416d499340288b1e43976d39b976a4e6802067
  
         	
         	for(let i=0;i<this.files.length;i++){

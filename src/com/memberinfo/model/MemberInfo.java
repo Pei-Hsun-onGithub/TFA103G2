@@ -5,7 +5,7 @@ import java.sql.Date;
 
 public class MemberInfo implements Serializable {
 	
-	private int userId;
+	private Integer userId;
 	private String email;
 	private String pwd;
 	private String userName;
@@ -14,20 +14,20 @@ public class MemberInfo implements Serializable {
 	private String phone;
 	private byte[] pic;
 	private Date registerDate;
-	private int gold;
-	private int feed;
-	private int monsterId;
+	private Integer gold;
+	private Integer feed;
+	private Integer monsterId;
 	private String monsterNickName;
-	private int Lv;
-	private int exp;
-	private int sta;
+	private Integer Lv;
+	private Integer exp;
+	private Integer sta;
 	
 	public MemberInfo() {
 	}
 
-	public MemberInfo(int userId, String email, String pwd, String userName, String gender, Date birthday, String phone,
-			byte[] pic, Date registerDate, int gold, int feed, int monsterId, String monsterNickName, int lv, int exp,
-			int sta) {
+	public MemberInfo(Integer userId, String email, String pwd, String userName, String gender, Date birthday, String phone,
+			byte[] pic, Date registerDate, Integer gold, Integer feed, Integer monsterId, String monsterNickName, Integer lv, Integer exp,
+			Integer sta) {
 		this.userId = userId;
 		this.email = email;
 		this.pwd = pwd;
@@ -46,11 +46,11 @@ public class MemberInfo implements Serializable {
 		this.sta = sta;
 	}
 
-	public int getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
@@ -118,27 +118,27 @@ public class MemberInfo implements Serializable {
 		this.registerDate = registerDate;
 	}
 
-	public int getGold() {
+	public Integer getGold() {
 		return gold;
 	}
 
-	public void setGold(int gold) {
+	public void setGold(Integer gold) {
 		this.gold = gold;
 	}
 
-	public int getFeed() {
+	public Integer getFeed() {
 		return feed;
 	}
 
-	public void setFeed(int feed) {
+	public void setFeed(Integer feed) {
 		this.feed = feed;
 	}
 
-	public int getMonsterId() {
+	public Integer getMonsterId() {
 		return monsterId;
 	}
 
-	public void setMonsterId(int monsterId) {
+	public void setMonsterId(Integer monsterId) {
 		this.monsterId = monsterId;
 	}
 
@@ -150,27 +150,27 @@ public class MemberInfo implements Serializable {
 		this.monsterNickName = monsterNickName;
 	}
 
-	public int getLv() {
+	public Integer getLv() {
 		return Lv;
 	}
 
-	public void setLv(int lv) {
+	public void setLv(Integer lv) {
 		this.Lv = lv;
 	}
 
-	public int getExp() {
+	public Integer getExp() {
 		return exp;
 	}
 
-	public void setExp(int exp) {
+	public void setExp(Integer exp) {
 		this.exp = exp;
 	}
 
-	public int getSta() {
+	public Integer getSta() {
 		return sta;
 	}
 
-	public void setSta(int sta) {
+	public void setSta(Integer sta) {
 		this.sta = sta;
 	}
 	
