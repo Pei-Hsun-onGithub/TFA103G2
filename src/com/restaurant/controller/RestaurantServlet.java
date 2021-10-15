@@ -28,6 +28,10 @@ public class RestaurantServlet extends HttpServlet{
 			Command insert = Command.createCommand("insert", req, res);
 			insert.execute();
 		}
+		if ("update".equals(action)) {
+			Command update = Command.createCommand("update", req, res);
+			update.execute();
+		}
 	}
 }
 
