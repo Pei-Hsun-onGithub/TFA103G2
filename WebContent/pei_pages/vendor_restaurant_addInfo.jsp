@@ -1,10 +1,11 @@
 <%@page import="com.restaurant.model.RestaurantService"%>
 <%@page import="util.DistrictCityMapping"%>
 <%@page import="com.restaurant.model.RestaurantVO"%>
+<%@page import="java.sql.Time"%>
 <%@ page import="com.meal.model.MealVO"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="zxx">
 <head>
 <meta charset="UTF-8">
@@ -250,6 +251,7 @@ div.my-chooseType ul li button{
 
 							<%
 								RestaurantVO restVO = (RestaurantVO) request.getAttribute("restVO");
+								request.setAttribute("restVO", restVO);
 							%>
 
 
@@ -265,6 +267,13 @@ div.my-chooseType ul li button{
 
 							</div>
 
+	
+<%
+Time now = new Time(System.currentTimeMillis());
+pageContext.setAttribute("now", now);
+%> 
+
+
 							<div class="row">
 								<div class="col-md-5">
 									<label>營業時間</label>
@@ -278,11 +287,12 @@ div.my-chooseType ul li button{
 								<div class="col-md-3">
 									<div class="single-input-wrap">
 										<input type="text" class="bs-timepicker" name="openTime"
-											value="<%=(restVO == null) ? "08:00" : restVO.getOpenTime()%>">
+											value=<fmt:formatDate value="${(restVO == null) ? now : restVO.openTime}" pattern="HH:mm"/>>
 									</div>
 								</div>
 
 							</div>
+
 
 							<div class="row">
 								<div class="col-md-2 my-time-setting-block">
@@ -291,7 +301,7 @@ div.my-chooseType ul li button{
 								<div class="col-md-3">
 									<div class="single-input-wrap">
 										<input type="text" class="bs-timepicker" name="closeTime"
-											value="<%=(restVO == null) ? "17:00" : restVO.getCloseTime()%>">
+										value=<fmt:formatDate value="${(restVO == null) ? now : restVO.closeTime}" pattern="HH:mm"/>>
 									</div>
 								</div>
 
@@ -497,7 +507,7 @@ RestaurantService restSvc = new RestaurantService();
 									<div class="col-md-2"></div>
 									<div class="col-md-4">
 										<input type="hidden" name="action" value="insert">
-										<button type="submit" class="btn btn-base" id="btn_submit">儲存</button>
+										<button type="submit" class="btn btn-base" id="btn_submit">新增</button>
 									</div>
 									<div class="col-md-4">
 										<button type="reset" class="btn btn-base">重填</button>

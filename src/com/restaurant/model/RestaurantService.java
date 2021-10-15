@@ -47,8 +47,6 @@ public class RestaurantService {
 		
 		String weeklyLeave = restaurantVO.getWeeklyLeave();
 		
-		
-		
 		if(this.MON.equals(dayOfWeek)) {
 			if('1' == weeklyLeave.charAt(0)) 
 				return "checked";
@@ -92,15 +90,8 @@ public class RestaurantService {
 				return "";
 		}
 		
-		
 		return "";
 		
-//		if(Integer.valueOf(dayOfWeeks[0]) == this.MON) {
-//			return true;
-//		}
-//		if(Integer.valueOf(dayOfWeeks[1]) == this.TUE) {
-//			return true;
-//		}
 	}
 }
 
