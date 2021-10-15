@@ -143,6 +143,7 @@ button.check_ok {
 }
 </style>
 
+
 </head>
 
 <body>
@@ -334,6 +335,8 @@ button.check_ok {
 	  }
 %>
 
+
+
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
@@ -346,6 +349,7 @@ button.check_ok {
            height: 151px;   /* height:  151px; */
   }
 </style>
+
 
 <script>
 	
@@ -366,7 +370,6 @@ button.check_ok {
 	    });
         
 
-        /*============點擊選擇圖片的button的按鈕會帶到input file性質============*/
         $('#img_file').on("click", function(e){
 			$('#add_file').click();
 			return false;
