@@ -1,3 +1,4 @@
+<%@page import="com.style.model.StyleService"%>
 <%@page import="com.restaurant.model.RestaurantService"%>
 <%@page import="util.DistrictCityMapping"%>
 <%@page import="com.restaurant.model.RestaurantVO"%>
@@ -444,24 +445,35 @@ RestaurantService restSvc = new RestaurantService();
 									</div>
 								</div>
 
+
+
 								<div class="col-md-8">
 									<label style="visibility: hidden;">類型候選</label>
 									<div class="single-input-wrap my-chooseType">
 										<!-- 放一些標籤上來 -->
+										<%
+										Integer style1Id = (Integer)session.getAttribute("style1");
+										Integer style2Id = (Integer)session.getAttribute("style2");
+										Integer style3Id = (Integer)session.getAttribute("style3");
+										
+										%>
+										
+										
+										
 										<ul>
 											<li>
 											
-												<button type="button" class="choose1" aria-label="Close" hidden></button>
+												<button type="button" class="choose1" aria-label="Close" <%= (style1Id == null)? "hidden" : ""%> > <%= (style1Id == null)? "" : styleSvc.getStyleTypeByPrimaryKey(style1Id)%></button>
 												<!-- 預設的選項為 50 -->
-												<input type="hidden" class="inchoose1" name="style1" value="50">
+												<input type="hidden" class="inchoose1" name="style1" value="<%= (style1Id == null)? "" : style1Id%>">
 											</li>
 											<li>
-												<button type="button" class="choose2" aria-label="Close" hidden></button>
-												<input type="hidden" class="inchoose2" name="style2">
+												<button type="button" class="choose2" aria-label="Close" <%= (style2Id == null)? "hidden" : ""%> > <%= (style2Id == null)? "" : styleSvc.getStyleTypeByPrimaryKey(style2Id)%></button>
+												<input type="hidden" class="inchoose2" name="style2" value="<%= (style2Id == null)? "" : style2Id%>">
 											</li>
 											<li>
-												<button type="button" class="choose3" aria-label="Close" hidden></button>
-												<input type="hidden" class="inchoose3" name="style3">
+												<button type="button" class="choose3" aria-label="Close" <%= (style3Id == null)? "hidden" : ""%> > <%= (style3Id == null)? "" : styleSvc.getStyleTypeByPrimaryKey(style3Id)%></button>
+												<input type="hidden" class="inchoose3" name="style3" value="<%= (style3Id == null)? "" : style3Id%>">
 											</li>
 										</ul>
 

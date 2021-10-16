@@ -29,6 +29,8 @@ public class RestaurantStyleServlet extends HttpServlet {
 
 		String action = req.getParameter("action");
 		HttpSession session = req.getSession();
+		
+		
 		if ("insert".equals(action)) {
 			RestaurantStyleService restStyleSvc = new RestaurantStyleService();
 			
