@@ -459,7 +459,6 @@ RestaurantService restSvc = new RestaurantService();
 										%>
 										
 										
-										
 										<ul>
 											<li>
 											
