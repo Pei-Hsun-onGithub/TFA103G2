@@ -4,6 +4,8 @@ import java.util.List;
 
 
 
+
+
 public interface PictureBaseDAO_interface {
 	
 	public void add(PictureBaseVO pictureBase);
@@ -11,4 +13,6 @@ public interface PictureBaseDAO_interface {
 	public void delete(Integer picNo);
 	PictureBaseVO findByFK(Integer articleNo);
 	List<PictureBaseVO> getall();
+	
+	public void insertWithArticle (PictureBaseVO pbVO , java.sql.Connection con);
 }
