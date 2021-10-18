@@ -6,6 +6,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%
+  response.setHeader("Cache-Control","no-store"); //HTTP 1.1
+  response.setHeader("Pragma","no-cache");        //HTTP 1.0
+  response.setDateHeader ("Expires", 0);
+%>
+
 <html lang="zxx">
 <head>
 <meta charset="UTF-8">
@@ -356,13 +363,13 @@ RestaurantService restSvc = new RestaurantService();
 
 							</div>
 
-							<div class="row">
+							<div class="row" style="display: none;">
 								<div class="col-md-2 my-time-setting-block">
 									<label>彈性休假日</label>
 								</div>
 								<div class="col-md-3">
 									<div class="single-input-wrap">
-										<input type="text" name="dayoffId" value="234">
+										<input type="text" name="dayoffId" value="234" >
 									</div>
 								</div>
 
@@ -403,7 +410,9 @@ RestaurantService restSvc = new RestaurantService();
 									<div class="single-input-wrap">
 										<select class="myclass-select myclass-select-lauchdays my-city-select"
 											id="inputGroupSelect01" name="city">
-											
+											<c:forEach var="city" items="<%= DistrictCityMapping.getCitys(\"台北市\") %>">
+												<option value="${city}">${city}
+											</c:forEach>
 										</select>
 									</div>
 								</div>
@@ -453,7 +462,7 @@ RestaurantService restSvc = new RestaurantService();
 											
 												<button type="button" class="choose1" aria-label="Close" hidden></button>
 												<!-- 預設的選項為 50 -->
-												<input type="hidden" class="inchoose1" name="style1" value="50">
+												<input type="hidden" class="inchoose1" name="style1">
 											</li>
 											<li>
 												<button type="button" class="choose2" aria-label="Close" hidden></button>
@@ -504,13 +513,10 @@ RestaurantService restSvc = new RestaurantService();
 							<div class="col-md-12">
 
 								<div class="row my-btn-wrapper">
-									<div class="col-md-2"></div>
+									<div class="col-md-4"></div>
 									<div class="col-md-4">
 										<input type="hidden" name="action" value="insert">
 										<button type="submit" class="btn btn-base" id="btn_submit">新增</button>
-									</div>
-									<div class="col-md-4">
-										<button type="reset" class="btn btn-base">重填</button>
 									</div>
 									<div class="col-md-2"></div>
 
@@ -562,6 +568,10 @@ RestaurantService restSvc = new RestaurantService();
 	<script>
 		$(document).ready(function() {
 
+			
+			
+/**********************************************      timepicker操作         ***************************************************/
+							
 							var p_file_el = document.getElementById("p_file");
 							var preview_el = document.getElementById("preview");
 							
@@ -572,7 +582,9 @@ RestaurantService restSvc = new RestaurantService();
 
 							});
 							
-							/**************      將select選取到的option顯示出來      **********************/
+/**********************************************      餐廳類型選項操作         ***************************************************/
+							
+							/**************      將select選取到的option顯示出來      ***************/
 							$('.my-pickStyle').on("change",function(e) {
 								
 								var chosen = $("select[name='pickStyle'] :selected").text().trim();
@@ -599,12 +611,10 @@ RestaurantService restSvc = new RestaurantService();
 										$('input.inchoose3').val(this.value);
 									}
 								}
-							
-								
-
+				
 							});
 							
-							/**************      將點選的button關閉並且去值      **********************/
+							/**************      將點選的button關閉並且去值         ****************/
 							$('button.choose1').on("click", function(e) {
 								
 								this.setAttribute("hidden", "");
@@ -628,78 +638,48 @@ RestaurantService restSvc = new RestaurantService();
 							});
 							
 							
-							/*********   縣市地區的操作     *************/
+/*********************************************   縣市地區的操作       **********************************************************/
 							
-							// 滾出option
-							getCityOptions("桃園").forEach(addOptionsToSelect);
+						
 							
+							// 設定預設的行政區選項是"台北市"
+							$("select.my-distrc-select option[value='台北市']").prop("selected", true);
+						
 							$('select.my-distrc-select').on('change', function(e){
 								var selectedDistrict = this.options[this.selectedIndex].text.trim();
-								console.log(selectedDistrict);
+								var json = <%= DistrictCityMapping.getJsonDistricsMappingToCitys()%>;
+								
 								if(selectedDistrict === "台北市") {
 									// 滾出city的option
 									deleteAllCurrentOptions();
-									getCityOptions("台北市").forEach(addOptionsToSelect);
+									var citys = json.taipei;
+									addOptionsToSelect(citys);
 								}
 								
+								if(selectedDistrict === "桃園市") {
+									// 滾出city的option
+									deleteAllCurrentOptions();
+									var citys = json.taoyuan;
+									addOptionsToSelect(citys);
+			
+								}
+								
+				
 							});
 							
 							function deleteAllCurrentOptions() {
 								$('select.my-city-select').empty();
 							}
-							
-							function getCityOptions(district) {
-								let dis = district.trim();
-								let cityOpts = [];
-								if("台北市" === dis){
-									cityOpts = 
-										['<option value="中正區">中正區</option>',
-										 '<option value="大同區">大同區</option>',	
-										];
-								}
-								
-								
-								if("桃園" === dis){
-									cityOpts = 
-										['<option value="桃園區">桃園區</option>',
-										 '<option value="龜山區">龜山區</option>',
-											];
-								}
-								
-								return cityOpts;
-							}
-							
-							function addOptionsToSelect(value) {
-								$('select.my-city-select').append(value);
-							}
-							
-// 						
-// 							taipeiCitys.add("中山區");
-// 							taipeiCitys.add("松山區");
-// 							taipeiCitys.add("大安區");
-// 							taipeiCitys.add("萬華區");
-// 							taipeiCitys.add("信義區");
-// 							taipeiCitys.add("士林區");
-// 							taipeiCitys.add("北投區");
-// 							taipeiCitys.add("內湖區");
-// 							taipeiCitys.add("南港區");
-// 							taipeiCitys.add("文山");
-							
-							
-							
-// 							touanCitys.add("");
-// 							touanCitys.add("龜山區");
-// 							touanCitys.add("八德區");
-// 							touanCitys.add("大溪區");
-// 							touanCitys.add("蘆竹區");
-// 							touanCitys.add("大園區");
-// 							touanCitys.add("龍潭區");
-// 							touanCitys.add("平鎮區");
-// 							touanCitys.add("楊梅區");
-// 							touanCitys.add("新屋區");
-// 							touanCitys.add("觀音區");
-// 							touanCitys.add("原住民區");
 
+							
+							function addOptionsToSelect(citys) {
+									
+								citys.forEach(function(city) {
+									$('select.my-city-select').append("<option value=\""
+									 + city + "\">"+ city + "</option>");
+								});
+							}
+							
 						});
 	</script>
 </body>
