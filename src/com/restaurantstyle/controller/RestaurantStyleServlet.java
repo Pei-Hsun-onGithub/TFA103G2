@@ -81,7 +81,8 @@ public class RestaurantStyleServlet extends HttpServlet {
 			Integer oldStyleId3 = (Integer) session.getAttribute("style3");
 			
 			Integer usedRestaurantId = (Integer) req.getAttribute("usedRestaurantId");
-			RestaurantVO restVO = (RestaurantVO) req.getAttribute("restVO");
+			RestaurantVO restVO = (RestaurantVO) req.getAttribute("updatedRestVO");
+			
 
 			// 資料更新
 			if(newStyleId1 != null ) {
