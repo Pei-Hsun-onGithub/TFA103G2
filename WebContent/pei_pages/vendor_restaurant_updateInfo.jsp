@@ -357,7 +357,7 @@ RestaurantService restSvc = new RestaurantService();
 
 							</div>
 
-							<div class="row">
+							<div class="row" style="display: none;">
 								<div class="col-md-2 my-time-setting-block">
 									<label>彈性休假日</label>
 								</div>
@@ -517,13 +517,10 @@ RestaurantService restSvc = new RestaurantService();
 							<div class="col-md-12">
 
 								<div class="row my-btn-wrapper">
-									<div class="col-md-2"></div>
+									<div class="col-md-4"></div>
 									<div class="col-md-4">
 										<input type="hidden" name="action" value="update">
 										<button type="submit" class="btn btn-base" id="btn_submit">更新</button>
-									</div>
-									<div class="col-md-4">
-										<button type="reset" class="btn btn-base">重填</button>
 									</div>
 									<div class="col-md-2"></div>
 
