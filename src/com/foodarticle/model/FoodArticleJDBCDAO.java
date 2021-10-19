@@ -305,6 +305,7 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 			PictureBaseJDBCDAO pbdao = new PictureBaseJDBCDAO();
 			
 			for(PictureBaseVO pbVO: list) {
+				System.out.println("jdbc="+pbVO);
 				pbVO.setArticleNo(new Integer(new_articleNo));
 				pbdao.insertWithArticle(pbVO, con);				
 			}

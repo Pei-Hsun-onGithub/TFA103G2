@@ -133,7 +133,8 @@ public class PictureBaseJDBCDAO implements PictureBaseDAO_interface {
 		}
 
 		@Override
-		public PictureBaseVO findByFK(Integer articleNo) {
+		public List<PictureBaseVO> findByFK(Integer articleNo) {
+			List<PictureBaseVO> list = new ArrayList<>();
 			PictureBaseVO pb = null;
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -152,6 +153,7 @@ public class PictureBaseJDBCDAO implements PictureBaseDAO_interface {
 					pb.setPicNo(rs.getInt("picNo"));
 					pb.setArticleNo(rs.getInt("articleNo"));
 					pb.setPic(rs.getBytes("pic"));
+					list.add(pb);
 				}
 			}catch(SQLException se) {
 				se.printStackTrace();
@@ -181,7 +183,7 @@ public class PictureBaseJDBCDAO implements PictureBaseDAO_interface {
 					}
 				}
 			}
-			return pb;		
+			return list;		
 		}
 
 		@Override

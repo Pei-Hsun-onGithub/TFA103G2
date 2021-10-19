@@ -33,7 +33,7 @@ public class PictureBaseService {
 		dao.delete(picNo);
 	}
 	
-	public  PictureBaseVO getPicturesOfAr(Integer articleNo) {
+	public  List<PictureBaseVO> getPicturesOfAr(Integer articleNo) {
 		return dao.findByFK(articleNo);
 	}
 	
