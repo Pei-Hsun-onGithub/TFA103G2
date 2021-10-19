@@ -1,12 +1,10 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.foodarticle.model.*"%>
-<%@ page import="com.picturebase.model.*"%>
 <%@ page import="com.restaurant.*"%>
 
 <%
 	FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO");
-	PictureBaseVO pbVO = (PictureBaseVO) request.getAttribute("pbVO");
 %>
 <!DOCTYPE html>
 
@@ -154,7 +152,7 @@ button.check_ok {
 	<header class="navbar-area ">
 		<nav class="navbar navbar-expand-lg">
 			
-			<!-- 閬��灸oostrap���潛�蝟餌絞閬�銝�摰�閬���div class="container nav-container" -->			
+			<!-- 要用boostrap的格線系統要一定要有div class="container nav-container" -->			
 			<div class="container nav-container">
 				
 				<div class="responsive-mobile-menu">
@@ -172,14 +170,14 @@ button.check_ok {
 				<div class="collapse navbar-collapse" id="themefie_main_menu">
 					<ul class="navbar-nav menu-open">
 						<li class="current-menu-item menu-item-has-children"><a
-							href="home-1.html">閮�擗�</a>
+							href="home-1.html">訂餐</a>
 							<ul class="sub-menu ps-0">
 								<li><a href="<%=request.getContextPath()%>/shop.html">Shop</a></li>
 								<li><a href="<%=request.getContextPath()%>/menu.html">Menu</a></li>
 								<li><a href="<%=request.getContextPath()%>/cart.html">Cart</a></li>
 								<li><a href="<%=request.getContextPath()%>/checkout.html">Checkout</a></li>
 							</ul></li>
-						<li><a href="<%=request.getContextPath()%>/blog.html">憌�閮�</a>
+						<li><a href="<%=request.getContextPath()%>/blog.html">食記</a>
 						</li>
 						<li><a href="<%=request.getContextPath()%>/about.html">ABOUT
 								US</a></li>
@@ -203,7 +201,7 @@ button.check_ok {
 						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
 						</li>
 						<li class="phone-contact"><a href="#">sign in</a></li>
-						<li class="menu-cart"><a href="#">撠��湧�� <span>4</span></a></li>
+						<li class="menu-cart"><a href="#">小鈴鐺 <span>4</span></a></li>
 						<li class="menu-cart"><a
 							href="<%=request.getContextPath()%>/cart.html">CART <span>1</span></a></li>
 						<li>49.50 $</li>
@@ -215,19 +213,19 @@ button.check_ok {
 
 	<div class="main">
 		
-		<!-- 閬��灸oostrap���潛�蝟餌絞閬�銝�摰�閬���div class="container nav-container" -->
+		<!-- 要用boostrap的格線系統要一定要有div class="container nav-container" -->
 		<div class="container">
 			
-			<!-- 閬�蝯字ow,��閮愣tml璈怠����蝭��� -->
+			<!-- 要給row,告訴html橫列的範圍 -->
 			<div class="row justify-content-center">
 
-				<!-- 蝯行�潛�蝭���,������蝝��暸�脫�潛�蝭���鋆�,撌�+銝剝��+��=12 -->
+				<!-- 給格線範圍,再把元素放進格線範圍裡,左+中間+右=12 -->
 				
-				<!-- 撌阡�� -->
+				<!-- 左邊 -->
 				<div class="col-md-2">
 				  <c:if test="${not empty errorMsgs}">
 	                 <div style="margin-top:90px">
-	                 <font style="color:red">隢�靽格迤隞乩��航炊:</font>
+	                 <font style="color:red">請修正以下錯誤:</font>
 	                 <ul>
 		               <c:forEach var="message" items="${errorMsgs}">
 			           <li style="color:red">${message}</li>
@@ -241,25 +239,25 @@ button.check_ok {
 				
 				</div>
 				
-				<!-- 銝剝�� -->
+				<!-- 中間 -->
 				<div class="col-md-7">
 					<form class="article" method="post" action="fa.do" name="form1" enctype="multipart/form-data">
 					    
-					    <p class="p1">���【d</p>
+					    <p class="p1">會員id</p>
 						<input class="res_input" name="userId">
 						
-						<p class="p1">�豢��擗�撱�</p>
+						<p class="p1">選擇餐廳</p>
 						<input class="res_input" name="restaurantId">
 
-						<p class="p1">璅�憿�</p>
+						<p class="p1">標題</p>
 						<input class="title_input" type="TEXT" name="articleTitle"
 							size="30"
 							value="<%=(faVO == null) ? "" : faVO.getArticleTitle()%>" />
 
-						<p class="p1">�潸”�交��</p>
+						<p class="p1">發表日期</p>
 						<input name="articleDate" id="f_date1" type="text">
 
-						<p class="p1">�批捆</p>
+						<p class="p1">內容</p>
 
 						<textarea class="editor" name="articleContent">
 			            <%=(faVO == null) ? "" : faVO.getArticleContent()%>
@@ -268,12 +266,12 @@ button.check_ok {
 						<input type="hidden" name="sta" size="2" value="1" />
 						 								
 						<div>
-						<button class="btn cancel" id="img_file">�豢������</button>
-						<input type="file" multiple id="add_file" style="display: none;" name="imgfile" >
+						<button class="btn cancel" id="img_file">選擇圖片</button>
+						<input type="file" multiple="true" id="add_file" style="display: none;" name="imgfile" >
 						</div>						
 
 <!-- 						<div class="preview_img"> -->
-<!-- 							<span class="text">��閬賢��</span> -->
+<!-- 							<span class="text">預覽圖</span> -->
 <!-- 						</div> -->
 
 						<div class="row">
@@ -281,8 +279,8 @@ button.check_ok {
 							<div class="col-md-5">
 
 								<div>
-									<button type="reset" class="cancel">皜���</button>
-									<button type="submit" class="check_ok">����</button>
+									<button type="reset" class="cancel">清除</button>
+									<button type="submit" class="check_ok">送出</button>
 									<input type="hidden" name="action" value="insert">
 									
 									
@@ -299,7 +297,7 @@ button.check_ok {
 					</form>
 				</div>
 
-				<!-- �喲�� -->
+				<!-- 右邊 -->
 				<div class="col-md-3"></div>
 			</div>
 		</div>
@@ -341,28 +339,27 @@ button.check_ok {
 	
 	$(document).ready(function() {
         
-		/*=========��撣怎���交���批��============*/
+		/*=========老師的日期控制============*/
 		$.datetimepicker.setLocale('zh');
         $('#f_date1').datetimepicker({
 	       theme: '',              //theme: 'dark',
 	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (���眩imepicker����閮剝����60����)
+	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
 		   value: '<%=articleDate%>', // value:   new Date(),
-	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // �駁�斤�孵�銝���
-	//startDate:	            '2017/07/10',  // 韏瑕���
-	//minDate:               '-1970-01-01', // �駁�支���(銝���)銋���
-	//maxDate:               '+1970-01-01'  // �駁�支���(銝���)銋�敺�
+	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+	//startDate:	            '2017/07/10',  // 起始日
+	//minDate:               '-1970-01-01', // 去除今日(不含)之前
+	//maxDate:               '+1970-01-01'  // 去除今日(不含)之後
 	    });
         
-
-        /*============暺����豢��������button��������撣嗅�迺nput file�扯釭============*/
+        /*============點擊選擇圖片的button的按鈕會帶到input file性質============*/
         $('#img_file').on("click", function(e){
 			$('#add_file').click();
-			return false;
+ 			return false;
 		});
         
-        /*===============��閬賢��=================*/
+        /*===============預覽圖=================*/
         
         var img_file_el = document.getElementById("add_file");
         img_file_el.addEventListener("change",function(e){

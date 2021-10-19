@@ -9,6 +9,7 @@ import javax.servlet.http.*;
 
 
 import com.foodarticle.model.*;
+import com.message.model.*;
 import com.picturebase.model.*;
 
 
@@ -23,15 +24,17 @@ public class FoodArticleServlet extends HttpServlet {
         		
 			req.setCharacterEncoding("UTF-8");
 			String action = req.getParameter("action");/*抓html的action屬性用字串變數接值*/
+//			res.setContentType("image/gif");
+//			ServletOutputStream out = res.getOutputStream();
 			
-// 新增文章和圖片都是同一個form表單,同一個request,如果要分兩隻servlet可以寫如下程式,把第一隻servlet接收到的req&res傳到下一個servlet
+			
+           /* 新增文章和圖片都是同一個form表單,同一個request,
+            * 如果要分兩隻servlet可以寫如下程式,
+            * 把第一隻servlet接收到的req&res傳到下一個servletX*/            
 //			req.getRequestDispatcher("PictureBasesServlet的url").forward(req, res);
+										
 			
-			
-	//		Collection<Part> parts = req.getParts();
-			
-			
-/*當user在前端按"送出"鍵,送請求進來,判斷user送的值有無符合設定*/
+            /*當user在前端按"送出"鍵,送請求進來,判斷user送的值有無符合設定*/
 			
 			if("getOne_For_Display".equals(action)){//from select_pageFA的請求
 				List<String> errorMsgs = new LinkedList<String>();
@@ -65,27 +68,42 @@ public class FoodArticleServlet extends HttpServlet {
 							falureView.forward(req,res);
 							return;//程式中斷
 						}
-			/*-------------------------查無資料-----------------------------*/
+			      /*帶著文章pk進資料找相對應的文章VO*/
 						FoodArticleService faSC = new FoodArticleService();
 						FoodArticleVO faVO = faSC.getOneArticle(articleNo) ;
+				  	  
+						PictureBaseService pbSC = new PictureBaseService();
+						MessageService msgSC = new MessageService ();
+						
+					/*-------------------查無資料--------------------------*/	
 						if(faVO ==null) {
 							errorMsgs.add("查無資料");
-						}
-						
+						}						
 						if(!errorMsgs.isEmpty()) {
 							RequestDispatcher falureView = req.getRequestDispatcher("/select_pageFA.jsp");
 							falureView.forward(req,res);
 							return;//程式中斷
 						}
-			/*-------------------------查有資料,準備送給前端-----------------------------*/	
+			/*-------------------抓指定pk的文章,準備送給前端-----------------*/	
+						
+						/*帶著文章fk進資料找相對應的圖片VO*/
+						List<PictureBaseVO> list =  pbSC.getPicturesOfAr(articleNo);
+						List<MessageVO> msgList = msgSC.getMsgsOfAr(articleNo);
+						HttpSession session = req.getSession();
+						
+						session.setAttribute("list", list);
 						req.setAttribute("faVO", faVO);
-						RequestDispatcher successView = req.getRequestDispatcher("/listoneFA.jsp");//轉交給listoneFA
+						req.setAttribute("msgList", msgList);
+						System.out.println(msgList);
+						RequestDispatcher successView = req.getRequestDispatcher("/article/oneFA_allMsg.jsp");//轉交給oneFA_allMsg.jsp
 						successView.forward(req, res);
 		  
-						/*-------------------------其他錯誤-----------------------------*/			
+			/*-------------------------其他錯誤-----------------------------*/			
 				}catch(Exception e) {
+					System.out.println(1);
+					e.printStackTrace();
 					errorMsgs.add("無法取得資料"+e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/listallFA.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/article/listallFA.jsp");
 					failureView.forward(req, res);
 				 }
 			
@@ -107,7 +125,8 @@ public class FoodArticleServlet extends HttpServlet {
 					RequestDispatcher successView = req.getRequestDispatcher(url);//轉交updateFA.jsp
 					successView.forward(req, res);
 					//System.out.println("程式跑到這3");
-	/*-------------其他錯誤處理----------*/				
+	
+					/*-------------其他錯誤處理----------*/				
 				}catch(Exception e ) {
 					errorMsgs.add("無法取得要修改的資料:"+e.getMessage());
 					RequestDispatcher failure = req.getRequestDispatcher("/listallFA.jsp");
@@ -189,6 +208,7 @@ public class FoodArticleServlet extends HttpServlet {
 //System.out.println(sta);				
 					
 /*如果user更新完資料按送出,有檢查到錯誤,會退回更新頁面,但填過且正確的資料會被保留在頁面上*/				
+					
 					if(!errorMsgs.isEmpty()) {
 						req.setAttribute("faVO", faVO);
 						RequestDispatcher failure = req.getRequestDispatcher("/updateFA.jsp");
@@ -273,14 +293,20 @@ public class FoodArticleServlet extends HttpServlet {
 					/*上傳圖片*/						
 					
 					List<PictureBaseVO> list = new ArrayList<PictureBaseVO>();
-					PictureBaseVO pbVO = new PictureBaseVO();					
+					PictureBaseVO pbVO = null;					
 					
 					byte[] pic=null;
 					Collection<Part> parts = req.getParts();
-/*getParts會把form表單裡不管是文字還是檔案都抓進來,所以先用getName取元素的name的值,去比對篩掉檔案以外的文字*/			
+				
+				/*getParts會把form表單裡不管是文字還是檔案都抓進來,
+				 * 所以先用getName取元素的name的值,
+				 * 去比對篩掉檔案以外的文字*/			
 					
 					for(Part part : parts) {
 						String partName = part.getName();
+						
+				/*要在迴圈內創建實體,每跑一次迴圈就是才會是新的vo	*/	
+						pbVO = new PictureBaseVO();
 						if(partName.equals("imgfile")) {
 							if(part.getSize()>0) {
 								InputStream imgIn = part.getInputStream();
@@ -288,44 +314,41 @@ public class FoodArticleServlet extends HttpServlet {
 								imgIn.read(pic);
 								pbVO.setPic(pic);
 								list.add(pbVO);
-								
+								System.out.println(pbVO);
 								}else {
 									errorMsgs.add("請新增最少一張圖片");
 								}
 						}
 			
-					}									
-					
-					
+					}																			
 					if(!errorMsgs.isEmpty()) {
+					HttpSession session = req.getSession();
 					req.setAttribute("faVO", faVO);
-					req.setAttribute("pbVO", pbVO);
+			//		req.setAttribute("pbVO", pbVO);
+					session.setAttribute("list", list);
 					
 					RequestDispatcher failureView = req.getRequestDispatcher("/article/addFA.jsp");
 					failureView.forward(req, res);
 					return;
 					}
 					
-					FoodArticleService faSvc = new FoodArticleService();
-//					PictureBaseService pbSvc = new PictureBaseService();
-//					faVO = faSvc.addFoodArticle(userIdCheck, resIdCheck, articleTitle, articleDate, articleContent, sta);
+					FoodArticleService faSvc = new FoodArticleService();					
 
-					/*文章和圖片同時要新增,所以要同時送文章VO 圖片list給資料庫取文章pk給圖片*/					
-					faSvc.addtWithPic(faVO, list);
-					
-					RequestDispatcher successView = req.getRequestDispatcher("/listallFA.jsp");
+					/*文章和圖片同時要新增,所以要同時送文章VO 圖片list給資料庫取文章pk給圖片*/	
+					faSvc.addtWithPic(faVO, list);															
+					RequestDispatcher successView = req.getRequestDispatcher("/article/listOneFA.jsp");
 					successView.forward(req,res);														
 					
-				}catch(Exception e){
-					System.out.println(2);
-					System.out.println(e);
+				}catch(Exception e){	
 					e.printStackTrace();
-					errorMsgs.add("新增資料失敗"+e.getMessage());
-					System.out.println(errorMsgs);
+					errorMsgs.add("新增資料失敗"+e.getMessage());					
 					RequestDispatcher failureView = req.getRequestDispatcher("/article/addFA.jsp");
 					failureView.forward(req, res);
 				}
 			}
+			
+			
+			
 			
 //			if("delete".equals(action)) {
 //				List<String> errorMsgs = new LinkedList<String>();
