@@ -1,3 +1,13 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="com.memberinfo.model.*"%>
+
+<%
+ MemberInfo memberinfo = (MemberInfo) request.getAttribute("memberinfo");
+%>
+    
+    
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -6,21 +16,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>會員中心-個人檔案</title>
     <!--fivicon icon-->
-    <link rel="icon" href="assets/img/Image4.png">
+    <link rel="icon" href="<%=request.getContextPath()%>/assets/img/Image4.png">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/magnific.min.css">
-    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
-    <link rel="stylesheet" href="assets/css/nice-select.min.css">
-    <link rel="stylesheet" href="assets/css/owl.min.css">
-    <link rel="stylesheet" href="assets/css/slick-slide.min.css">
-    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/css/remixicon/remixicon.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/Member01.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/animate.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/magnific.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/nice-select.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/owl.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/slick-slide.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/remixicon/remixicon.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/responsive.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/Member01.css">
 
     <!--Google Fonts-->
     <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
@@ -41,7 +51,7 @@
                   </button>
               </div>
               <div class="logo">
-                  <a class="main-logo" href="home-1.html"><img src="assets/img/logo.png" alt="img"></a>
+                  <a class="main-logo" href="home-1.html"><img src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
               </div>
               <div class="collapse navbar-collapse" id="themefie_main_menu">
                   <ul class="navbar-nav menu-open">
@@ -95,22 +105,22 @@
 
 <div class="total">
   <div class="profile">
-      <img src="assets/img/girl.png" alt="img">
+      <img src="<%=request.getContextPath()%>/assets/img/girl.png" alt="img">
         <ul>
-          <li class="nickname">小寶</li>
-          <li class="edit"><a href="#">編輯個人資料</li>
+          <li class="nickname"><%= memberinfo.getUserName()%></li>
+          <li class="edit"><a href="#"></a>編輯個人資料</li>
         </ul>
   </div>
 
   <div class="memberlist">
     <ul>
-      <li class="one"><a href="Member01.html">個人檔案</li>
-      <li class="two"><a href="Member02.html">密碼修改</li>
-      <li class="three"><a href="Member03.html">銀行/信用卡資訊</li>
-      <li class="four"><a href="Member04.html">外送地址管理</li>
-      <li class="five"><a href="Member05.html">歷史訂單</li>
-      <li class="six"><a href="Member06.html">文章管理</li>
-      <li class="seven"><a href="#">我的收藏</li>
+      <li class="one"><a href="<%=request.getContextPath()%>/Member01.jsp">個人檔案</a></li>
+      <li class="two"><a href="<%=request.getContextPath()%>/Member02.html">密碼修改</a></li>
+      <li class="three"><a href="<%=request.getContextPath()%>/Member03.html">銀行/信用卡資訊</a></li>
+      <li class="four"><a href="<%=request.getContextPath()%>/Member04.html">外送地址管理</a></li>
+      <li class="five"><a href="<%=request.getContextPath()%>/Member05.html">歷史訂單</a></li>
+      <li class="six"><a href="<%=request.getContextPath()%>/Member06.html">文章管理</a></li>
+      <li class="seven"><a href="#">我的收藏</a></li>
     </ul>
   </div>
 
@@ -129,37 +139,35 @@
         <div class="account">
           <div class="lebel1">電子郵件帳號
           </div>
-          <div class="input1">123@gmail.com
+          <div class="input1"><%= memberinfo.getEmail()%>
           </div>
-          <button type="button" name="button">變更</button>
         </div>
         <div class="name">
           <div class="lebel2">姓名
           </div>
-          <div class="input2"><input type="text" name="" placeholder maxlength="255" value="">
+          <div class="input2"><input type="text" placeholder maxlength="255" value="<%= memberinfo.getUserName()%>">
           </div>
         </div>
         <div class="phone">
           <div class="lebel3">電話號碼
           </div>
-          <div class="input3">0932323236
+          <div class="input3"><input type="text" placeholder maxlength="255" value="<%= memberinfo.getPhone()%>">
           </div>
-          <button type="button" name="button">變更</button>
         </div>
         <div class="gender">
-          <div class="lebel4">性別
+          <div class="lebel4">性別 
           </div>
           <div class="input4">
-            <input  type="radio" name="sex" value="male">男性
-            <input  type="radio" name="sex" value="female">女性
-            <input  type="radio" name="sex" value="other">其他<p>
+            <input  type="radio" name="sex" value="male" <%="男".equals(memberinfo.getGender()) ? "checked" : "" %>>男性
+            <input  type="radio" name="sex" value="female" <%="女".equals(memberinfo.getGender()) ? "checked" : "" %>>女性
+            <input  type="radio" name="sex" value="other" <%="其他".equals(memberinfo.getGender()) ? "checked" : "" %>>其他<p>           
           </div>
         </div>
         <div class="birthday">
           <div class="lebel5">生日
           </div>
           <div class="input5">
-            <input id="date" type="date">
+            <input id="date" type="date" value="<%= memberinfo.getBirthday()%>">
           </div>
         </div>
         <div class="storebutton">
@@ -168,10 +176,11 @@
       </div>
       <div class="editpic">
         <div class="pic">
-          <img src="assets/img/girl.png" alt="img">
+          <img src="<%=request.getContextPath()%>/assets/img/girl.png" alt="img">
         </div>
         <div class="selectbutton">
-          <button type="button" name="button">上傳照片</button>
+          <button id="photo_upload" type="button" name="button">上傳照片</button>
+          <input id="img_file" type="file" multiple style="display: none;" name="imgfile" >
         </div>
         <div class="illustrate">
           檔案大小:最大1MB<br>
@@ -183,6 +192,44 @@
   </div>
 
   </div>
+ 
+ <script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/imageloded.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/counterup.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/waypoint.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/magnific.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/owl.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/tweenmax.min.js"></script>
+	
+	
+	<!-- main js  -->
+	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>		
+    <script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.js"></script>
+    <script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
+ 
+ <script>
+ 	
+ 	$(document).ready(function() {
+ 
+ 	$('#photo_upload').on("click", function(e){
+		$('#img_file').click();
+		return false;
+	});
+ 	
+	var img_file_element = document.getElementById("img_file");        
+	img_file_element.addEventListener("change", function(e){   
+		var image = $(this).sibling("img")
+	})
+ 	
+ });
+ </script>		
 
 
 
