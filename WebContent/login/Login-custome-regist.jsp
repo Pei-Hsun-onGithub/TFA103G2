@@ -1,9 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.memberinfo.model.*"%>
 
 <%
- MemberInfo memberinfo = (MemberInfo) request.getAttribute("memberinfo");
+ MemberInfo memberinfo = (MemberInfo) request.getAttribute("memberInfo");
  MemberInfo memberinfo2 = (MemberInfo) request.getAttribute("memberinfo2");
 %>
 <!DOCTYPE html>
@@ -69,7 +69,7 @@
    <div class="container nav-container">
     <div class="logo">
      <a class="main-logo" 
-     href="<%=request.getContextPath()%>/home-1.html"><img
+     href="<%=request.getContextPath()%>/login/Login-login.jsp"><img
       src="<%=request.getContextPath()%>/assets/img/logo.png"></a>
     </div>
    </div>
@@ -158,6 +158,7 @@
  
  <!-- main js  -->
  <script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
+ 
  <script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.js"></script>
  <script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
 

@@ -1,3 +1,4 @@
+<%@page import="com.style.model.StyleService"%>
 <%@page import="com.restaurant.model.RestaurantService"%>
 <%@page import="util.DistrictCityMapping"%>
 <%@page import="com.restaurant.model.RestaurantVO"%>
@@ -356,7 +357,7 @@ RestaurantService restSvc = new RestaurantService();
 
 							</div>
 
-							<div class="row">
+							<div class="row" style="display: none;">
 								<div class="col-md-2 my-time-setting-block">
 									<label>彈性休假日</label>
 								</div>
@@ -403,7 +404,9 @@ RestaurantService restSvc = new RestaurantService();
 									<div class="single-input-wrap">
 										<select class="myclass-select myclass-select-lauchdays my-city-select"
 											id="inputGroupSelect01" name="city">
-											
+											<c:forEach var="city" items="<%= (restVO == null) ? DistrictCityMapping.getCitys(\"台北市\"): DistrictCityMapping.getCitys(restVO.getDistrict()) %>">
+												<option value="${city}">${city}
+											</c:forEach>
 										</select>
 									</div>
 								</div>
@@ -444,24 +447,34 @@ RestaurantService restSvc = new RestaurantService();
 									</div>
 								</div>
 
+
+
 								<div class="col-md-8">
 									<label style="visibility: hidden;">類型候選</label>
 									<div class="single-input-wrap my-chooseType">
 										<!-- 放一些標籤上來 -->
+										<%
+										Integer style1Id = (Integer)session.getAttribute("style1");
+										Integer style2Id = (Integer)session.getAttribute("style2");
+										Integer style3Id = (Integer)session.getAttribute("style3");
+										
+										%>
+										
+										
 										<ul>
 											<li>
 											
-												<button type="button" class="choose1" aria-label="Close" hidden></button>
+												<button type="button" class="choose1" aria-label="Close" <%= (style1Id == null)? "hidden" : ""%> > <%= (style1Id == null)? "" : styleSvc.getStyleTypeByPrimaryKey(style1Id)%></button>
 												<!-- 預設的選項為 50 -->
-												<input type="hidden" class="inchoose1" name="style1" value="50">
+												<input type="hidden" class="inchoose1" name="style1" value="<%= (style1Id == null)? "" : style1Id%>">
 											</li>
 											<li>
-												<button type="button" class="choose2" aria-label="Close" hidden></button>
-												<input type="hidden" class="inchoose2" name="style2">
+												<button type="button" class="choose2" aria-label="Close" <%= (style2Id == null)? "hidden" : ""%> > <%= (style2Id == null)? "" : styleSvc.getStyleTypeByPrimaryKey(style2Id)%></button>
+												<input type="hidden" class="inchoose2" name="style2" value="<%= (style2Id == null)? "" : style2Id%>">
 											</li>
 											<li>
-												<button type="button" class="choose3" aria-label="Close" hidden></button>
-												<input type="hidden" class="inchoose3" name="style3">
+												<button type="button" class="choose3" aria-label="Close" <%= (style3Id == null)? "hidden" : ""%> > <%= (style3Id == null)? "" : styleSvc.getStyleTypeByPrimaryKey(style3Id)%></button>
+												<input type="hidden" class="inchoose3" name="style3" value="<%= (style3Id == null)? "" : style3Id%>">
 											</li>
 										</ul>
 
@@ -504,13 +517,10 @@ RestaurantService restSvc = new RestaurantService();
 							<div class="col-md-12">
 
 								<div class="row my-btn-wrapper">
-									<div class="col-md-2"></div>
+									<div class="col-md-4"></div>
 									<div class="col-md-4">
 										<input type="hidden" name="action" value="update">
 										<button type="submit" class="btn btn-base" id="btn_submit">更新</button>
-									</div>
-									<div class="col-md-4">
-										<button type="reset" class="btn btn-base">重填</button>
 									</div>
 									<div class="col-md-2"></div>
 
@@ -562,143 +572,119 @@ RestaurantService restSvc = new RestaurantService();
 	<script>
 		$(document).ready(function() {
 
-							var p_file_el = document.getElementById("p_file");
-							var preview_el = document.getElementById("preview");
-							
-							$('.bs-timepicker').timepicker();
-
-							$('#my-img-btn').on("click", function(e) {
-								$('#p_file').click();
-
-							});
-							
-							/**************      將select選取到的option顯示出來      **********************/
-							$('.my-pickStyle').on("change",function(e) {
-								
-								var chosen = $("select[name='pickStyle'] :selected").text().trim();
-								var c1 = $('button.choose1').text().trim();
-								var c2 = $('button.choose2').text().trim();
-								var c3 = $('button.choose3').text().trim();
-								// 檯面上顯示的標籤不可以再被重複選取 
-								if( c1 === chosen || c2 === chosen || c3 ===chosen) {
-									//console.log("重複");
-									// doNothing!
-								} else {
-									if($('button.choose1').is('[hidden]')) {
-										$('button.choose1').removeAttr("hidden");
-										$('button.choose1').text(this.options[this.selectedIndex].text);
-										$('input.inchoose1').val(this.value);
+			
+			/**********************************************      timepicker操作         ***************************************************/
 										
-									} else if($('button.choose2').is('[hidden]')) {
-										$('button.choose2').removeAttr("hidden");
-										$('button.choose2').text(this.options[this.selectedIndex].text);
-										$('input.inchoose2').val(this.value);
-									} else if($('button.choose3').is('[hidden]')) {
-										$('button.choose3').removeAttr("hidden");
-										$('button.choose3').text(this.options[this.selectedIndex].text);
-										$('input.inchoose3').val(this.value);
-									}
-								}
-							
-								
+										var p_file_el = document.getElementById("p_file");
+										var preview_el = document.getElementById("preview");
+										
+										$('.bs-timepicker').timepicker();
 
-							});
+										$('#my-img-btn').on("click", function(e) {
+											$('#p_file').click();
+
+										});
+										
+			/**********************************************      餐廳類型選項操作         ***************************************************/
+										
+										/**************      將select選取到的option顯示出來      ***************/
+										$('.my-pickStyle').on("change",function(e) {
+											
+											var chosen = $("select[name='pickStyle'] :selected").text().trim();
+											var c1 = $('button.choose1').text().trim();
+											var c2 = $('button.choose2').text().trim();
+											var c3 = $('button.choose3').text().trim();
+											// 檯面上顯示的標籤不可以再被重複選取 
+											if( c1 === chosen || c2 === chosen || c3 ===chosen) {
+												//console.log("重複");
+												// doNothing!
+											} else {
+												if($('button.choose1').is('[hidden]')) {
+													$('button.choose1').removeAttr("hidden");
+													$('button.choose1').text(this.options[this.selectedIndex].text);
+													$('input.inchoose1').val(this.value);
+													
+												} else if($('button.choose2').is('[hidden]')) {
+													$('button.choose2').removeAttr("hidden");
+													$('button.choose2').text(this.options[this.selectedIndex].text);
+													$('input.inchoose2').val(this.value);
+												} else if($('button.choose3').is('[hidden]')) {
+													$('button.choose3').removeAttr("hidden");
+													$('button.choose3').text(this.options[this.selectedIndex].text);
+													$('input.inchoose3').val(this.value);
+												}
+											}
 							
-							/**************      將點選的button關閉並且去值      **********************/
-							$('button.choose1').on("click", function(e) {
-								
-								this.setAttribute("hidden", "");
-								$('button.choose1').text("");
-								$('input.inchoose1').val("");
-								
-							});
+										});
+										
+										/**************      將點選的button關閉並且去值         ****************/
+										$('button.choose1').on("click", function(e) {
+											
+											this.setAttribute("hidden", "");
+											$('button.choose1').text("");
+											$('input.inchoose1').val("");
+											
+										});
+										
+										$('button.choose2').on("click", function(e) {
+											
+											this.setAttribute("hidden", "");
+											$('button.choose2').text("");
+											$('input.inchoose2').val("");
+										});
+										
+										$('button.choose3').on("click", function(e) {
+				
+											this.setAttribute("hidden", "");
+											$('button.choose3').text("");
+											$('input.inchoose3').val("");
+										});
+										
+										
+			/*********************************************   縣市地區的操作       **********************************************************/
+										
 							
-							$('button.choose2').on("click", function(e) {
-								
-								this.setAttribute("hidden", "");
-								$('button.choose2').text("");
-								$('input.inchoose2').val("");
-							});
+										$('select.my-distrc-select').on('change', function(e){
+											
+											var selectedDistrict = this.options[this.selectedIndex].text.trim();
+											var json = <%= DistrictCityMapping.getJsonDistricsMappingToCitys()%>;
+											
+											if(selectedDistrict === "台北市") {
+												// 滾出city的option
+												deleteAllCurrentOptions();
+												var citys = json.taipei;
+												addOptionsToSelect(citys);
+											}
+											
+											if(selectedDistrict === "桃園市") {
+												// 滾出city的option
+												deleteAllCurrentOptions();
+												var citys = json.taoyuan;
+												addOptionsToSelect(citys);
+						
+											}
+											
 							
-							$('button.choose3').on("click", function(e) {
-	
-								this.setAttribute("hidden", "");
-								$('button.choose3').text("");
-								$('input.inchoose3').val("");
-							});
-							
-							
-							/*********   縣市地區的操作     *************/
-							
-							// 滾出option
-							getCityOptions("桃園").forEach(addOptionsToSelect);
-							
-							$('select.my-distrc-select').on('change', function(e){
-								var selectedDistrict = this.options[this.selectedIndex].text.trim();
-								console.log(selectedDistrict);
-								if(selectedDistrict === "台北市") {
-									// 滾出city的option
-									deleteAllCurrentOptions();
-									getCityOptions("台北市").forEach(addOptionsToSelect);
-								}
-								
-							});
-							
-							function deleteAllCurrentOptions() {
-								$('select.my-city-select').empty();
-							}
-							
-							function getCityOptions(district) {
-								let dis = district.trim();
-								let cityOpts = [];
-								if("台北市" === dis){
-									cityOpts = 
-										['<option value="中正區">中正區</option>',
-										 '<option value="大同區">大同區</option>',	
-										];
-								}
-								
-								
-								if("桃園" === dis){
-									cityOpts = 
-										['<option value="桃園區">桃園區</option>',
-										 '<option value="龜山區">龜山區</option>',
-											];
-								}
-								
-								return cityOpts;
-							}
-							
-							function addOptionsToSelect(value) {
-								$('select.my-city-select').append(value);
-							}
-							
-// 						
-// 							taipeiCitys.add("中山區");
-// 							taipeiCitys.add("松山區");
-// 							taipeiCitys.add("大安區");
-// 							taipeiCitys.add("萬華區");
-// 							taipeiCitys.add("信義區");
-// 							taipeiCitys.add("士林區");
-// 							taipeiCitys.add("北投區");
-// 							taipeiCitys.add("內湖區");
-// 							taipeiCitys.add("南港區");
-// 							taipeiCitys.add("文山");
-							
-							
-							
-// 							touanCitys.add("");
-// 							touanCitys.add("龜山區");
-// 							touanCitys.add("八德區");
-// 							touanCitys.add("大溪區");
-// 							touanCitys.add("蘆竹區");
-// 							touanCitys.add("大園區");
-// 							touanCitys.add("龍潭區");
-// 							touanCitys.add("平鎮區");
-// 							touanCitys.add("楊梅區");
-// 							touanCitys.add("新屋區");
-// 							touanCitys.add("觀音區");
-// 							touanCitys.add("原住民區");
+										});
+										
+										function deleteAllCurrentOptions() {
+											$('select.my-city-select').empty();
+										}
+
+										
+										function addOptionsToSelect(citys) {
+												
+											citys.forEach(function(city) {
+												$('select.my-city-select').append("<option value=\""
+												 + city + "\">"+ city + "</option>");
+											});
+										}
+										
+										/**************      Keep住更新後的畫面使用         ****************/
+										
+										$("select.my-distrc-select option[value='<%= (restVO == null)? "" : restVO.getDistrict() %>']").prop("selected", true);
+										$("select.my-city-select option[value='<%= (restVO == null)? "" : restVO.getCity() %>']").prop("selected", true);
+						
 
 						});
 	</script>

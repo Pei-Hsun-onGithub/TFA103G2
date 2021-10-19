@@ -108,6 +108,7 @@ public class RestInsert extends Command {
 		req.setAttribute("styleId3", styleId3);
 		
 		HttpSession session = req.getSession();
+		// 保存新增成功的餐廳編號
 		session.setAttribute("restaurantId", restaurantId);
 		
 		

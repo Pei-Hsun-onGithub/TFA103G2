@@ -64,6 +64,19 @@
 		<servlet-name>MealServlet</servlet-name>
 		<url-pattern>/meal/meal.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PhotoServlet</servlet-name>
+		<servlet-class>com.meal.controller.PhotoServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PhotoServlet</servlet-name>
+		<url-pattern>/meal/photoServlet</url-pattern>
+	</servlet-mapping>
+	
+
+
 
 	<servlet>
 		<servlet-name>RestaurantServlet</servlet-name>

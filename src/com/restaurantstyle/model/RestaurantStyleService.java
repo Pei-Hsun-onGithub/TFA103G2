@@ -52,4 +52,11 @@ public class RestaurantStyleService {
 		}
 		return results;
 	}
+	
+	public void deleteRestaurantStyle(Integer restaurantId, Integer styleId) {
+		RestaurantStyleVO restStyleVO = new RestaurantStyleVO();
+		restStyleVO.setRestaurantId(restaurantId);
+		restStyleVO.setStyleId(styleId);
+		this.dao.delete(restStyleVO);
+	}
 }

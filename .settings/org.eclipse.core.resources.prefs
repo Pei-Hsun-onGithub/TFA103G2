@@ -1,5 +1,9 @@
 eclipse.preferences.version=1
 encoding//WebContent/DBtable/foodMonster_custom_order.sql=UTF-8
+<<<<<<< HEAD
 encoding//WebContent/article/addFA.jsp=UTF-8
 encoding//WebContent/article/oneFA_allMsg.jsp=UTF-8
 encoding//src/com/picturebase/model/TestPictureBase.java=UTF-8
+=======
+encoding//WebContent/login/Login-forget.jsp=UTF-8
+>>>>>>> de432c5ae0971bdf030aaccb5d1d07a172c4320f
