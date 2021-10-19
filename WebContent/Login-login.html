@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>FoodKa - Food Ordering, Delivery & Restuarent Template</title>
+    <!--fivicon icon-->
+    <link rel="icon" href="assets/img/Image4.png">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="assets/css/animate.min.css">       
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="assets/css/magnific.min.css">
+    <link rel="stylesheet" href="assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="assets/css/nice-select.min.css">
+    <link rel="stylesheet" href="assets/css/owl.min.css">
+    <link rel="stylesheet" href="assets/css/slick-slide.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/remixicon/remixicon.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <!-- new css -->
+    <link rel="stylesheet" href="assets/css/Login-login.css">
+
+    <!--Google Fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
+    
+    
+    <style>
+        .test{
+            margin-top: 52px;
+        }
+    </style>
+
+</head>
+<body class='sc5'>
+    <!-- preloader area start -->
+    <!-- preloader area end -->
+    <!-- search popup area start -->
+    <!-- //. search Popup -->
+
+    <!-- navbar start -->
+    <header class="navbar-area">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container nav-container">
+                <div class="logo">
+                    <a class="main-logo" href="home-1.html"><img src="assets/img/logo.png" alt="img"></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- navbar end -->
+
+    <!-- bredcrumb Area Start-->
+	<section class="breadcrumb-area test">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-6 align-self-center">
+					<div class="banner-inner text-center">
+
+						<!---------------------------------- new  ---------------------------------->
+
+						<div class="panel-group">
+							<input type="radio" name="panel-radio" id="radio1"
+								class="panel-control" checked> <input type="radio"
+								name="panel-radio" id="radio2" class="panel-control">
+							<div class="tab-group">
+								<label for="radio1" class="active">會員</label> <label
+									for="radio2">廠商</label>
+							</div>
+							<div class="content-group">
+
+								<!---------------------------------- table內帳號輸入 ---------------------------------->
+								<form class="content content1" action="javascript:;"
+									method="post">
+									<div id="right" class="two-thirds">
+										<fieldset>
+											<h1 class="lgd" style="color: black">登入帳號</h1>
+											<p>直接輸入您的會員帳號密碼登入</p>
+											<input type="username" id="username" class="username_email"
+												name="username" placeholder="您的電子郵件地址" required> <input
+												type="password" id="password" class="password1"
+												name="password" placeholder="您的密碼" required> <input
+												type="button" value="登入" class="btn" id="submit"
+												onclick="myFormCheck()" />
+											<div id="rmbr">
+												<input type="checkbox" id="remberme" name="remberme"
+													required> <label for="remberme" id="remberme0">記住我</label>
+											</div>
+											<div id="sign">
+												<a href="<%=request.getContextPath()%>/login/Login-forget.jsp" id="member_btn">忘記密碼?</a> <a
+													href="<%=request.getContextPath()%>/login/Login-custome-regist.jsp">註冊</a>
+											</div>
+										</fieldset>
+									</div>
+									<!--two-thirds-->
+								</form>
+								<!---------------------------------- table內帳號輸入2 ---------------------------------->
+								<form class="content content2" action="javascript:;"
+									method="post">
+									<div id="right" class="two-thirds">
+										<fieldset>
+											<h1 class="lgd" style="color: black">登入帳號</h1>
+											<p>直接輸入您的廠商帳號密碼登入</p>
+											<input type="username" id="username" class="username_email"
+												name="usernam1" placeholder="您的電子郵件地址" required> <input
+												type="password" id="password" class="password1"
+												name="password1" placeholder="您的密碼" required> <input
+												type="button" value="登入" class="btn" id="submit1"
+												onclick="myFormCheck()" />
+											<div id="rmbr">
+												<input type="checkbox" id="remberme" name="remberme"
+													required> <label for="remberme" id="remberme0">記住我</label>
+											</div>
+											<div id="sign">
+												<a href="<%=request.getContextPath()%>/Login-forget.jsp" id="member_btn">忘記密碼?</a> <a
+													href="<%=request.getContextPath()%>/login/Login-custome-regist.jsp" id="register">註冊</a>
+											</div>
+										</fieldset>
+									</div>
+									<!--two-thirds-->
+								</form>
+							</div>
+						</div>
+						<!----------------------------------  end  ---------------------------------->
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+    <!-- bredcrumb Area End --> 
+    
+    <!-- all plugins here -->
+    <script src="assets/js/jquery.3.6.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/imageloded.min.js"></script>
+    <script src="assets/js/counterup.js"></script>
+    <script src="assets/js/waypoint.js"></script>
+    <script src="assets/js/magnific.min.js"></script>
+    <script src="assets/js/isotope.pkgd.min.js"></script>
+    <script src="assets/js/jquery-ui.min.js"></script>
+    <script src="assets/js/nice-select.min.js"></script>
+    <script src="assets/js/fontawesome.min.js"></script>
+    <script src="assets/js/owl.min.js"></script>
+    <script src="assets/js/slick-slider.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/tweenmax.min.js"></script>
+    <!-- main js  -->
+    <script src="assets/js/main.js"></script>
+    <!-- new js   -->
+    <script src="assets/js/Login-login.js"></script>
+
+</body>
+</html>

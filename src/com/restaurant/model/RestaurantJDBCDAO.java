@@ -10,8 +10,8 @@ public class RestaurantJDBCDAO implements RestaurantDAO_interface {
 
 	public static final String driver = "com.mysql.cj.jdbc.Driver";
 	public static final String url = "jdbc:mysql://localhost:3306/fm01?serverTimezone=Asia/Taipei";
-	private static final String userid = "chou";
-	private static final String passwd = "chou79";
+	private static final String userid = "David";
+	private static final String passwd = "123456";
 
 	
 	private static final String INSERT_STMT = "INSERT INTO Restaurant "
@@ -39,13 +39,17 @@ public class RestaurantJDBCDAO implements RestaurantDAO_interface {
 
 
 	@Override
-	public void insert(RestaurantVO restaurantVO) {
+	public RestaurantVO insert(RestaurantVO restaurantVO) {
 	
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
 		try {
 			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(INSERT_STMT);
+			
+			String[] cols = { "restaurantId" };
+			pstmt = con.prepareStatement(INSERT_STMT, cols);
 			
 			pstmt.setString(1, restaurantVO.getRestaurantName());
 			pstmt.setString(2, restaurantVO.getBoss());
@@ -61,11 +65,26 @@ public class RestaurantJDBCDAO implements RestaurantDAO_interface {
 			
 			pstmt.executeUpdate();
 			
+			rs = pstmt.getGeneratedKeys();
+			
+			if (rs.next()) {
+				Integer key = rs.getInt(1); // 只支援欄位索引值取得自增主鍵值
+				restaurantVO.setRestaurantId(key);
+//				System.out.println("自增主鍵值 = " + key + "(剛新增成功的餐點編號)");
+			} 
 			
 		} catch(SQLException se) {
 			throw new RuntimeException("A database error occured. "
 					+ se.getMessage());
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			
 			if(pstmt != null) {
 				try {
 					pstmt.close();					
@@ -81,6 +100,8 @@ public class RestaurantJDBCDAO implements RestaurantDAO_interface {
 				}
 			}
 		}
+		
+		return restaurantVO;
 	}
 
 

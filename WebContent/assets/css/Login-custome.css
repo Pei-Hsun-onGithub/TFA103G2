@@ -1,0 +1,50 @@
+/* 原來div處理 */
+
+:root {
+  overflow-y: hidden;
+}
+
+body{
+  margin:100px auto 
+}
+
+form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+input{
+  margin-bottom: 5px;
+}
+
+td.td1{
+  /* text-align-last:justify;  */
+   text-align:justify; 
+  text-align-last:justify; 
+  text-justify:distribute-all-lines
+}  
+
+div from input.submit{
+  /* position: relative; */
+  margin-left: 50px;
+}
+
+
+/* div.body{
+  margin-top: 80px;
+} */
+
+
+
+    @media all and (max-width:2000px) {
+      .banner-inner h1 {
+        font-size: 60px;
+        line-height: 60px;
+      }
+
+      .banner-inner p {
+        font-size: 20px;
+      }
+    }

@@ -11,7 +11,7 @@ public class AchieveProgressService {
 		dao = new AchieveProgressDAOImpl();
 	}
 	
-	public AchieveProgress addAchieveProgress (int userId, int achiId, int currentArticle, int currentOrder, Date beginDate, int sta) {
+	public AchieveProgress addAchieveProgress (Integer userId, Integer achiId, Integer currentArticle, Integer currentOrder, Date beginDate, Integer sta) {
 		
 		AchieveProgress achieveprogress = new AchieveProgress();
 		
@@ -26,7 +26,7 @@ dao.add(achieveprogress);
 		return achieveprogress;
 	}
 	
-	public AchieveProgress updateAchieveProgress (int userId, int achiId, int currentArticle, int currentOrder, Date beginDate, int sta) {
+	public AchieveProgress updateAchieveProgress (Integer userId, Integer achiId, Integer currentArticle, Integer currentOrder, Date beginDate, Integer sta) {
 		
 		AchieveProgress achieveprogress = new AchieveProgress();
 		
@@ -41,11 +41,11 @@ dao.add(achieveprogress);
 		return achieveprogress;
 	}
 	
-	public void deleteAchieveProgress(int userId, int achiId) {
+	public void deleteAchieveProgress(Integer userId, Integer achiId) {
 		dao.delete(userId, achiId);
 	}
 	
-	public AchieveProgress getOneAchieveProgress(int userId, int achiId) {
+	public AchieveProgress getOneAchieveProgress(Integer userId, Integer achiId) {
 		return dao.findByPK(userId, achiId);
 	}
 	

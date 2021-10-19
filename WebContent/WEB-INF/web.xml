@@ -33,16 +33,28 @@
 		<param-value>123456</param-value>
 	</context-param>
 
+<!-- 葉力德 -->
 	<servlet>
 		<servlet-name>AddressServlet</servlet-name>
 		<servlet-class>com.address.controller.AddressServlet</servlet-class>
 	</servlet>
+
 	<servlet-mapping>
 		<servlet-name>AddressServlet</servlet-name>
 		<url-pattern>/address/address.do</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>MemberInfoServlet</servlet-name>
+		<servlet-class>com.memberinfo.controller.MemberInfoServlet</servlet-class>
+	</servlet>
 
+	<servlet-mapping>
+		<servlet-name>MemberInfoServlet</servlet-name>
+		<url-pattern>/login/memberinfo.do</url-pattern>
+	</servlet-mapping>
+	
+<!-- 周沛勳	 -->
 	<servlet>
 		<servlet-name>MealServlet</servlet-name>
 		<servlet-class>com.meal.controller.MealServlet</servlet-class>
@@ -52,7 +64,41 @@
 		<servlet-name>MealServlet</servlet-name>
 		<url-pattern>/meal/meal.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>PhotoServlet</servlet-name>
+		<servlet-class>com.meal.controller.PhotoServlet</servlet-class>
+	</servlet>
 
+	<servlet-mapping>
+		<servlet-name>PhotoServlet</servlet-name>
+		<url-pattern>/meal/photoServlet</url-pattern>
+	</servlet-mapping>
+	
+
+
+
+	<servlet>
+		<servlet-name>RestaurantServlet</servlet-name>
+		<servlet-class>com.restaurant.controller.RestaurantServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RestaurantServlet</servlet-name>
+		<url-pattern>/restaurant/restaurant.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>RestaurantStyleServlet</servlet-name>
+		<servlet-class>com.restaurantstyle.controller.RestaurantStyleServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>RestaurantStyleServlet</servlet-name>
+		<url-pattern>/restaurantstyle/restaurantstyle.do</url-pattern>
+	</servlet-mapping>
+	
+<!-- 黃楚鈞 -->
 	<servlet>
 		<servlet-name>AchieveProgressServlet</servlet-name>
 		<servlet-class>com.achieveprogress.controller.AchieveProgressServlet</servlet-class>
@@ -61,6 +107,19 @@
 		<servlet-name>AchieveProgressServlet</servlet-name>
 		<url-pattern>/Gary_pages/achieveprogress.do</url-pattern>
 	</servlet-mapping>
+	
+<!-- 鄭伊芸 -->
+	<servlet>
+		<servlet-name>FoodArticleServlet</servlet-name>
+		<servlet-class>com.foodarticle.controller.FoodArticleServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>FoodArticleServlet</servlet-name>
+		<url-pattern>/article/fa.do</url-pattern>
+	</servlet-mapping>
+
+
 
 
 </web-app>

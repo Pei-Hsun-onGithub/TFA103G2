@@ -3,6 +3,8 @@ package com.foodarticle.model;
 import java.sql.Date;
 import java.util.List;
 
+import com.picturebase.model.PictureBaseVO;
+
 public class FoodArticleService {
 	
 	private FoodArticleDAO_interface dao;
@@ -39,7 +41,7 @@ public class FoodArticleService {
 		foodArticleVO.setArticleDate(articleDate);
 		foodArticleVO.setArticleContent(articleContent);
 		foodArticleVO.setSta(sta);		
-		
+		dao.update(foodArticleVO);
 		return foodArticleVO;
 	}
 	
@@ -54,5 +56,15 @@ public class FoodArticleService {
 	public List<FoodArticleVO> getall(){
 		return dao.getall();
 	}
+	
+	public void addtWithPic(FoodArticleVO foodArticleVO, List<PictureBaseVO> list) {
+		  dao.insertWithPic(foodArticleVO,list);	
+	}
+
+	
+	
+//	public boolean addtWithPic(FoodArticleVO foodArticleVO, List<PictureBaseVO> list) {
+//		 return dao.insertWithPic(foodArticleVO,list);	
+//	}
 
 }

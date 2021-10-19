@@ -1,19 +1,20 @@
 package com.foodarticle.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+
+import com.picturebase.model.PictureBaseJDBCDAO;
+import com.picturebase.model.PictureBaseVO;
 
 public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 
 	public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	public static final String URL = "jdbc:mysql://localhost:3306/fm01?serverTimezone=Asia/Taipei";
-	public static final String USER = "root";
-	public static final String PASSWORD = "password";
+	public static final String USER = "David";
+	public static final String PASSWORD = "123456";
 	
 	
 	public static final String INSERT_STMT = 
@@ -40,7 +41,7 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 			con = DriverManager.getConnection(URL,USER,PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-			//pstmt.setInt(1,foodarticle.getArticleno());Ëá™ÂãïÁ∑®Ëôü‰∏çÁî®Êñ∞Â¢û
+		  //pstmt.setInt(1,foodarticle.getArticleno());¶€ºW¡‰§£•Œ§‚∞ ºW•[
 			pstmt.setInt(1,foodArticle.getUserId());
 			pstmt.setInt(2,foodArticle.getRestaurantId());
 			pstmt.setString(3,foodArticle.getArticleTitle());
@@ -265,6 +266,90 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 		}									
 		
 		return farList;
+	}
+
+	@Override
+	public void insertWithPic(FoodArticleVO foodArticleVO, List<PictureBaseVO> list){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			
+			// •˝√ˆ≥¨autocommit,¶bpstm.executeUpdate()§ß´e
+			con.setAutoCommit(false);
+			
+			//•˝∑sºW§Â≥π
+			
+			String[] cols = {"articleno"};
+			pstmt=con.prepareStatement(INSERT_STMT, cols);
+			pstmt.setInt(1,foodArticleVO.getUserId());
+			pstmt.setInt(2,foodArticleVO.getRestaurantId());
+			pstmt.setString(3,foodArticleVO.getArticleTitle());
+			pstmt.setDate(4,foodArticleVO.getArticleDate());
+			pstmt.setString(5,foodArticleVO.getArticleContent());
+			pstmt.setInt(6,foodArticleVO.getSta());
+			pstmt.executeUpdate();
+			
+			//ßÏ•X≠Ë≠Ë∑sºW™∫¶€ºWpk
+			
+			String new_articleNo =null;
+			ResultSet rs =  pstmt.getGeneratedKeys();
+			if(rs.next()) {
+				new_articleNo =rs.getString(1);
+			}
+			rs.close();
+			
+		//¶A¶PÆ…∑sºWπœ§˘
+			
+			PictureBaseJDBCDAO pbdao = new PictureBaseJDBCDAO();
+			
+			for(PictureBaseVO pbVO: list) {
+				pbVO.setArticleNo(new Integer(new_articleNo));
+				pbdao.insertWithArticle(pbVO, con);				
+			}
+			
+			con.commit();
+			con.setAutoCommit(true);			
+			
+			
+		
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3°¥≥]©w©Û∑Ì¶≥exceptionµo•ÕÆ…§ßcatch∞œ∂Ù§∫
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-•—-dept");
+					con.rollback();
+//					return false;
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+//		return true;
+		
+		
+		
 	}
 	
 }

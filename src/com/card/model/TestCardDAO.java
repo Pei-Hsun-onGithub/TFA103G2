@@ -8,16 +8,17 @@ public class TestCardDAO {
 		CardDAO_interface dao = new CardDAO();
 
 		// ·s¼W
-//		CardVO card1 = new CardVO();
-//		card1.setUserId(1);
-//		card1.setCardHolder("¾G¥ì°·");
-//		card1.setCardNumber("1234567812345678");
-//		card1.setDeadLine(java.sql.Date.valueOf("2023-12-31"));
-//		card1.setCvv("466");
-//		card1.setBillAddress("¶³ªL¿¤ªê§ÀÂíªê¿³¦è¤Tµó27¸¹´Î");
-//		card1.setZipCode("632");
-//		card1.setSta(1);
-//		dao.insert(card1);
+		CardVO card1 = new CardVO();
+		card1.setUserId(20210001);
+		card1.setCardHolder("¾G¥ì°·");
+		card1.setCardNumber("1234567812345678");
+		card1.setDeadLine(java.sql.Date.valueOf("2023-12-31"));
+		card1.setCvv("466");
+		System.out.println(card1.getCvv());
+		card1.setBillAddress("¶³ªL¿¤ªê§ÀÂíªê¿³¦è¤Tµó27¸¹´Î");
+		card1.setZipCode("632");
+		card1.setSta(1);
+		dao.insert(card1);
 
 		// ­×§ï
 //		CardVO card2 = new CardVO();
@@ -38,8 +39,8 @@ public class TestCardDAO {
 		
 
 		// ¬d¸ß
-		CardVO card3 = dao.findByPK(2);
-		System.out.println(card3.toString());	
+//		CardVO card3 = dao.findByPK(2);
+//		System.out.println(card3.toString());	
 //		System.out.print(card3.getCardId() + ",");
 //		System.out.print(card3.getUserId() + ",");
 //		System.out.print(card3.getCardHolder() + ",");
@@ -50,12 +51,12 @@ public class TestCardDAO {
 //		System.out.print(card3.getZipCode() +  ",");
 //		System.out.print(card3.getSta() +  ",");
 //		System.out.println(card3.getSta() + ",");
-		System.out.println("---------------------------------------------");
+//		System.out.println("---------------------------------------------");
 
 		// ¬d¸ß
-		List<CardVO> list = dao.getAll();
-		for (CardVO card4 : list) {
-		System.out.println(card4.toString());
+//		List<CardVO> list = dao.getAll();
+//		for (CardVO card4 : list) {
+//		System.out.println(card4.toString());
 //		System.out.print(card4.getCardId() + ",");
 //		System.out.print(card4.getUserId() + ",");
 //		System.out.print(card4.getCardHolder() + ",");
@@ -68,7 +69,7 @@ public class TestCardDAO {
 //		System.out.println(card4.getSta() + ",");
 //		System.out.println();
 		
-		}
+//		}
 	}
 }
 
