@@ -17,7 +17,7 @@ function myFormCheck(){
             
     console.log(1)
     $("div.overlay").css("display", "block");
-
+    setTimeout("location.href='Login-login.jsp';", 1000);
     $("button.btn_modal_close").on("click", function(){
         $("div.overlay").css("display", "none");
     })
