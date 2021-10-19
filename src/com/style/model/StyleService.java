@@ -17,4 +17,8 @@ public class StyleService {
 	public List<StyleVO> getAllStyle() {
 		return this.dao.getAll();
 	}
+	
+	public String getStyleTypeByPrimaryKey(Integer styleId) {
+		return this.dao.findByPrimaryKey(styleId).getStyleType();
+	}
 }

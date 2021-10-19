@@ -61,14 +61,16 @@ section.work-area {
 }
 
 input.my-btn {
-
 	padding: 0px 10px;
 	width: 53px;
 	height: 30px;
 	line-height: 10px;
 	border-radius: 10px;
-	
+}
 
+table tr td img {
+	width: 60px;
+	height: 50px;
 }
 </style>
 
@@ -81,7 +83,8 @@ input.my-btn {
 		<nav class="navbar navbar-expand-lg">
 			<div class="container nav-container">
 				<div class="logo">
-					<a class="main-logo" href="<%=request.getContextPath()%>/pei_pages/vendor_meal_upload.jsp"><img
+					<a class="main-logo"
+						href="<%=request.getContextPath()%>/pei_pages/vendor_meal_upload.jsp"><img
 						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
 				</div>
 			</div>
@@ -127,6 +130,7 @@ input.my-btn {
 							type="java.util.List<MealVO>" />
 
 						<c:forEach var="mealVO" items="${list}">
+
 							<tr>
 								<td>${mealVO.mealId}</td>
 								<td>${mealVO.sta}</td>
@@ -136,21 +140,27 @@ input.my-btn {
 								<td>${mealVO.launchDate}</td>
 								<td>${mealVO.launchDays}</td>
 								<td>${mealVO.mealDescription}</td>
-								<td>${mealVO.mealImg}</td>
+								<td><img
+									src="/TFA103G2/meal/photoServlet?id=${mealVO.mealId}" /></td>
 								<td>${mealVO.restaurantId}</td>
 								<td>
-									<FORM METHOD="post" ACTION="/TFA103G2/meal/meal.do?action=getOne_For_Update" style="margin-bottom: 0px;">
-										<input type="submit" class="btn btn-warning my-btn" value="修改"> 
-										<input type="hidden" name="mealId" value="${mealVO.mealId}"> 
+									<FORM METHOD="post"
+										ACTION="/TFA103G2/meal/meal.do?action=getOne_For_Update"
+										style="margin-bottom: 0px;">
+										<input type="submit" class="btn btn-warning my-btn" value="修改">
+										<input type="hidden" name="mealId" value="${mealVO.mealId}">
 									</FORM>
 								</td>
 								<td>
-									<FORM METHOD="post" ACTION="/TFA103G2/meal/meal.do?action=delete" style="margin-bottom: 0px;">
-										
-										<input type="submit" class="btn btn-warning my-btn" id="my-delete-submit" value="刪除"> 
-										<input type="hidden" name="mealId" value="${mealVO.mealId}">  
-										
-										
+									<FORM METHOD="post"
+										ACTION="/TFA103G2/meal/meal.do?action=delete"
+										style="margin-bottom: 0px;">
+
+										<input type="submit" class="btn btn-warning my-btn"
+											id="my-delete-submit" value="刪除"> <input
+											type="hidden" name="mealId" value="${mealVO.mealId}">
+
+
 									</FORM>
 								</td>
 
@@ -200,10 +210,8 @@ input.my-btn {
 	<script>
 		$(document).ready(function() {
 			$('#table_id').DataTable();
-			
+
 		});
-		
-		
 	</script>
 </body>
 </html>

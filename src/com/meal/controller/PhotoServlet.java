@@ -1,4 +1,4 @@
-package com.restaurant.controller;
+package com.meal.controller;
 
 import java.io.IOException;
 
@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.restaurant.controller.Command;
+import com.meal.model.MealService;
+import com.meal.model.MealVO;
 
-public class RestaurantServlet extends HttpServlet{
+public class PhotoServlet extends HttpServlet {
 
+	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		doPost(req, res);
@@ -20,18 +22,12 @@ public class RestaurantServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
-
-		String action = req.getParameter("action");
+		res.setContentType("image/png");
 		
-		
-		if ("insert".equals(action)) {
-			Command insert = Command.createCommand("insert", req, res);
-			insert.execute();
-		}
-		if ("update".equals(action)) {
-			Command update = Command.createCommand("update", req, res);
-			update.execute();
-		}
+		Integer mealId = new Integer(req.getParameter("id"));
+		System.out.println("mealId=" + mealId);
+		MealService mealSvc = new MealService();
+		MealVO mealVO = mealSvc.findMealByPrimaryKey(mealId);
+		res.getOutputStream().write(mealVO.getMealImg());
 	}
 }
-

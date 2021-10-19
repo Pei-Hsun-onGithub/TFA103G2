@@ -14,6 +14,10 @@ public abstract class Command {
 		if ("insert".equals(action)) {
 			return new RestInsert(req, res);
 		}
+		if ("update".equals(action)) {
+			return new RestUpdate(req, res);
+		}
+		
 
 		return null;
 	}

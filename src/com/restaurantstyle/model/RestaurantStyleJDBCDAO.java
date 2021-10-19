@@ -20,7 +20,9 @@ public class RestaurantStyleJDBCDAO implements RestaurantStyleDAO_interface{
 	private static final String passwd = "123456";
 	
 	private static final String INSERT_STMT = "INSERT INTO RestaurantStyle (restaurantId, styleId) VALUES (?, ?)";
-	// 只有複合主鍵是否不需要update??
+	
+	private static final String UPDATE_STMT = "UPDATE RestaurantStyle SET restaurantId = ?, styleId = ? WHERE restaurantId = ? AND styleId=?";
+	
 	private static final String DELETE = "DELETE FROM RestaurantStyle where restaurantId = ? and styleId = ?";
 	private static final String GET_ALL_STMT = "SELECT * FROM RestaurantStyle ";
 	
@@ -44,6 +46,45 @@ public class RestaurantStyleJDBCDAO implements RestaurantStyleDAO_interface{
 
 			pstmt.setInt(1, restaurantStyleVO.getRestaurantId());
 			pstmt.setInt(2, restaurantStyleVO.getStyleId());
+			
+			pstmt.executeUpdate();
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
+	
+	@Override
+	public void update(RestaurantStyleVO newRestaurantStyleVO, RestaurantStyleVO oldRestaurantStyleVO) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		try {
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_STMT);
+
+			pstmt.setInt(1, newRestaurantStyleVO.getRestaurantId());
+			pstmt.setInt(2, newRestaurantStyleVO.getStyleId());
+			pstmt.setInt(3, oldRestaurantStyleVO.getRestaurantId());
+			pstmt.setInt(4, oldRestaurantStyleVO.getStyleId());
 			
 			pstmt.executeUpdate();
 

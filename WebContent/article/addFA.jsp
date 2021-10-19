@@ -1,10 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.foodarticle.model.*"%>
+<%@ page import="com.picturebase.model.*"%>
 <%@ page import="com.restaurant.*"%>
 
 <%
 	FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO");
+	PictureBaseVO pbVO = (PictureBaseVO) request.getAttribute("pbVO");
 %>
 <!DOCTYPE html>
 
@@ -152,7 +154,7 @@ button.check_ok {
 	<header class="navbar-area ">
 		<nav class="navbar navbar-expand-lg">
 			
-			<!-- ­n¥Îboostrapªº®æ½u¨t²Î­n¤@©w­n¦³div class="container nav-container" -->			
+			<!-- é–¬ï¿½ï¿½ç¸oostrapï¿½ï¿½ï¿½æ½›ï¿½èŸé¤Œçµé–¬ï¿½éŠï¿½æ‘°ï¿½é–¬ï¿½ï¿½ï¿½div class="container nav-container" -->			
 			<div class="container nav-container">
 				
 				<div class="responsive-mobile-menu">
@@ -170,14 +172,14 @@ button.check_ok {
 				<div class="collapse navbar-collapse" id="themefie_main_menu">
 					<ul class="navbar-nav menu-open">
 						<li class="current-menu-item menu-item-has-children"><a
-							href="home-1.html">­qÀ\</a>
+							href="home-1.html">é–®ï¿½æ“—ï¿½</a>
 							<ul class="sub-menu ps-0">
 								<li><a href="<%=request.getContextPath()%>/shop.html">Shop</a></li>
 								<li><a href="<%=request.getContextPath()%>/menu.html">Menu</a></li>
 								<li><a href="<%=request.getContextPath()%>/cart.html">Cart</a></li>
 								<li><a href="<%=request.getContextPath()%>/checkout.html">Checkout</a></li>
 							</ul></li>
-						<li><a href="<%=request.getContextPath()%>/blog.html">­¹°O</a>
+						<li><a href="<%=request.getContextPath()%>/blog.html">æ†Œï¿½é–®ï¿½</a>
 						</li>
 						<li><a href="<%=request.getContextPath()%>/about.html">ABOUT
 								US</a></li>
@@ -201,7 +203,7 @@ button.check_ok {
 						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
 						</li>
 						<li class="phone-contact"><a href="#">sign in</a></li>
-						<li class="menu-cart"><a href="#">¤p¹aÅL <span>4</span></a></li>
+						<li class="menu-cart"><a href="#">æ’ ï¿½ï¿½æ¹§ï¿½ï¿½ <span>4</span></a></li>
 						<li class="menu-cart"><a
 							href="<%=request.getContextPath()%>/cart.html">CART <span>1</span></a></li>
 						<li>49.50 $</li>
@@ -213,19 +215,19 @@ button.check_ok {
 
 	<div class="main">
 		
-		<!-- ­n¥Îboostrapªº®æ½u¨t²Î­n¤@©w­n¦³div class="container nav-container" -->
+		<!-- é–¬ï¿½ï¿½ç¸oostrapï¿½ï¿½ï¿½æ½›ï¿½èŸé¤Œçµé–¬ï¿½éŠï¿½æ‘°ï¿½é–¬ï¿½ï¿½ï¿½div class="container nav-container" -->
 		<div class="container">
 			
-			<!-- ­nµ¹row,§i¶Dhtml¾î¦Cªº½d³ò -->
+			<!-- é–¬ï¿½è¯å­—ow,ï¿½ï¿½é–®æ„£tmlç’ˆæ€ ï¿½ï¿½ï¿½ï¿½è­ï¿½ï¿½ï¿½ -->
 			<div class="row justify-content-center">
 
-				<!-- µ¹®æ½u½d³ò,¦A§â¤¸¯À©ñ¶i®æ½u½d³ò¸Ì,¥ª+¤¤¶¡+¥k=12 -->
+				<!-- è¯è¡Œï¿½æ½›ï¿½è­ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½èï¿½ï¿½æš¸ï¿½è„«ï¿½æ½›ï¿½è­ï¿½ï¿½ï¿½é‹†ï¿½,æ’Œï¿½+éŠå‰ï¿½ï¿½+ï¿½ï¿½=12 -->
 				
-				<!-- ¥ªÃä -->
+				<!-- æ’Œé˜¡ï¿½ï¿½ -->
 				<div class="col-md-2">
 				  <c:if test="${not empty errorMsgs}">
 	                 <div style="margin-top:90px">
-	                 <font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+	                 <font style="color:red">éš¢ï¿½é½æ ¼è¿¤éšä¹©ï¿½ï¿½èˆªç‚Š:</font>
 	                 <ul>
 		               <c:forEach var="message" items="${errorMsgs}">
 			           <li style="color:red">${message}</li>
@@ -239,25 +241,25 @@ button.check_ok {
 				
 				</div>
 				
-				<!-- ¤¤¶¡ -->
+				<!-- éŠå‰ï¿½ï¿½ -->
 				<div class="col-md-7">
 					<form class="article" method="post" action="fa.do" name="form1" enctype="multipart/form-data">
 					    
-					    <p class="p1">·|­ûid</p>
+					    <p class="p1">ï¿½ï¿½ï¿½ã€d</p>
 						<input class="res_input" name="userId">
 						
-						<p class="p1">¿ï¾ÜÀ\ÆU</p>
+						<p class="p1">ï¿½è±¢ï¿½ï¿½æ“—ï¿½æ’±ï¿½</p>
 						<input class="res_input" name="restaurantId">
 
-						<p class="p1">¼ĞÃD</p>
+						<p class="p1">ç’…ï¿½æ†¿ï¿½</p>
 						<input class="title_input" type="TEXT" name="articleTitle"
 							size="30"
 							value="<%=(faVO == null) ? "" : faVO.getArticleTitle()%>" />
 
-						<p class="p1">µoªí¤é´Á</p>
+						<p class="p1">ï¿½æ½¸â€ï¿½äº¤ï¿½ï¿½</p>
 						<input name="articleDate" id="f_date1" type="text">
 
-						<p class="p1">¤º®e</p>
+						<p class="p1">ï¿½æ‰¹æ†</p>
 
 						<textarea class="editor" name="articleContent">
 			            <%=(faVO == null) ? "" : faVO.getArticleContent()%>
@@ -266,12 +268,12 @@ button.check_ok {
 						<input type="hidden" name="sta" size="2" value="1" />
 						 								
 						<div>
-						<button class="btn cancel" id="img_file">¿ï¾Ü¹Ï¤ù</button>
+						<button class="btn cancel" id="img_file">ï¿½è±¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</button>
 						<input type="file" multiple id="add_file" style="display: none;" name="imgfile" >
 						</div>						
 
 <!-- 						<div class="preview_img"> -->
-<!-- 							<span class="text">¹wÄı¹Ï</span> -->
+<!-- 							<span class="text">ï¿½ï¿½é–¬è³¢ï¿½ï¿½</span> -->
 <!-- 						</div> -->
 
 						<div class="row">
@@ -279,8 +281,8 @@ button.check_ok {
 							<div class="col-md-5">
 
 								<div>
-									<button type="reset" class="cancel">²M°£</button>
-									<button type="submit" class="check_ok">°e¥X</button>
+									<button type="reset" class="cancel">çšœï¿½ï¿½ï¿½</button>
+									<button type="submit" class="check_ok">ï¿½ï¿½ï¿½ï¿½</button>
 									<input type="hidden" name="action" value="insert">
 									
 									
@@ -297,7 +299,7 @@ button.check_ok {
 					</form>
 				</div>
 
-				<!-- ¥kÃä -->
+				<!-- ï¿½å–²ï¿½ï¿½ -->
 				<div class="col-md-3"></div>
 			</div>
 		</div>
@@ -339,27 +341,28 @@ button.check_ok {
 	
 	$(document).ready(function() {
         
-		/*=========¦Ñ®vªº¤é´Á±±¨î============*/
+		/*=========ï¿½ï¿½æ’£æ€ï¿½ï¿½ï¿½äº¤ï¿½ï¿½ï¿½æ‰¹ï¿½ï¿½============*/
 		$.datetimepicker.setLocale('zh');
         $('#f_date1').datetimepicker({
 	       theme: '',              //theme: 'dark',
 	       timepicker:false,       //timepicker:true,
-	       step: 1,                //step: 60 (³o¬Otimepickerªº¹w³]¶¡¹j60¤ÀÄÁ)
+	       step: 1,                //step: 60 (ï¿½ï¿½ï¿½çœ©imepickerï¿½ï¿½ï¿½ï¿½é–®å‰ï¿½ï¿½ï¿½ï¿½60ï¿½ï¿½ï¿½ï¿½)
 	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
 		   value: '<%=articleDate%>', // value:   new Date(),
-	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // ¥h°£¯S©w¤£§t
-	//startDate:	            '2017/07/10',  // °_©l¤é
-	//minDate:               '-1970-01-01', // ¥h°£¤µ¤é(¤£§t)¤§«e
-	//maxDate:               '+1970-01-01'  // ¥h°£¤µ¤é(¤£§t)¤§«á
+	//disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // ï¿½é§ï¿½æ–¤ï¿½å­µï¿½éŠï¿½ï¿½ï¿½
+	//startDate:	            '2017/07/10',  // éŸç‘•ï¿½ï¿½ï¿½
+	//minDate:               '-1970-01-01', // ï¿½é§ï¿½æ”¯ï¿½ï¿½ï¿½(éŠï¿½ï¿½ï¿½)éŠ‹ï¿½ï¿½ï¿½
+	//maxDate:               '+1970-01-01'  // ï¿½é§ï¿½æ”¯ï¿½ï¿½ï¿½(éŠï¿½ï¿½ï¿½)éŠ‹ï¿½æ•ºï¿½
 	    });
         
-        /*============ÂIÀ»¿ï¾Ü¹Ï¤ùªºbuttonªº«ö¶s·|±a¨ìinput file©Ê½è============*/
+
+        /*============æšºï¿½ï¿½ï¿½ï¿½è±¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½buttonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ’£å—…ï¿½è¿ºnput fileï¿½æ‰¯é‡­============*/
         $('#img_file').on("click", function(e){
 			$('#add_file').click();
 			return false;
 		});
         
-        /*===============¹wÄı¹Ï=================*/
+        /*===============ï¿½ï¿½é–¬è³¢ï¿½ï¿½=================*/
         
         var img_file_el = document.getElementById("add_file");
         img_file_el.addEventListener("change",function(e){

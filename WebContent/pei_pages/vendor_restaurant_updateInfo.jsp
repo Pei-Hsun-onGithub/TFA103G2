@@ -1,3 +1,4 @@
+<%@page import="com.style.model.StyleService"%>
 <%@page import="com.restaurant.model.RestaurantService"%>
 <%@page import="util.DistrictCityMapping"%>
 <%@page import="com.restaurant.model.RestaurantVO"%>
@@ -6,13 +7,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<%
-  response.setHeader("Cache-Control","no-store"); //HTTP 1.1
-  response.setHeader("Pragma","no-cache");        //HTTP 1.0
-  response.setDateHeader ("Expires", 0);
-%>
-
 <html lang="zxx">
 <head>
 <meta charset="UTF-8">
@@ -268,7 +262,7 @@ div.my-chooseType ul li button{
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="restaurantName"
-											value="欣葉日本料理">
+											value="<%=(restVO == null) ? "欣葉日本料理" : restVO.getRestaurantName()%>">
 									</div>
 								</div>
 
@@ -294,7 +288,7 @@ pageContext.setAttribute("now", now);
 								<div class="col-md-3">
 									<div class="single-input-wrap">
 										<input type="text" class="bs-timepicker" name="openTime"
-											value=<fmt:formatDate value="${now}" pattern="HH:mm"/>>
+											value=<fmt:formatDate value="${(restVO == null) ? now : restVO.openTime}" pattern="HH:mm"/>>
 									</div>
 								</div>
 
@@ -308,7 +302,7 @@ pageContext.setAttribute("now", now);
 								<div class="col-md-3">
 									<div class="single-input-wrap">
 										<input type="text" class="bs-timepicker" name="closeTime"
-										value=<fmt:formatDate value="${now}" pattern="HH:mm"/>>
+										value=<fmt:formatDate value="${(restVO == null) ? now : restVO.closeTime}" pattern="HH:mm"/>>
 									</div>
 								</div>
 
@@ -326,37 +320,37 @@ RestaurantService restSvc = new RestaurantService();
 
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox1" name="Mon"> <label
+											id="inlineCheckbox1" name="Mon" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.MON) %>> <label
 											class="form-check-label" for="inlineCheckbox1">Mon</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox2" name="Tue"> <label
+											id="inlineCheckbox2" name="Tue" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.TUE) %>> <label
 											class="form-check-label" for="inlineCheckbox2">Tue</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox1" name="Wed"> <label
+											id="inlineCheckbox1" name="Wed" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.WED) %>> <label
 											class="form-check-label" for="inlineCheckbox1">Wed</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox2" name="Thu"> <label
+											id="inlineCheckbox2" name="Thu" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.THUR) %>> <label
 											class="form-check-label" for="inlineCheckbox2">Thu</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox1" name="Fri"> <label
+											id="inlineCheckbox1" name="Fri" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.FRI) %>> <label
 											class="form-check-label" for="inlineCheckbox1">Fri</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox2" name="Sat"> <label
+											id="inlineCheckbox2" name="Sat" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.SAT) %>> <label
 											class="form-check-label" for="inlineCheckbox2">Sat</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="checkbox"
-											id="inlineCheckbox2" name="Sun"> <label
+											id="inlineCheckbox2" name="Sun" <%=(restVO == null) ? " " : restSvc.getCloseFlag(restVO, RestaurantService.SUN) %>> <label
 											class="form-check-label" for="inlineCheckbox2">Sun</label>
 									</div>
 								</div>
@@ -369,7 +363,7 @@ RestaurantService restSvc = new RestaurantService();
 								</div>
 								<div class="col-md-3">
 									<div class="single-input-wrap">
-										<input type="text" name="dayoffId" value="234" >
+										<input type="text" name="dayoffId" value="234">
 									</div>
 								</div>
 
@@ -410,7 +404,7 @@ RestaurantService restSvc = new RestaurantService();
 									<div class="single-input-wrap">
 										<select class="myclass-select myclass-select-lauchdays my-city-select"
 											id="inputGroupSelect01" name="city">
-											<c:forEach var="city" items="<%= DistrictCityMapping.getCitys(\"台北市\") %>">
+											<c:forEach var="city" items="<%= (restVO == null) ? DistrictCityMapping.getCitys(\"台北市\"): DistrictCityMapping.getCitys(restVO.getDistrict()) %>">
 												<option value="${city}">${city}
 											</c:forEach>
 										</select>
@@ -427,7 +421,7 @@ RestaurantService restSvc = new RestaurantService();
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="location"
-											value="復興北路一段100號">
+											value="<%=(restVO == null) ? "復興北路一段100號" : restVO.getLocation()%>">
 									</div>
 								</div>
 
@@ -453,24 +447,34 @@ RestaurantService restSvc = new RestaurantService();
 									</div>
 								</div>
 
+
+
 								<div class="col-md-8">
 									<label style="visibility: hidden;">類型候選</label>
 									<div class="single-input-wrap my-chooseType">
 										<!-- 放一些標籤上來 -->
+										<%
+										Integer style1Id = (Integer)session.getAttribute("style1");
+										Integer style2Id = (Integer)session.getAttribute("style2");
+										Integer style3Id = (Integer)session.getAttribute("style3");
+										
+										%>
+										
+										
 										<ul>
 											<li>
 											
-												<button type="button" class="choose1" aria-label="Close" hidden></button>
+												<button type="button" class="choose1" aria-label="Close" <%= (style1Id == null)? "hidden" : ""%> > <%= (style1Id == null)? "" : styleSvc.getStyleTypeByPrimaryKey(style1Id)%></button>
 												<!-- 預設的選項為 50 -->
-												<input type="hidden" class="inchoose1" name="style1">
+												<input type="hidden" class="inchoose1" name="style1" value="<%= (style1Id == null)? "" : style1Id%>">
 											</li>
 											<li>
-												<button type="button" class="choose2" aria-label="Close" hidden></button>
-												<input type="hidden" class="inchoose2" name="style2">
+												<button type="button" class="choose2" aria-label="Close" <%= (style2Id == null)? "hidden" : ""%> > <%= (style2Id == null)? "" : styleSvc.getStyleTypeByPrimaryKey(style2Id)%></button>
+												<input type="hidden" class="inchoose2" name="style2" value="<%= (style2Id == null)? "" : style2Id%>">
 											</li>
 											<li>
-												<button type="button" class="choose3" aria-label="Close" hidden></button>
-												<input type="hidden" class="inchoose3" name="style3">
+												<button type="button" class="choose3" aria-label="Close" <%= (style3Id == null)? "hidden" : ""%> > <%= (style3Id == null)? "" : styleSvc.getStyleTypeByPrimaryKey(style3Id)%></button>
+												<input type="hidden" class="inchoose3" name="style3" value="<%= (style3Id == null)? "" : style3Id%>">
 											</li>
 										</ul>
 
@@ -485,7 +489,7 @@ RestaurantService restSvc = new RestaurantService();
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="boss"
-											value="劉德華">
+											value="<%=(restVO == null) ? "劉德華" : restVO.getBoss()%>">
 									</div>
 								</div>
 
@@ -497,7 +501,7 @@ RestaurantService restSvc = new RestaurantService();
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="phone"
-											value="0933345667">
+											value="<%=(restVO == null) ? "0933345667" : restVO.getPhone()%>">
 									</div>
 								</div>
 
@@ -506,7 +510,7 @@ RestaurantService restSvc = new RestaurantService();
 							<!-- 隱藏的餐廳狀態 START-->
 
 							<input type="hidden" class="form-control" name="sta"
-								value="1">
+								value="<%=(restVO == null) ? "1" : restVO.getSta()%>">
 
 							<!-- 隱藏的餐廳狀態 END -->
 
@@ -515,8 +519,8 @@ RestaurantService restSvc = new RestaurantService();
 								<div class="row my-btn-wrapper">
 									<div class="col-md-4"></div>
 									<div class="col-md-4">
-										<input type="hidden" name="action" value="insert">
-										<button type="submit" class="btn btn-base" id="btn_submit">新增</button>
+										<input type="hidden" name="action" value="update">
+										<button type="submit" class="btn btn-base" id="btn_submit">更新</button>
 									</div>
 									<div class="col-md-2"></div>
 
@@ -569,117 +573,119 @@ RestaurantService restSvc = new RestaurantService();
 		$(document).ready(function() {
 
 			
-			
-/**********************************************      timepicker操作         ***************************************************/
-							
-							var p_file_el = document.getElementById("p_file");
-							var preview_el = document.getElementById("preview");
-							
-							$('.bs-timepicker').timepicker();
-
-							$('#my-img-btn').on("click", function(e) {
-								$('#p_file').click();
-
-							});
-							
-/**********************************************      餐廳類型選項操作         ***************************************************/
-							
-							/**************      將select選取到的option顯示出來      ***************/
-							$('.my-pickStyle').on("change",function(e) {
-								
-								var chosen = $("select[name='pickStyle'] :selected").text().trim();
-								var c1 = $('button.choose1').text().trim();
-								var c2 = $('button.choose2').text().trim();
-								var c3 = $('button.choose3').text().trim();
-								// 檯面上顯示的標籤不可以再被重複選取 
-								if( c1 === chosen || c2 === chosen || c3 ===chosen) {
-									//console.log("重複");
-									// doNothing!
-								} else {
-									if($('button.choose1').is('[hidden]')) {
-										$('button.choose1').removeAttr("hidden");
-										$('button.choose1').text(this.options[this.selectedIndex].text);
-										$('input.inchoose1').val(this.value);
+			/**********************************************      timepicker操作         ***************************************************/
 										
-									} else if($('button.choose2').is('[hidden]')) {
-										$('button.choose2').removeAttr("hidden");
-										$('button.choose2').text(this.options[this.selectedIndex].text);
-										$('input.inchoose2').val(this.value);
-									} else if($('button.choose3').is('[hidden]')) {
-										$('button.choose3').removeAttr("hidden");
-										$('button.choose3').text(this.options[this.selectedIndex].text);
-										$('input.inchoose3').val(this.value);
-									}
-								}
-				
-							});
-							
-							/**************      將點選的button關閉並且去值         ****************/
-							$('button.choose1').on("click", function(e) {
-								
-								this.setAttribute("hidden", "");
-								$('button.choose1').text("");
-								$('input.inchoose1').val("");
-								
-							});
-							
-							$('button.choose2').on("click", function(e) {
-								
-								this.setAttribute("hidden", "");
-								$('button.choose2').text("");
-								$('input.inchoose2').val("");
-							});
-							
-							$('button.choose3').on("click", function(e) {
-	
-								this.setAttribute("hidden", "");
-								$('button.choose3').text("");
-								$('input.inchoose3').val("");
-							});
-							
-							
-/*********************************************   縣市地區的操作       **********************************************************/
-							
-						
-							
-							// 設定預設的行政區選項是"台北市"
-							$("select.my-distrc-select option[value='台北市']").prop("selected", true);
-						
-							$('select.my-distrc-select').on('change', function(e){
-								var selectedDistrict = this.options[this.selectedIndex].text.trim();
-								var json = <%= DistrictCityMapping.getJsonDistricsMappingToCitys()%>;
-								
-								if(selectedDistrict === "台北市") {
-									// 滾出city的option
-									deleteAllCurrentOptions();
-									var citys = json.taipei;
-									addOptionsToSelect(citys);
-								}
-								
-								if(selectedDistrict === "桃園市") {
-									// 滾出city的option
-									deleteAllCurrentOptions();
-									var citys = json.taoyuan;
-									addOptionsToSelect(citys);
-			
-								}
-								
-				
-							});
-							
-							function deleteAllCurrentOptions() {
-								$('select.my-city-select').empty();
-							}
+										var p_file_el = document.getElementById("p_file");
+										var preview_el = document.getElementById("preview");
+										
+										$('.bs-timepicker').timepicker();
 
+										$('#my-img-btn').on("click", function(e) {
+											$('#p_file').click();
+
+										});
+										
+			/**********************************************      餐廳類型選項操作         ***************************************************/
+										
+										/**************      將select選取到的option顯示出來      ***************/
+										$('.my-pickStyle').on("change",function(e) {
+											
+											var chosen = $("select[name='pickStyle'] :selected").text().trim();
+											var c1 = $('button.choose1').text().trim();
+											var c2 = $('button.choose2').text().trim();
+											var c3 = $('button.choose3').text().trim();
+											// 檯面上顯示的標籤不可以再被重複選取 
+											if( c1 === chosen || c2 === chosen || c3 ===chosen) {
+												//console.log("重複");
+												// doNothing!
+											} else {
+												if($('button.choose1').is('[hidden]')) {
+													$('button.choose1').removeAttr("hidden");
+													$('button.choose1').text(this.options[this.selectedIndex].text);
+													$('input.inchoose1').val(this.value);
+													
+												} else if($('button.choose2').is('[hidden]')) {
+													$('button.choose2').removeAttr("hidden");
+													$('button.choose2').text(this.options[this.selectedIndex].text);
+													$('input.inchoose2').val(this.value);
+												} else if($('button.choose3').is('[hidden]')) {
+													$('button.choose3').removeAttr("hidden");
+													$('button.choose3').text(this.options[this.selectedIndex].text);
+													$('input.inchoose3').val(this.value);
+												}
+											}
 							
-							function addOptionsToSelect(citys) {
-									
-								citys.forEach(function(city) {
-									$('select.my-city-select').append("<option value=\""
-									 + city + "\">"+ city + "</option>");
-								});
-							}
+										});
+										
+										/**************      將點選的button關閉並且去值         ****************/
+										$('button.choose1').on("click", function(e) {
+											
+											this.setAttribute("hidden", "");
+											$('button.choose1').text("");
+											$('input.inchoose1').val("");
+											
+										});
+										
+										$('button.choose2').on("click", function(e) {
+											
+											this.setAttribute("hidden", "");
+											$('button.choose2').text("");
+											$('input.inchoose2').val("");
+										});
+										
+										$('button.choose3').on("click", function(e) {
+				
+											this.setAttribute("hidden", "");
+											$('button.choose3').text("");
+											$('input.inchoose3').val("");
+										});
+										
+										
+			/*********************************************   縣市地區的操作       **********************************************************/
+										
 							
+										$('select.my-distrc-select').on('change', function(e){
+											
+											var selectedDistrict = this.options[this.selectedIndex].text.trim();
+											var json = <%= DistrictCityMapping.getJsonDistricsMappingToCitys()%>;
+											
+											if(selectedDistrict === "台北市") {
+												// 滾出city的option
+												deleteAllCurrentOptions();
+												var citys = json.taipei;
+												addOptionsToSelect(citys);
+											}
+											
+											if(selectedDistrict === "桃園市") {
+												// 滾出city的option
+												deleteAllCurrentOptions();
+												var citys = json.taoyuan;
+												addOptionsToSelect(citys);
+						
+											}
+											
+							
+										});
+										
+										function deleteAllCurrentOptions() {
+											$('select.my-city-select').empty();
+										}
+
+										
+										function addOptionsToSelect(citys) {
+												
+											citys.forEach(function(city) {
+												$('select.my-city-select').append("<option value=\""
+												 + city + "\">"+ city + "</option>");
+											});
+										}
+										
+										/**************      Keep住更新後的畫面使用         ****************/
+										
+										$("select.my-distrc-select option[value='<%= (restVO == null)? "" : restVO.getDistrict() %>']").prop("selected", true);
+										$("select.my-city-select option[value='<%= (restVO == null)? "" : restVO.getCity() %>']").prop("selected", true);
+						
+
 						});
 	</script>
 </body>

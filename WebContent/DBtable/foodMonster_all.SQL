@@ -6,11 +6,11 @@ Drop table if exists Message;
 Drop table if exists PictureBase;
 Drop table if exists FoodArticle;
 
-DROP TABLE IF EXISTS OrderList; 	-- ­q³æ©ú²Ó
-DROP TABLE IF EXISTS RsOrder;		-- À\ÂI­q³æ
-DROP TABLE IF EXISTS Address;   	-- ¥~°e¦a§} 
-DROP TABLE IF EXISTS Card;			-- «H¥Î¥d 
-DROP TABLE IF EXISTS FavoRestaurant;-- ¦¬ÂÃÀ\ÆU
+DROP TABLE IF EXISTS OrderList; 	-- è¨‚å–®æ˜ç´°
+DROP TABLE IF EXISTS RsOrder;		-- é¤é»è¨‚å–®
+DROP TABLE IF EXISTS Address;   	-- å¤–é€åœ°å€ 
+DROP TABLE IF EXISTS Card;			-- ä¿¡ç”¨å¡ 
+DROP TABLE IF EXISTS FavoRestaurant;-- æ”¶è—é¤å»³
 
 DROP TABLE IF EXISTS RestaurantStyle;
 DROP TABLE IF EXISTS ElasticDayoff;
@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS MonsterBook;
 
 
 
-# ©ÇÃ~¹ÏÅ²
+# æ€ªç¸åœ–é‘‘
 CREATE TABLE MonsterBook (
 	monsterId			INT AUTO_INCREMENT NOT NULL,
 	minDemandLevel		INT,
@@ -37,14 +37,14 @@ CREATE TABLE MonsterBook (
 ) AUTO_INCREMENT = 1001;
 
 INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
-VALUES (1, '¤p¤p©Ç', '­q³æ¥[¦¨', '§Ú¬O¹Ï¤ù');
+VALUES (1, 'å°å°æ€ª', 'è¨‚å–®åŠ æˆ', 'æˆ‘æ˜¯åœ–ç‰‡');
 INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
-VALUES (10, '¤¤¤¤©Ç', '­q³æ¥[¦¨', '§Ú¬O¹Ï¤ù');
+VALUES (10, 'ä¸­ä¸­æ€ª', 'è¨‚å–®åŠ æˆ', 'æˆ‘æ˜¯åœ–ç‰‡');
 INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
-VALUES (20, '¤j¤j©Ç', '­q³æ¥[¦¨', '§Ú¬O¹Ï¤ù');
+VALUES (20, 'å¤§å¤§æ€ª', 'è¨‚å–®åŠ æˆ', 'æˆ‘æ˜¯åœ–ç‰‡');
 
 
-# µ¥¯Å¸gÅç
+# ç­‰ç´šç¶“é©—
 CREATE TABLE LevelExp (
 	Lv					INT AUTO_INCREMENT NOT NULL,
     expLow				INT,
@@ -57,7 +57,7 @@ INSERT INTO LevelExp (expLow, expUp)  VALUES (10, 100);
 INSERT INTO LevelExp (expLow, expUp)  VALUES (100, 1000);
 
 
-# ¦¨´N¸ê®Æ
+# æˆå°±è³‡æ–™
 CREATE TABLE Achieve (
 	achiId				INT AUTO_INCREMENT NOT NULL,
     achiName			VARCHAR(20),
@@ -73,14 +73,14 @@ CREATE TABLE Achieve (
 ) AUTO_INCREMENT = 2001;
 
 INSERT INTO Achieve (achiName, descript, openDate, validDays, achiArticle, achiOrder, gainFeed, gainGold, achiPic) 
-VALUES ('¤j­G¤ı', '¦¨¥\§¹¦¨50µ§­q³æ¥iÀò±o100­Ó¹}®Æ', '2021-09-07 00:00:00', 180, 0, 50, 100, 0, '³o¬O¹Ï¤ù');
+VALUES ('å¤§èƒƒç‹', 'æˆåŠŸå®Œæˆ50ç­†è¨‚å–®å¯ç²å¾—100å€‹é£¼æ–™', '2021-09-07 00:00:00', 180, 0, 50, 100, 0, 'é€™æ˜¯åœ–ç‰‡');
 INSERT INTO Achieve (achiName, descript, openDate, validDays, achiArticle, achiOrder, gainFeed, gainGold, achiPic) 
-VALUES ('ºî¦X¤ı', '¦¨¥\§¹¦¨25µ§­q³æ25µ§­¹°O¥iÀò±o50­Ó¹}®Æ50­Óª÷¹ô', '2021-09-09 00:00:00', 90, 25, 25, 50, 50, '³o¬O¹Ï¤ù');
+VALUES ('ç¶œåˆç‹', 'æˆåŠŸå®Œæˆ25ç­†è¨‚å–®25ç­†é£Ÿè¨˜å¯ç²å¾—50å€‹é£¼æ–™50å€‹é‡‘å¹£', '2021-09-09 00:00:00', 90, 25, 25, 50, 50, 'é€™æ˜¯åœ–ç‰‡');
 INSERT INTO Achieve (achiName, descript, openDate, validDays, achiArticle, achiOrder, gainFeed, gainGold, achiPic) 
-VALUES ('ª¾ÃÑ¤ı', '¦¨¥\§¹¦¨50½g­¹°O¥iÀò±o100­Óª÷¹ô', '2021-09-10 00:00:00', 60, 50, 0, 0, 100, '³o¬O¹Ï¤ù');
+VALUES ('çŸ¥è­˜ç‹', 'æˆåŠŸå®Œæˆ50ç¯‡é£Ÿè¨˜å¯ç²å¾—100å€‹é‡‘å¹£', '2021-09-10 00:00:00', 60, 50, 0, 0, 100, 'é€™æ˜¯åœ–ç‰‡');
 
 
-#·|­û¸ê®Æ	sta:4,5
+#æœƒå“¡è³‡æ–™	sta:4,5
 CREATE TABLE MemberInfo (
 	userId				INT AUTO_INCREMENT NOT NULL,
     email				VARCHAR(50),
@@ -104,34 +104,34 @@ CREATE TABLE MemberInfo (
 ) AUTO_INCREMENT = 20210001;
 
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('EdwardLDawkins@teleworm.us', 'Qu4GNM4Y', 'ÁÂ¨Ì¦B', '¤k', '1966-12-27', '0921562069', '³o¬O¤jÀY¶K', '2000-11-26', 20, 100, 1001, '¤p¤§', 1, 20, 4);
+VALUES ('EdwardLDawkins@teleworm.us', 'Qu4GNM4Y', 'è¬ä¾å†°', 'å¥³', '1966-12-27', '0921562069', 'é€™æ˜¯å¤§é ­è²¼', '2000-11-26', 20, 100, 1001, 'å°ä¹‹', 1, 20, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('JohnEDay@dayrep.com', 'MgD8QpXB', '³¯¨Î¿P', '¤k', '1992-10-16', '0987459122', '³o¬O¤jÀY¶K', '2019-09-24', 1000, 20, 1002, '«n­·', 2, 100, 4);
+VALUES ('JohnEDay@dayrep.com', 'MgD8QpXB', 'é™³ä½³ç‡•', 'å¥³', '1992-10-16', '0987459122', 'é€™æ˜¯å¤§é ­è²¼', '2019-09-24', 1000, 20, 1002, 'å—é¢¨', 2, 100, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('SteveMJackson@teleworm.us', 'PR3W9q2f', '¤ı©y§g', '¤k', '2006-01-12', '0921618067', '³o¬O¤jÀY¶K', '2001-10-26', 20, 100, 1001, '¶®¥ç', 1, 20, 4);
+VALUES ('SteveMJackson@teleworm.us', 'PR3W9q2f', 'ç‹å®œå›', 'å¥³', '2006-01-12', '0921618067', 'é€™æ˜¯å¤§é ­è²¼', '2001-10-26', 20, 100, 1001, 'é›…äº¦', 1, 20, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('stevemjackson@fleckens.hu', 'gNbHkZh3', '¼ï§g¦Ö', '¤k', '2016-07-16', '0961036280', '³o¬O¤jÀY¶K', '2004-04-08', 1000, 20, 1002, '­¸µ^', 2, 100, 5);
+VALUES ('stevemjackson@fleckens.hu', 'gNbHkZh3', 'æ½˜å›è¿', 'å¥³', '2016-07-16', '0961036280', 'é€™æ˜¯å¤§é ­è²¼', '2004-04-08', 1000, 20, 1002, 'é£›ç´', 2, 100, 5);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('AmyJWallace@teleworm.us', 'HAa7g3KC', '·¨­ì©f', '¤k', '1926-07-02', '0961544146', '³o¬O¤jÀY¶K', '2007-10-03', 20, 100, 1001, '¥ÕÄõ', 1, 20, 4);
+VALUES ('AmyJWallace@teleworm.us', 'HAa7g3KC', 'æ¥ŠåŸå¦¹', 'å¥³', '1926-07-02', '0961544146', 'é€™æ˜¯å¤§é ­è²¼', '2007-10-03', 20, 100, 1001, 'ç™½è˜­', 1, 20, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('TerryABrown@teleworm.us', 'sDchsSUc', '¶À°Ò¬M', '¤k', '1950-03-11', '0915724955', '³o¬O¤jÀY¶K', '2013-10-16', 1000, 20, 1002, '¤s¥Õ', 2, 100, 4);
+VALUES ('TerryABrown@teleworm.us', 'sDchsSUc', 'é»ƒæ›¼æ˜ ', 'å¥³', '1950-03-11', '0915724955', 'é€™æ˜¯å¤§é ­è²¼', '2013-10-16', 1000, 20, 1002, 'å±±ç™½', 2, 100, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('RobertJThornton@armyspy.com', 'S9WpvK9V', '¤ı®a»¨', '¨k', '1969-12-13', '0970258018', '³o¬O¤jÀY¶K', '2011-05-01', 20, 100, 1001, '¾K¬Ã', 1, 20, 5);
+VALUES ('RobertJThornton@armyspy.com', 'S9WpvK9V', 'ç‹å®¶è±ª', 'ç”·', '1969-12-13', '0970258018', 'é€™æ˜¯å¤§é ­è²¼', '2011-05-01', 20, 100, 1001, 'é†‰ç', 1, 20, 5);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('JeffreyBBalling@armyspy.com', 'p8WA9Au5', '¨HÄ_©ø', '¤k', '1922-06-21', '0935929444', '³o¬O¤jÀY¶K', '2018-11-10', 1000, 20, 1002, '·s¥©', 2, 100, 4);
+VALUES ('JeffreyBBalling@armyspy.com', 'p8WA9Au5', 'æ²ˆå¯¶æ˜†', 'å¥³', '1922-06-21', '0935929444', 'é€™æ˜¯å¤§é ­è²¼', '2018-11-10', 1000, 20, 1002, 'æ–°å·§', 2, 100, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('RandyDSnyder@jourrapide.com', 'bZY9CHxw', '¤ı¹t±©', '¤k', '1926-07-02', '0953417861', '³o¬O¤jÀY¶K', '2018-11-16', 20, 100, 1001, '¥®Âù', 1, 20, 5);
-INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('
-SusanJArviso@jourrapide.com', 'pvswkPP3', '½²¥Á¬f', '¨k', '1978-07-17', '0934263542', '³o¬O¤jÀY¶K', '2019-03-07', 1000, 20, 1002, '­»µ^', 2, 100, 4);
+VALUES ('RandyDSnyder@jourrapide.com', 'bZY9CHxw', 'ç‹é–æƒŸ', 'å¥³', '1926-07-02', '0953417861', 'é€™æ˜¯å¤§é ­è²¼', '2018-11-16', 20, 100, 1001, 'å¹¼é›™', 1, 20, 5);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
 VALUES ('
-LeighRPang@armyspy.com', 'V8qG6x8U', '³¯°]³ß', '¨k', '1991-02-27', '0921090574', '³o¬O¤jÀY¶K', '2013-07-08', 20, 100, 1001, '¥­¬X', 1, 20, 5);
+SusanJArviso@jourrapide.com', 'pvswkPP3', 'è”¡æ°‘æŸ', 'ç”·', '1978-07-17', '0934263542', 'é€™æ˜¯å¤§é ­è²¼', '2019-03-07', 1000, 20, 1002, 'é¦™ç´', 2, 100, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
 VALUES ('
-OdellVOritz@dayrep.com', 'KsxD5ngR', '¿à¤¦®õ', '¨k', '1995-04-29', '0914918600', '³o¬O¤jÀY¶K', '2008-10-04', 1000, 20, 1002, '·sÅS', 2, 100, 4);
+LeighRPang@armyspy.com', 'V8qG6x8U', 'é™³è²¡å–œ', 'ç”·', '1991-02-27', '0921090574', 'é€™æ˜¯å¤§é ­è²¼', '2013-07-08', 20, 100, 1001, 'å¹³æŸ”', 1, 20, 5);
+INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
+VALUES ('
+OdellVOritz@dayrep.com', 'KsxD5ngR', 'è³´ä¸¹æ³°', 'ç”·', '1995-04-29', '0914918600', 'é€™æ˜¯å¤§é ­è²¼', '2008-10-04', 1000, 20, 1002, 'æ–°éœ²', 2, 100, 4);
 
-# ¦¨´N¶i«×	sta13,14,15
+# æˆå°±é€²åº¦	sta13,14,15
 CREATE TABLE AchieveProgress (
 	userId				INT NOT NULL,
 	achiId 				INT NOT NULL,
@@ -170,7 +170,7 @@ INSERT INTO AchieveProgress (userId, achiId, currentArticle, currentOrder, begin
 VALUES (20210012, 2002, 10, 4, '2021-09-09 23:59:59', 14);
 
 
-# À\ÆU¼t°Ó 
+# é¤å»³å» å•† 
 CREATE TABLE Restaurant (
 	restaurantid     	INT AUTO_INCREMENT NOT NULL,
 	restaurantname      VARCHAR(20),
@@ -187,16 +187,16 @@ CREATE TABLE Restaurant (
 	CONSTRAINT Restaurant_restaurantid_PK PRIMARY KEY (restaurantid)
 ) AUTO_INCREMENT = 7001;
 
-INSERT INTO Restaurant (restaurantname, boss, phone, district, city, location, opentime, closetime, dayoffid, weeklyleave, sta)  VALUES ('ÅW­¹¤Ñ°ó', '³s³Ó°A', '0222983345', '¥x¥_¥«', '¤º´ò°Ï', '¤¤¤s¸ô¤G¬q19¸¹8¼Ó', '08:00:00', '21:30:00', 233, '0001000', 4 );
-INSERT INTO Restaurant (restaurantname, boss, phone, district, city, location, opentime, closetime, dayoffid, weeklyleave, sta)  VALUES ('®üÅQ¤ı', 'µæ°AÆN', '0944778449', '¥x¥_¥«', '¤j¦P°Ï', '©Ó¼w¸ô¤T¬q42¸¹19¼Ó', '13:00:00', '22:30:00', 234, '0000000', 5 );
-INSERT INTO Restaurant (restaurantname, boss, phone, district, city, location, opentime, closetime, dayoffid, weeklyleave, sta)  VALUES ('Ashidori', 'ÃÃ­ì©İ®ü', '0935779049', '·s¥_¥«', '¤¤©M°Ï', '«Ñ§À¸ô89¸¹', '17:00:00', '00:30:00', 235, '0100010', 4 );
-INSERT INTO Restaurant (restaurantname, boss, phone, district, city, location, opentime, closetime, dayoffid, weeklyleave, sta)  VALUES ('»ô¨ı¤õÁç', '¾|¤Ò', '0935779249', '·s¥_¥«', 'Äª¬w°Ï', 'ªøºa¸ô89¸¹', '17:00:00', '00:30:00', 235, '0100010', 4 );
-INSERT INTO Restaurant (restaurantname, boss, phone, district, city, location, opentime, closetime, dayoffid, weeklyleave, sta)  VALUES ('¦w®æ¤h', '¤ñº¸»\¯÷', '0935779888', '¥x¥_¥«', '¤j¦w°Ï', '©Ó¼w¸ô89¸¹', '17:00:00', '22:30:00', 235, '0100011', 5 );
-INSERT INTO Restaurant (restaurantname, boss, phone, district, city, location, opentime, closetime, dayoffid, weeklyleave, sta)  VALUES ('¤Ù¨Ê©ÔÄÑ', '¥[ÃÃÆN', '0935439249', '·s¥_¥«', '¤T­«°Ï', '¨S¦³¸ô334¸¹', '12:00:00', '21:30:00', 235, '0000000', 4 );
-INSERT INTO Restaurant (restaurantname, boss, phone, district, city, location, opentime, closetime, dayoffid, weeklyleave, sta)  VALUES ('¯ÀÄÆ­»', '§®ÁI', '0935346249', '¥x¥_¥«', 'ªF°Ï', 'º~¤fµó¸ô89¸¹', '06:00:00', '16:30:00', 235, '0111010', 4 );
+INSERT INTO Restaurant (restaurantname, boss, phone, district, city, location, opentime, closetime, dayoffid, weeklyleave, sta)  VALUES ('é¥—é£Ÿå¤©å ‚', 'é€£å‹èšŠ', '0222983345', 'å°åŒ—å¸‚', 'å…§æ¹–å€', 'ä¸­å±±è·¯äºŒæ®µ19è™Ÿ8æ¨“', '08:00:00', '21:30:00', 233, '0001000', 4 );
+INSERT INTO Restaurant (restaurantname, boss, phone, district, city, location, opentime, closetime, dayoffid, weeklyleave, sta)  VALUES ('æµ·éœ¸ç‹', 'èœèšŠé·¹', '0944778449', 'å°åŒ—å¸‚', 'å¤§åŒå€', 'æ‰¿å¾·è·¯ä¸‰æ®µ42è™Ÿ19æ¨“', '13:00:00', '22:30:00', 234, '0000000', 5 );
+INSERT INTO Restaurant (restaurantname, boss, phone, district, city, location, opentime, closetime, dayoffid, weeklyleave, sta)  VALUES ('Ashidori', 'è—¤åŸæ‹“æµ·', '0935779049', 'æ–°åŒ—å¸‚', 'ä¸­å’Œå€', 'å··å°¾è·¯89è™Ÿ', '17:00:00', '00:30:00', 235, '0100010', 4 );
+INSERT INTO Restaurant (restaurantname, boss, phone, district, city, location, opentime, closetime, dayoffid, weeklyleave, sta)  VALUES ('é½Šå‘³ç«é‹', 'é­¯å¤«', '0935779249', 'æ–°åŒ—å¸‚', 'è˜†æ´²å€', 'é•·æ¦®è·¯89è™Ÿ', '17:00:00', '00:30:00', 235, '0100010', 4 );
+INSERT INTO Restaurant (restaurantname, boss, phone, district, city, location, opentime, closetime, dayoffid, weeklyleave, sta)  VALUES ('å®‰æ ¼å£«', 'æ¯”çˆ¾è“‹èŒ²', '0935779888', 'å°åŒ—å¸‚', 'å¤§å®‰å€', 'æ‰¿å¾·è·¯89è™Ÿ', '17:00:00', '22:30:00', 235, '0100011', 5 );
+INSERT INTO Restaurant (restaurantname, boss, phone, district, city, location, opentime, closetime, dayoffid, weeklyleave, sta)  VALUES ('å±¯äº¬æ‹‰éºµ', 'åŠ è—¤é·¹', '0935439249', 'æ–°åŒ—å¸‚', 'ä¸‰é‡å€', 'æ²’æœ‰è·¯334è™Ÿ', '12:00:00', '21:30:00', 235, '0000000', 4 );
+INSERT INTO Restaurant (restaurantname, boss, phone, district, city, location, opentime, closetime, dayoffid, weeklyleave, sta)  VALUES ('ç´ é£„é¦™', 'å¦™ç¦ª', '0935346249', 'å°åŒ—å¸‚', 'æ±å€', 'æ¼¢å£è¡—è·¯89è™Ÿ', '06:00:00', '16:30:00', 235, '0111010', 4 );
 
 
-# À\ÂI
+# é¤é»
 CREATE TABLE Meal (
 	mealid         		INT AUTO_INCREMENT NOT NULL,
 	sta     			INT,
@@ -212,33 +212,33 @@ CREATE TABLE Meal (
 	CONSTRAINT Meal_mealid_PK PRIMARY KEY (mealid)
 ) AUTO_INCREMENT = 501;
 
-INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '¤»¶ôÂû±í', '¬µª«', 199, '2021-04-19 22:12:34', 60, '¾A¦X©~®a©M¼Ö¨É¥Î', null, 7002);
-INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '³Â»¶ÃÄ¿¯Áç', '¤õÁç', 450, '2021-07-15 23:04:54', 90, '¶æ»¶¤£¦ºÄĞ', null, 7004);
-INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, 'ªü¥j½Ş', '¿N¯N', 150, '2021-09-15 23:04:54', 90, '¨Ó¦Û¨RÃ·ªº´ş¨ı', null, 7003);
-INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, 'ªF¨Ê³b°©©ÔÄÑ', '¤é¦¡', 200, '2005-09-15 23:04:54', 90, '¨Ó¦ÛªF¨Ê­È¤H©ÔÄÑ', null, 7006);
-INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '»¨µØ©Mµæ', '¤¤¦¡', 5000, '2000-09-15 23:04:54', 90, '®b®u®Æ²zªº»â¾É«~µP', null, 7002);
+INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, 'å…­å¡Šé›æ¡¶', 'ç‚¸ç‰©', 199, '2021-04-19 22:12:34', 60, 'é©åˆå±…å®¶å’Œæ¨‚äº«ç”¨', null, 7002);
+INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, 'éº»è¾£è—¥è†³é‹', 'ç«é‹', 450, '2021-07-15 23:04:54', 90, 'å—†è¾£ä¸æ­»é¹¹', null, 7004);
+INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, 'é˜¿å¤è±¬', 'ç‡’çƒ¤', 150, '2021-09-15 23:04:54', 90, 'ä¾†è‡ªæ²–ç¹©çš„æ»‹å‘³', null, 7003);
+INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, 'æ±äº¬è±šéª¨æ‹‰éºµ', 'æ—¥å¼', 200, '2005-09-15 23:04:54', 90, 'ä¾†è‡ªæ±äº¬å€¼äººæ‹‰éºµ', null, 7006);
+INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, 'è±ªè¯å’Œèœ', 'ä¸­å¼', 5000, '2000-09-15 23:04:54', 90, 'å®´å¸­æ–™ç†çš„é ˜å°å“ç‰Œ', null, 7002);
 
 
-# ­·®æÃş«¬
+# é¢¨æ ¼é¡å‹
 CREATE TABLE Style (
 	styleid		INT AUTO_INCREMENT NOT NULL,
 	styletype   VARCHAR(20),
 	CONSTRAINT Style_styleid_PK PRIMARY KEY (styleid)
 ) AUTO_INCREMENT = 50;
 
-INSERT INTO Style (styletype) VALUES ('¿N¯N');
-INSERT INTO Style (styletype) VALUES ('¤é¦¡');
-INSERT INTO Style (styletype) VALUES ('¤¤¦¡');
-INSERT INTO Style (styletype) VALUES ('®õ¦¡');
-INSERT INTO Style (styletype) VALUES ('¦è¦¡');
-INSERT INTO Style (styletype) VALUES ('³t­¹');
-INSERT INTO Style (styletype) VALUES ('¯À­¹');
-INSERT INTO Style (styletype) VALUES ('¤õÁç');
-INSERT INTO Style (styletype) VALUES ('¤p¦Y');
-INSERT INTO Style (styletype) VALUES ('¬µª«');
+INSERT INTO Style (styletype) VALUES ('ç‡’çƒ¤');
+INSERT INTO Style (styletype) VALUES ('æ—¥å¼');
+INSERT INTO Style (styletype) VALUES ('ä¸­å¼');
+INSERT INTO Style (styletype) VALUES ('æ³°å¼');
+INSERT INTO Style (styletype) VALUES ('è¥¿å¼');
+INSERT INTO Style (styletype) VALUES ('é€Ÿé£Ÿ');
+INSERT INTO Style (styletype) VALUES ('ç´ é£Ÿ');
+INSERT INTO Style (styletype) VALUES ('ç«é‹');
+INSERT INTO Style (styletype) VALUES ('å°åƒ');
+INSERT INTO Style (styletype) VALUES ('ç‚¸ç‰©');
 
 
-# ¼u©Ê¥ğ°²
+# å½ˆæ€§ä¼‘å‡
 CREATE TABLE ElasticDayoff (
 	dayoffid		INT AUTO_INCREMENT NOT NULL,
 	restaurantid  	INT  NOT NULL,
@@ -256,7 +256,7 @@ INSERT INTO ElasticDayoff (restaurantid, newWeeklyleave) VALUES (7006,'1010010')
 
 
 
-# À\ÆUÃş«¬
+# é¤å»³é¡å‹
 CREATE TABLE RestaurantStyle (
 	restaurantid	INT  NOT NULL,
 	styleid	  		INT  NOT NULL,
@@ -275,7 +275,7 @@ CREATE TABLE RestaurantStyle (
 #INSERT INTO RestaurantStyle (restaurantid, styleid) VALUES (7003,54);
 
 
-# ¥~°e¦a§}
+# å¤–é€åœ°å€
 CREATE TABLE Address (
 	deliveryaddid     	INT AUTO_INCREMENT NOT NULL,
 	userid      		INT NOT NULL,
@@ -290,31 +290,31 @@ CREATE TABLE Address (
 ) AUTO_INCREMENT = 1;
 
  INSERT INTO Address ( userid, customername, deliverphone, deliveraddress, buildingname, note,  sta)  
- VALUES (20210001, '³¯°ê®¦', '0922983345', '·s¦Ë¥«¥_°Ï¸g°ê¸ô¤@¬q238¸¹', '­ô­Û¤ñ¨È¤j¼Ó', '§Ú­n¥[»¶', 1);
+ VALUES (20210001, 'é™³åœ‹æ©', '0922983345', 'æ–°ç«¹å¸‚åŒ—å€ç¶“åœ‹è·¯ä¸€æ®µ238è™Ÿ', 'å“¥å€«æ¯”äºå¤§æ¨“', 'æˆ‘è¦åŠ è¾£', 1);
  INSERT INTO Address ( userid, customername, deliverphone, deliveraddress, buildingname, note,  sta)  
- VALUES (20210002, 'ªL«ä­Û', '0934808576', '¥x«n¥«¦w«n°Ï¦w©M¸ô¤@¬q186«Ñ15¸¹', '¸t¤ß¤j¼Ó', '§Ú¤£­n»¶', 2);
+ VALUES (20210002, 'æ—æ€å€«', '0934808576', 'å°å—å¸‚å®‰å—å€å®‰å’Œè·¯ä¸€æ®µ186å··15è™Ÿ', 'è–å¿ƒå¤§æ¨“', 'æˆ‘ä¸è¦è¾£', 2);
 INSERT INTO Address ( userid, customername, deliverphone, deliveraddress, buildingname, note,  sta)  
- VALUES (20210003, '¤ı¤l¯Â', '0919779933', '¥x¤¤¥«¤Ó¥­°Ï©yªY¸ô267¸¹', '¬ü¦w¤j¼Ó', '§Ú­n¥[»¶', 1);
+ VALUES (20210003, 'ç‹å­ç´”', '0919779933', 'å°ä¸­å¸‚å¤ªå¹³å€å®œæ¬£è·¯267è™Ÿ', 'ç¾å®‰å¤§æ¨“', 'æˆ‘è¦åŠ è¾£', 1);
   INSERT INTO Address ( userid, customername, deliverphone, deliveraddress, buildingname, note,  sta)  
- VALUES (20210004, '±i­b­}', '0987529962', '·s¥_¥«¤T®l°Ï¤j«i¸ô238¸¹', '¸t¦a¦w­ô¤j¼Ó', '§Ú­n¥[»¶', 1);
+ VALUES (20210004, 'å¼µè‹‘è¿ª', '0987529962', 'æ–°åŒ—å¸‚ä¸‰å³½å€å¤§å‹‡è·¯238è™Ÿ', 'è–åœ°å®‰å“¥å¤§æ¨“', 'æˆ‘è¦åŠ è¾£', 1);
   INSERT INTO Address ( userid, customername, deliverphone, deliveraddress, buildingname, note,  sta)  
- VALUES (20210005, '©÷¶hºÕ', '0963428053', '°ª¶¯¥«»ñ¤s°Ï¥­µ¥¸ô38¸¹', '´¼«a¤j¼Ó', '§Ú­n¥[»¶', 1);
+ VALUES (20210005, 'æ˜Œé€¸ç¦', '0963428053', 'é«˜é›„å¸‚é³³å±±å€å¹³ç­‰è·¯38è™Ÿ', 'æ™ºå† å¤§æ¨“', 'æˆ‘è¦åŠ è¾£', 1);
   INSERT INTO Address ( userid, customername, deliverphone, deliveraddress, buildingname, note,  sta)  
- VALUES (20210006, '¤ı«Â§Ê', '0924817741', '­]®ß¿¤ÀY¥÷¥««H¤¤¸ô105«Ñ8¸¹7¼Ó', 'ºë¸Û¼Ó', '§Ú­n¥[»¶', 1);
+ VALUES (20210006, 'ç‹å¨å»·', '0924817741', 'è‹—æ —ç¸£é ­ä»½å¸‚ä¿¡ä¸­è·¯105å··8è™Ÿ7æ¨“', 'ç²¾èª æ¨“', 'æˆ‘è¦åŠ è¾£', 1);
   INSERT INTO Address ( userid, customername, deliverphone, deliveraddress, buildingname, note,  sta)  
- VALUES (20210007, '±çŞ³ã¸', '0919030566', '·s¦Ë¿¤´ò¤f¶m¤¯¼Ö¸ô190¸¹', '°ê®õ¤j¼Ó', '§Ú­n¥[»¶', 1);
+ VALUES (20210007, 'æ¢ç‘‹è“', '0919030566', 'æ–°ç«¹ç¸£æ¹–å£é„‰ä»æ¨‚è·¯190è™Ÿ', 'åœ‹æ³°å¤§æ¨“', 'æˆ‘è¦åŠ è¾£', 1);
   INSERT INTO Address ( userid, customername, deliverphone, deliveraddress, buildingname, note,  sta)  
- VALUES (20210008, '®}©É´@', '0987121140', '¥x¥_¥«¤º´ò°Ï·s´ò¤T¸ô244¸¹', '´I¨¹¤j¼Ó', '§Ú­n¥[»¶', 1);
+ VALUES (20210008, 'å¾æ€¡å©·', '0987121140', 'å°åŒ—å¸‚å…§æ¹–å€æ–°æ¹–ä¸‰è·¯244è™Ÿ', 'å¯Œé‚¦å¤§æ¨“', 'æˆ‘è¦åŠ è¾£', 1);
   INSERT INTO Address ( userid, customername, deliverphone, deliveraddress, buildingname, note,  sta)  
- VALUES (20210009, '³¯©v¿«', '0988310059', '¶³ªL¿¤¥x¦è¶m±[Â×¸ô46¸¹', '¦w®õ¤j¼Ó', '§Ú­n¥[»¶', 1);
+ VALUES (20210009, 'é™³å®—ç¿°', '0988310059', 'é›²æ—ç¸£å°è¥¿é„‰å´™è±è·¯46è™Ÿ', 'å®‰æ³°å¤§æ¨“', 'æˆ‘è¦åŠ è¾£', 1);
   INSERT INTO Address ( userid, customername, deliverphone, deliveraddress, buildingname, note,  sta)  
- VALUES (20210010, '­J«Â§Ê', '0961746675', '¥x¤¤¥«¥_¤Ù°Ï­x¥\¸ô¤G¬q177«Ñ11¸¹', '¥Ã´Ë¤j¼Ó', '§Ú­n¥[»¶', 1);
+ VALUES (20210010, 'èƒ¡å¨å»·', '0961746675', 'å°ä¸­å¸‚åŒ—å±¯å€è»åŠŸè·¯äºŒæ®µ177å··11è™Ÿ', 'æ°¸æ£®å¤§æ¨“', 'æˆ‘è¦åŠ è¾£', 1);
   INSERT INTO Address ( userid, customername, deliverphone, deliveraddress, buildingname, note,  sta)  
- VALUES (20210011, '½²¦N¤Í', '0988811498', '·s¦Ë¿¤Ãö¦èÂí¤¤¤sªF¸ô39¸¹', '¥Ã«O¤j¼Ó', '§Ú­n¥[»¶', 1);
+ VALUES (20210011, 'è”¡å‰å‹', '0988811498', 'æ–°ç«¹ç¸£é—œè¥¿é®ä¸­å±±æ±è·¯39è™Ÿ', 'æ°¸ä¿å¤§æ¨“', 'æˆ‘è¦åŠ è¾£', 1);
  INSERT INTO Address ( userid, customername, deliverphone, deliveraddress, buildingname, note,  sta)  
- VALUES (20210012, '³¯«a°a', '0932271151', '¥x¥_¥«¤å¤s°Ï¸U¬üµó¤@¬q85«Ñ3¸¹7¼Ó', '¦w±d¤j¼Ó', '§Ú­n¥[»¶', 1);
+ VALUES (20210012, 'é™³å† è»’', '0932271151', 'å°åŒ—å¸‚æ–‡å±±å€è¬ç¾è¡—ä¸€æ®µ85å··3è™Ÿ7æ¨“', 'å®‰åº·å¤§æ¨“', 'æˆ‘è¦åŠ è¾£', 1);
  
-# «H¥Î¥d
+# ä¿¡ç”¨å¡
 CREATE TABLE Card (
 	cardid         	INT AUTO_INCREMENT NOT NULL,
 	userid     		INT NOT NULL,
@@ -331,32 +331,32 @@ CREATE TABLE Card (
 ) AUTO_INCREMENT = 1;
 
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210001, '³¯°ê®¦', 4716329842362253, '2023-12-31', '466', '·s¦Ë¥«¥_°Ï¸g°ê¸ô¤@¬q238¸¹', '632', 1);
+ 	VALUES(20210001, 'é™³åœ‹æ©', 4716329842362253, '2023-12-31', '466', 'æ–°ç«¹å¸‚åŒ—å€ç¶“åœ‹è·¯ä¸€æ®µ238è™Ÿ', '632', 1);
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210002, 'ªL«ä­Û', 2058942978991061, '2024-05-31', '689', '¥x«n¥«¦w«n°Ï¦w©M¸ô¤@¬q186«Ñ15¸¹', '269', 1);
+ 	VALUES(20210002, 'æ—æ€å€«', 2058942978991061, '2024-05-31', '689', 'å°å—å¸‚å®‰å—å€å®‰å’Œè·¯ä¸€æ®µ186å··15è™Ÿ', '269', 1);
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210003, '¤ı¤l¯Â', 9318776636761858, '2023-04-23', '233', '¥x¤¤¥«¤Ó¥­°Ï©yªY¸ô267¸¹', '632', 1);
+ 	VALUES(20210003, 'ç‹å­ç´”', 9318776636761858, '2023-04-23', '233', 'å°ä¸­å¸‚å¤ªå¹³å€å®œæ¬£è·¯267è™Ÿ', '632', 1);
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210004, '±i­b­}', 8765432187654321, '2023-01-31', '006', '·s¥_¥«¤T®l°Ï¤j«i¸ô238¸¹', '269', 1);
+ 	VALUES(20210004, 'å¼µè‹‘è¿ª', 8765432187654321, '2023-01-31', '006', 'æ–°åŒ—å¸‚ä¸‰å³½å€å¤§å‹‡è·¯238è™Ÿ', '269', 1);
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210005, '©÷¶hºÕ', 0538755043873639, '2025-03-31', '643', '°ª¶¯¥«»ñ¤s°Ï¥­µ¥¸ô38¸¹', '632', 1);
+ 	VALUES(20210005, 'æ˜Œé€¸ç¦', 0538755043873639, '2025-03-31', '643', 'é«˜é›„å¸‚é³³å±±å€å¹³ç­‰è·¯38è™Ÿ', '632', 1);
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210006, '¤ı«Â§Ê', 5332056483252861, '2023-11-23', '360', '­]®ß¿¤ÀY¥÷¥««H¤¤¸ô105«Ñ8¸¹7¼Ó', '269', 1);
+ 	VALUES(20210006, 'ç‹å¨å»·', 5332056483252861, '2023-11-23', '360', 'è‹—æ —ç¸£é ­ä»½å¸‚ä¿¡ä¸­è·¯105å··8è™Ÿ7æ¨“', '269', 1);
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210007, '±çŞ³ã¸', 2400596074546732, '2022-10-31', '711', '·s¦Ë¿¤´ò¤f¶m¤¯¼Ö¸ô190¸¹', '632', 1);
+ 	VALUES(20210007, 'æ¢ç‘‹è“', 2400596074546732, '2022-10-31', '711', 'æ–°ç«¹ç¸£æ¹–å£é„‰ä»æ¨‚è·¯190è™Ÿ', '632', 1);
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210008, '®}©É´@', 5950976460340512, '2021-12-31', '885', '¥x¥_¥«¤º´ò°Ï·s´ò¤T¸ô244¸¹', '269', 1);
+ 	VALUES(20210008, 'å¾æ€¡å©·', 5950976460340512, '2021-12-31', '885', 'å°åŒ—å¸‚å…§æ¹–å€æ–°æ¹–ä¸‰è·¯244è™Ÿ', '269', 1);
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210009, '³¯©v¿«', 1234567812345678, '2024-01-31', '152', '¶³ªL¿¤¥x¦è¶m±[Â×¸ô46¸¹', '632', 1);
+ 	VALUES(20210009, 'é™³å®—ç¿°', 1234567812345678, '2024-01-31', '152', 'é›²æ—ç¸£å°è¥¿é„‰å´™è±è·¯46è™Ÿ', '632', 1);
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210010, '­J«Â§Ê', 9542710573627430, '2025-05-31', '075', '¥x¤¤¥«¥_¤Ù°Ï­x¥\¸ô¤G¬q177«Ñ11¸¹', '269', 1);
+ 	VALUES(20210010, 'èƒ¡å¨å»·', 9542710573627430, '2025-05-31', '075', 'å°ä¸­å¸‚åŒ—å±¯å€è»åŠŸè·¯äºŒæ®µ177å··11è™Ÿ', '269', 1);
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210011, '½²¦N¤Í', 6956674759132833, '2024-08-31', '171', '·s¦Ë¿¤Ãö¦èÂí¤¤¤sªF¸ô39¸¹', '632', 1);
+ 	VALUES(20210011, 'è”¡å‰å‹', 6956674759132833, '2024-08-31', '171', 'æ–°ç«¹ç¸£é—œè¥¿é®ä¸­å±±æ±è·¯39è™Ÿ', '632', 1);
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210012, '³¯«a°a', 3597905196233614, '2023-12-31', '044', '¥x¥_¥«¤å¤s°Ï¸U¬üµó¤@¬q85«Ñ3¸¹7¼Ó', '269', 1);
+ 	VALUES(20210012, 'é™³å† è»’', 3597905196233614, '2023-12-31', '044', 'å°åŒ—å¸‚æ–‡å±±å€è¬ç¾è¡—ä¸€æ®µ85å··3è™Ÿ7æ¨“', '269', 1);
  	
  	
-   # À\ÂI­q³æ
+   # é¤é»è¨‚å–®
 CREATE TABLE RsOrder (
 	orderid 		INT AUTO_INCREMENT NOT NULL,
 	userid     		INT NOT NULL,
@@ -392,7 +392,7 @@ INSERT INTO RsOrder
 (20210011, 6 ,11 ,1 ,0 ,'2021-05-05 08:00:00', '2021-05-05 09:30:00' ,'2021-05-05 08:00:00', '2021-05-05 21:30:00','2021-05-05 21:30:00' ,5 ,null, 1),
 (20210012, 8 ,12 ,1 ,0 ,'2021-05-05 08:00:00', '2021-05-05 09:30:00' ,'2021-05-05 08:00:00', '2021-05-05 21:30:00','2021-05-05 21:30:00' ,5 ,null, 1);
 
-# ­q³æ©ú²Ó
+# è¨‚å–®æ˜ç´°
 CREATE TABLE OrderList (
 	orderlistid    INT AUTO_INCREMENT NOT NULL,
 	orderid    	   INT NOT NULL,
@@ -407,10 +407,10 @@ CREATE TABLE OrderList (
 ) AUTO_INCREMENT = 1;
 
 INSERT INTO OrderList (orderid, mealId, quantity, unitprice, note) 
-			VALUES (1, 501, '¿ú¿ú', '¤@¦Ê', 'NULL');
+			VALUES (1, 501, 'éŒ¢éŒ¢', 'ä¸€ç™¾', 'NULL');
 
 
-# ¦¬ÂÃÀ\ÆU
+# æ”¶è—é¤å»³
 CREATE TABLE FavoRestaurant (
 	userid  		INT NOT NULL,
     restaurantid 	INT NOT NULL,
@@ -423,9 +423,9 @@ CREATE TABLE FavoRestaurant (
 INSERT INTO FavoRestaurant (userid, restaurantid) VALUES (20210001,7001);
 
 
-#­¹°O°Ï
+#é£Ÿè¨˜å€
 
-#­¹°Otable
+#é£Ÿè¨˜table
 create table FoodArticle(
 	articleno int not null auto_increment primary key,
     userid int,
@@ -433,16 +433,16 @@ create table FoodArticle(
     articletitle varchar(50) not null,
     articledate datetime,
     articlecontent text not null,
-    sta int comment"ª¬ºA",
+    sta int comment"ç‹€æ…‹",
     constraint FoodArticle_userid_FK foreign key(userid) references MemberInFo (userid),
     constraint FoodArticle_restaurantid_FK foreign key(restaurantid)references Restaurant (restaurantid)
     );
 insert into FoodArticle (userid,restaurantid,articletitle,articledate,articlecontent,sta)
-values(20210002,7001,'½æ¾´¾´¦n¦n¦Y',now(),'Á¦±ø¶p¯Ü,¬µÂû¦n»¶«¢«¢«¢«¢«¢«¢',1),
-(20210002,7001,'ªÖ¼w°ò¦n¦n¦Y',now(),'«Cªá´Ô³ÂÂû­»»¶,¤Ó»¶!!!!',1),
-(20210002,7002,'°g§J®L¦n³Ü¨ìÃz',now(),'¬õ¯ù®³ÅK¤Ó¦n³Ü°Õ,¦n³Ü¨ì¤£¦æ',1);
+values(20210002,7001,'è³£å™¹å™¹å¥½å¥½åƒ',now(),'è–¯æ¢é…¥è„†,ç‚¸é›å¥½è¾£å“ˆå“ˆå“ˆå“ˆå“ˆå“ˆ',1),
+(20210002,7001,'è‚¯å¾·åŸºå¥½å¥½åƒ',now(),'é’èŠ±æ¤’éº»é›é¦™è¾£,å¤ªè¾£!!!!',1),
+(20210002,7002,'è¿·å…‹å¤å¥½å–åˆ°çˆ†',now(),'ç´…èŒ¶æ‹¿éµå¤ªå¥½å–å•¦,å¥½å–åˆ°ä¸è¡Œ',1);
     
-    #¹Ï¤ù®wtable
+    #åœ–ç‰‡åº«table
     create table PictureBase(
 		picno int not null auto_increment primary key,
         articleno int,
@@ -453,7 +453,7 @@ values(20210002,7001,'½æ¾´¾´¦n¦n¦Y',now(),'Á¦±ø¶p¯Ü,¬µÂû¦n»¶«¢«¢«¢«¢«¢«¢',1),
     
     
     
-    #¯d¨¥
+    #ç•™è¨€
     create table Message(
 		msgno int not null auto_increment primary key,
 		articleno int,
@@ -465,14 +465,14 @@ values(20210002,7001,'½æ¾´¾´¦n¦n¦Y',now(),'Á¦±ø¶p¯Ü,¬µÂû¦n»¶«¢«¢«¢«¢«¢«¢',1),
 		constraint Message_userid_FK foreign key(userid) references MemberInFo (userid)
     );    
     insert into Message (articleno,userid,msgdate,msgcontent,sta) 
-	values(1,20210001,now(),"¦n¦YÆgÆg",1),
-	(1,20210001,now(),"¬y¤f¤ôing",1),
-	(2,20210002,now(),"Ãø¦Y",1),
-	(2,20210003,now(),"¤Ó»¶°Õ",1);
+	values(1,20210001,now(),"å¥½åƒè®šè®š",1),
+	(1,20210001,now(),"æµå£æ°´ing",1),
+	(2,20210002,now(),"é›£åƒ",1),
+	(2,20210003,now(),"å¤ªè¾£å•¦",1);
     
     
     
-    #¦¬ÂÃ­¹°Otable
+    #æ”¶è—é£Ÿè¨˜table
     create table FavoFoodArticle(
 		userid int,
         articleno int,

@@ -1,6 +1,7 @@
 package com.restaurant.controller;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,12 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import com.restaurant.model.RestaurantService;
 import com.restaurant.model.RestaurantVO;
-import com.restaurantstyle.model.RestaurantStyleService;
-import com.restaurantstyle.model.RestaurantStyleVO;
-import com.style.model.StyleService;
 
-public class RestInsert extends Command {
-
+public class RestUpdate extends Command{
 
 	private HttpServletRequest req;
 	private HttpServletResponse res;
@@ -25,15 +22,15 @@ public class RestInsert extends Command {
 	private String ErrorTo;
 	
 
-	public RestInsert(HttpServletRequest req, HttpServletResponse res) {
+	public RestUpdate(HttpServletRequest req, HttpServletResponse res) {
 		this.req = req;
 		this.res = res;
 
 	}
+	
 	@Override
 	public void execute() throws ServletException, IOException {
-		
-		RestaurantService restSvc = new RestaurantService();
+	
 		
 		// 1. 擷取前端資料
 		
@@ -73,8 +70,11 @@ public class RestInsert extends Command {
 		
 		
 		// 2. 與持久層溝通
+		RestaurantService restSvc = new RestaurantService();
+		HttpSession session = req.getSession();
+		Integer usedRestaurantId = (Integer)session.getAttribute("restaurantId");
+		RestaurantVO updatedRestVO = restSvc.updateRestaurant(usedRestaurantId, restaurantName, boss, phone, district, city, location, openTime, closeTime, dayoffId, weeklyLeave, sta);
 		
-		RestaurantVO restVO = restSvc.addRestaurant(restaurantName, boss, phone, district, city, location, openTime, closeTime, dayoffId, weeklyLeave, sta);
 //		System.out.println("restVO=" + restVO);
 		
 		// 擷取關聯類別RestaurantStyle所需的資料
@@ -93,35 +93,25 @@ public class RestInsert extends Command {
 			styleId3 = new Integer(req.getParameter("style3"));			
 		}
 	
-		Integer restaurantId = restVO.getRestaurantId();
+		 
 		
 		
 		
 		// 3.1 轉送資料到關聯類別RestaurantStyle的controller來將資料入庫,由restaurantstyle的controller來forward到view
 		
-		req.setAttribute("restVO", restVO);
+		req.setAttribute("updatedRestVO", updatedRestVO);
 		
-		req.setAttribute("action", "insert");
-		req.setAttribute("restaurantId", restaurantId);
+		req.setAttribute("action", "update");
+		req.setAttribute("usedRestaurantId", usedRestaurantId);
 		req.setAttribute("styleId1", styleId1);
 		req.setAttribute("styleId2", styleId2);
 		req.setAttribute("styleId3", styleId3);
-		
-		HttpSession session = req.getSession();
-		// 保存新增成功的餐廳編號
-		session.setAttribute("restaurantId", restaurantId);
-		
 		
 		RequestDispatcher toRestStyleServlet = req.getRequestDispatcher("/restaurantstyle/restaurantstyle.do");
 		toRestStyleServlet.forward(req, res);
 		
 		
-		
-		
 	}
-	
-	
-	
 	
 	private java.sql.Time transformTimeAsSqlTimeFormat(String time) {
 		return java.sql.Time.valueOf(new StringBuffer(time).append(":00").toString());

@@ -8,5 +8,7 @@ public interface RestaurantStyleDAO_interface {
 	
 	public void delete(RestaurantStyleVO restaurantStyleVO);
 	
+	public void update(RestaurantStyleVO newRestaurantStyleVO, RestaurantStyleVO oldRestaurantStyleVO);
+	
 	public List<RestaurantStyleVO> getAll();
 }

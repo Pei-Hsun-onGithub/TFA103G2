@@ -6,8 +6,11 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
+
+
 import com.foodarticle.model.*;
-import com.picturebase.model.PictureBaseVO;
+import com.picturebase.model.*;
+
 
 @MultipartConfig
 public class FoodArticleServlet extends HttpServlet {
@@ -214,28 +217,28 @@ public class FoodArticleServlet extends HttpServlet {
 				req.setAttribute("errorMsgs", errorMsgs);
 				
 				try {
-					String userId =(req.getParameter("userId")).trim();
-					String rule1 = "^[1-9]{4}$";
+			String userId =(req.getParameter("userId")).trim();
+					String rule1 = "^[0-9]{8}$";
 					Integer userIdCheck= null;
-System.out.println("userId");
-System.out.println(userId);
+//System.out.println("userId");
+//System.out.println(userId);
 					if(userId == null || (userId.length()) ==0 ) {
 						errorMsgs.add("會員id: 請勿空白");
 					}else if(!userId.matches(rule1)){
-						errorMsgs.add("會員id只能是4個數字");
+						errorMsgs.add("會員id只能是8個數字");
 					}else {
 					    userIdCheck =new Integer(userId);
 					}
-					String rule2 = "^[1-9]{5}$";
-					String restaurantId = (req.getParameter("restaurantId").trim());
+					String rule2 = "^[0-9]{4}$";
+			        String restaurantId = (req.getParameter("restaurantId").trim());
 					Integer resIdCheck = null;
 					if(restaurantId == null || (restaurantId.length()) ==0 ) {
 						errorMsgs.add("餐廳id: 請勿空白");
-System.out.println(restaurantId);
+//System.out.println(restaurantId);
 					}else if(!restaurantId.matches(rule2)){
-						errorMsgs.add("餐廳id只能是5個數字");
+						errorMsgs.add("餐廳id只能是4個數字");
 					}else {
-						resIdCheck = new Integer(restaurantId);
+			resIdCheck = new Integer(restaurantId);
 					}
 					
 					String articleTitle = (req.getParameter("articleTitle")).trim();
@@ -267,41 +270,48 @@ System.out.println(restaurantId);
 					faVO.setSta(sta);
 					
 					
-					/*新增圖片的請求*/	
+					/*上傳圖片*/						
 					
-					PictureBaseVO pbVO = new PictureBaseVO();
+					List<PictureBaseVO> list = new ArrayList<PictureBaseVO>();
+					PictureBaseVO pbVO = new PictureBaseVO();					
 					
 					byte[] pic=null;
 					Collection<Part> parts = req.getParts();
+/*getParts會把form表單裡不管是文字還是檔案都抓進來,所以先用getName取元素的name的值,去比對篩掉檔案以外的文字*/			
 					
 					for(Part part : parts) {
-						if(part.getSize()>0) {
-						InputStream imgIn = part.getInputStream();
-						pic = new byte[imgIn.available()];
-						imgIn.read(pic);
-						pbVO.setPic(pic);
-						}else {
-							errorMsgs.add("請新增最少一張圖片");
+						String partName = part.getName();
+						if(partName.equals("imgfile")) {
+							if(part.getSize()>0) {
+								InputStream imgIn = part.getInputStream();
+								pic = new byte[imgIn.available()];
+								imgIn.read(pic);
+								pbVO.setPic(pic);
+								list.add(pbVO);
+								
+								}else {
+									errorMsgs.add("請新增最少一張圖片");
+								}
 						}
-						
-					}
-					
-		
-//			
+			
+					}									
 					
 					
 					if(!errorMsgs.isEmpty()) {
 					req.setAttribute("faVO", faVO);
 					req.setAttribute("pbVO", pbVO);
-					System.out.println("hello");
-					System.out.println(errorMsgs);
+					
 					RequestDispatcher failureView = req.getRequestDispatcher("/article/addFA.jsp");
 					failureView.forward(req, res);
 					return;
 					}
 					
 					FoodArticleService faSvc = new FoodArticleService();
-					faVO = faSvc.addFoodArticle(userIdCheck, resIdCheck, articleTitle, articleDate, articleContent, sta);
+//					PictureBaseService pbSvc = new PictureBaseService();
+//					faVO = faSvc.addFoodArticle(userIdCheck, resIdCheck, articleTitle, articleDate, articleContent, sta);
+
+					/*文章和圖片同時要新增,所以要同時送文章VO 圖片list給資料庫取文章pk給圖片*/					
+					faSvc.addtWithPic(faVO, list);
 					
 					RequestDispatcher successView = req.getRequestDispatcher("/listallFA.jsp");
 					successView.forward(req,res);														
@@ -317,26 +327,26 @@ System.out.println(restaurantId);
 				}
 			}
 			
-			if("delete".equals(action)) {
-				List<String> errorMsgs = new LinkedList<String>();
-				req.setAttribute("errorMsgs",errorMsgs );
-				
-				try {
-					
-					Integer articleNo = new Integer(req.getParameter("articleNo"));
-					
-					FoodArticleService faSvc = new FoodArticleService();
-					faSvc.deleteFoodArticle(articleNo);
-					
-					RequestDispatcher successView = req.getRequestDispatcher("/listallFA.jsp");
-					successView.forward(req,res);
-				}catch(Exception e) {
-					errorMsgs.add("資料刪除失敗"+e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/listallFA.jsp");
-					failureView.forward(req,res);
-					
-				}
-			}
+//			if("delete".equals(action)) {
+//				List<String> errorMsgs = new LinkedList<String>();
+//				req.setAttribute("errorMsgs",errorMsgs );
+//				
+//				try {
+//					
+//					Integer articleNo = new Integer(req.getParameter("articleNo"));
+//					
+//					FoodArticleService faSvc = new FoodArticleService();
+//					faSvc.deleteFoodArticle(articleNo);
+//					
+//					RequestDispatcher successView = req.getRequestDispatcher("/listallFA.jsp");
+//					successView.forward(req,res);
+//				}catch(Exception e) {
+//					errorMsgs.add("資料刪除失敗"+e.getMessage());
+//					RequestDispatcher failureView = req.getRequestDispatcher("/listallFA.jsp");
+//					failureView.forward(req,res);
+//					
+//				}
+//			}
 
 	}
 }
