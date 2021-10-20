@@ -52,6 +52,17 @@
 * {
 	list-style: none;
 }
+
+header.my-navbar-area {
+
+	background: #a30481;
+	border-bottom: none;
+}
+
+div.my-aside-left-container img{
+	width: 42px;
+	height: 42px;
+}
 .timepicker {
 	position: absolute;
 	z-index: 1000;
@@ -152,7 +163,7 @@ div.my-chooseType ul li button{
 </head>
 <body>
 
-	<header class="navbar-area ">
+	<header class="navbar-area my-navbar-area">
 		<nav class="navbar navbar-expand-lg">
 			<div class="container nav-container">
 				<div class="responsive-mobile-menu">
@@ -163,11 +174,11 @@ div.my-chooseType ul li button{
 					</button>
 				</div>
 				<div class="logo">
-					<a class="main-logo" href="home-1.html"><img
+					<a class="main-logo" href="#"><img
 						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
 				</div>
 				<div class="collapse navbar-collapse" id="themefie_main_menu">
-					<ul class="navbar-nav menu-open">
+					<ul class="navbar-nav menu-open" style="visibility: hidden;">
 						<li class="current-menu-item menu-item-has-children"><a
 							href="home-1.html">訂餐</a>
 							<ul class="sub-menu ps-0">
@@ -193,12 +204,13 @@ div.my-chooseType ul li button{
 				</div>
 				<div class="nav-right-part nav-right-part-desktop">
 					<ul>
-						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
+						<li style="visibility: hidden;"><a class="search" href="#"><i class="ri-search-line"></i></a>
 						</li>
-						<li class="phone-contact"><a href="#">sign in</a></li>
-						<li class="menu-cart"><a href="#">小鈴鐺 <span>4</span></a></li>
-						<li class="menu-cart"><a href="cart.html">CART <span>1</span></a></li>
-						<li>49.50 $</li>
+						<li class="menu-cart"><a href="#" style="visibility: hidden;">小鈴鐺 <span>4</span></a></li>
+						<li class="menu-cart"><a href="cart.html" style="visibility: hidden;">CART <span>1</span></a></li>
+						<li class="phone-contact"><a href="#">登出</a></li>
+						
+						
 					</ul>
 				</div>
 			</div>
@@ -211,27 +223,27 @@ div.my-chooseType ul li button{
 					<div class="my-aside-left-container">
 
 						<div class="widget widget_categories style-2">
-							<h4 class="widget-title">Categories</h4>
+							<h4 class="widget-title" style="visibility: hidden;">Categories</h4>
 							<ul>
 								<li><a href="#"><img
-										src="<%=request.getContextPath()%>/assets/img/category/1.png"
+										src="<%=request.getContextPath()%>/images/m1.svg"
 										alt="img"> 餐廳資料 <span>(5)</span></a></li>
 								<li><a
 									href="<%=request.getContextPath()%>/pei_pages/vendor_meal_upload.jsp"><img
-										src="<%=request.getContextPath()%>/assets/img/category/2.png"
+										src="<%=request.getContextPath()%>/images/m2.svg"
 										alt="img"> 餐點上架 <span>(9)</span> </a></li>
 								<li><a
 									href="<%=request.getContextPath()%>/pei_pages/vendor_orderTracking_addInfo.jsp"><img
-										src="<%=request.getContextPath()%>/assets/img/category/3.png"
+										src="<%=request.getContextPath()%>/images/m3.svg"
 										alt="img"> 訂單追蹤 <span>(18)</span></a></li>
 								<li><a
 									href="<%=request.getContextPath()%>/meal/meal.do?action=getAll"><img
-										src="<%=request.getContextPath()%>/assets/img/category/4.png"
+										src="<%=request.getContextPath()%>/images/m4.svg"
 										alt="img"> 歷史明細 <span>(14)</span></a></li>
-								<li><a href="#"><img
+								<li style="visibility: hidden;"><a href="#"><img
 										src="<%=request.getContextPath()%>/assets/img/category/5.png"
 										alt="img"> Fast food <span>(10)</span></a></li>
-								<li><a href="#"><img
+								<li style="visibility: hidden;"><a href="#"><img
 										src="<%=request.getContextPath()%>/assets/img/category/6.png"
 										alt="img"> Soft drinks <span>(28)</span></a></li>
 							</ul>

@@ -46,6 +46,12 @@
 
 
 <style>
+
+header.my-navbar-area {
+
+	background: #a30481;
+	border-bottom: none;
+}
 .xdsoft_datetimepicker .xdsoft_datepicker {
 	width: 300px; /* width:  300px; */
 }
@@ -98,6 +104,17 @@ div.card-body ul.my-form-wrapper li a {
 	line-height: normal;
 	border-radius: 10px;
 }
+
+form div.my-checkbox{
+	text-align: left;
+	padding-left: 20px;
+
+}
+
+form textarea {
+	width: 240px;
+	height: 250px;
+}
 </style>
 
 </head>
@@ -105,12 +122,55 @@ div.card-body ul.my-form-wrapper li a {
 
 
 	<!-- navbar start -->
-	<header class="navbar-area">
+	<header class="navbar-area my-navbar-area">
 		<nav class="navbar navbar-expand-lg">
 			<div class="container nav-container">
+				<div class="responsive-mobile-menu">
+					<button class="menu toggle-btn d-block d-lg-none"
+						data-target="#themefie_main_menu" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="icon-left"></span> <span class="icon-right"></span>
+					</button>
+				</div>
 				<div class="logo">
-					<a class="main-logo" href="/TFA103G2/pei_pages/select-page.jsp"><img
+					<a class="main-logo" href="<%=request.getContextPath()%>/pei_pages/vendor_restaurant_updateInfo.jsp"><img
 						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
+				</div>
+				<div class="collapse navbar-collapse" id="themefie_main_menu">
+					<ul class="navbar-nav menu-open" style="visibility: hidden;">
+						<li class="current-menu-item menu-item-has-children"><a
+							href="home-1.html">訂餐</a>
+							<ul class="sub-menu ps-0">
+								<li><a href="<%=request.getContextPath()%>/shop.html">Shop</a></li>
+								<li><a href="<%=request.getContextPath()%>/menu.html">Menu</a></li>
+								<li><a href="<%=request.getContextPath()%>/cart.html">Cart</a></li>
+								<li><a href="<%=request.getContextPath()%>/checkout.html">Checkout</a></li>
+							</ul></li>
+						<li><a href="blog.html">食記</a></li>
+						<li><a href="about.html">ABOUT US</a></li>
+						<li><a href="contact.html">CONTACTS</a></li>
+					</ul>
+				</div>
+				<div class="nav-right-part nav-right-part-mobile">
+					<ul>
+						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
+						</li>
+						<li class="phone-contact d-md-block d-none"><i
+							class="ri-phone-fill float-start"></i> +997 509 153 849</li>
+						<li class="menu-cart"><a href="cart.html">CART <span>1</span></a></li>
+						<li>49.50 $</li>
+					</ul>
+				</div>
+				<div class="nav-right-part nav-right-part-desktop">
+					<ul>
+						<li style="visibility: hidden;"><a class="search" href="#"><i class="ri-search-line"></i></a>
+						</li>
+						<li class="menu-cart"><a href="#" style="visibility: hidden;">小鈴鐺 <span>4</span></a></li>
+						<li class="menu-cart"><a href="cart.html" style="visibility: hidden;">CART <span>1</span></a></li>
+						<li class="phone-contact"><a href="#">登出</a></li>
+						
+						
+					</ul>
 				</div>
 			</div>
 		</nav>
@@ -185,9 +245,10 @@ div.card-body ul.my-form-wrapper li a {
 
 							<div class="row">
 								<label class="col-sm-3 col-form-label">餐點狀態 </label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control" name="sta"
-										value="<%=(mealVO == null) ? "3" : mealVO.getSta()%>">
+								<div class="col-sm-3 my-checkbox">
+								 <input  type="radio" name="sta" value="1" <%="1".equals(mealVO.getSta().toString()) ? "checked" : "" %>>熱賣中
+            					 <input  type="radio" name="sta" value="2" <%="2".equals(mealVO.getSta().toString()) ? "checked" : "" %>>下架
+
 								</div>
 								<div class="col-sm-6"></div>
 							</div>
@@ -235,14 +296,7 @@ div.card-body ul.my-form-wrapper li a {
 								<div class="col-sm-6"></div>
 							</div>
 
-							<div class="row">
-								<label class="col-sm-3 col-form-label">餐點描述</label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control" name="mealDescription"
-										value="<%=(mealVO == null) ? "排隊美食" : mealVO.getMealDescription()%>">
-								</div>
-								<div class="col-sm-6"></div>
-							</div>
+						
 
 							<div class="row">
 								<label class="col-sm-3 col-form-label">餐點照片</label>
@@ -254,13 +308,15 @@ div.card-body ul.my-form-wrapper li a {
 							</div>
 
 							<div class="row">
-								<label class="col-sm-3 col-form-label">餐廳</label>
+								<label class="col-sm-3 col-form-label">餐點描述</label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control" name="restaurantId"
-										value="<%=(mealVO == null) ? "7002" : mealVO.getRestaurantId()%>">
+									<textarea maxlength="450" rows="4"
+												placeholder="商品介紹...(字數不超過450)" name="mealDescription"><%=(mealVO == null) ? "排隊美食" : mealVO.getMealDescription()%></textarea>
 								</div>
 								<div class="col-sm-6"></div>
 							</div>
+				
+							
 							<%--         送出的按鈕                --%>
 
 							<div class="row">

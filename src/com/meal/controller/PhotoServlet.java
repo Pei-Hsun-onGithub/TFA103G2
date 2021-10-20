@@ -44,9 +44,9 @@ public class PhotoServlet extends HttpServlet {
 				// getServletContext().getContextPath());
 				// System.out.println("notFoundImage.exists()=" + notFoundImage.exists());
 				FileInputStream fin = new FileInputStream(notFoundImage);
-				byte[] notFoundimgBytes = new byte[fin.available()];
-				fin.read(notFoundimgBytes);
-				res.getOutputStream().write(notFoundimgBytes);
+				byte[] notFoundImgBytes = new byte[fin.available()];
+				fin.read(notFoundImgBytes);
+				res.getOutputStream().write(notFoundImgBytes);
 
 			} catch (IOException ex) {
 				ex.printStackTrace();

@@ -27,9 +27,11 @@ public class MealDelete extends Command {
 		// 1. 抓取頁面送來的PK值
 
 		Integer mealid = new Integer(req.getParameter("mealId"));
+		
 
-		// 2.刪除資料庫檔案
-		service.deleteMeal(mealid);
+		// 2.下架資料庫檔案
+		service.changeMealStateAsOffShelf(mealid);
+		
 
 		// 3.展示層反映結果
 
