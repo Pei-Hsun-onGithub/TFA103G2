@@ -51,12 +51,24 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/vendors/DataTables/datatables.css">
 <style>
+
+header.my-navbar-area {
+
+	background: #a30481;
+	border-bottom: none;
+}
+
 section.breadcrumb-area {
 	height: 80px;
 }
 
 section.work-area {
 	margin-top: 50px;
+}
+
+table tr td img {
+	width: 60px;
+	height: 50px;
 }
 </style>
 
@@ -65,12 +77,55 @@ section.work-area {
 
 
 	<!-- navbar start -->
-	<header class="navbar-area">
+	<header class="navbar-area my-navbar-area">
 		<nav class="navbar navbar-expand-lg">
 			<div class="container nav-container">
+				<div class="responsive-mobile-menu">
+					<button class="menu toggle-btn d-block d-lg-none"
+						data-target="#themefie_main_menu" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="icon-left"></span> <span class="icon-right"></span>
+					</button>
+				</div>
 				<div class="logo">
-					<a class="main-logo" href="/TFA103G2/pei_pages/select-page.jsp"><img
+					<a class="main-logo" href="<%=request.getContextPath()%>/pei_pages/vendor_restaurant_updateInfo.jsp"><img
 						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
+				</div>
+				<div class="collapse navbar-collapse" id="themefie_main_menu">
+					<ul class="navbar-nav menu-open" style="visibility: hidden;">
+						<li class="current-menu-item menu-item-has-children"><a
+							href="home-1.html">訂餐</a>
+							<ul class="sub-menu ps-0">
+								<li><a href="<%=request.getContextPath()%>/shop.html">Shop</a></li>
+								<li><a href="<%=request.getContextPath()%>/menu.html">Menu</a></li>
+								<li><a href="<%=request.getContextPath()%>/cart.html">Cart</a></li>
+								<li><a href="<%=request.getContextPath()%>/checkout.html">Checkout</a></li>
+							</ul></li>
+						<li><a href="blog.html">食記</a></li>
+						<li><a href="about.html">ABOUT US</a></li>
+						<li><a href="contact.html">CONTACTS</a></li>
+					</ul>
+				</div>
+				<div class="nav-right-part nav-right-part-mobile">
+					<ul>
+						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
+						</li>
+						<li class="phone-contact d-md-block d-none"><i
+							class="ri-phone-fill float-start"></i> +997 509 153 849</li>
+						<li class="menu-cart"><a href="cart.html">CART <span>1</span></a></li>
+						<li>49.50 $</li>
+					</ul>
+				</div>
+				<div class="nav-right-part nav-right-part-desktop">
+					<ul>
+						<li style="visibility: hidden;"><a class="search" href="#"><i class="ri-search-line"></i></a>
+						</li>
+						<li class="menu-cart"><a href="#" style="visibility: hidden;">小鈴鐺 <span>4</span></a></li>
+						<li class="menu-cart"><a href="cart.html" style="visibility: hidden;">CART <span>1</span></a></li>
+						<li class="phone-contact"><a href="#">登出</a></li>
+						
+						
+					</ul>
 				</div>
 			</div>
 		</nav>
@@ -113,7 +168,7 @@ section.work-area {
 							<th>上市天數</th>
 							<th>餐點描述</th>
 							<th>餐點照片</th>
-							<th>餐聽編號</th>
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -127,8 +182,9 @@ section.work-area {
 							<td>${mealVO.launchDate}</td>
 							<td>${mealVO.launchDays}</td>
 							<td>${mealVO.mealDescription}</td>
-							<td>${mealVO.mealImg}</td>
-							<td>${mealVO.restaurantId}</td>
+							<td><img
+									src="/TFA103G2/meal/photoServlet?id=${mealVO.mealId}" /></td>
+							
 
 						</tr>
 					</tbody>

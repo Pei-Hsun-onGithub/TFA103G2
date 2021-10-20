@@ -1,5 +1,7 @@
 package com.meal.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -22,12 +24,35 @@ public class PhotoServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
-		res.setContentType("image/png");
-		
+		// res.setContentType("image/png");
+
 		Integer mealId = new Integer(req.getParameter("id"));
-		System.out.println("mealId=" + mealId);
+		// System.out.println("mealId=" + mealId);
 		MealService mealSvc = new MealService();
 		MealVO mealVO = mealSvc.findMealByPrimaryKey(mealId);
-		res.getOutputStream().write(mealVO.getMealImg());
+		try {
+
+			byte[] imgBytes = mealVO.getMealImg();
+			res.getOutputStream().write(imgBytes);
+			
+		} catch (NullPointerException e) {
+			// 如果沒有照片，放入預設的圖片!
+			try {
+				File notFoundImage = new File(
+						"C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\images\\not-found-image.png");
+				// System.out.println("getServletContext().getContextPath() =" +getServletContext().getContextPath())
+				// getServletContext().getContextPath());
+				// System.out.println("notFoundImage.exists()=" + notFoundImage.exists());
+				FileInputStream fin = new FileInputStream(notFoundImage);
+				byte[] notFoundImgBytes = new byte[fin.available()];
+				fin.read(notFoundImgBytes);
+				res.getOutputStream().write(notFoundImgBytes);
+
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
