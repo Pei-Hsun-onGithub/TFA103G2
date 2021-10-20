@@ -205,7 +205,48 @@ public class MemberInfoServlet extends HttpServlet {
 //				failureView.forward(req, res);
 //			}
 //		}
+		if("getOne".equals(action)) {
 
+		// List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+		//	req.setAttribute("errorMsgs", errorMsgs);
+			MemberInfoService memberSvc1 = new MemberInfoService();
+			MemberInfo member1 = memberSvc1.getOneMemberInfo(20210001);
+			req.setAttribute("memberinfo", member1);
+			String url = "/Gary_pages/Member01.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+			successView.forward(req, res);
+		}
+		
+		if("getOneEmail".equals(action)) {
+
+			// List<String> errorMsgs = new LinkedList<String>();
+				// Store this set in the request scope, in case we need to
+				// send the ErrorPage view.
+			//	req.setAttribute("errorMsgs", errorMsgs);
+				MemberInfoService memberSvc2 = new MemberInfoService();
+				MemberInfo member2 = memberSvc2.getOneMemberInfo(20210001);
+				req.setAttribute("memberinfo", member2);
+				String url = "/Gary_pages/Member01-email.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+				successView.forward(req, res);
+		}
+		
+		if("getOnePhone".equals(action)) {
+
+			// List<String> errorMsgs = new LinkedList<String>();
+				// Store this set in the request scope, in case we need to
+				// send the ErrorPage view.
+			//	req.setAttribute("errorMsgs", errorMsgs);
+				MemberInfoService memberSvc3 = new MemberInfoService();
+				MemberInfo member3 = memberSvc3.getOneMemberInfo(20210001);
+				req.setAttribute("memberinfo", member3);
+				String url = "/Gary_pages/Member01-phone.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+				successView.forward(req, res);
+		}
+		
         if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
 			
 			List<String> errorMsgs = new LinkedList<String>();

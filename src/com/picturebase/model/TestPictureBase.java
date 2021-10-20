@@ -9,28 +9,29 @@ public class TestPictureBase {
 	public static void main(String[] args) throws IOException {
 		PictureBaseDAO_interface dao = new PictureBaseJDBCDAO();
 		
-		PictureBaseVO pbd = new PictureBaseVO();
+		PictureBaseVO pbd1 = new PictureBaseVO();
 
-		//新增				
+		//�憓�				
 		
-		byte[] pic = getPictureByteArray("C:/Users/Tibame_T14/Desktop/擷取1.JPG");
-		pbd.setArticleNo(1);
-		pbd.setPic(pic);
-		dao.add(pbd);
+		byte[] pic = getPictureByteArray("C:/Users/Tibame_T14/Desktop/test1.jpg");
+		pbd1.setArticleNo(1);
+		pbd1.setPic(pic);
+		dao.add(pbd1);
+		
+		PictureBaseVO pbd2 = new PictureBaseVO();
+		byte[] pic2 = getPictureByteArray("C:\\Users\\Tibame_T14\\Desktop\\test2.jpg");
+		pbd2.setArticleNo(1);
+		pbd2.setPic(pic2);
+		dao.add(pbd2);
 //		
-//		byte[] pic2 = getPictureByteArray("C:\\Users\\Tibame_T14\\Desktop\\擷取2.JPG");
-//		pbd.setArticleNo(1);
-//		pbd.setPic(pic2);
-//		dao.add(pbd);
-//		
-		//更新
+		//��
 		
 //		byte[] pic3 =getPictureByteArray("C:\\Users\\Tibame_T14\\Desktop\\tomcat2.gif");		
 //		pbd.setPic(pic3);		
 //		pbd.setPicNo(1);
 //		dao.update(pbd);
 										
-		//刪除
+		//��
 		
 		//dao.delete(1);
 		//dao.delete(3);	

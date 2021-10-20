@@ -145,9 +145,13 @@ public  class MessageJDBCDAO implements MessageDAO_interface {
 		
 	}
 
+	/**
+	 *
+	 */
 	@Override
-	public MessageVO findByFK(Integer articleNo) {
-		MessageVO me = null;
+	public List<MessageVO> findByFK(Integer articleNo) {
+		List<MessageVO> msgList = new ArrayList<>();
+		MessageVO msgVO =null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -160,12 +164,14 @@ public  class MessageJDBCDAO implements MessageDAO_interface {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				me = new MessageVO();
-				me.setMsgNo(rs.getInt("msgNo"));
-				me.setArticleNo(rs.getInt("articleNo"));
-				me.setMsgDate(rs.getDate("msgDate"));
-				me.setMsgContent(rs.getString("msgContent"));
-				me.setSta(rs.getInt("sta"));
+				msgVO = new MessageVO();
+				msgVO.setMsgNo(rs.getInt("msgNo"));
+				msgVO.setArticleNo(rs.getInt("articleNo"));
+				msgVO.setUserId(rs.getInt("userId"));
+				msgVO.setMsgDate(rs.getDate("msgDate"));
+				msgVO.setMsgContent(rs.getString("msgContent"));
+				msgVO.setSta(rs.getInt("sta"));
+				msgList.add(msgVO);
 				
 				
 			}
@@ -197,7 +203,7 @@ public  class MessageJDBCDAO implements MessageDAO_interface {
 				}
 			}
 		}
-		return me;
+		return msgList;
 		
 	}
 
@@ -219,6 +225,7 @@ public  class MessageJDBCDAO implements MessageDAO_interface {
 				me = new MessageVO();
 				me.setMsgNo(rs.getInt("msgNo"));
 				me.setArticleNo(rs.getInt("articleNo"));
+				me.setUserId(rs.getInt("userId"));
 				me.setMsgDate(rs.getDate("msgDate"));
 				me.setMsgContent(rs.getString("msgContent"));
 				me.setSta(rs.getInt("sta"));
