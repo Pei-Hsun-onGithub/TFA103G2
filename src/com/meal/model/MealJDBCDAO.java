@@ -116,7 +116,7 @@ public class MealJDBCDAO implements MealDAO_interface {
 		try {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE_STMT);
-
+			System.out.println("mealVO=" + mealVO);
 			pstmt.setInt(1, mealVO.getSta());
 			pstmt.setString(2, mealVO.getMealName());
 			pstmt.setString(3, mealVO.getMealType());

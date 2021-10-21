@@ -38,7 +38,7 @@ public class MealService {
 			Timestamp launchDate, Integer launchDays, String mealDescription, byte[] mealImg, Integer restaurantId) {
 
 		MealVO eachMeal = new MealVO();
-		
+	
 		eachMeal.setMealId(mealId);
 		eachMeal.setSta(sta);
 		eachMeal.setMealName(mealName);
@@ -68,7 +68,9 @@ public class MealService {
 		// ¤U¬[À\ÂI
 		Integer offShelfStatus = new Integer(2);
 		MealVO offShelfMeal = this.dao.findByPrimaryKey(mealId);
+		System.out.println("offShelfMeal=" + offShelfMeal);
 		offShelfMeal.setSta(offShelfStatus);
+		System.out.println("offShelfMeal=" + offShelfMeal);
 		this.dao.update(offShelfMeal);
 		
 	}
