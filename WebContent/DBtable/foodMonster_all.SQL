@@ -104,9 +104,9 @@ CREATE TABLE MemberInfo (
 ) AUTO_INCREMENT = 20210001;
 
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('EdwardLDawkins@teleworm.us', 'Qu4GNM4Y', '謝依冰', '女', '1966-12-27', '0921562069', '這是大頭貼', '2000-11-26', 20, 100, 1001, '小之', 1, 20, 4);
+VALUES ('1qaz@y.com', '1qaz@WSX', '謝依冰', '女', '1966-12-27', '0921562069', '這是大頭貼', '2000-11-26', 20, 100, 1001, '小之', 1, 20, 1);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('JohnEDay@dayrep.com', 'MgD8QpXB', '陳佳燕', '女', '1992-10-16', '0987459122', '這是大頭貼', '2019-09-24', 1000, 20, 1002, '南風', 2, 100, 4);
+VALUES ('2wsx@y.com', '1qaz@WSX', '陳佳燕', '女', '1992-10-16', '0987459122', '這是大頭貼', '2019-09-24', 1000, 20, 1002, '南風', 2, 100, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
 VALUES ('SteveMJackson@teleworm.us', 'PR3W9q2f', '王宜君', '女', '2006-01-12', '0921618067', '這是大頭貼', '2001-10-26', 20, 100, 1001, '雅亦', 1, 20, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 

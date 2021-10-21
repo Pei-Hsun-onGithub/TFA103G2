@@ -19,6 +19,8 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 	private static final String FIND_BY_PK = "SELECT * FROM MEMBERINFO WHERE USERID = ?";
 	private static final String GET_ALL = "SELECT * FROM MEMBERINFO"; 
 	private static final String FIND_BY_EMAIL = "SELECT * FROM MEMBERINFO WHERE EMAIL = ?";
+	private static final String FIND_BY_EMAIL2 = "SELECT * FROM MEMBERINFO WHERE EMAIL = ? AND PWD = ?";
+	
 	static {
 		try {
 			Class.forName(Util.DRIVER);
@@ -335,5 +337,54 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 			}
 
 		return false;
+	}
+
+	@Override
+	public MemberInfo selectEmail2(String email,String pwd) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberInfo mem = null;
+		try {
+
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(FIND_BY_EMAIL2);
+			pstmt.setString(1, email);
+			pstmt.setString(2, pwd);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+					mem = new MemberInfo();
+					mem.setEmail(rs.getString("USERId"));
+					mem.setEmail(rs.getString("EMAIL"));
+					mem.setPwd(rs.getString("PWD"));
+					mem.setSta(rs.getInt("STA"));
+			}
+		} catch (SQLException se) {
+				se.printStackTrace();
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+		return mem;
 	}
 }

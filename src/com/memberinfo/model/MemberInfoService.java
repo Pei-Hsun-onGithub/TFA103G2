@@ -82,4 +82,9 @@ public class MemberInfoService {
 	public boolean findByEmail(String email) {
 		return dao.selectEmail(email);
 	}
+	
+	public MemberInfo findByEmail2(String email,String pwd) {
+		return dao.selectEmail2(email,pwd);
+	}
+	
 }

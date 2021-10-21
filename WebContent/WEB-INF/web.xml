@@ -33,7 +33,7 @@
 		<param-value>123456</param-value>
 	</context-param>
 
-<!-- 葉力德 -->
+<!-- 力德 -->
 	<servlet>
 		<servlet-name>AddressServlet</servlet-name>
 		<servlet-class>com.address.controller.AddressServlet</servlet-class>
@@ -54,7 +54,7 @@
 		<url-pattern>/login/memberinfo.do</url-pattern>
 	</servlet-mapping>
 	
-<!-- 周沛勳	 -->
+<!-- 沛勳	 -->
 	<servlet>
 		<servlet-name>MealServlet</servlet-name>
 		<servlet-class>com.meal.controller.MealServlet</servlet-class>
@@ -76,8 +76,6 @@
 	</servlet-mapping>
 	
 
-
-
 	<servlet>
 		<servlet-name>RestaurantServlet</servlet-name>
 		<servlet-class>com.restaurant.controller.RestaurantServlet</servlet-class>
@@ -98,7 +96,7 @@
 		<url-pattern>/restaurantstyle/restaurantstyle.do</url-pattern>
 	</servlet-mapping>
 	
-<!-- 黃楚鈞 -->
+<!-- 楚鈞 -->
 	<servlet>
 		<servlet-name>AchieveProgressServlet</servlet-name>
 		<servlet-class>com.achieveprogress.controller.AchieveProgressServlet</servlet-class>
@@ -108,7 +106,7 @@
 		<url-pattern>/Gary_pages/achieveprogress.do</url-pattern>
 	</servlet-mapping>
 	
-<!-- 鄭伊芸 -->
+<!-- 伊芸 -->
 	<servlet>
 		<servlet-name>FoodArticleServlet</servlet-name>
 		<servlet-class>com.foodarticle.controller.FoodArticleServlet</servlet-class>
@@ -119,7 +117,41 @@
 		<url-pattern>/article/fa.do</url-pattern>
 	</servlet-mapping>
 
+<!-- 以下為Filter的註冊 -->
 
+<!-- 以下為SetCharacterEncodingFilter的註冊-->
+    <!--【以後不用再撰寫 req.setCharacterEncoding("UTF-8"); 這行程式碼於程式中了】-->
+    <!-- Example filter to set character encoding on each request -->
+    <!-- Example filter mapping to apply the "SetCharacterEncodingFilter" filter to *all* requests processed by this web application -->
+	<filter>
+		<filter-name>setCharacterEncoding</filter-name>
+		<filter-class>filters.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>setCharacterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> 
+
+
+  <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>filters.LoginFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>/address/listAllAddress.jsp</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+    <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
 
 
 </web-app>
