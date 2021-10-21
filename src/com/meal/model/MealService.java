@@ -68,9 +68,7 @@ public class MealService {
 		// ¤U¬[À\ÂI
 		Integer offShelfStatus = new Integer(2);
 		MealVO offShelfMeal = this.dao.findByPrimaryKey(mealId);
-		System.out.println("offShelfMeal=" + offShelfMeal);
 		offShelfMeal.setSta(offShelfStatus);
-		System.out.println("offShelfMeal=" + offShelfMeal);
 		this.dao.update(offShelfMeal);
 		
 	}
