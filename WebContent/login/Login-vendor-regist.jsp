@@ -11,7 +11,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta charset="UTF-8">
-<title>Login-custom-register</title>
+<title>Login-vendor-register</title>
 <!--fivicon icon-->
 <link rel="icon"
  href="<%=request.getContextPath()%>/assets/img/Image4.png">
@@ -78,12 +78,11 @@
  <!-- navbar end -->
 
  <div class="body">
-
   <FORM METHOD="post" ACTION="memberinfo.do" name="form1">
 
    <table>
     <tr>
-     <td class="td1">會員註冊</td>
+     <td class="td1">廠商註冊</td>
      <td><input type="hidden" size="45" /></td>
     </tr>
     <tr>
@@ -122,13 +121,13 @@
       value="<%=(memberinfo == null) ? "0987678567" : memberinfo.getPhone()%>" /></td>
     </tr>
    </table>
-   <br> <input type="hidden" name="action" value="insert">
+   <br> <input type="hidden" name="action" value="insert2">
    <input type="submit" value="申請會員">
   </FORM>
  </div>
 
-  <%-- 錯誤表列 --%>
- 
+ <%-- 錯誤表列 --%>
+
 <c:if test="${not empty errorMsgs}">
  <font style="color:red">請修正以下錯誤:</font>
  <ul>
@@ -137,6 +136,7 @@
   </c:forEach>
  </ul>
 </c:if>
+
 
  <!-- all plugins here -->
  <script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
