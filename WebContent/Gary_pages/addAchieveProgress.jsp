@@ -74,7 +74,7 @@
 		<td>選擇會員編號:</td>
 		<td><select size="1" name="userid">
          	<c:forEach var="memberinfo" items="${MemberInfoSvc.all}" > 
-          	<option value="${memberinfo.userId}">${memberinfo.userId}
+          	<option value="${memberinfo.userId}">${memberinfo.userName}
          	</c:forEach>   
        		</select>
 		</td>
@@ -83,7 +83,7 @@
 		<td>選擇成就編號:</td>
 		<td><select size="1" name="achiid">
          	<c:forEach var="achieve" items="${AchieveSvc.all}" > 
-          	<option value="${achieve.achiId}">${achieve.achiId}
+          	<option value="${achieve.achiId}">${achieve.achiName}
          	</c:forEach>   
        		</select>
 		</td>

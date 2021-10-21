@@ -63,9 +63,13 @@ public class MealService {
 	}
 	
 	
-	public void deleteMeal(Integer mealId) {
+	public void changeMealStateAsOffShelf(Integer mealId) {
 		
-		this.dao.delete(mealId);
+		// ¤U¬[À\ÂI
+		Integer offShelfStatus = new Integer(2);
+		MealVO offShelfMeal = this.dao.findByPrimaryKey(mealId);
+		offShelfMeal.setSta(offShelfStatus);
+		this.dao.update(offShelfMeal);
 		
 	}
 

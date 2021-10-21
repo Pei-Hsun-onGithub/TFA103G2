@@ -39,9 +39,7 @@ public class MessageService {
 		dao.delete(msgNo);	
 	}
 	
-	public MessageVO getMsgsOfAr(Integer articleNo) {
-		MessageVO messageVO = new MessageVO();
-		
+	public List<MessageVO> getMsgsOfAr(Integer articleNo) {		
 		return dao.findByFK(articleNo);
 	}
 	
