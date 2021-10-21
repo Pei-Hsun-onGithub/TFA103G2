@@ -176,11 +176,11 @@
       </div>
       <div class="editpic">
         <div class="pic">
-          <img src="<%=request.getContextPath()%>/assets/img/girl.png" alt="img">
+<%--           <img src="<%=request.getContextPath()%>/assets/img/girl.png" alt="img"> --%>
         </div>
         <div class="selectbutton">
           <button id="photo_upload" type="button" name="button">上傳照片</button>
-          <input id="img_file" type="file" multiple style="display: none;" name="imgfile" >
+          <input id="img_file" type="file" style="display: none;" name="imgfile" >
         </div>
         <div class="illustrate">
           檔案大小:最大1MB<br>
@@ -223,9 +223,21 @@
 		return false;
 	});
  	
-	var img_file_element = document.getElementById("img_file");        
+	var pic = document.getElementsByClassName("pic");
+ 	var img_file_element = document.getElementById("img_file");        
 	img_file_element.addEventListener("change", function(e){   
-		var image = $(this).sibling("img")
+		
+    		let reader = new FileReader();
+    		reader.readAsDataURL(this.files[0]); 
+    		reader.addEventListener("load",function(){
+    			var img_tag = "<img src='" + reader.result + "' class='preview_img'>";
+console.log(reader.result);
+//     			pic.insertAdjacentHTML("afterend",img_tag);
+    			$('.pic').html(img_tag);
+//     			pic.append(img_tag);
+    		})
+    		
+    	
 	})
  	
  });
