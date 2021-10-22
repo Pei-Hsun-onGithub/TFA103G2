@@ -202,7 +202,6 @@ public class MemberInfoServlet extends HttpServlet {
 //				failureView.forward(req, res);
 //			}
 //		}
-<<<<<<< HEAD
 //		if ("delete".equals(action)) { // 來自listAllEmp.jsp
 //
 //			List<String> errorMsgs = new LinkedList<String>();
@@ -233,23 +232,23 @@ public class MemberInfoServlet extends HttpServlet {
 //		}
 		
 		
-/*************************************會員註冊***************************************/
-		
-        if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
-=======
-		if("getOne".equals(action)) {
 
-		// List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-		//	req.setAttribute("errorMsgs", errorMsgs);
-			MemberInfoService memberSvc1 = new MemberInfoService();
-			MemberInfo member1 = memberSvc1.getOneMemberInfo(20210001);
-			req.setAttribute("memberinfo", member1);
-			String url = "/Gary_pages/Member01.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
-			successView.forward(req, res);
-		}
+		
+//        if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
+//
+//		// List<String> errorMsgs = new LinkedList<String>();
+//			// Store this set in the request scope, in case we need to
+//			// send the ErrorPage view.
+//		//	req.setAttribute("errorMsgs", errorMsgs);
+//			MemberInfoService memberSvc1 = new MemberInfoService();
+//			MemberInfo member1 = memberSvc1.getOneMemberInfo(20210001);
+//			req.setAttribute("memberinfo", member1);
+//			String url = "/Gary_pages/Member01.jsp";
+//			RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
+//			successView.forward(req, res);
+//		}
+		
+		/*************************************會員中心***************************************/			
 		
 		if("getOneEmail".equals(action)) {
 
@@ -279,9 +278,11 @@ public class MemberInfoServlet extends HttpServlet {
 				successView.forward(req, res);
 		}
 		
-        if ("insert".equals(action)) { // �Ӧ�addEmp.jsp���ШD  
->>>>>>> fdd703ae2ebd08ec1dd1d0b5fe9160d869743e6c
-			
+		
+/*************************************會員註冊***************************************/		
+		
+        if ("insert".equals(action)) { 
+
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -383,6 +384,7 @@ String phone = req.getParameter("phone");
 
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
+				
 				String url = "https://www.google.com/";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交vendor_meal_upload.jsp
 				successView.forward(req, res);				
@@ -471,7 +473,7 @@ String phone = req.getParameter("phone");
 					errorMsgs.add("電話號碼:數字 , 且長度必需為10，開頭為09開頭");					
 	            }	
 				
-				
+
 				java.sql.Date registerDate = new java.sql.Date(System.currentTimeMillis());
 				
 				MemberInfo memberInfo2 = new MemberInfo();
@@ -516,7 +518,5 @@ String phone = req.getParameter("phone");
 				failureView.forward(req, res);
 			}
 		}
-		
-
 	}
 }

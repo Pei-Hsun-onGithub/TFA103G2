@@ -35,19 +35,19 @@ public class MealGetOne extends Command {
 		try {
 			mealid = new Integer(req.getParameter("mealId"));
 		} catch (NumberFormatException e) {
-			errMsgs.add("À\ÂI½s¸¹¥²¶·¬O¼Æ¦r¡A¨Ò¦p : 502");
+			errMsgs.add("é¤é»ç·¨è™Ÿå¿…é ˆæ˜¯æ•¸å­—ï¼Œä¾‹å¦‚ : 502");
 		}
 		if (!errMsgs.isEmpty()) {
 			RequestDispatcher failureView = req.getRequestDispatcher(this.ErrorTo);
 			failureView.forward(req, res);
-			return;// µ{¦¡¤¤Â_
+			return;// ç¨‹å¼ä¸­æ–·
 		}
 
 		MealService service = new MealService();
 		MealVO mealVO = service.findMealByPrimaryKey(mealid);
 		if (mealVO == null) {
 
-			errMsgs.add("¬dµL¦¹¸ê®Æ!");
+			errMsgs.add("æŸ¥ç„¡æ­¤è³‡æ–™!");
 			RequestDispatcher failureView = req.getRequestDispatcher(this.ErrorTo);
 			failureView.forward(req, res);
 			return;
