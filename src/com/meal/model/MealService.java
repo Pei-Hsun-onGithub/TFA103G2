@@ -38,7 +38,7 @@ public class MealService {
 			Timestamp launchDate, Integer launchDays, String mealDescription, byte[] mealImg, Integer restaurantId) {
 
 		MealVO eachMeal = new MealVO();
-		
+	
 		eachMeal.setMealId(mealId);
 		eachMeal.setSta(sta);
 		eachMeal.setMealName(mealName);

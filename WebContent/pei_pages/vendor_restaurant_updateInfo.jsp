@@ -656,6 +656,9 @@ RestaurantService restSvc = new RestaurantService();
 			/*********************************************   縣市地區的操作       **********************************************************/
 										
 							
+									
+								
+									
 										$('select.my-distrc-select').on('change', function(e){
 											
 											var selectedDistrict = this.options[this.selectedIndex].text.trim();
