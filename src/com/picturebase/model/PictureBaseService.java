@@ -41,6 +41,10 @@ public class PictureBaseService {
 		return dao.getall();
 	}
 	
+	public PictureBaseVO OnePicOfAr(Integer articleNo) {		
+		return dao.findOnePic(articleNo);		
+	}
+	
 	
 	
 

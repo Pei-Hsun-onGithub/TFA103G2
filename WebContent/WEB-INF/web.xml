@@ -116,6 +116,17 @@
 		<servlet-name>FoodArticleServlet</servlet-name>
 		<url-pattern>/article/fa.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MessageServlet</servlet-name>
+		<servlet-class>com.message.controller.MessageServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MessageServlet</servlet-name>
+		<url-pattern>/article/msg.do</url-pattern>
+	</servlet-mapping>
+	
 
 <!-- 以下為Filter的註冊 -->
 
