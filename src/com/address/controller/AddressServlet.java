@@ -22,7 +22,7 @@ public class AddressServlet extends HttpServlet {
 
 //===============================================================================================	
 
-		if ("getOne_For_Display".equals(action)) { // ¨Ó¦Ûselect_page.jspªº½Ğ¨D
+		if ("getOne_For_Display".equals(action)) { // ä¾†è‡ªselect_page.jspçš„è«‹æ±‚
 			System.out.println("hello--1");
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -31,59 +31,59 @@ public class AddressServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*************************** 1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z **********************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç† **********************/
 				String str = req.getParameter("deliveryAddId");
 				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("½Ğ¿é¤J¥~°e¦a§}½s¸¹");
+					errorMsgs.add("è«‹è¼¸å…¥å¤–é€åœ°å€ç·¨è™Ÿ");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/address/select_page.jsp");
 					failureView.forward(req, res);
-					return;// µ{¦¡¤¤Â_
+					return;// ç¨‹å¼ä¸­æ–·
 				}
 
 				Integer deliveryAddId = null;
 				try {
 					deliveryAddId = new Integer(str);
 				} catch (Exception e) {
-					errorMsgs.add("¥~°e¦a§}½s¸¹®æ¦¡¤£¥¿½T");
+					errorMsgs.add("å¤–é€åœ°å€ç·¨è™Ÿæ ¼å¼ä¸æ­£ç¢º");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/address/select_page.jsp");
 					failureView.forward(req, res);
-					return;// µ{¦¡¤¤Â_
+					return;// ç¨‹å¼ä¸­æ–·
 				}
 
-				/*************************** 2.¶}©l¬d¸ß¸ê®Æ *****************************************/
+				/*************************** 2.é–‹å§‹æŸ¥è©¢è³‡æ–™ *****************************************/
 				AddressService addressSvc = new AddressService();
 				AddressVO addressVO = addressSvc.getOneAddress(deliveryAddId);
 				if (addressVO == null) {
-					errorMsgs.add("¬dµL¸ê®Æ");
+					errorMsgs.add("æŸ¥ç„¡è³‡æ–™");
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("/address/select_page.jsp");
 					failureView.forward(req, res);
-					return;// µ{¦¡¤¤Â_
+					return;// ç¨‹å¼ä¸­æ–·
 				}
 
-				/*************************** 3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) *************/
-				req.setAttribute("addressVO", addressVO); // ¸ê®Æ®w¨ú¥XªºaddressVOª«¥ó,¦s¤Jreq
+				/*************************** 3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) *************/
+				req.setAttribute("addressVO", addressVO); // è³‡æ–™åº«å–å‡ºçš„addressVOç‰©ä»¶,å­˜å…¥req
 				String url = "/address/listOneAddress.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ¦¨¥\Âà¥æ listOneAddress.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // æˆåŠŸè½‰äº¤ listOneAddress.jsp
 				successView.forward(req, res);
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z *************************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† *************************************/
 			} catch (Exception e) {
-				errorMsgs.add("µLªk¨ú±o¸ê®Æ:" + e.getMessage());
+				errorMsgs.add("ç„¡æ³•å–å¾—è³‡æ–™:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/address/select_page.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
-		if ("getOne_For_Update".equals(action)) { // ¨Ó¦ÛlistAllAddress.jspªº½Ğ¨D
+		if ("getOne_For_Update".equals(action)) { // ä¾†è‡ªlistAllAddress.jspçš„è«‹æ±‚
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -91,23 +91,23 @@ public class AddressServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*************************** 1.±µ¦¬½Ğ¨D°Ñ¼Æ ****************************************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ ****************************************/
 				Integer addId = new Integer(req.getParameter("deliveryAddId"));
 
-				/*************************** 2.¶}©l¬d¸ß¸ê®Æ ****************************************/
+				/*************************** 2.é–‹å§‹æŸ¥è©¢è³‡æ–™ ****************************************/
 				AddressService addressSvc = new AddressService();
 				AddressVO addressVO = addressSvc.getOneAddress(addId);
 
-				/*************************** 3.¬d¸ß§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) ************/
-				req.setAttribute("addressVO", addressVO); // ¸ê®Æ®w¨ú¥XªºaddressVOª«¥ó,¦s¤Jreq
+				/*************************** 3.æŸ¥è©¢å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) ************/
+				req.setAttribute("addressVO", addressVO); // è³‡æ–™åº«å–å‡ºçš„addressVOç‰©ä»¶,å­˜å…¥req
 				String url = "/address/update_address_input.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// ¦¨¥\Âà¥æ update_address_input.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url);// æˆåŠŸè½‰äº¤ update_address_input.jsp
 				successView.forward(req, res);
 				return;
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z **********************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† **********************************/
 			} catch (Exception e) {
-				errorMsgs.add("µLªk¨ú±o­n­×§ïªº¸ê®Æ:" + e.getMessage());
+				errorMsgs.add("ç„¡æ³•å–å¾—è¦ä¿®æ”¹çš„è³‡æ–™:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/address/listAllAddress.jsp");
 				failureView.forward(req, res);
 				return;
@@ -116,7 +116,7 @@ public class AddressServlet extends HttpServlet {
 
 //================================================================================================================		
 
-		if ("update".equals(action)) { // ¨Ó¦Ûupdate_address_input.jspªº½Ğ¨D
+		if ("update".equals(action)) { // ä¾†è‡ªupdate_address_input.jspçš„è«‹æ±‚
 //System.out.println("update");
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -124,7 +124,7 @@ public class AddressServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*************************** 1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z **********************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç† **********************/
 
 				try {
 					String a = req.getParameter("deliveryAddId").trim();
@@ -132,7 +132,7 @@ public class AddressServlet extends HttpServlet {
 					Integer deliveryAddId = new Integer(req.getParameter("deliveryAddId").trim());
 //					System.out.println(deliveryAddId);
 				} catch (Exception e) {
-					System.err.println("¿ù¦b³o");
+					System.err.println("éŒ¯åœ¨é€™");
 				}
 
 				Integer userId = null;
@@ -141,34 +141,34 @@ public class AddressServlet extends HttpServlet {
 //		System.out.println(userId);
 				} catch (NumberFormatException e) {
 					userId = 0;
-					errorMsgs.add("½Ğ¶ñ·|­û½s¸¹");
+					errorMsgs.add("è«‹å¡«æœƒå“¡ç·¨è™Ÿ");
 				}
 
 				String customerName = req.getParameter("customerName");
 //	System.out.println(customerName);
 				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (customerName == null || customerName.trim().length() == 0) {
-					errorMsgs.add("¨úÀ\¤H©m¦W: ½Ğ¤ÅªÅ¥Õ");
-				} else if (!customerName.trim().matches(enameReg)) { // ¥H¤U½m²ß¥¿«h(³W)ªí¥Ü¦¡(regular-expression)
-					errorMsgs.add("¨úÀ\¤H©m¦W: ¥u¯à¬O¤¤¡B­^¤å¦r¥À¡B¼Æ¦r©M_ , ¥Bªø«×¥²»İ¦b2¨ì10¤§¶¡");
+					errorMsgs.add("å–é¤äººå§“å: è«‹å‹¿ç©ºç™½");
+				} else if (!customerName.trim().matches(enameReg)) { // ä»¥ä¸‹ç·´ç¿’æ­£å‰‡(è¦)è¡¨ç¤ºå¼(regular-expression)
+					errorMsgs.add("å–é¤äººå§“å: åªèƒ½æ˜¯ä¸­ã€è‹±æ–‡å­—æ¯ã€æ•¸å­—å’Œ_ , ä¸”é•·åº¦å¿…éœ€åœ¨2åˆ°10ä¹‹é–“");
 				}
 
 				String deliverPhone = req.getParameter("deliverPhone");
 //		System.out.println(deliverPhone);
 				String deliverPhoneReg = "^09\\d{2}(\\d{6}|-\\d{3}-\\d{3})$";
 				if (deliverPhone == null || deliverPhone.trim().length() == 0) {
-					errorMsgs.add("¹q¸Ü¸¹½X: ½Ğ¤ÅªÅ¥Õ");
-				} else if (!deliverPhone.trim().matches(deliverPhoneReg)) { // ¥H¤U½m²ß¥¿«h(³W)ªí¥Ü¦¡(regular-expression)
-					errorMsgs.add("½Ğ¶ñ¼g¹q¸Ü¸¹½X¡C");
+					errorMsgs.add("é›»è©±è™Ÿç¢¼: è«‹å‹¿ç©ºç™½");
+				} else if (!deliverPhone.trim().matches(deliverPhoneReg)) { // ä»¥ä¸‹ç·´ç¿’æ­£å‰‡(è¦)è¡¨ç¤ºå¼(regular-expression)
+					errorMsgs.add("è«‹å¡«å¯«é›»è©±è™Ÿç¢¼ã€‚");
 				}
 
 				String deliverAddress = req.getParameter("deliverAddress");
 //				System.out.println(deliverAddress);
 				String AddressReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{1,100}$";
 				if (deliverAddress == null || deliverAddress.trim().length() == 0) {
-					errorMsgs.add("¦a§}: ½Ğ¤ÅªÅ¥Õ");
-				} else if (!deliverAddress.trim().matches(AddressReg)) { // ¥H¤U½m²ß¥¿«h(³W)ªí¥Ü¦¡(regular-expression)
-					errorMsgs.add("¦a§}: ¥u¯à¬O¤¤¡B­^¤å¦r¥À¡B¼Æ¦r , ¥Bªø«×¥²»İ¦b100¤§¶¡");
+					errorMsgs.add("åœ°å€: è«‹å‹¿ç©ºç™½");
+				} else if (!deliverAddress.trim().matches(AddressReg)) { // ä»¥ä¸‹ç·´ç¿’æ­£å‰‡(è¦)è¡¨ç¤ºå¼(regular-expression)
+					errorMsgs.add("åœ°å€: åªèƒ½æ˜¯ä¸­ã€è‹±æ–‡å­—æ¯ã€æ•¸å­— , ä¸”é•·åº¦å¿…éœ€åœ¨100ä¹‹é–“");
 				}
 
 				String buildingName = req.getParameter("buildingName");
@@ -178,7 +178,7 @@ public class AddressServlet extends HttpServlet {
 //				System.out.println(note);
 
 				Integer sta = new Integer(req.getParameter("sta").trim());
-				// ¦]¬°¬Oget get³£¬O¦r¦ê¡C¼Æ¦r¦^¨Ó­nÂà«¬¡A©Ò¥H¥Înew¡C
+				// å› ç‚ºæ˜¯get getéƒ½æ˜¯å­—ä¸²ã€‚æ•¸å­—å›ä¾†è¦è½‰å‹ï¼Œæ‰€ä»¥ç”¨newã€‚
 //				System.out.println(sta);
 
 				Integer deliveryAddId = new Integer(req.getParameter("deliveryAddId").trim());
@@ -198,28 +198,28 @@ public class AddressServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 //					System.out.println(errorMsgs.size());
 					System.out.println("hahaha");
-					req.setAttribute("addressVO", addressVO); // §t¦³¿é¤J®æ¦¡¿ù»~ªºempVOª«¥ó,¤]¦s¤Jreq
+					req.setAttribute("addressVO", addressVO); // å«æœ‰è¼¸å…¥æ ¼å¼éŒ¯èª¤çš„empVOç‰©ä»¶,ä¹Ÿå­˜å…¥req
 					RequestDispatcher failureView = req.getRequestDispatcher("/address/update_address_input.jsp");
 					failureView.forward(req, res);
-					return; // µ{¦¡¤¤Â_
+					return; // ç¨‹å¼ä¸­æ–·
 				}
 
-				/*************************** 2.¶}©l­×§ï¸ê®Æ *****************************************/
+				/*************************** 2.é–‹å§‹ä¿®æ”¹è³‡æ–™ *****************************************/
 				AddressService addressSvc = new AddressService();
 				addressVO = addressSvc.updateAddress(userId, customerName, deliverPhone, deliverAddress, buildingName,
 						note, sta, deliveryAddId);
 
-				/*************************** 3.­×§ï§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) *************/
-				req.setAttribute("addressVO", addressVO); // ¸ê®Æ®wupdate¦¨¥\«á,¥¿½TªºªºempVOª«¥ó,¦s¤Jreq
+				/*************************** 3.ä¿®æ”¹å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) *************/
+				req.setAttribute("addressVO", addressVO); // è³‡æ–™åº«updateæˆåŠŸå¾Œ,æ­£ç¢ºçš„çš„empVOç‰©ä»¶,å­˜å…¥req
 //	System.out.println("transfor");
 				String url = "/address/listOneAddress.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ­×§ï¦¨¥\«á,Âà¥ælistOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // ä¿®æ”¹æˆåŠŸå¾Œ,è½‰äº¤listOneEmp.jsp
 				successView.forward(req, res);
 				return;
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z *************************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† *************************************/
 			} catch (Exception e) {
-				errorMsgs.add("­×§ï¸ê®Æ¥¢±Ñ:" + e.getMessage());
+				errorMsgs.add("ä¿®æ”¹è³‡æ–™å¤±æ•—:" + e.getMessage());
 			}
 			RequestDispatcher failureView = req.getRequestDispatcher("update_address_input.jsp");
 			failureView.forward(req, res);
@@ -227,7 +227,7 @@ public class AddressServlet extends HttpServlet {
 
 //===========================================================================================
 
-		if ("insert".equals(action)) { // ¨Ó¦ÛaddAddress.jspªº½Ğ¨D
+		if ("insert".equals(action)) { // ä¾†è‡ªaddAddress.jspçš„è«‹æ±‚
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -235,14 +235,14 @@ public class AddressServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-//				/***********************1.±µ¦¬½Ğ¨D°Ñ¼Æ - ¿é¤J®æ¦¡ªº¿ù»~³B²z*************************/
+//				/***********************1.æ¥æ”¶è«‹æ±‚åƒæ•¸ - è¼¸å…¥æ ¼å¼çš„éŒ¯èª¤è™•ç†*************************/
 //				try {
 //					String a = req.getParameter("deliveryAddId").trim();
 //					System.out.println(a);
 //					Integer deliveryAddId = new Integer(req.getParameter("deliveryAddId").trim());
 //		System.out.println(deliveryAddId);
 //				} catch (Exception e) {
-//					System.err.println("¿ù¦b³o");
+//					System.err.println("éŒ¯åœ¨é€™");
 //				}
 
 				Integer userId = null;
@@ -251,34 +251,34 @@ public class AddressServlet extends HttpServlet {
 System.out.println("1.userId="+userId);
 				} catch (NumberFormatException e) {
 					userId = 0;
-					errorMsgs.add("½Ğ¶ñ·|­û½s¸¹");
+					errorMsgs.add("è«‹å¡«æœƒå“¡ç·¨è™Ÿ");
 				}
 
 				String customerName = req.getParameter("customerName");
 System.out.println("2.customerName="+ customerName);
 				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{2,10}$";
 				if (customerName == null || customerName.trim().length() == 0) {
-					errorMsgs.add("¨úÀ\¤H©m¦W: ½Ğ¤ÅªÅ¥Õ");
-				} else if (!customerName.trim().matches(enameReg)) { // ¥H¤U½m²ß¥¿«h(³W)ªí¥Ü¦¡(regular-expression)
-					errorMsgs.add("¨úÀ\¤H©m¦W: ¥u¯à¬O¤¤¡B­^¤å¦r¥À¡B¼Æ¦r , ¥Bªø«×¥²»İ¦b2¨ì10¤§¶¡");
+					errorMsgs.add("å–é¤äººå§“å: è«‹å‹¿ç©ºç™½");
+				} else if (!customerName.trim().matches(enameReg)) { // ä»¥ä¸‹ç·´ç¿’æ­£å‰‡(è¦)è¡¨ç¤ºå¼(regular-expression)
+					errorMsgs.add("å–é¤äººå§“å: åªèƒ½æ˜¯ä¸­ã€è‹±æ–‡å­—æ¯ã€æ•¸å­— , ä¸”é•·åº¦å¿…éœ€åœ¨2åˆ°10ä¹‹é–“");
 				}
 
 				String deliverPhone = req.getParameter("deliverPhone");
 System.out.println("3.deliverPhone="+deliverPhone);
 				String deliverPhoneReg = "^09\\d{2}(\\d{6}|-\\d{3}-\\d{3})$";
 				if (deliverPhone == null || deliverPhone.trim().length() == 0) {
-					errorMsgs.add("¹q¸Ü¸¹½X: ½Ğ¤ÅªÅ¥Õ");
-				} else if (!deliverPhone.trim().matches(deliverPhoneReg)) { // ¥H¤U½m²ß¥¿«h(³W)ªí¥Ü¦¡(regular-expression)
-					errorMsgs.add("½Ğ¶ñ¼g¹q¸Ü¸¹½X¡C");
+					errorMsgs.add("é›»è©±è™Ÿç¢¼: è«‹å‹¿ç©ºç™½");
+				} else if (!deliverPhone.trim().matches(deliverPhoneReg)) { // ä»¥ä¸‹ç·´ç¿’æ­£å‰‡(è¦)è¡¨ç¤ºå¼(regular-expression)
+					errorMsgs.add("è«‹å¡«å¯«é›»è©±è™Ÿç¢¼ã€‚");
 				}
 
 				String deliverAddress = req.getParameter("deliverAddress");
 System.out.println("4.deliverAddress="+ deliverAddress);
 				String AddressReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{1,100}$";
 				if (deliverAddress == null || deliverAddress.trim().length() == 0) {
-					errorMsgs.add("¦a§}: ½Ğ¤ÅªÅ¥Õ");
-				} else if (!deliverAddress.trim().matches(AddressReg)) { // ¥H¤U½m²ß¥¿«h(³W)ªí¥Ü¦¡(regular-expression)
-					errorMsgs.add("¦a§}: ¥u¯à¬O¤¤¡B­^¤å¦r¥À¡B¼Æ¦r , ¥Bªø«×¥²»İ¦b100¤§¶¡");
+					errorMsgs.add("åœ°å€: è«‹å‹¿ç©ºç™½");
+				} else if (!deliverAddress.trim().matches(AddressReg)) { // ä»¥ä¸‹ç·´ç¿’æ­£å‰‡(è¦)è¡¨ç¤ºå¼(regular-expression)
+					errorMsgs.add("åœ°å€: åªèƒ½æ˜¯ä¸­ã€è‹±æ–‡å­—æ¯ã€æ•¸å­— , ä¸”é•·åº¦å¿…éœ€åœ¨100ä¹‹é–“");
 				}
 
 				String buildingName = req.getParameter("buildingName");
@@ -288,7 +288,7 @@ System.out.println("5.buildingName="+ buildingName);
 System.out.println("6.note="+note);
 
 				Integer sta = new Integer(req.getParameter("sta").trim());
-//¦]¬°¬Oget get³£¬O¦r¦ê¡C¼Æ¦r¦^¨Ó­nÂà«¬¡A©Ò¥H¥Înew¡C
+//å› ç‚ºæ˜¯get getéƒ½æ˜¯å­—ä¸²ã€‚æ•¸å­—å›ä¾†è¦è½‰å‹ï¼Œæ‰€ä»¥ç”¨newã€‚
 System.out.println("7.sta="+sta);
 
 //				Integer deliveryAddId = new Integer(req.getParameter("deliveryAddId").trim());
@@ -307,28 +307,28 @@ System.out.println("7.sta="+sta);
 				if (!errorMsgs.isEmpty()) {
 					System.out.println(errorMsgs.size());
 //System.out.println("hahaha");
-					req.setAttribute("addressVO", addressVO); // §t¦³¿é¤J®æ¦¡¿ù»~ªºempVOª«¥ó,¤]¦s¤Jreq
+					req.setAttribute("addressVO", addressVO); // å«æœ‰è¼¸å…¥æ ¼å¼éŒ¯èª¤çš„empVOç‰©ä»¶,ä¹Ÿå­˜å…¥req
 					RequestDispatcher failureView = req.getRequestDispatcher("/address/addAddress.jsp");
 					failureView.forward(req, res);
-					return; // µ{¦¡¤¤Â_
+					return; // ç¨‹å¼ä¸­æ–·
 				}
 
-				/*************************** 2.¶}©l­×§ï¸ê®Æ *****************************************/
+				/*************************** 2.é–‹å§‹ä¿®æ”¹è³‡æ–™ *****************************************/
 				AddressService addressSvc = new AddressService();
 				addressVO = addressSvc.addAddress(userId, customerName, deliverPhone, deliverAddress, buildingName,
 						note, sta);
 
-				/*************************** 3.­×§ï§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) *************/
-				req.setAttribute("addressVO", addressVO); // ¸ê®Æ®wupdate¦¨¥\«á,¥¿½TªºªºempVOª«¥ó,¦s¤Jreq
+				/*************************** 3.ä¿®æ”¹å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) *************/
+				req.setAttribute("addressVO", addressVO); // è³‡æ–™åº«updateæˆåŠŸå¾Œ,æ­£ç¢ºçš„çš„empVOç‰©ä»¶,å­˜å…¥req
 				System.out.println("transfor");
 				String url = "/address/listAllAddress.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ­×§ï¦¨¥\«á,Âà¥ælistOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // ä¿®æ”¹æˆåŠŸå¾Œ,è½‰äº¤listOneEmp.jsp
 				successView.forward(req, res);
 				return;
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z *************************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† *************************************/
 			} catch (Exception e) {
-				errorMsgs.add("­×§ï¸ê®Æ¥¢±Ñ:" + e.getMessage());
+				errorMsgs.add("ä¿®æ”¹è³‡æ–™å¤±æ•—:" + e.getMessage());
 			}
 			RequestDispatcher failureView = req.getRequestDispatcher("update_address_input.jsp");
 			failureView.forward(req, res);
@@ -336,7 +336,7 @@ System.out.println("7.sta="+sta);
 //		
 //===================================================================================================
 //		
-		if ("delete".equals(action)) { // ¨Ó¦ÛlistAllEmp.jsp
+		if ("delete".equals(action)) { // ä¾†è‡ªlistAllEmp.jsp
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -344,21 +344,21 @@ System.out.println("7.sta="+sta);
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*************************** 1.±µ¦¬½Ğ¨D°Ñ¼Æ ***************************************/
+				/*************************** 1.æ¥æ”¶è«‹æ±‚åƒæ•¸ ***************************************/
 				Integer deleteAddId = new Integer(req.getParameter("deliveryAddId"));
 
-				/*************************** 2.¶}©l§R°£¸ê®Æ ***************************************/
+				/*************************** 2.é–‹å§‹åˆªé™¤è³‡æ–™ ***************************************/
 				AddressService empSvc = new AddressService();
 				empSvc.deleteAddress(deleteAddId);
 
-				/*************************** 3.§R°£§¹¦¨,·Ç³ÆÂà¥æ(Send the Success view) ***********/
+				/*************************** 3.åˆªé™¤å®Œæˆ,æº–å‚™è½‰äº¤(Send the Success view) ***********/
 				String url = "/address/listAllAddress.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// §R°£¦¨¥\«á,Âà¥æ¦^°e¥X§R°£ªº¨Ó·½ºô­¶
+				RequestDispatcher successView = req.getRequestDispatcher(url);// åˆªé™¤æˆåŠŸå¾Œ,è½‰äº¤å›é€å‡ºåˆªé™¤çš„ä¾†æºç¶²é 
 				successView.forward(req, res);
 
-				/*************************** ¨ä¥L¥i¯àªº¿ù»~³B²z **********************************/
+				/*************************** å…¶ä»–å¯èƒ½çš„éŒ¯èª¤è™•ç† **********************************/
 			} catch (Exception e) {
-				errorMsgs.add("§R°£¸ê®Æ¥¢±Ñ:" + e.getMessage());
+				errorMsgs.add("åˆªé™¤è³‡æ–™å¤±æ•—:" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/address/listAllAddress.jsp");
 				failureView.forward(req, res);
 			}

@@ -1,5 +1,7 @@
 package com.meal.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
@@ -15,7 +17,7 @@ import javax.servlet.http.Part;
 import com.meal.model.MealService;
 import com.meal.model.MealVO;
 
-public class MealInsert extends Command {
+public class MealInsert2 extends Command {
 
 	private HttpServletRequest req;
 	private HttpServletResponse res;
@@ -23,7 +25,7 @@ public class MealInsert extends Command {
 	private String ErrorTo;
 	
 
-	public MealInsert(HttpServletRequest req, HttpServletResponse res) {
+	public MealInsert2(HttpServletRequest req, HttpServletResponse res) {
 		this.req = req;
 		this.res = res;
 
@@ -84,18 +86,22 @@ public class MealInsert extends Command {
 
 			// 圖片上傳
 			byte[] mealImg = null;
-			Part part = req.getPart("myUploadImg");
-			if (part.getSize() > 0) {
-				InputStream in = part.getInputStream();
-				mealImg = new byte[in.available()];
-				in.read(mealImg);
-				in.close();
-
-			}
+////			Part part = req.getPart("myUploadImg");
+//			
+//			Part part = req.getPart("myUploadImg");
+//			if (part.getSize() > 0) {
+//				InputStream in = part.getInputStream();
+//				mealImg = new byte[in.available()];
+//				System.out.println(mealImg);
+//				in.read(mealImg);
+//				in.close();
+//
+//			}
+			
+			
 			
 			
 			if (!errMsgs.isEmpty()) {
-				
 				MealVO errMealVO = new MealVO();
 				errMealVO.setMealName(mealName);
 				errMealVO.setSta(sta);
@@ -115,8 +121,20 @@ public class MealInsert extends Command {
 			
 
 			// 2. 持久化
-			MealVO mealVO = service.addMeal(sta, mealName, mealType, unitPrice, launchDate, launchDays,
-					mealDescription, mealImg, restaurantId);
+			
+			String path = "C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\meal\\pic";
+			File f = new File(path);
+			String[] s = f.list();
+			
+			MealVO mealVO = new MealVO();
+			
+			for (int i = 0; i < s.length; i++) {
+				String img = path + "\\" + s[i];
+				mealImg = getPictureByteArray(img);
+				mealVO = service.addMeal(sta, mealName, mealType, unitPrice, launchDate, launchDays,
+						mealDescription, mealImg, restaurantId);
+			}
+			
 
 			// 3. 轉交至展示層
 			req.setAttribute("mealVO", mealVO);
@@ -139,6 +157,14 @@ public class MealInsert extends Command {
 	public void setErrorURL(String url) {
 		this.ErrorTo = url;
 		
+	}
+	
+	public static byte[] getPictureByteArray(String path) throws IOException {
+		FileInputStream fis = new FileInputStream(path);
+		byte[] buffer = new byte[fis.available()];
+		fis.read(buffer);
+		fis.close();
+		return buffer;
 	}
 
 }

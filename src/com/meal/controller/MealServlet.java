@@ -59,6 +59,15 @@ public class MealServlet extends HttpServlet {
 			insertOne.execute();
 
 		}
+		
+		if ("insert2".equals(action)) {
+
+			Command insertOne = Command.createCommand("insert2", req, res);
+			insertOne.setForwardURL("/pei_pages/listOneMeal.jsp");
+			insertOne.setErrorURL("/vendor_meal_upload.jsp");
+			insertOne.execute();
+
+		}
 
 		if ("getOne_For_Update".equals(action)) {
 
