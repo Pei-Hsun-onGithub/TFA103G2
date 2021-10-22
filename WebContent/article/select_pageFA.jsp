@@ -51,7 +51,7 @@
 
 <ul>
   
-  <li><a href="<%=request.getContextPath()%>/article/fa.do?action=getAll" >List</a> all article.  <br><br></li>
+  <li><a href="allFA.jsp" >List</a> all article.  <br><br></li>
   
   
   <li>

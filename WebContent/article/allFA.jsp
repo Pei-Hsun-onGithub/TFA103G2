@@ -6,7 +6,6 @@
 
 
 <% 
-
 	FoodArticleService faSvc = new FoodArticleService();
 	FoodArticleVO faVO1 = faSvc.getOneArticle(1);
 	FoodArticleVO faVO2 = faSvc.getOneArticle(2);
@@ -363,7 +362,7 @@
                     <div class="sidebar-area">
                         
                         <div class="widget widget-recent-post">
-                            <h4 class="widget-title">Recent Post</h4>
+                            <h4 class="widget-title">熱門食記</h4>
                             <ul>
                                 <li>
                                     <div class="media">
@@ -371,7 +370,7 @@
                                             <img src="<%=request.getContextPath()%>/assets/img/widget/1.png" alt="widget">
                                         </div>
                                         <div class="media-body">
-                                            <h6 class="title"><a href="#">Greek yogurt breakfast bowls with toppings</a></h6>
+                                            <h6 class="title"><a href="#"><%=faVO1.getArticleTitle() %></a></h6>
                                         </div>
                                     </div>
                                 </li>
@@ -381,7 +380,7 @@
                                             <img src="<%=request.getContextPath()%>/assets/img/widget/2.png" alt="widget">
                                         </div>
                                         <div class="media-body">
-                                            <h6 class="title"><a href="#">Broad, garlic & mozzarella cheese bruschetta
+                                            <h6 class="title"><a href="#"><%=faVO2.getArticleTitle() %>
                                             </a></h6>
                                         </div>
                                     </div>
@@ -392,7 +391,7 @@
                                             <img src="<%=request.getContextPath()%>/assets/img/widget/3.png" alt="widget">
                                         </div>
                                         <div class="media-body">
-                                            <h6 class="title"><a href="#">Make authentic Italian margherita pizza at home
+                                            <h6 class="title"><a href="#"><%=faVO3.getArticleTitle() %>
                                             </a></h6>
                                         </div>
                                     </div>
@@ -403,7 +402,7 @@
                                             <img src="<%=request.getContextPath()%>/assets/img/widget/4.png" alt="widget">
                                         </div>
                                         <div class="media-body">
-                                            <h6 class="title"><a href="#">BBQ Chicken Classic Pizza Large</a></h6>
+                                            <h6 class="title"><a href="#"><%=faVO4.getArticleTitle() %>/a></h6>
                                         </div>
                                     </div>
                                 </li>
