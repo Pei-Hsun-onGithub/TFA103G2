@@ -12,11 +12,11 @@ public class MessageService {
 		dao = new MessageJDBCDAO();
 	}
 	
-	public MessageVO addMessage(Integer articleNo,Integer userId, Date msgDate, String msgContent, Integer sta) {
+	public MessageVO addMessage(Integer articleNo,Integer userId, String msgContent, Integer sta) {
 		MessageVO messageVO = new MessageVO();
 		
 		messageVO.setArticleNo(articleNo);
-		messageVO.setMsgDate(msgDate);
+		messageVO.setUserId(userId);
 		messageVO.setMsgContent(msgContent);
 		messageVO.setSta(sta);
 		dao.add(messageVO);
@@ -24,11 +24,10 @@ public class MessageService {
 		return messageVO;
 	}
 	
-	public MessageVO updateMessage(Integer msgNo, Date msgDate, String msgContent, Integer sta) {
+	public MessageVO updateMessage(Integer msgNo, String msgContent, Integer sta) {
 		MessageVO messageVO = new MessageVO();
 		
 		messageVO.setMsgNo(msgNo);
-		messageVO.setMsgDate(msgDate);
 		messageVO.setMsgContent(msgContent);
 		messageVO.setSta(sta);
 		

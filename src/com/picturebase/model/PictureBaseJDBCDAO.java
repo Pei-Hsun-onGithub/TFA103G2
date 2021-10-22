@@ -16,12 +16,16 @@ public class PictureBaseJDBCDAO implements PictureBaseDAO_interface {
 	public static final String DELETE = "DELETE FROM PictureBase WHERE picno =?";
 	public static final String FIND_ONE = "SELECT * FROM PictureBase WHERE articleno = ? ";
 	public static final String GET_ALL = "SELECT * FROM PictureBase";
+	public static final String FIND_ONE_IMAGE ="SELECT * FROM PictureBase WHERE articleno = ? ORDER BY picno LIMIT 1";
+			                                 
 
+	
 	static {
 		try {
 			Class.forName(Util.DRIVER);			
 		}catch(ClassNotFoundException ce) {
 			ce.printStackTrace();
+			 
 		}
 	}
 		
@@ -254,9 +258,9 @@ public class PictureBaseJDBCDAO implements PictureBaseDAO_interface {
 			}catch (SQLException se) {
 				if (con != null) {
 					try {
-						// 3°¥≥]©w©Û∑Ì¶≥exceptionµo•ÕÆ…§ßcatch∞œ∂Ù§∫
+						// 3‚óèË®≠ÂÆöÊñºÁï∂ÊúâexceptionÁôºÁîüÊôÇ‰πãcatchÂçÄÂ°äÂÖß
 						System.err.print("Transaction is being ");
-						System.err.println("rolled back-•—-emp");
+						System.err.println("rolled back-Áî±-emp");
 						con.rollback();
 					} catch (SQLException excep) {
 						throw new RuntimeException("rollback error occured. "
@@ -276,6 +280,60 @@ public class PictureBaseJDBCDAO implements PictureBaseDAO_interface {
 				}
 			}
 			
+			
+		}
+
+		@Override
+		public PictureBaseVO findOnePic(Integer articleNo) {			
+			PictureBaseVO pbVO = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+				pstmt = con.prepareStatement(FIND_ONE_IMAGE);
+				
+				
+				pstmt.setInt(1,articleNo);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pbVO = new PictureBaseVO();
+					pbVO.setPicNo(rs.getInt("picNo"));
+					pbVO.setArticleNo(rs.getInt("articleNo"));
+					pbVO.setPic(rs.getBytes("pic"));
+					
+				}
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}finally{
+				
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}			
+				
+				if(pstmt != null) {
+					try {
+					pstmt.close();
+					}catch(SQLException se){
+						se.printStackTrace();
+					}
+				}
+					
+				if( con != null) {
+					try {
+						con.close();
+					}catch(SQLException se) {
+						se.printStackTrace();
+					}
+				}
+			}
+			return pbVO;
 			
 		}
 		
