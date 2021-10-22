@@ -80,7 +80,7 @@
        <b>選擇成就編號:</b>
        <select size="1" name="achiid">
          <c:forEach var="achieve" items="${AchieveSvc.all}" > 
-          <option value="${achieve.achiId}">${achieve.achiId}
+          <option value="${achieve.achiId}">${achieve.achiName}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">

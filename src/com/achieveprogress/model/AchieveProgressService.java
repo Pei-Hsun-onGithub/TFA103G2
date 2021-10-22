@@ -21,7 +21,7 @@ public class AchieveProgressService {
 		achieveprogress.setCurrentOrder(currentOrder);
 		achieveprogress.setBeginDate(beginDate);
 		achieveprogress.setSta(sta);
-		dao.add(achieveprogress);
+dao.add(achieveprogress);
 
 		return achieveprogress;
 	}
