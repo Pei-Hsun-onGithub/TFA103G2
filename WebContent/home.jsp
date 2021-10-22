@@ -1,3 +1,4 @@
+<%@page import="com.memberinfo.model.MemberInfoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -29,7 +30,7 @@
 	rel="stylesheet">
 <style>
 section.my-monster-state-bar {
-	margin-top: 80px;
+	margin-top: 60px;
 	background-color: #faf7f2;
 }
 
@@ -39,7 +40,6 @@ section ul.my-monsteritem-menu {
 
 section li.category-wrap {
 	width: 60px;
-	
 }
 
 section li.my-li {
@@ -52,6 +52,43 @@ section li.my-monsteritem-wrap img.my-monster-now {
 	height: 50px;
 }
 
+div.carousel div.carousel-item img.my-carousel-img {
+}
+
+/*********  tooltip的CSS 開始  ********/
+#tooltip {
+  display:none;
+  background: #ffffff;
+  color: #643045;
+  font-weight: bold;
+  padding: 5px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+}
+#arrow,
+#arrow::before {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+}
+
+#arrow {
+  visibility: hidden;
+}
+
+#arrow::before {
+  visibility: visible;
+  content: '';
+  transform: rotate(45deg);
+}
+
+#tooltip[data-popper-placement^='bottom'] > #arrow {
+  top: -4px;
+}
+
+
+/*********  tooltip的CSS 結束 ********/
 
 </style>
 
@@ -83,10 +120,17 @@ section li.my-monsteritem-wrap img.my-monster-now {
 	</div>
 	<!-- //. search Popup -->
 
+	<%
+		Integer userId = (Integer) session.getAttribute("userId");
+
+		MemberInfoService memInfoSvc = new MemberInfoService();
+	%>
+
 	<!-- navbar start -->
 	<header class="navbar-area ">
 		<nav class="navbar navbar-expand-lg">
 			<div class="container nav-container">
+
 				<div class="responsive-mobile-menu">
 					<button class="menu toggle-btn d-block d-lg-none"
 						data-target="#themefie_main_menu" aria-expanded="false"
@@ -94,35 +138,27 @@ section li.my-monsteritem-wrap img.my-monster-now {
 						<span class="icon-left"></span> <span class="icon-right"></span>
 					</button>
 				</div>
+
+
 				<div class="logo">
 					<a class="main-logo" href="#"><img src="assets/img/logo.png"
 						alt="img"></a>
+
+
+
+
 				</div>
+
 				<div class="collapse navbar-collapse" id="themefie_main_menu">
 					<ul class="navbar-nav menu-open">
-						<li class="current-menu-item menu-item-has-children"><a
-							href="home-1.html">訂餐</a>
-							<ul class="sub-menu ps-0">
-								<li><a href="shop.html">Shop</a></li>
-								<li><a href="menu.html">Menu</a></li>
-								<li><a href="cart.html">Cart</a></li>
-								<li><a href="checkout.html">Checkout</a></li>
-							</ul></li>
-
-						<li class="current-menu-item menu-item-has-children"><a
-							href="blog.html">食記</a>
-							<ul class="sub-menu ps-0">
-								<li><a href="shop.html">查詢食記</a></li>
-								<li><a href="menu.html">食記</a></li>
-								<li><a href="cart.html">Cart</a></li>
-
-							</ul></li>
-
-
-						<li><a href="about.html">ABOUT US</a></li>
-						<li><a href="contact.html">CONTACTS</a></li>
+						<li><a href="menu.html">訂餐去</a></li>
+						<li><a href="shop.html">訂餐去2</a></li>
+						<li><a href="checkout.html">直接結帳</a></li>
+						<li><a href="about.html">查詢食記</a></li>
+						<li><a href="contact.html">食記撰寫</a></li>
 					</ul>
 				</div>
+
 				<div class="nav-right-part nav-right-part-mobile">
 					<ul>
 						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
@@ -139,12 +175,28 @@ section li.my-monsteritem-wrap img.my-monster-now {
 						<!--                         </li> -->
 						<li class="phone-contact"><a
 							href="/TFA103G2/login/memberinfo.do?action=getOne"><i
-								class="far fa-user"></i></a></li>
-						<li class="menu-cart"><a href="#"><i class="far fa-bell"></i>
-								<span>4</span></a></li>
-						<li class="menu-cart"><a href="cart.html"><i
-								class="fas fa-shopping-cart"></i> <span>1</span></a></li>
-						<li>49.50 $</li>
+								class="far fa-user"></i> username</a></li>
+								
+						<li><a id="my-bell" href="#" onclick="toggleTheTooltip()"><i class="far fa-bell"></i>
+								<span>4</span></a>
+						</li>
+								<!--   放入想要提醒的事項!    -->		
+						<div id="tooltip" role="tooltip">
+							<div>Popcorn</div>
+							<div>sizes</div>
+							<div>&amp; Price</div>
+							<div>XXS: $1.99</div>
+							<div>XS: $2.99</div>
+							<div>S: $3.99</div>
+							<div>M: $4.99</div>
+							<div>L: $5.99</div>
+							<div>XL: $6.99</div>
+							<div>XXL: $7.99</div>
+							<div id="arrow" data-popper-arrow></div>
+						</div>
+				
+						<li><a href="cart.html"><i class="fas fa-shopping-cart"></i>
+								<span>1</span></a></li>
 					</ul>
 				</div>
 			</div>
@@ -154,89 +206,109 @@ section li.my-monsteritem-wrap img.my-monster-now {
 
 	<!-- category Area Start-->
 
- <section class="category-area my-monster-state-bar">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-12 align-self-center">
-                    <ul class="category-menu my-monsteritem-menu">
-                        
-                        <li class="category-wrap my-monsteritem-wrap"><a href="#"><img src="images/243.jpg"  class="my-monster-now" alt="category"></a>
-                            <div class="category-sub-menu">
-                                <div class="row">
-                                    <div class="col-md-3 col-6">
-                                        <div class="single-item-wrap text-center">
-                                            <div class="thumb">
-                                                <img src="assets/img/product/pizza/1.png" alt="img">
-                                            </div>
-                                            <div class="wrap-details">
-                                                <h6><a href="shop.html">Margherita Pizza</a></h6>                          
-                                            </div> 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-6">
-                                        <div class="single-item-wrap text-center">
-                                            <div class="thumb">
-                                                <img src="assets/img/product/pizza/2.png" alt="img">
-                                            </div>
-                                            <div class="wrap-details">
-                                                <h6><a href="shop.html">Maxican Pizza Test Better</a></h6>                          
-                                            </div> 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-6">
-                                        <div class="single-item-wrap text-center">
-                                            <div class="thumb">
-                                                <img src="assets/img/product/pizza/3.png" alt="img">
-                                            </div>
-                                            <div class="wrap-details">
-                                                <h6><a href="shop.html">Margherita Pizza</a></h6>                          
-                                            </div> 
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-6">
-                                        <a href="#"><img src="assets/img/ad.png" alt="img"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                       
-                       	<li class="category-wrap my-li"><span>菲力</span></li>
-                       	<li class="category-wrap my-li"><span>LV 3</span></li>
-                       	<li class="category-wrap my-li"><span>愛吃麵</span></li>
-                       
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-	<!-- category Area End -->
-
-
-
-
-
-	<!-- Banner Area Start-->
-	<section class="banner-area banner-area-2">
-		<div class="banner-thumb">
-			<!-- <img src="assets/img//home-3/banner-bg.png" alt="img"> -->
-		</div>
+	<section class="category-area my-monster-state-bar">
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-lg-8 align-self-center">
-					<div class="banner-inner text-center my-main-search-block">
-						<h1>在您附近的熱門外送美食</h1>
-						<form>
-							<div class="single-input-wrap mb-0 with-btn">
-								<input type="email" placeholder="想吃點什麼">
-								<button class="btn btn-base">Search your location</button>
-							</div>
-						</form>
-					</div>
+				<div class="col-lg-12 align-self-center">
+					<ul class="category-menu my-monsteritem-menu">
+
+						<li class="category-wrap my-monsteritem-wrap"><a href="#"><img
+								src="images/243.jpg" class="my-monster-now" alt="category"></a>
+							<div class="category-sub-menu">
+								<div class="row">
+									<div class="col-md-3 col-6">
+										<div class="single-item-wrap text-center">
+											<div class="thumb">
+												<img src="assets/img/product/pizza/1.png" alt="img">
+											</div>
+											<div class="wrap-details">
+												<h6>
+													<a href="shop.html">Margherita Pizza</a>
+												</h6>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3 col-6">
+										<div class="single-item-wrap text-center">
+											<div class="thumb">
+												<img src="assets/img/product/pizza/2.png" alt="img">
+											</div>
+											<div class="wrap-details">
+												<h6>
+													<a href="shop.html">Maxican Pizza Test Better</a>
+												</h6>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3 col-6">
+										<div class="single-item-wrap text-center">
+											<div class="thumb">
+												<img src="assets/img/product/pizza/3.png" alt="img">
+											</div>
+											<div class="wrap-details">
+												<h6>
+													<a href="shop.html">Margherita Pizza</a>
+												</h6>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-3 col-6">
+										<a href="#"><img src="assets/img/ad.png" alt="img"></a>
+									</div>
+								</div>
+							</div></li>
+
+						<li class="category-wrap my-li"><span>菲力</span></li>
+						<li class="category-wrap my-li"><span>LV 3</span></li>
+						<li class="category-wrap my-li"><span>愛吃麵</span></li>
+
+					</ul>
 				</div>
 			</div>
 		</div>
 	</section>
-	<!-- Banner Area End -->
+	<!-- category Area End -->
+
+	<!-- 幻燈片 Area Start-->
+	<div id="carouselExampleInterval" class="carousel slide"
+		data-bs-ride="carousel">
+		<div class="carousel-inner">
+			<div class="carousel-item active" data-bs-interval="2000">
+				<div style="margin: 0 auto; width: 1200px;">
+					<img class="bg-img my-carousel-img"
+						src="https://via.placeholder.com/1200x420" alt="img">
+				</div>
+			</div>
+			<div class="carousel-item my-carousel-img" data-bs-interval="2000">
+				<div style="margin: 0 auto; width: 1200px;">
+					<img class="bg-img" src="https://via.placeholder.com/1200x420"
+						alt="img">
+				</div>
+
+			</div>
+			<div class="carousel-item my-carousel-img" data-bs-interval="2000">
+				<div style="margin: 0 auto; width: 1200px;">
+					<img class="bg-img" src="https://via.placeholder.com/1200x420"
+						alt="img">
+				</div>
+			</div>
+		</div>
+		<button class="carousel-control-prev" type="button"
+			data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button"
+			data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Next</span>
+		</button>
+	</div>
+	<!-- 幻燈片 Area End -->
+
+
+
+
 
 	<!-- category Area Start-->
 
@@ -1186,36 +1258,7 @@ section li.my-monsteritem-wrap img.my-monster-now {
 
 
 
-	<!-- testimonial Area Start-->
-	<section class="testimonial-area text-center">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-7 col-md-10">
-					<div class="testimonial-slider owl-carousel">
-						<div class="item">
-							<div class="testimonial-wrap">
-								<p>“We have no regrets! I don't know what else to say. It
-									really saves me time and effort. Food is exactly what our
-									business has been lacking”</p>
-								<h3>Julia R. Davis</h3>
-								<h6>Food Bloger</h6>
-							</div>
-						</div>
-						<div class="item">
-							<div class="testimonial-wrap">
-								<p>“We have no regrets! I don't know what else to say. It
-									really saves me time and effort. Food is exactly what our
-									business has been lacking”</p>
-								<h3>Davis J. Rulia</h3>
-								<h6>Food Bloger</h6>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- testimonial Area End -->
+
 
 	<!-- blog Area Start-->
 	<section class="blog-area pd-bottom-90">
@@ -1425,5 +1468,33 @@ section li.my-monsteritem-wrap img.my-monster-now {
 	<script src="assets/js/tweenmax.min.js"></script>
 	<!-- main js  -->
 	<script src="assets/js/main.js"></script>
+
+	<script src="https://unpkg.com/@popperjs/core@^2.0.0"></script>
+	<script>
+		const bell = document.querySelector('#my-bell');
+		const tooltip = document.querySelector('#tooltip');
+
+		// Pass the button, the tooltip, and some options, and Popper will do the
+		// magic positioning for you:
+		Popper.createPopper(bell, tooltip, {
+			placement : 'bottom',
+			modifiers : [ {
+				name : 'offset',
+				options : {
+					offset : [ 0, 10],
+				},
+			}, ],
+
+		});
+		
+		
+		function toggleTheTooltip() {
+			
+			$('#tooltip').toggle();
+			
+		}
+	</script>
+
+
 </body>
 </html>
