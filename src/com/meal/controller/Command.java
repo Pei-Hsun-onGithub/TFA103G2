@@ -22,6 +22,9 @@ public abstract class Command {
 		if ("insert".equals(action)) {
 			return new MealInsert(req, res);
 		}
+		if ("insert2".equals(action)) {
+			return new MealInsert2(req, res);
+		}
 		if ("getOne_For_Update".equals(action)) {
 			return new MealGetOneForUpdate(req, res);
 		}

@@ -50,7 +50,8 @@
 </c:if>
 
 <ul>
-  <li><a href='listallFA.jsp'>List</a> all article.  <br><br></li>
+  
+  <li><a href="allFA.jsp" >List</a> all article.  <br><br></li>
   
   
   <li>

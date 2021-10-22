@@ -3,7 +3,7 @@
 <%@ page import="com.memberinfo.model.*"%>
 
 <%
- MemberInfo memberinfo = (MemberInfo) request.getAttribute("memberInfo");
+	MemberInfo memberinfo = (MemberInfo) request.getAttribute("memberInfo");
 %>
 
 <!DOCTYPE html>
@@ -76,34 +76,32 @@
 						<!---------------------------------- new  ---------------------------------->
 
 						<div class="panel-group">
-							<input type="radio" name="panel-radio" id="radio1"
-								class="panel-control" checked> <input type="radio"
-								name="panel-radio" id="radio2" class="panel-control">
+							<input type="radio" name="panel-radio" id="radio1" class="panel-control" checked> 
+							<input type="radio" name="panel-radio" id="radio2" class="panel-control">
 							<div class="tab-group">
-								<label for="radio1" class="active">會員</label> <label
-									for="radio2">廠商</label>
+								<label for="radio1" class="active">會員</label>
+								<label for="radio2">廠商</label>
 							</div>
 							<div class="content-group">
 
 								<!---------------------------------- table內帳號輸入 ---------------------------------->
-								<form class="content content1" action="loginhandler;"
-									method="post">
+								<form class="content content1" action="<%=request.getContextPath()%>/loginhandler" method="post">
 									<div id="right" class="two-thirds">
 										<fieldset>
 											<h1 class="lgd" style="color: black">登入帳號</h1>
 											<p>直接輸入您的會員帳號密碼登入</p>
-											<input type="username" id="username" class="username_email"
-												name="email" placeholder="您的電子郵件地址" required> <input
-												type="password" id="password" class="password1"
-												name="pwd" placeholder="您的密碼" required> <input
-												type="button" value="登入" class="btn" id="submit"
+											<input type="username" id="username" class="username_email"name="email" placeholder="您的電子郵件地址" required> 
+											<input type="password" id="password" class="password1" name="pwd" placeholder="您的密碼" required> 
+											<input
+												type="submit" value="登入" class="btn" id="submit1"
 												onclick="myFormCheck()" />
 											<div id="rmbr">
-												<input type="checkbox" id="remberme" name="remberme"
-													required> <label for="remberme" id="remberme0">記住我</label>
+												<input type="checkbox" id="remberme" name="remberme">
+												<label for="remberme" id="remberme0">記住我</label>
 											</div>
 											<div id="sign">
-												<a href="<%=request.getContextPath()%>/login/Login-forget.jsp" id="member_btn">忘記密碼?</a> <a
+												<a
+													href="<%=request.getContextPath()%>/login/Login-forget.jsp" id="member_btn">忘記密碼?</a> <a
 													href="<%=request.getContextPath()%>/login/Login-custome-regist.jsp">註冊</a>
 											</div>
 										</fieldset>
@@ -111,25 +109,21 @@
 									<!--two-thirds-->
 								</form>
 								<!---------------------------------- table內帳號輸入2 ---------------------------------->
-								<form class="content content2" action="loginhandler;"
-									method="post">
+								<form class="content content2" action="<%=request.getContextPath()%>/loginhandler" method="post">
 									<div id="right" class="two-thirds">
 										<fieldset>
 											<h1 class="lgd" style="color: black">登入帳號</h1>
 											<p>直接輸入您的廠商帳號密碼登入</p>
-											<input type="username" id="username" class="username_email"
-												name="email2" placeholder="您的電子郵件地址" required> <input
-												type="password" id="password" class="password1"
-												name="pwd2" placeholder="您的密碼" required> <input
-												type="button" value="登入" class="btn" id="submit1"
-												onclick="myFormCheck()" />
+											<input type="username" id="username" class="username_email"name="email" placeholder="您的電子郵件地址" required>
+											<input type="password" id="password" class="password1" name="pwd" placeholder="您的密碼" required>
+											<input type="submit" value="登入" class="btn" id="submit1" onclick="myFormCheck()" />
 											<div id="rmbr">
-												<input type="checkbox" id="remberme" name="remberme"
-													required> <label for="remberme" id="remberme0">記住我</label>
+												<input type="checkbox" id="remberme" name="remberme"> 
+												<label for="remberme" id="remberme0">記住我</label>
 											</div>
 											<div id="sign">
-												<a href="<%=request.getContextPath()%>/login/Login-forget.jsp" id="member_btn">忘記密碼?</a> <a
-													href="<%=request.getContextPath()%>/login/Login-custome-regist.jsp" id="register">註冊</a>
+												<a href="<%=request.getContextPath()%>/login/Login-forget.jsp" id="member_btn">忘記密碼?</a>
+												<a href="<%=request.getContextPath()%>/login/Login-vendor-regist.jsp" id="register">註冊</a>
 											</div>
 										</fieldset>
 									</div>
@@ -151,23 +145,18 @@
 	<script src="<%=request.getContextPath()%>/assets/js/counterup.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/waypoint.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/magnific.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/owl.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/tweenmax.min.js"></script>
 	<!-- main js  -->
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 	<!-- new js   -->
-	<script src="<%=request.getContextPath()%>/assets/js/Login-login.js"></script>
-
+<%-- 	<script src="<%=request.getContextPath()%>/assets/js/Login-login.js"></script> --%>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.address.model.*"%>
@@ -13,8 +13,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="BIG5">
-<title>©Ò¦³­û¤u¸ê®Æ - listAllAddress_byDAO.jsp</title>
+<meta charset="UTF-8">
+<title>æ‰€æœ‰å“¡å·¥è³‡æ–™ - listAllAddress_byDAO.jsp</title>
 
 <style>
   table#table-1 {
@@ -52,17 +52,17 @@
 </head>
 <body bgcolor='white'>
 
-<h4>¦¹­¶½m²ß±Ä¥Î EL ªº¼gªk¨ú­È:</h4>
+<h4>æ­¤é ç·´ç¿’æ¡ç”¨ EL çš„å¯«æ³•å–å€¼:</h4>
 <table id="table-1">
 	<tr><td>
-		 <h3>©Ò¦³­û¤u¸ê®Æ - listAllAddress_byDAO.jsp</h3>
-		 <h4><a href="<%=request.getContextPath()%>/address/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">¦^­º­¶</a></h4>
+		 <h3>æ‰€æœ‰å“¡å·¥è³‡æ–™ - listAllAddress_byDAO.jsp</h3>
+		 <h4><a href="<%=request.getContextPath()%>/address/select_page.jsp"><img src="images/back1.gif" width="100" height="32" border="0">å›é¦–é </a></h4>
 	</td></tr>
 </table>
 
-<%-- ¿ù»~ªí¦C --%>
+<%-- éŒ¯èª¤è¡¨åˆ— --%>
 <c:if test="${not empty errorMsgs}">
-	<font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+	<font style="color:red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 	<ul>
 		<c:forEach var="message" items="${errorMsgs}">
 			<li style="color:red">${message}</li>
@@ -72,14 +72,14 @@
 
 <table>
 	<tr>
-		<th>¥~°e¦a§}½s¸¹</th>
-		<th>·|­û½s¸¹</th>
-		<th>¨úÀ\¤H©m¦W</th>
-		<th>³sµ¸¹q¸Ü</th>
-		<th>¦a§}</th>
-		<th>¤j¼Ó¦WºÙ</th>
-		<th>³Æµù</th>
-		<th>ª¬ºA</th>
+		<th>å¤–é€åœ°å€ç·¨è™Ÿ</th>
+		<th>æœƒå“¡ç·¨è™Ÿ</th>
+		<th>å–é¤äººå§“å</th>
+		<th>é€£çµ¡é›»è©±</th>
+		<th>åœ°å€</th>
+		<th>å¤§æ¨“åç¨±</th>
+		<th>å‚™è¨»</th>
+		<th>ç‹€æ…‹</th>
 	</tr>
 	
 	<%@ include file="page\page1.file" %> 
@@ -97,14 +97,14 @@
 			<td>${AddressVO.sta}</td>
 						<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/address/address.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="­×§ï">
+			     <input type="submit" value="ä¿®æ”¹">
 			     <input type="hidden" name="deliveryAddId"  value="${AddressVO.deliveryAddId}">
 			     <input type="hidden" name="action"	value="getOne_For_Update">
 			  </FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/address/address.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="§R°£">
+			     <input type="submit" value="åˆªé™¤">
 			     <input type="hidden" name="deliveryAddId"  value="${AddressVO.deliveryAddId}">
 			     <input type="hidden" name="action" value="delete"></FORM>
 			</td>

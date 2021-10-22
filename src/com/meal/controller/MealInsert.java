@@ -34,16 +34,16 @@ public class MealInsert extends Command {
 		List<String> errMsgs = new LinkedList<String>();
 		req.setAttribute("errMsgs", errMsgs);
 		MealService service = new MealService();
-		// 1. §ì¨úªí³æ¸ê®Æ¡A¿ù»~¸ê®Æ³B²z
+		// 1. æŠ“å–è¡¨å–®è³‡æ–™ï¼ŒéŒ¯èª¤è³‡æ–™è™•ç†
 		try {
 
 			String mealName = req.getParameter("mealName");
 			String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 
 			if (!mealName.trim().matches(enameReg)) {
-				errMsgs.add("½Ğ¿é¤J¥¿½T¤¤­^¤å»P0~9ªº¼Æ¦r");
+				errMsgs.add("è«‹è¼¸å…¥æ­£ç¢ºä¸­è‹±æ–‡èˆ‡0~9çš„æ•¸å­—");
 			} else if (mealName == null || mealName.trim().length() == 0) {
-				errMsgs.add("½Ğ¿é¤J¸ê®Æ¡A¤£­nªÅ¥Õ");
+				errMsgs.add("è«‹è¼¸å…¥è³‡æ–™ï¼Œä¸è¦ç©ºç™½");
 			}
 
 
@@ -51,7 +51,7 @@ public class MealInsert extends Command {
 			try {
 				sta = new Integer(req.getParameter("sta").trim());
 			} catch (NumberFormatException e) {
-				errMsgs.add("ª¬ºA½Ğ¿é¤J¼Æ¦r");
+				errMsgs.add("ç‹€æ…‹è«‹è¼¸å…¥æ•¸å­—");
 			}
 			String mealType = req.getParameter("mealType");
 
@@ -60,7 +60,7 @@ public class MealInsert extends Command {
 				unitPrice = new Integer(req.getParameter("unitPrice"));
 			} catch (NumberFormatException e) {
 				unitPrice = new Integer("0");
-				errMsgs.add("³æ»ù½Ğ¿é¤J¼Æ¦r");
+				errMsgs.add("å–®åƒ¹è«‹è¼¸å…¥æ•¸å­—");
 			}
 
 			Timestamp launchDate = java.sql.Timestamp.valueOf(req.getParameter("launchDate"));
@@ -70,7 +70,7 @@ public class MealInsert extends Command {
 				launchDays = new Integer(req.getParameter("launchDays"));
 			} catch (NumberFormatException e) {
 				launchDays = new Integer("30");
-				errMsgs.add("¤Ñ¼Æ½Ğ¿é¤J¼Æ¦r");
+				errMsgs.add("å¤©æ•¸è«‹è¼¸å…¥æ•¸å­—");
 			}
 
 			String mealDescription = req.getParameter("mealDescription");
@@ -79,10 +79,10 @@ public class MealInsert extends Command {
 			try {
 				restaurantId = new Integer(req.getParameter("restaurantId"));
 			} catch (NumberFormatException e) {
-				errMsgs.add("À\ÆU½s¸¹½Ğ¿é¤J¼Æ¦r");
+				errMsgs.add("é¤å»³ç·¨è™Ÿè«‹è¼¸å…¥æ•¸å­—");
 			}
 
-			// ¹Ï¤ù¤W¶Ç
+			// åœ–ç‰‡ä¸Šå‚³
 			byte[] mealImg = null;
 			Part part = req.getPart("myUploadImg");
 			if (part.getSize() > 0) {
@@ -109,16 +109,16 @@ public class MealInsert extends Command {
 				RequestDispatcher failureView = req.getRequestDispatcher(this.ErrorTo);
 				req.setAttribute("UpdatingMealVO", errMealVO);
 				failureView.forward(req, res);
-				return;// µ{¦¡¤¤Â_
+				return;// ç¨‹å¼ä¸­æ–·
 			}
 			
 			
 
-			// 2. «ù¤[¤Æ
+			// 2. æŒä¹…åŒ–
 			MealVO mealVO = service.addMeal(sta, mealName, mealType, unitPrice, launchDate, launchDays,
 					mealDescription, mealImg, restaurantId);
 
-			// 3. Âà¥æ¦Ü®i¥Ü¼h
+			// 3. è½‰äº¤è‡³å±•ç¤ºå±¤
 			req.setAttribute("mealVO", mealVO);
 			RequestDispatcher toListOneView = req.getRequestDispatcher(this.forwardTo);
 			toListOneView.forward(req, res);

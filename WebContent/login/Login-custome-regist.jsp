@@ -4,13 +4,13 @@
 
 <%
  MemberInfo memberinfo = (MemberInfo) request.getAttribute("memberInfo");
- MemberInfo memberinfo2 = (MemberInfo) request.getAttribute("memberinfo2");
+ MemberInfo memberinfo2 = (MemberInfo) request.getAttribute("memberInfo2");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta charset="BIG5">
+<meta charset="UTF-8">
 <title>Login-custom-register</title>
 <!--fivicon icon-->
 <link rel="icon"
@@ -78,6 +78,7 @@
  <!-- navbar end -->
 
  <div class="body">
+
   <FORM METHOD="post" ACTION="memberinfo.do" name="form1">
 
    <table>
@@ -126,7 +127,7 @@
   </FORM>
  </div>
 
- <%-- 錯誤表列 --%>
+  <%-- 錯誤表列 --%>
  
 <c:if test="${not empty errorMsgs}">
  <font style="color:red">請修正以下錯誤:</font>
@@ -136,9 +137,6 @@
   </c:forEach>
  </ul>
 </c:if>
-
-
-
 
  <!-- all plugins here -->
  <script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>

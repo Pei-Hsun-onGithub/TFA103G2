@@ -7,17 +7,15 @@ public class TestMsg {
 	public static void main(String[] args) {
 		MessageDAO_interface dao = new MessageJDBCDAO();
 		
-		MessageVO msg = new MessageVO();
-		//Date date = new Date();
-		
+		MessageVO msg = new MessageVO();				
 		
 		//新增
 		
-//		msg.setArticleNo(1);
-//		msg.setMsgDate(java.sql.Date.valueOf("2021-09-16"));
-//		msg.setMsgContent("去冰要加錢,不推");
-//		msg.setSta(1);
-//		dao.add(msg);
+		msg.setArticleNo(2);		
+		msg.setUserId(20210002);
+		msg.setMsgContent("去冰要加錢,不推");
+		msg.setSta(1);
+		dao.add(msg);
 		
 	}
 
