@@ -145,7 +145,7 @@
   
   <filter-mapping>
     <filter-name>LoginFilter</filter-name>
-    <url-pattern>/address/listAllAddress.jsp</url-pattern>
+    <url-pattern></url-pattern>
     <dispatcher>REQUEST</dispatcher>
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>INCLUDE</dispatcher>

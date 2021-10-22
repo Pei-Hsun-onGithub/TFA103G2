@@ -31,28 +31,28 @@ public class MealUpdate extends Command {
 	public void execute() throws ServletException, IOException {
 		
 		MealService service = new MealService();
-		// 1. §ì¨ú­¶­±°e¨ÓªºPK­È
+		// 1. æŠ“å–é é¢é€ä¾†çš„PKå€¼
 
 		Integer mealid = new Integer(req.getParameter("mealId"));
 
 		Map<String, String> errMsgs = new LinkedHashMap<String, String>();
 
-		// 1. §ì¨úªí³æ¸ê®Æ¡A¿ù»~¸ê®Æ³B²z
+		// 1. æŠ“å–è¡¨å–®è³‡æ–™ï¼ŒéŒ¯èª¤è³‡æ–™è™•ç†
 		try {
 
 			String mealName = req.getParameter("mealName");
 			String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 
 			if (!mealName.trim().matches(enameReg)) {
-				errMsgs.put(mealName, "½Ğ¿é¤J¥¿½T¤¤­^¤å»P0~9ªº¼Æ¦r");
+				errMsgs.put(mealName, "è«‹è¼¸å…¥æ­£ç¢ºä¸­è‹±æ–‡èˆ‡0~9çš„æ•¸å­—");
 			} else if (mealName.trim().length() == 0) {
-				errMsgs.put(mealName, "½Ğ¿é¤J¸ê®Æ¡A¤£­nªÅ¥Õ");
+				errMsgs.put(mealName, "è«‹è¼¸å…¥è³‡æ–™ï¼Œä¸è¦ç©ºç™½");
 			}
 			Integer sta = null;
 			try {
 				sta = new Integer(req.getParameter("sta"));
 			} catch (NumberFormatException e) {
-				errMsgs.put("sta", "ª¬ºA½Ğ¿é¤J¼Æ¦r");
+				errMsgs.put("sta", "ç‹€æ…‹è«‹è¼¸å…¥æ•¸å­—");
 			}
 			String mealType = req.getParameter("mealType");
 
@@ -60,7 +60,7 @@ public class MealUpdate extends Command {
 			try {
 				unitPrice = new Integer(req.getParameter("unitPrice"));
 			} catch (NumberFormatException e) {
-				errMsgs.put("unitPrice", "³æ»ù½Ğ¿é¤J¼Æ¦r");
+				errMsgs.put("unitPrice", "å–®åƒ¹è«‹è¼¸å…¥æ•¸å­—");
 			}
 
 			Timestamp launchDate = java.sql.Timestamp.valueOf(req.getParameter("launchDate"));
@@ -69,7 +69,7 @@ public class MealUpdate extends Command {
 			try {
 				launchDays = new Integer(req.getParameter("launchDays"));
 			} catch (NumberFormatException e) {
-				errMsgs.put("launchDays", "¤Ñ¼Æ½Ğ¿é¤J¼Æ¦r");
+				errMsgs.put("launchDays", "å¤©æ•¸è«‹è¼¸å…¥æ•¸å­—");
 			}
 
 			String mealDescription = req.getParameter("mealDescription");
@@ -78,10 +78,10 @@ public class MealUpdate extends Command {
 			try {
 				restaurantId = new Integer(req.getParameter("restaurantId"));
 			} catch (NumberFormatException e) {
-				errMsgs.put("restaurantId", "À\ÆU½s¸¹½Ğ¿é¤J¼Æ¦r");
+				errMsgs.put("restaurantId", "é¤å»³ç·¨è™Ÿè«‹è¼¸å…¥æ•¸å­—");
 			}
 
-			// ¹Ï¤ù¤W¶Ç
+			// åœ–ç‰‡ä¸Šå‚³
 			byte[] mealImg = null;
 
 			Part part = req.getPart("myUploadImg");
@@ -92,11 +92,11 @@ public class MealUpdate extends Command {
 				in.close();
 			}
 
-			// 2. «ù¤[¤Æ
+			// 2. æŒä¹…åŒ–
 			MealVO mealVO = service.updateMeal(mealid, sta, mealName, mealType, unitPrice, launchDate, launchDays,
 					mealDescription, mealImg, restaurantId);
 
-			// 3. Âà¥æ¦Ü®i¥Ü¼h
+			// 3. è½‰äº¤è‡³å±•ç¤ºå±¤
 
 			req.setAttribute("list", service.getAll());
 			RequestDispatcher toListallView = req.getRequestDispatcher(this.forwardTo);

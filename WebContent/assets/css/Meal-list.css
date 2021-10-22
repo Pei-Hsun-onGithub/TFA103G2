@@ -1,0 +1,25 @@
+.category-area{
+    margin-top: 80px ;
+}
+
+.category-menu{
+    display: flex;
+    overflow: hidden;
+}
+.input#he{
+    position:relative;
+    left: 0px;
+    top:50%;
+}
+
+ul.category-menu li{
+    transition: all .5s linear;
+}
+
+input#he:checked ~ ul.category-menu li{
+    transform: translateX(-500px);
+}
+
+
+
+
