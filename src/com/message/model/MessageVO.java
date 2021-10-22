@@ -1,12 +1,13 @@
 package com.message.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class MessageVO implements java.io.Serializable {
 	private Integer msgNo;
 	private Integer articleNo;
 	private Integer userId;
-	private Date msgDate;
+	private Timestamp msgDate;
 	private String msgContent;
 	private Integer sta ;
 	
@@ -14,7 +15,7 @@ public class MessageVO implements java.io.Serializable {
 		super();
 	}
 	
-	public MessageVO(Integer msgNo, Integer articleNo,Integer userId, Date msgDate, String msgContent, Integer sta) {
+	public MessageVO(Integer msgNo, Integer articleNo,Integer userId, Timestamp msgDate, String msgContent, Integer sta) {
 		super();
 		this.msgNo = msgNo;
 		this.articleNo = articleNo;
@@ -49,11 +50,11 @@ public class MessageVO implements java.io.Serializable {
 		this.userId = userId;
 	}
 	
-	public Date getMsgDate() {
+	public Timestamp getMsgDate() {
 		return msgDate;
 	}
 
-	public void setMsgDate(Date msgDate) {
+	public void setMsgDate(Timestamp msgDate) {
 		this.msgDate = msgDate;
 	}
 

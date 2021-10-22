@@ -14,8 +14,8 @@ import util.copy.Util;
 
 public  class MessageJDBCDAO implements MessageDAO_interface {
 
-	public static final String INSERT_STMT = "INSERT INTO Message (articleNo,userId, msgDate, msgContent, sta) VALUES(?, ?, ?, ?,?)";
-	public static final String UPDATE = "UPDATE Message SET msgDate=?, msgdate=?, msgContext=?, sta=? where msgno=?";
+	public static final String INSERT_STMT = "INSERT INTO Message (articleNo,userId, msgContent, sta) VALUES(?, ?, ?, ?)";
+	public static final String UPDATE = "UPDATE Message SET  msgContext=?, sta=? where msgno=?";
 	public static final String DELETE = "DELETE FROM Message WHERE msgno =?";
 	public static final String FIND_BY_FK = "SELECT * FROM Message WHERE articleno = ?";
 	public static final String GET_ALL = "SELECT * FROM Message";
@@ -42,9 +42,8 @@ public  class MessageJDBCDAO implements MessageDAO_interface {
 			
 			pstmt.setInt(1,message.getArticleNo());
 			pstmt.setInt(2,message.getUserId());
-			pstmt.setDate(3,message.getMsgDate());
-			pstmt.setString(4,message.getMsgContent());
-			pstmt.setInt(5,message.getSta());
+			pstmt.setString(3,message.getMsgContent());
+			pstmt.setInt(4,message.getSta());
 			pstmt.executeUpdate();
 		
 		}catch(SQLException se) {
@@ -82,7 +81,7 @@ public  class MessageJDBCDAO implements MessageDAO_interface {
 			con = DriverManager.getConnection(Util.URL,Util.USER,Util.PASSWORD);
 			pstmt = con.prepareStatement(UPDATE);			
 			
-			pstmt.setDate(1,message.getMsgDate());
+			pstmt.setTimestamp(1,message.getMsgDate());
 			pstmt.setString(2,message.getMsgContent());
 			pstmt.setInt(3,message.getSta());			
 			pstmt.setInt(4,message.getMsgNo());
@@ -168,7 +167,7 @@ public  class MessageJDBCDAO implements MessageDAO_interface {
 				msgVO.setMsgNo(rs.getInt("msgNo"));
 				msgVO.setArticleNo(rs.getInt("articleNo"));
 				msgVO.setUserId(rs.getInt("userId"));
-				msgVO.setMsgDate(rs.getDate("msgDate"));
+				msgVO.setMsgDate(rs.getTimestamp("msgDate"));
 				msgVO.setMsgContent(rs.getString("msgContent"));
 				msgVO.setSta(rs.getInt("sta"));
 				msgList.add(msgVO);
@@ -226,7 +225,7 @@ public  class MessageJDBCDAO implements MessageDAO_interface {
 				me.setMsgNo(rs.getInt("msgNo"));
 				me.setArticleNo(rs.getInt("articleNo"));
 				me.setUserId(rs.getInt("userId"));
-				me.setMsgDate(rs.getDate("msgDate"));
+				me.setMsgDate(rs.getTimestamp("msgDate"));
 				me.setMsgContent(rs.getString("msgContent"));
 				me.setSta(rs.getInt("sta"));
 				meList.add(me);
