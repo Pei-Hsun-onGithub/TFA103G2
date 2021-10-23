@@ -550,7 +550,9 @@ RestaurantService restSvc = new RestaurantService();
 			</div>
 		</div>
 	</div>
-
+	
+	<%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp" %>
+	
 	<!-- all plugins here -->
 	<script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
