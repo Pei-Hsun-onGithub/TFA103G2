@@ -180,7 +180,7 @@
 
                   <div class="mb-3">
                     <label for="recipient-name" class="col-form-label">名字</label>
-                    <input type="text" class="form-control" id="recipient-name" name="monsterNickName" value="<%=  monsterBookSvc.getFirstMonsterNumber("1").getMonsterName() %>">
+                    <input type="text" class="form-control my-nickname" id="recipient-name" name="monsterNickName" value="<%=  monsterBookSvc.getFirstMonsterNumber("1").getMonsterName() %>">
                     <input type="hidden" class="form-control" name="monsterId" value="<%= monsterBookSvc.getFirstMonsterNumber("1").getMonsterId() %>">
                     
                   </div>
@@ -271,7 +271,7 @@
 		   $('div.modal form img').removeClass('my-main-img');
 		   $('div.modal form img').addClass('my-modal-img');
 		   
-		   $('div.modal form input').val(chosenName);
+		   $('div.modal form input.my-nickname').val(chosenName);
 		   $('div.modal form h4.level').text(chosenLV);
 		   $('div.modal form h4.ability').text(chosenAbility);
 		   

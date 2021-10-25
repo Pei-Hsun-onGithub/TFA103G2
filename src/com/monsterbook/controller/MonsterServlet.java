@@ -28,8 +28,7 @@ public class MonsterServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("action");
-		System.out.println("有到");
-		System.out.println("action="+ action);
+
 		MemberInfoService memInfoSvc = new MemberInfoService();
 		MonsterBookService monsterBookSvc = new MonsterBookService();
 		HttpSession session = req.getSession();
@@ -37,7 +36,7 @@ public class MonsterServlet extends HttpServlet {
 		Integer userId = 20210002;
 		
 		if("updateMonsterVOtoMemInfo".equals(action)) {
-			System.out.println("有到");
+			
 			String monsterNickName = req.getParameter("monsterNickName");
 			Integer monsterId = new Integer(req.getParameter("monsterId"));
 			Integer monsterLevel = new Integer(req.getParameter("originLevel"));
@@ -46,14 +45,12 @@ public class MonsterServlet extends HttpServlet {
 			MemberInfo memInfo = memInfoSvc.getOneMemberInfo(userId);
 			
 			
-			memInfoSvc.updateMemberInfo(memInfo.getEmail(), memInfo.getPwd(), memInfo.getUserName(), 
+			memInfoSvc.updateMemberInfo(userId, memInfo.getEmail(), memInfo.getPwd(), memInfo.getUserName(), 
 					memInfo.getGender(), memInfo.getBirthday(), memInfo.getPhone(), memInfo.getPic(), memInfo.getRegisterDate(), 
 					memInfo.getGold(), memInfo.getFeed(), monsterId, monsterNickName, monsterLevel, monsterExp, memInfo.getSta());
 			
 			RequestDispatcher toHomeView = req.getRequestDispatcher("/home.jsp");
 			toHomeView.forward(req, res);
 		}
-		
-		System.out.println("if 下面");
 	}
 }
