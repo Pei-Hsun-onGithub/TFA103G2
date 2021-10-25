@@ -38,7 +38,7 @@ public class FoodArticleServlet extends HttpServlet {
 			if("getOne_For_Display".equals(action)){//from select_pageFA的請求
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs",errorMsgs);
-			//	System.out.println(action);
+				System.out.println(action);
 			
 				try {
 				
@@ -49,7 +49,7 @@ public class FoodArticleServlet extends HttpServlet {
 						}
 						
 						if(!errorMsgs.isEmpty()) {
-							RequestDispatcher falureView = req.getRequestDispatcher("/select_pageFA.jsp");
+							RequestDispatcher falureView = req.getRequestDispatcher("/article/select_pageFA.jsp");
 							falureView.forward(req,res);
 							return;
 						}
