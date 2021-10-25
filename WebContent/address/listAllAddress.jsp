@@ -7,7 +7,7 @@
 <%
 	AddressDAO dao = new AddressDAO();
 	List<AddressVO> list = dao.getAll();
-    pageContext.setAttribute("list",list);   
+      
 %>
 
 <!DOCTYPE html>
