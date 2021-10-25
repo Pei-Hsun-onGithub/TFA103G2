@@ -240,7 +240,7 @@
                     <div class="sidebar-area">
                         
                         <div class="widget widget-recent-post">
-                            <h4 class="widget-title">Recent Post</h4>
+                            <h4 class="widget-title">熱門食記</h4>
                             <ul>
                                 <c:forEach var="popfaVO" items="${popularList}" >
                                 <li>
@@ -251,30 +251,6 @@
                                         <div class="media-body">
 
                                             <h6 class="title"><a href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${popfaVO.articleNo}"> ${popfaVO.articleTitle} </a></h6>
-
-                                            
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <img src="<%=request.getContextPath()%>/assets/img/widget/2.png" alt="widget">
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="title"><a href="#">Broad, garlic & mozzarella cheese bruschetta
-                                            </a></h6>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <img src="<%=request.getContextPath()%>/assets/img/widget/3.png" alt="widget">
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="title"><a href="#">Make authentic Italian margherita pizza at home
-                                            </a></h6>
 
                                         </div>
                                     </div>
