@@ -29,6 +29,16 @@ public class PictureBaseService {
 		return picVO;
 	}
 	
+	public List<PictureBaseVO> updatePictureBaseByArticleNo(Integer articleNo, List<PictureBaseVO> pictureBases) {
+		
+		for(PictureBaseVO picBase : pictureBases) {
+			Integer picNo = picBase.getPicNo();
+			updatePictureBase(picNo, picBase.getPic());
+		}
+		
+		return null;
+	}
+	
 	public void deletePictureBase(Integer picNo) {
 		dao.delete(picNo);
 	}
