@@ -383,10 +383,11 @@ String phone = req.getParameter("phone");
 				memberInfo = memberInfoSvc.addMemberInfo(email, pwd, userName, gender, birthday, phone,null,registerDate,0,0,1001,null,1,0,1);
 				HttpSession session = req.getSession();
 				session.setAttribute("userId", memberInfo.getUserId());
+				session.setAttribute("memberInfo", memberInfo);
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				
-				String url = "https://www.google.com/";
+				String url = "/pei_pages/monsterChoose.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交vendor_meal_upload.jsp
 				successView.forward(req, res);				
 				
@@ -506,6 +507,7 @@ String phone = req.getParameter("phone");
 				//System.out.println("memberInfo="+memberInfo);
 				HttpSession session = req.getSession();
 				session.setAttribute("userId", memberInfo.getUserId());
+				session.setAttribute("memberInfo", memberInfo);
 				
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
