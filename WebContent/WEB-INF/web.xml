@@ -127,6 +127,16 @@
 		<url-pattern>/article/msg.do</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>ImageUtilServlet</servlet-name>
+		<servlet-class>com.picturebases.controller.ImageUtilServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ImageUtilServlet</servlet-name>
+		<url-pattern>/article/pic.do</url-pattern>
+	</servlet-mapping>
+	
 
 <!-- 以下為Filter的註冊 -->
 

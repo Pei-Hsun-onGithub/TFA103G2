@@ -24,6 +24,7 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 	public static final String DELETE = "DELETE FROM FoodArticle WHERE articleno =? ";
 	public static final String FIND_BY_PK = "SELECT * FROM FoodArticle WHERE articleno = ?";
 	public static final String GET_ALL = "SELECT * FROM FoodArticle";
+	public static final String GET_POPULAR ="SELECT * FROM FoodArticle ORDER BY articleno DESC LIMIT 4";
 	
 	static {
 		try {
@@ -41,7 +42,7 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 			con = DriverManager.getConnection(URL,USER,PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 			
-		  //pstmt.setInt(1,foodarticle.getArticleno());¦Û¼WÁä¤£¥Î¤â°Ê¼W¥[
+		  //pstmt.setInt(1,foodarticle.getArticleno());è‡ªå¢éµä¸ç”¨æ‰‹å‹•å¢åŠ 
 			pstmt.setInt(1,foodArticle.getUserId());
 			pstmt.setInt(2,foodArticle.getRestaurantId());
 			pstmt.setString(3,foodArticle.getArticleTitle());
@@ -276,10 +277,10 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			
-			// ¥ıÃö³¬autocommit,¦bpstm.executeUpdate()¤§«e
+			// å…ˆé—œé–‰autocommit,åœ¨pstm.executeUpdate()ä¹‹å‰
 			con.setAutoCommit(false);
 			
-			//¥ı·s¼W¤å³¹
+			//å…ˆæ–°å¢æ–‡ç« 
 			
 			String[] cols = {"articleno"};
 			pstmt=con.prepareStatement(INSERT_STMT, cols);
@@ -291,7 +292,7 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 			pstmt.setInt(6,foodArticleVO.getSta());
 			pstmt.executeUpdate();
 			
-			//§ì¥X­è­è·s¼Wªº¦Û¼Wpk
+			//æŠ“å‡ºå‰›å‰›æ–°å¢çš„è‡ªå¢pk
 			
 			String new_articleNo =null;
 			ResultSet rs =  pstmt.getGeneratedKeys();
@@ -300,7 +301,7 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 			}
 			rs.close();
 			
-		//¦A¦P®É·s¼W¹Ï¤ù
+		//å†åŒæ™‚æ–°å¢åœ–ç‰‡
 			
 			PictureBaseJDBCDAO pbdao = new PictureBaseJDBCDAO();
 			
@@ -318,9 +319,9 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 		} catch (SQLException se) {
 			if (con != null) {
 				try {
-					// 3¡´³]©w©ó·í¦³exceptionµo¥Í®É¤§catch°Ï¶ô¤º
+					// 3â—è¨­å®šæ–¼ç•¶æœ‰exceptionç™¼ç”Ÿæ™‚ä¹‹catchå€å¡Šå…§
 					System.err.print("Transaction is being ");
-					System.err.println("rolled back-¥Ñ-dept");
+					System.err.println("rolled back-ç”±-dept");
 					con.rollback();
 //					return false;
 				} catch (SQLException excep) {
@@ -351,6 +352,62 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 		
 		
 		
+	}
+
+	@Override
+	public List<FoodArticleVO> getPopular() {
+		
+		List<FoodArticleVO> popularList = new ArrayList<>();
+		FoodArticleVO faVO =null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(GET_POPULAR);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				faVO = new FoodArticleVO();
+				faVO.setArticleNo(rs.getInt("articleNo"));
+				faVO.setUserId(rs.getInt("userId"));
+				faVO.setRestaurantId(rs.getInt("restaurantId"));
+				faVO.setArticleTitle(rs.getString("articleTitle"));
+				faVO.setArticleDate(rs.getDate("articleDate"));
+				faVO.setArticleContent(rs.getString("articleContent"));
+				faVO.setSta(rs.getInt("sta"));
+				popularList.add(faVO);
+			}
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}			
+			
+			if(pstmt != null) {
+				try {
+				pstmt.close();
+				}catch(SQLException se){
+					se.printStackTrace();
+				}
+			}
+				
+			if( con != null) {
+				try {
+					con.close();
+				}catch(SQLException se) {
+					se.printStackTrace();
+				}
+			}
+		}									
+		
+		return popularList;
 	}
 	
 }

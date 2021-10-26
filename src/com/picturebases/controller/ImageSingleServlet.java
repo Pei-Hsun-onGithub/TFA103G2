@@ -1,8 +1,13 @@
 package com.picturebases.controller;
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
@@ -25,13 +30,16 @@ public class ImageSingleServlet extends HttpServlet {
 		Integer id = new Integer(req.getParameter("Id"));
 		PictureBaseService pbSVC = new PictureBaseService();
 		PictureBaseVO pbVO =new PictureBaseVO();
-		pbVO = pbSVC.OnePicOfAr(id);
-		out.write(pbVO.getPic());
-		System.out.println(id);
+		pbVO = pbSVC.OnePicOfAr(id);		
 		
-		//byte[] xxx = VO.getPic();
+		out.write(pbVO.getPic());
+		
+		
+		
 		
 			
 	}
+	
+	
 
 }
