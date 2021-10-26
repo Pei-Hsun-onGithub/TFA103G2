@@ -121,8 +121,7 @@
                             </div>
                             <button type="submit" class="btn btn-secondary">ADD TO CART</button>
                         </form>
-
-                        
+  
                     </div>
                 </div>
             </div>
