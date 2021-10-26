@@ -30,7 +30,7 @@ public class LoginHandler extends HttpServlet {
 		boolean MemberInfo = memberInfoSvc.findByEmail(email);
 
 		MemberInfoService memberInfoSvc2 = new MemberInfoService();
-		MemberInfo MemberInfo2 = memberInfoSvc2.findByEmail2(email, pwd);
+		MemberInfo memberInfo2 = memberInfoSvc2.findByEmail2(email, pwd);
 
 		// 【檢查該帳號 , 密碼是否有效】
 // 【帳號無效時】
@@ -40,18 +40,18 @@ public class LoginHandler extends HttpServlet {
 			out.println("請按此重新登入 <A HREF=" + req.getContextPath() + "/login/Login-login.jsp>重新登入</A>");
 			out.println("</BODY></HTML>");
 // 【密碼無效時】	
-		} else if (MemberInfo2 == null) { 
+		} else if (memberInfo2 == null) { 
 			out.println("<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD>");
 			out.println("<BODY>密碼錯誤!<BR>");
 			out.println("請按此重新登入 <A HREF=" + req.getContextPath() + "/login/Login-login.jsp>重新登入</A>");
 			out.println("</BODY></HTML>");
 // 【轉會員】			
-		} else if (MemberInfo2.getSta().equals(1) || MemberInfo2.getSta().equals(2)) { 
-			Integer userId = MemberInfo2.getUserId();
+		} else if (memberInfo2.getSta().equals(1) || memberInfo2.getSta().equals(2)) { 
+			Integer userId = memberInfo2.getUserId();
 			HttpSession session = req.getSession();
 			session.setAttribute("email", email);
 			session.setAttribute("userId", userId);
-			session.setAttribute("MemberInfo", MemberInfo2);
+			session.setAttribute("MemberInfo", memberInfo2);
 			
 			String location = (String) session.getAttribute("location");
 //*工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
@@ -63,12 +63,12 @@ public class LoginHandler extends HttpServlet {
 				res.sendRedirect(req.getContextPath() + "/pei_pages/monsterChoose.jsp"); 															// (-->如無來源網頁:則重導至login_success.jsp)
 			}
 // 【轉廠商】			
-		} else if (MemberInfo2.getSta().equals(4) || MemberInfo2.getSta().equals(5)) { 
-			Integer userId = MemberInfo2.getUserId();
+		} else if (memberInfo2.getSta().equals(4) || memberInfo2.getSta().equals(5)) { 
+			Integer userId = memberInfo2.getUserId();
 			HttpSession session = req.getSession();
 			session.setAttribute("email", email);
 			session.setAttribute("userId", userId);
-			session.setAttribute("MemberInfo", MemberInfo2);
+			session.setAttribute("memberInfo", memberInfo2);
 
 			String location = (String) session.getAttribute("location");
 			if (location != null) {
