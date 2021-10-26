@@ -8,7 +8,7 @@
 <%
   FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO"); //FoodArticleServlet.java(Concroller), 存入req的faVO物件
    List<MessageVO> msgList = (List<MessageVO>) request.getAttribute("msgList");
-   request.setAttribute("msgList", msgList);
+//    request.setAttribute("msgList", msgList);
 %>
 
 <!DOCTYPE html>
@@ -252,7 +252,6 @@ div.authorname {
 								<%--                                 <img src="<%=request.getContextPath()%>/assets/img/blog/comment.png" alt="img"> --%>
 								<!--                             </div>                             -->
 								<div class="media-body">
-									<a class="btn btn-base float-end" href="#">Reply</a>
 									<h6>${msgVO.userId}</h6>
 									<span>${msgVO.msgDate}</span>
 									<p>${msgVO.msgContent}</p>
@@ -270,7 +269,7 @@ div.authorname {
 							<div class="col-md-6">
 								<div class="single-input-wrap">
 									<input type="text" class="form-control" placeholder="Your Name"
-										name="userId"> <input type="text" name="articleNo"
+										name="userId"> <input type="hidden" name="articleNo"
 										value="<%=faVO.getArticleNo()%>" />
 								</div>
 							</div>
@@ -295,6 +294,7 @@ div.authorname {
 						<input type="hidden" name="action" value="msgAdd">
 					</form>
 				</div>
+				
 				<div class="col-lg-4">
 					<div class="sidebar-area">
 						<div class="widget widget_search">

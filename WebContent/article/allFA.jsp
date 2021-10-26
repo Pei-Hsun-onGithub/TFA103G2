@@ -1,23 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.foodarticle.model.*"%>
 <%@ page import="com.picturebase.model.*"%>
 
 
 <% 
+
 	FoodArticleService faSvc = new FoodArticleService();
-	FoodArticleVO faVO1 = faSvc.getOneArticle(1);
-	FoodArticleVO faVO2 = faSvc.getOneArticle(2);
-	FoodArticleVO faVO3 = faSvc.getOneArticle(3);
-	FoodArticleVO faVO4 = faSvc.getOneArticle(4);
-	FoodArticleVO faVO5= faSvc.getOneArticle(5);
-	pageContext.setAttribute("faVO1",faVO1); 
-	pageContext.setAttribute("faVO2",faVO2); 
-	pageContext.setAttribute("faVO3",faVO3); 
-	pageContext.setAttribute("faVO4",faVO4); 
-	pageContext.setAttribute("faVO5",faVO5); 
-	
+    List<FoodArticleVO> faList =faSvc.getall();
+    List<FoodArticleVO> popularList = faSvc.getPopularArticle();
+    pageContext.setAttribute("faList",faList);
+    pageContext.setAttribute("popularList",popularList);   	
+
 %>
 
 
@@ -202,229 +198,89 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
+                    
                     <div class="row justify-content-center">
                         
 <%--                        <c:forEach var="faVO" items="${list}"> </c:forEach> --%>
+                       
+                       <c:forEach var="faVO" items="${faList}"  >
                         <div class="col-sm-6">                                                                                                                 
                             <div class="single-blog-wrap">
                                 <div class="thumb">                                    
-                                    <img src="<%=request.getContextPath()%>/ImageSingleServlet?Id=<%= faVO1.getArticleNo() %>" alt="img">                                	
+                                    <img src="<%=request.getContextPath()%>/ImageSingleServlet?Id=${faVO.articleNo}" alt="img">                                	
                                 </div>
                                 <div class="wrap-details">
                                     <span class="cat">
                                         <span class="date">
-                                            <i class="ri-calendar-todo-fill"></i><%=faVO1.getArticleDate() %>
+                                            <i class="ri-calendar-todo-fill"></i>${faVO.articleDate}
                                         </span>
                                         <a href="#" class="tag me-0">
                                             <i class="ri-price-tag-3-fill"></i>Burgar
                                         </a>
                                     </span>
-                                    <h5><a href="<%=request.getContextPath()%>/article/oneFA_allMsg.jsp"><%=faVO1.getArticleTitle() %> </a></h5> 
+
+                                     <h5><a href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${faVO.articleNo}">${faVO.articleTitle}
+                                    </a></h5> 
                                     <div class="wrap-hover-area">
-                                        <p><%=faVO1.getArticleContent() %></p>
-                                         
-                                        <a class="link-btn" href="<%=request.getContextPath()%>/article/oneFA_allMsg.jsp">Read More</a> 
+                                        <p> ${faVO.articleContent}
+                                        </p> 
+                                        <a class="link-btn" href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${faVO.articleNo}">Read More</a> 
                                     </div>                       
                                 </div> 
                             </div>                                                                                  
                                                        
                         </div>
-                      
+                       </c:forEach>
+                    </div>
+                 </div>
                        
                         
-                        <div class="col-sm-6">
-                            <div class="single-blog-wrap">
-                                <div class="thumb">
-                                    
-                                    <img src="<%=request.getContextPath()%>/ImageSingleServlet?Id=<%= faVO2.getArticleNo() %>" alt="img">
-                                	
-                                </div>
-                                <div class="wrap-details">
-                                    <span class="cat">
-                                        <span class="date">
-                                            <i class="ri-calendar-todo-fill"></i><%=faVO2.getArticleDate()%>
-                                        </span>
-                                        <a href="#" class="tag me-0">
-                                            <i class="ri-price-tag-3-fill"></i>Pizza
-                                        </a>
-                                    </span>
-                                    <h5><a href="<%=request.getContextPath()%>/blog-details.html"><%=faVO2.getArticleTitle()%>
-                                    </a></h5> 
-                                    <div class="wrap-hover-area">
-                                        <p> <%=faVO2.getArticleContent()%>
-                                        </p> 
-                                        <a class="link-btn" href="blog-details.html">Read More</a> 
-                                    </div>                       
-                                </div> 
-                            </div>
-                        </div>
-                        
-                        <div class="col-sm-6">
-                            <div class="single-blog-wrap">
-                                <div class="thumb">
-                                    <img src="<%=request.getContextPath()%>/ImageSingleServlet?Id=<%= faVO3.getArticleNo() %>" alt="img">
-                                </div>
-                                <div class="wrap-details">
-                                    <span class="cat">
-                                        <span class="date">
-                                            <i class="ri-calendar-todo-fill"></i><%=faVO3.getArticleDate()%>
-                                        </span>
-                                        <a href="#" class="tag me-0">
-                                            <i class="ri-price-tag-3-fill"></i>Pizza
-                                        </a>
-                                    </span>
-                                    <h5><a href="<%=request.getContextPath()%>/blog-details.html"><%=faVO3.getArticleTitle()%>
-                                    </a></h5> 
-                                    <div class="wrap-hover-area">
-                                        <p> <%=faVO3.getArticleContent()%>
-                                        </p> 
-                                        <a class="link-btn" href="<%=request.getContextPath()%>/blog-details.html">Read More</a> 
-                                    </div>                       
-                                </div> 
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="single-blog-wrap">
-                                <div class="thumb">
-                                    <img src="<%=request.getContextPath()%>/ImageSingleServlet?Id=<%= faVO4.getArticleNo() %>" alt="img">
-                                </div>
-                                <div class="wrap-details">
-                                    <span class="cat">
-                                        <span class="date">
-                                            <i class="ri-calendar-todo-fill"></i><%=faVO4.getArticleDate()%>
-                                        </span>
-                                        <a href="#" class="tag me-0">
-                                            <i class="ri-price-tag-3-fill"></i>Fresh food
-                                        </a>
-                                    </span>
-                                    <h5><a href="<%=request.getContextPath()%>/blog-details.html"><%=faVO4.getArticleTitle()%>
-                                    </a></h5> 
-                                    <div class="wrap-hover-area">
-                                        <p> <%=faVO4.getArticleContent()%>
-                                        </p> 
-                                        <a class="link-btn" href="<%=request.getContextPath()%>/blog-details.html">Read More</a> 
-                                    </div>                       
-                                </div> 
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="single-blog-wrap">
-                                <div class="thumb">
-                                    <img src="<%=request.getContextPath()%>/ImageSingleServlet?Id=<%= faVO5.getArticleNo() %>" alt="img">
-                                </div>
-                                <div class="wrap-details">
-                                    <span class="cat">
-                                        <span class="date">
-                                            <i class="ri-calendar-todo-fill"></i><%=faVO5.getArticleDate()%>
-                                        </span>
-                                        <a href="#" class="tag me-0">
-                                            <i class="ri-price-tag-3-fill"></i>Fresh food
-                                        </a>
-                                    </span>
-                                    <h5><a href="<%=request.getContextPath()%>/blog-details.html"><%=faVO5.getArticleTitle()%>
-
-                                    </a></h5> 
-                                    <div class="wrap-hover-area">
-                                        <p> <%=faVO5.getArticleContent()%>
-                                        </p> 
-                                        <a class="link-btn" href="<%=request.getContextPath()%>/blog-details.html">Read More</a> 
-                                    </div>                       
-                                </div> 
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="single-blog-wrap">
-                                <div class="thumb">
-                                    <img src="<%=request.getContextPath()%>/assets/img/blog/6.png" alt="img">
-                                </div>
-                                <div class="wrap-details">
-                                    <span class="cat">
-                                        <span class="date">
-                                            <i class="ri-calendar-todo-fill"></i>September 10, 2021
-                                        </span>
-                                        <a href="#" class="tag me-0">
-                                            <i class="ri-price-tag-3-fill"></i>Spicy
-                                        </a>
-                                    </span>
-                                    <h5><a href="blog-details.html">Celebrating the awesomeness of food.
-                                    </a></h5> 
-                                    <div class="wrap-hover-area">
-                                        <p> It with just a touch of sauce. saucy riff, more in the style of takeout American Chinese kung pao. The sauce makes it perfect for eating with rice.
-                                        </p> 
-                                        <a class="link-btn" href="<%=request.getContextPath()%>/blog-details.html">Read More</a> 
-                                    </div>                       
-                                </div> 
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                       
                 <div class="col-lg-4">
                     <div class="sidebar-area">
                         
                         <div class="widget widget-recent-post">
                             <h4 class="widget-title">熱門食記</h4>
                             <ul>
+                                <c:forEach var="popfaVO" items="${popularList}" >
                                 <li>
                                     <div class="media">
                                         <div class="media-left">
-                                            <img src="<%=request.getContextPath()%>/assets/img/widget/1.png" alt="widget">
+                                            <img src="<%=request.getContextPath()%>/article/pic.do?Id=${popfaVO.articleNo}" alt="widget">
                                         </div>
                                         <div class="media-body">
-                                            <h6 class="title"><a href="#"><%=faVO1.getArticleTitle() %></a></h6>
+
+                                            <h6 class="title"><a href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${popfaVO.articleNo}"> ${popfaVO.articleTitle} </a></h6>
+
                                         </div>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <img src="<%=request.getContextPath()%>/assets/img/widget/2.png" alt="widget">
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="title"><a href="#"><%=faVO2.getArticleTitle() %>
-                                            </a></h6>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <img src="<%=request.getContextPath()%>/assets/img/widget/3.png" alt="widget">
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="title"><a href="#"><%=faVO3.getArticleTitle() %>
-                                            </a></h6>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="media">
-                                        <div class="media-left">
-                                            <img src="<%=request.getContextPath()%>/assets/img/widget/4.png" alt="widget">
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="title"><a href="#"><%=faVO4.getArticleTitle() %>/a></h6>
-                                        </div>
-                                    </div>
-                                </li>
+                                </c:forEach>
+                                
                             </ul>
                         </div>
-                        <div class="widget widget-newsletter">
-                            <h4 class="widget-title">Newsletter</h4>
-                            <p>Subscribe to get the latest news, update and offer information. Don't worry, we won't send spam!</p>
-                            <form class="newsletter-form">
-                                <div class="form-group">
-                                    <input type="email" placeholder="Enter e-mail">
-                                </div>
-                                <button class="submit-btn" type="submit"><i class="ri-arrow-right-line"></i></button>
-                            </form>
-                        </div>
-                        <div class="widget widget_categories">
-                            <h4 class="widget-title">Categories</h4>
+                       
+                        <div class="widget widget-recent-post">
+                            <h4 class="widget-title">熱門餐廳</h4>
                             <ul>
-                                <li><a href="#">Inspiration <span>(5)</span></a></li>
-                                <li><a href="#">Recipes <span>(9)</span> </a></li>
-                                <li><a href="#">Others <span>(18)</span></a></li>
+                                <c:forEach var="popfaVO" items="${popularList}" >
+                                <li>
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <img src="<%=request.getContextPath()%>/article/pic.do?Id=${popfaVO.articleNo}" alt="widget">
+                                        </div>
+                                        <div class="media-body">
+
+                                            <h6 class="title"><a href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${popfaVO.articleNo}"> ${popfaVO.articleTitle} </a></h6>
+
+                                        </div>
+                                    </div>
+                                </li>
+                                </c:forEach>
+                                
                             </ul>
+                        </div>
+                        <div class="widget widget_categories" style= display:none>                                                                                                          
                         </div>
                     </div>
                 </div>

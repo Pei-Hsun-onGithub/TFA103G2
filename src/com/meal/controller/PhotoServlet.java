@@ -36,7 +36,7 @@ public class PhotoServlet extends HttpServlet {
 			res.getOutputStream().write(imgBytes);
 			
 		} catch (NullPointerException e) {
-			// ¦pªG¨S¦³·Ó¤ù¡A©ñ¤J¹w³]ªº¹Ï¤ù!
+			// ï¿½pï¿½Gï¿½Sï¿½ï¿½ï¿½Ó¤ï¿½ï¿½Aï¿½ï¿½Jï¿½wï¿½]ï¿½ï¿½ï¿½Ï¤ï¿½!
 			try {
 				File notFoundImage = new File(
 						"C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\images\\not-found-image.png");
