@@ -217,11 +217,11 @@ CREATE TABLE Meal (
 	CONSTRAINT Meal_mealid_PK PRIMARY KEY (mealid)
 ) AUTO_INCREMENT = 501;
 
--- INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '六塊雞桶', '炸物', 199, '2021-04-19 22:12:34', 60, '適合居家和樂享用', null, 7002);
--- INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '麻辣藥膳鍋', '火鍋', 450, '2021-07-15 23:04:54', 90, '嗆辣不死鹹', null, 7004);
--- INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '阿古豬', '燒烤', 150, '2021-09-15 23:04:54', 90, '來自沖繩的滋味', null, 7003);
--- INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '東京豚骨拉麵', '日式', 200, '2005-09-15 23:04:54', 90, '來自東京值人拉麵', null, 7006);
--- INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '豪華和菜', '中式', 5000, '2000-09-15 23:04:54', 90, '宴席料理的領導品牌', null, 7002);
+ INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '六塊雞桶', '炸物', 199, '2021-04-19 22:12:34', 60, '適合居家和樂享用', null, 7002);
+ INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '麻辣藥膳鍋', '火鍋', 450, '2021-07-15 23:04:54', 90, '嗆辣不死鹹', null, 7004);
+ INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '阿古豬', '燒烤', 150, '2021-09-15 23:04:54', 90, '來自沖繩的滋味', null, 7003);
+ INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '東京豚骨拉麵', '日式', 200, '2005-09-15 23:04:54', 90, '來自東京值人拉麵', null, 7006);
+ INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '豪華和菜', '中式', 5000, '2000-09-15 23:04:54', 90, '宴席料理的領導品牌', null, 7002);
 
 
 # 風格類型

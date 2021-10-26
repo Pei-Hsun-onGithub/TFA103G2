@@ -45,13 +45,15 @@
 	href="<%=request.getContextPath()%>/assets/css/responsive.css">
 
 <!-- new css -->
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/assets/css/Meal-lest.css">
+
 
 <!--Google Fonts-->
 <link rel="stylesheet"
 	href=https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap>
 
+<%@ include file="/assets/webPageSnippet/cssSnippet_navbar_home_1.jsp" %>
+
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/Meal-lest.css">
 </head>
 <body class='sc5'>
 	<!-- preloader area start -->
@@ -79,70 +81,9 @@
 	</div>
 	<!-- //. search Popup -->
 
-	<!-- navbar start -->
-	<header class="navbar-area">
-		<nav class="navbar navbar-expand-lg">
-			<div class="container nav-container">
-				<div class="responsive-mobile-menu">
-					<button class="menu toggle-btn d-block d-lg-none"
-						data-target="#themefie_main_menu" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="icon-left"></span> <span class="icon-right"></span>
-					</button>
-				</div>
-				<div class="collapse navbar-collapse" id="themefie_main_menu">
-					<ul class="navbar-nav menu-open">
-						<li class="current-menu-item menu-item-has-children"><a
-							href="home-1.html">HOME</a> <!-- <ul class="sub-menu ps-0">
-                                <li><a href="home-1.html">Home 01</a></li>
-                                <li><a href="home-2.html">Home 02</a></li>
-                                <li><a href="home-3.html">Home 03</a></li>
-                            </ul> --></li>
-						<li class="current-menu-item menu-item-has-children"><a
-							href="#">PAGES</a>
-							<ul class="sub-menu ps-0">
-								<li><a href="about.html">About</a></li>
-								<li><a href="blog.html">Blog</a></li>
-								<li><a href="blog-details.html">Blog Details</a></li>
-								<li><a href="menu.html">Menu</a></li>
-								<li><a href="menu-list.html">Menu List</a></li>
-								<li><a href="shop.html">Shop</a></li>
-								<li><a href="single-product.html">Shop Details</a></li>
-								<li><a href="cart.html">Cart</a></li>
-								<li><a href="checkout.html">Checkout</a></li>
-							</ul></li>
-						<li><a href="about.html">ABOUT US</a></li>
-						<li><a href="contact.html">CONTACTS</a></li>
-					</ul>
-				</div>
-				<div class="logo">
-					<a class="main-logo" href="home-1.html"><img
-						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
-				</div>
-				<div class="nav-right-part nav-right-part-mobile">
-					<ul>
-						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
-						</li>
-						<li class="phone-contact d-md-block d-none"><i
-							class="ri-phone-fill float-start"></i> +997 509 153 849</li>
-						<li class="menu-cart"><a href="cart.html">CART <span>1</span></a></li>
-						<li>49.50 $</li>
-					</ul>
-				</div>
-				<div class="nav-right-part nav-right-part-desktop">
-					<ul>
-						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
-						</li>
-						<li class="phone-contact"><i
-							class="ri-phone-fill float-start"></i> +997 509 153 849</li>
-						<li class="menu-cart"><a href="cart.html">CART <span>1</span></a></li>
-						<li>49.50 $</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
-	<!-- navbar end -->
+ <!-- navbar start -->
+    <%@ include file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp" %>
+ <!-- navbar end -->
 
 	<!-- category Area Start-->
 	<section class="category-area">
@@ -234,6 +175,9 @@
 	</section>
 	<!-- populer Area End -->
 
+    <!-- footer area start -->
+<%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp" %>
+    <!-- footer area end -->  
 
 	<!-- all plugins here -->
 	<script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
@@ -253,6 +197,6 @@
 
 	<!-- main js  -->
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
-
+<%@ include file="/assets/webPageSnippet/jsSnippet_navbar_home_3.jsp" %>
 </body>
 </html>

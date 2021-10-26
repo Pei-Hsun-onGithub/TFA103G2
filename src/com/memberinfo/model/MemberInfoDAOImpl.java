@@ -30,14 +30,19 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 	}
 
 	@Override
-	public void add(MemberInfo memberinfo) {
+	public MemberInfo add(MemberInfo memberinfo) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-
+		ResultSet rs = null;
+		
 		try {
 
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			pstmt = con.prepareStatement(INSERT_STMT);
+			
+			String[] cols = { "userId" };
+			
+			
+			pstmt = con.prepareStatement(INSERT_STMT, cols);
 
 			pstmt.setString(1, memberinfo.getEmail());
 			pstmt.setString(2, memberinfo.getPwd());
@@ -56,12 +61,27 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 			pstmt.setInt(15, memberinfo.getSta());
 		
 			pstmt.executeUpdate();
-
+			
+			rs = pstmt.getGeneratedKeys();
+			
+			if (rs.next()) {
+				Integer key = rs.getInt(1); // �u�䴩�����ޭȨ��o�ۼW�D���
+				memberinfo.setUserId(key);;
+//				System.out.println("�ۼW�D��� = " + key + "(��s�W���\���\�I�s��)");
+			}
+			
 			// Handle any driver errors
 		} catch (SQLException se) {
 			se.printStackTrace();
 			// Clean up JDBC resources
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -77,6 +97,8 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 				}
 			}
 		}
+		
+		return memberinfo;
 	}
 
 	@Override
@@ -354,7 +376,7 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 					mem = new MemberInfo();
-					mem.setEmail(rs.getString("USERId"));
+					mem.setUserId(rs.getInt("USERId"));
 					mem.setEmail(rs.getString("EMAIL"));
 					mem.setPwd(rs.getString("PWD"));
 					mem.setSta(rs.getInt("STA"));
