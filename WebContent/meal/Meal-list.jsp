@@ -198,7 +198,7 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-item-wrap">
 						<div class="thumb">
-							<img src="/TFA103G2/meal/photoServlet?id=${mealVO.mealId}">
+							<img src="<%=request.getContextPath()%>/meal/photoServlet?id=${mealVO.mealId}">
 							<a class="fav-btn" href="#">
 							<i class="ri-heart-line"></i>
 							</a>
@@ -221,7 +221,7 @@
 							</div>
 						</div>
 						<div class="btn-area">
-							<a class="btn btn-secondary" href="single-product.html">CHOOSE OPTIONS </a>
+							<a class="btn btn-secondary" href="<%=request.getContextPath()%>/Mealsingle?mealId=${mealVO.mealId}">CHOOSE OPTIONS </a>
 						</div>
 					</div>
 				</div>
