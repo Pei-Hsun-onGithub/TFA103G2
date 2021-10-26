@@ -14,7 +14,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>add new FoodArticle</title>
+<title>update FoodArticle</title>
 
 <!--fivicon icon-->
 <link rel="icon" href="<%=request.getContextPath()%>/assets/img/fevicon.png">
@@ -52,7 +52,7 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.css" />
 
-
+<%@ include file="/assets/webPageSnippet/cssSnippet_navbar_home_1.jsp" %>
 
 <style>
 body {
@@ -149,67 +149,7 @@ button.check_ok {
 
 <body>
 
-	<header class="navbar-area ">
-		<nav class="navbar navbar-expand-lg">
-			
-			<!-- 要用boostrap的格線系統要一定要有div class="container nav-container" -->			
-			<div class="container nav-container">
-				
-				<div class="responsive-mobile-menu">
-					<button class="menu toggle-btn d-block d-lg-none"
-						data-target="#themefie_main_menu" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="icon-left"></span> <span class="icon-right"></span>
-					</button>
-				</div>
-				<div class="logo">
-					<a class="main-logo"
-						href="<%=request.getContextPath()%>/home-1.html"><img
-						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
-				</div>
-				<div class="collapse navbar-collapse" id="themefie_main_menu">
-					<ul class="navbar-nav menu-open">
-						<li class="current-menu-item menu-item-has-children"><a
-							href="home-1.html">訂餐</a>
-							<ul class="sub-menu ps-0">
-								<li><a href="<%=request.getContextPath()%>/shop.html">Shop</a></li>
-								<li><a href="<%=request.getContextPath()%>/menu.html">Menu</a></li>
-								<li><a href="<%=request.getContextPath()%>/cart.html">Cart</a></li>
-								<li><a href="<%=request.getContextPath()%>/checkout.html">Checkout</a></li>
-							</ul></li>
-						<li><a href="<%=request.getContextPath()%>/blog.html">食記</a>
-						</li>
-						<li><a href="<%=request.getContextPath()%>/about.html">ABOUT
-								US</a></li>
-						<li><a href="<%=request.getContextPath()%>/contact.html">CONTACTS</a>
-						</li>
-					</ul>
-				</div>
-				<div class="nav-right-part nav-right-part-mobile">
-					<ul>
-						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
-						</li>
-						<li class="phone-contact d-md-block d-none"><i
-							class="ri-phone-fill float-start"></i> +997 509 153 849</li>
-						<li class="menu-cart"><a
-							href="<%=request.getContextPath()%>/cart.html">CART <span>1</span></a></li>
-						<li>49.50 $</li>
-					</ul>
-				</div>
-				<div class="nav-right-part nav-right-part-desktop">
-					<ul>
-						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
-						</li>
-						<li class="phone-contact"><a href="#">sign in</a></li>
-						<li class="menu-cart"><a href="#">小鈴鐺 <span>4</span></a></li>
-						<li class="menu-cart"><a
-							href="<%=request.getContextPath()%>/cart.html">CART <span>1</span></a></li>
-						<li>49.50 $</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
+	<%@ include file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp" %>
 
 	<div class="main">
 		
@@ -260,7 +200,8 @@ button.check_ok {
 						<p class="p1">內容</p>
 
 						<textarea class="editor" name="articleContent">${faVO.articleContent}</textarea>
-
+						
+						<input type="hidden" name="articleNo"  value="<%=faVO.getArticleNo()%>" />
 						<input type="hidden" name="sta"  value="1" />
 						 								
 						<div>
@@ -287,7 +228,7 @@ button.check_ok {
 								<div>
 									<button type="reset" class="cancel">清除</button>
 									<button type="submit" class="check_ok">更新</button>
-									<input type="hidden" name="action" value="insert">
+									<input type="hidden" name="action" value="update">
 									
 									
 								</div>
@@ -308,6 +249,10 @@ button.check_ok {
 			</div>
 		</div>
 	</div>
+	
+	<!-- footer area start -->
+	<%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp" %>
+	<!-- footer area end -->
 
 	<script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
@@ -330,7 +275,7 @@ button.check_ok {
     <script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.js"></script>
     <script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
 	
-	
+	<%@ include file="/assets/webPageSnippet/jsSnippet_navbar_home_3.jsp" %>
 			
 
 <%

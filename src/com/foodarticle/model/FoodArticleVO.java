@@ -3,6 +3,8 @@ package com.foodarticle.model;
 import java.sql.Date;
 
 public class FoodArticleVO implements java.io.Serializable {
+	
+
 	private Integer articleNo;
 	private Integer userId;
 	private Integer restaurantId;
@@ -82,6 +84,13 @@ public class FoodArticleVO implements java.io.Serializable {
 	
 	public void setSta(Integer sta) {
 		this.sta = sta;
+	}
+	
+	@Override
+	public String toString() {
+		return "FoodArticleVO [articleNo=" + articleNo + ", userId=" + userId + ", restaurantId=" + restaurantId
+				+ ", articleTitle=" + articleTitle + ", articleDate=" + articleDate + ", articleContent="
+				+ articleContent + ", sta=" + sta + "]";
 	}
 	
 	
