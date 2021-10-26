@@ -51,6 +51,7 @@ public class LoginHandler extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("email", email);
 			session.setAttribute("userId", userId);
+			session.setAttribute("MemberInfo", MemberInfo2);
 			
 			String location = (String) session.getAttribute("location");
 //*工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
@@ -67,7 +68,8 @@ public class LoginHandler extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("email", email);
 			session.setAttribute("userId", userId);
-			System.out.println(session.toString());
+			session.setAttribute("MemberInfo", MemberInfo2);
+
 			String location = (String) session.getAttribute("location");
 			if (location != null) {
 				session.removeAttribute("location"); // *工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
