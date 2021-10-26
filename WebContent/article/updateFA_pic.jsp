@@ -244,41 +244,49 @@ button.check_ok {
 					<form class="article" method="post" action="fa.do" name="form1" enctype="multipart/form-data">
 					    
 					    <p class="p1">會員id</p>
-						<input class="res_input" name="userId">
+						<input class="res_input" name="userId" value="<%=faVO.getUserId()%>">
 						
 						<p class="p1">選擇餐廳</p>
-						<input class="res_input" name="restaurantId">
+						<input class="res_input" name="restaurantId" value="<%=faVO.getRestaurantId()%>">
 
 						<p class="p1">標題</p>
 						<input class="title_input" type="TEXT" name="articleTitle"
 							size="30"
-							value="<%=(faVO == null) ? "" : faVO.getArticleTitle()%>" />
+							value="<%=faVO.getArticleTitle()%>" />
 
 						<p class="p1">發表日期</p>
 						<input name="articleDate" id="f_date1" type="text">
 
 						<p class="p1">內容</p>
 
-						<textarea class="editor" name="articleContent"><%=(faVO == null) ? "" : faVO.getArticleContent()%></textarea>			            
-                        
-						<input type="hidden" name="sta" size="2" value="1" />
+						<textarea class="editor" name="articleContent">${faVO.articleContent}</textarea>
+
+						<input type="hidden" name="sta"  value="1" />
 						 								
 						<div>
 						<button class="btn cancel" id="img_file">選擇圖片</button>
 						<input type="file" multiple="true" id="add_file" style="display: none;" name="imgfile" >
+						
+						<div class="preview_img">
+							<c:forEach var="oldpicVO" items="${list}" varStatus="index">
+							<img  src="<%=request.getContextPath()%>/PictureBasesServlet?id=${index.index}">						
+							</c:forEach>
+						</div>
+						
+						
 						</div>						
 
-<!-- 						<div class="preview_img"> -->
-<!-- 							<span class="text">預覽圖</span> -->
-<!-- 						</div> -->
+						
 
+						
+						
 						<div class="row">
 							<div class="col-md-4"></div>
 							<div class="col-md-5">
 
 								<div>
 									<button type="reset" class="cancel">清除</button>
-									<button type="submit" class="check_ok">送出</button>
+									<button type="submit" class="check_ok">更新</button>
 									<input type="hidden" name="action" value="insert">
 									
 									
