@@ -23,10 +23,11 @@ public class MonsterBookService {
 		return monsterbook;
 	}
 	
-	public MonsterBook updateMonsterBook (Integer minDemandLevel, String monsterName, String monsterAbility, byte[] monsterPic) {
+	public MonsterBook updateMonsterBook (Integer monsterId, Integer minDemandLevel, String monsterName, String monsterAbility, byte[] monsterPic) {
 		
 		MonsterBook monsterbook = new MonsterBook();
 		
+		monsterbook.setMonsterId(monsterId);
 		monsterbook.setMinDemandLevel(minDemandLevel);
 		monsterbook.setMonsterName(monsterName);
 		monsterbook.setMonsterAbility(monsterAbility);
@@ -44,8 +45,24 @@ public class MonsterBookService {
 		return dao.findByPK(monsterId);
 	}
 	
-	public List<MonsterBook> gerAll() {
+	public List<MonsterBook> getAll() {
 		return dao.getAll();
 	}
+	
+	public MonsterBook getFirstMonsterNumber(String num) {
+		
+		if("1".equals(num)) 
+			return this.dao.findByPK(1001);
+		
+		else if("2".equals(num)) 
+			return this.dao.findByPK(1002);
+		
+		else if("3".equals(num)) 
+			return this.dao.findByPK(1003);
+		
+		else
+			return null;
+	}
+	
 
 }

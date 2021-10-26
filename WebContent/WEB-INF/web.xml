@@ -96,6 +96,18 @@
 		<url-pattern>/restaurantstyle/restaurantstyle.do</url-pattern>
 	</servlet-mapping>
 	
+	
+	<servlet>
+		<servlet-name>MonsterServlet</servlet-name>
+		<servlet-class>com.monsterbook.controller.MonsterServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MonsterServlet</servlet-name>
+		<url-pattern>/monsterbook/MonsterServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	
 <!-- 楚鈞 -->
 	<servlet>
 		<servlet-name>AchieveProgressServlet</servlet-name>
