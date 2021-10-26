@@ -38,7 +38,7 @@ public class FoodArticleServlet extends HttpServlet {
 			if("getOne_For_Display".equals(action)){//from select_pageFA的請求
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs",errorMsgs);
-				System.out.println(action);
+//				System.out.println(action);
 			
 				try {
 				
@@ -67,7 +67,7 @@ public class FoodArticleServlet extends HttpServlet {
 							falureView.forward(req,res);
 							return;//程式中斷
 						}
-			      /*帶著文章pk進資料找相對應的文章VO*/
+			      /*帶著文章pk進資料庫找相對應的文章VO*/
 						FoodArticleService faSC = new FoodArticleService();
 						FoodArticleVO faVO = faSC.getOneArticle(articleNo) ;
 				  	  
@@ -85,7 +85,7 @@ public class FoodArticleServlet extends HttpServlet {
 						}
 			/*-------------------抓指定pk的文章,準備送給前端-----------------*/	
 						
-						/*帶著文章fk進資料找相對應的圖片VO*/
+						/*帶著文章fk進資料庫找相對應的圖片VO*/
 						List<PictureBaseVO> list =  pbSC.getPicturesOfAr(articleNo);
 						List<MessageVO> msgList = msgSC.getMsgsOfAr(articleNo);
 						HttpSession session = req.getSession();
@@ -117,12 +117,21 @@ public class FoodArticleServlet extends HttpServlet {
 				try {
 					Integer articleNo = new Integer(req.getParameter("articleNo"));
 					
+					//抓指定PK的文章
 					FoodArticleService faSvc = new FoodArticleService();
-					FoodArticleVO faVO = faSvc.getOneArticle(articleNo);
-					//System.out.println("程式跑到這2");
+					FoodArticleVO oldfaVO = faSvc.getOneArticle(articleNo);
 					
-					req.setAttribute("faVO",faVO);
-					String url = "/updateFA.jsp";
+					//抓指定FK圖片
+					PictureBaseService pbSvc = new PictureBaseService();
+					List<PictureBaseVO> list = pbSvc.getPicturesOfAr(articleNo);
+					
+					HttpSession session =req.getSession();
+					
+					req.setAttribute("faVO",oldfaVO);
+					
+					session.setAttribute("list", list);
+																				
+					String url = "/article/updateFA_pic.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);//轉交updateFA.jsp
 					successView.forward(req, res);
 					//System.out.println("程式跑到這3");
