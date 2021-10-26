@@ -42,6 +42,11 @@ INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic
 VALUES (10, '中中怪', '訂單加成', '我是圖片');
 INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
 VALUES (20, '大大怪', '訂單加成', '我是圖片');
+INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
+VALUES (1, '小小獸', '偏好食記', '我是圖片');
+INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
+VALUES (1, '小小鬼', '訂餐最愛', '我是圖片');
+
 
 
 # 等級經驗

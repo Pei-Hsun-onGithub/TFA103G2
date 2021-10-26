@@ -184,19 +184,24 @@
                   <div class="mb-3">
                     <label for="recipient-name" class="col-form-label">名字</label>
                     <input type="text" class="form-control my-nickname" id="recipient-name" name="monsterNickName" value="<%=  monsterBookSvc.getFirstMonsterNumber("1").getMonsterName() %>">
-                    <input type="hidden" class="form-control" name="monsterId" value="<%= monsterBookSvc.getFirstMonsterNumber("1").getMonsterId() %>">
+                    
+                    <!--   monsterId 的 擷取  -->
+                    <input type="hidden" class="form-control my-monsterId" name="monsterId" value="<%= monsterBookSvc.getFirstMonsterNumber("1").getMonsterId() %>">
                     
                   </div>
 
                   <div class="mb-3">
                     <label for="recipient-name" class="col-form-label">等級</label>
                     <h4 class="level"><%= monsterBookSvc.getFirstMonsterNumber("1").getMinDemandLevel() %></h4>
-                    <input type="hidden" class="form-control" name="originLevel" value="<%= monsterBookSvc.getFirstMonsterNumber("1").getMinDemandLevel() %>">
+                    <!--   originLevel 的擷取   -->
+                    <input type="hidden" class="form-control my-originLevel" name="originLevel" value="<%= monsterBookSvc.getFirstMonsterNumber("1").getMinDemandLevel() %>">
                   </div>
 
                   <div class="mb-3">
                     <label for="recipient-name" class="col-form-label">經驗值</label>
                     <h4>0</h4>
+                    
+                    <!--   originExp 的擷取   -->
                     <input type="hidden" class="form-control" name="originExp" value="0">
                   </div>
 
@@ -255,6 +260,9 @@
 	  let chosenName = ""; 
 	  let chosenAbility = "";	  
 	  let chosenLV = "";
+	  let monster1Id = "1001";
+	  let monster2Id = "1004";
+	  let monster3Id = "1005";
 	  
 	  $('div.my-5>ul.thumbnail>li').on('click', function() {
 		  
@@ -278,7 +286,21 @@
 		   $('div.modal form img').addClass('my-modal-img');
 		   
 		   $('div.modal form input.my-nickname').val(chosenName);
+		   
+		   /*********    放上選取到的monsterId     ************/
+		   if(monsterNo == "1") {
+			   $('div.modal form input.my-monsterId').val(monster1Id);
+		   } else if(monsterNo == "2") {
+			   $('div.modal form input.my-monsterId').val(monster2Id);
+		   } else if(monsterNo == "3") {
+			   $('div.modal form input.my-monsterId').val(monster3Id);
+		   }
+		   
+		   
 		   $('div.modal form h4.level').text(chosenLV);
+		  
+		   $('div.modal form input.my-originLevel').val(chosenLV);
+		   
 		   $('div.modal form h4.ability').text(chosenAbility);
 		   
 	  });

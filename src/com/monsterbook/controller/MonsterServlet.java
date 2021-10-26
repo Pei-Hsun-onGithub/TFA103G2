@@ -32,8 +32,9 @@ public class MonsterServlet extends HttpServlet {
 		MemberInfoService memInfoSvc = new MemberInfoService();
 		MonsterBookService monsterBookSvc = new MonsterBookService();
 		HttpSession session = req.getSession();
-//		Integer userId = (Integer)session.getAttribute("userId");
-		Integer userId = 20210002;
+		Integer userId = (Integer)session.getAttribute("userId");
+		//之後要換成上面的動態擷取userId
+//		Integer userId = 20210002;
 		
 		if("updateMonsterVOtoMemInfo".equals(action)) {
 			
