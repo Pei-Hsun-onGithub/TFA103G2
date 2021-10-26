@@ -132,7 +132,7 @@ public class FoodArticleServlet extends HttpServlet {
 					session.setAttribute("list", list);
 																				
 					String url = "/article/updateFA_pic.jsp";
-					RequestDispatcher successView = req.getRequestDispatcher(url);//轉交updateFA.jsp
+					RequestDispatcher successView = req.getRequestDispatcher(url);//轉交updateFA_pic.jsp
 					successView.forward(req, res);
 					//System.out.println("程式跑到這3");
 	
@@ -148,13 +148,14 @@ public class FoodArticleServlet extends HttpServlet {
 			if("update".equals(action)) {
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
-//System.out.println("update");
+System.out.println(action);
 				
 				/*檢查前端輸入的資料有沒有符合規定*/	
 				try {
 					Integer articleNo = new Integer(req.getParameter("articleNo").trim());
-//			System.out.println("1112"+articleNo);
-					String rule = "^[1-9]{5}$";
+					System.out.println("articleNoxxxxxx="+articleNo);
+			System.out.println("1112"+articleNo);
+					String rule = "^[0-9]{4}$";
 					
 					Integer userId =new Integer((req.getParameter("userId").trim()));
 			//System.out.println("hello"+userId);
@@ -169,12 +170,12 @@ public class FoodArticleServlet extends HttpServlet {
 //			System.out.println(userId);
 					
 					String restaurantId = (req.getParameter("restaurantId").trim());
-//			System.out.println(restaurantId);
+			     System.out.println(restaurantId);
 					Integer resIdCheck = null;
 					if(restaurantId == null || (restaurantId.length()) ==0 ) {
 						errorMsgs.add("餐廳id: 請勿空白");
 					}else if(!restaurantId.matches(rule)){
-						errorMsgs.add("餐廳id只能是5個數字");
+						errorMsgs.add("餐廳id只能是4個數字");
 					}else {
 						resIdCheck = new Integer(restaurantId);
 					}
@@ -199,42 +200,83 @@ public class FoodArticleServlet extends HttpServlet {
 					
 					Integer sta = new Integer(req.getParameter("sta"));
 					
+					FoodArticleService foodArticleSvc = new FoodArticleService();
 					
-					FoodArticleVO faVO = new FoodArticleVO();
-					faVO.setArticleNo(articleNo);
-					faVO.setUserId(userId);
-					faVO.setRestaurantId(resIdCheck);
-					faVO.setArticleTitle(articleTitle);
-					faVO.setArticleDate(articleDate);
-					faVO.setArticleContent(articleContent);
-					faVO.setSta(sta);
 					
-		
+					FoodArticleVO faVO = foodArticleSvc.updateFoodArticle(articleNo, userId, resIdCheck, articleTitle, articleDate, articleContent, sta);
+					//System.out.println("faVO"+faVO);
+					
+					
+					
+					/*更新圖片*/
+					
+					List<PictureBaseVO> list = new ArrayList<PictureBaseVO>();
+					PictureBaseVO pbVO = null;					
+					
+					byte[] pic=null;
+					Collection<Part> parts = req.getParts();
+				
+				/*getParts會把form表單裡不管是文字還是檔案都抓進來,
+				 * 所以先用getName取元素的name的值,
+				 * 去比對篩掉檔案以外的文字*/			
+					
+					for(Part part : parts) {
+						String partName = part.getName();
+						
+				/*要在迴圈內創建實體,每跑一次迴圈就是才會是新的vo	*/	
+						pbVO = new PictureBaseVO();
+						if(partName.equals("imgfile")) {
+							if(part.getSize()>0) {
+								InputStream imgIn = part.getInputStream();
+								pic = new byte[imgIn.available()];
+								imgIn.read(pic);
+								pbVO.setPic(pic);
+								list.add(pbVO);
+								System.out.println(pbVO);
+								}else {
+									errorMsgs.add("請新增最少一張圖片");
+								}
+						}
+			
+					}
+					
+					
+					PictureBaseService picBaseSvc = new PictureBaseService();
+					
+					System.out.println("picBaseslist=" + list);
+					picBaseSvc.updatePictureBaseByArticleNo(articleNo, list);
 					
 /*如果user更新完資料按送出,有檢查到錯誤,會退回更新頁面,但填過且正確的資料會被保留在頁面上*/				
 					
 					if(!errorMsgs.isEmpty()) {
 						req.setAttribute("faVO", faVO);
-						RequestDispatcher failure = req.getRequestDispatcher("/updateFA.jsp");
+						
+						RequestDispatcher failure = req.getRequestDispatcher("/article/updateFA_pic.jsp");
 						failure.forward(req,res);
 						return;
 					}
 	/*開始修改資料*/			
-					FoodArticleService faSVC = new FoodArticleService();
-					faVO = faSVC.updateFoodArticle(articleNo, userId, resIdCheck, articleTitle, articleDate, articleContent, sta);
-	/*修改完成準備轉交*/	
+				
+	
+					
+					/*修改完成準備轉交*/	
 					
 					req.setAttribute("faVO",  faVO);
-					RequestDispatcher successView = req.getRequestDispatcher("/listoneFA.jsp");
+					RequestDispatcher successView = req.getRequestDispatcher("/article/allFA_member.jsp");
 					successView.forward(req,res);
 					
 				}catch(Exception e) {
 					errorMsgs.add("修改資料失敗:"+e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/updateFA.jsp");
+					e.printStackTrace();
+					System.out.println("我在這");
+					RequestDispatcher failureView = req.getRequestDispatcher("/article/allFA_member.jsp");
 					failureView.forward(req,res);
 				}
 			}
-/*新增資料的請求*/			
+			
+			
+			
+            /*新增資料的請求*/			
 			if("insert".equals(action)) {
 				
 				List<String> errorMsgs = new LinkedList<String>();
@@ -257,11 +299,11 @@ public class FoodArticleServlet extends HttpServlet {
 					Integer resIdCheck = null;
 					if(restaurantId == null || (restaurantId.length()) ==0 ) {
 						errorMsgs.add("餐廳id: 請勿空白");
-//System.out.println(restaurantId);
+
 					}else if(!restaurantId.matches(rule2)){
 						errorMsgs.add("餐廳id只能是4個數字");
 					}else {
-			resIdCheck = new Integer(restaurantId);
+			            resIdCheck = new Integer(restaurantId);
 					}
 					
 					String articleTitle = (req.getParameter("articleTitle")).trim();
