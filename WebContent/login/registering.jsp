@@ -39,33 +39,37 @@
  href="<%=request.getContextPath()%>/assets/css/style.css">
 <link rel="stylesheet"
  href="<%=request.getContextPath()%>/assets/css/responsive.css">
- 
-<!-- new css -->
-<link rel="stylesheet"
- href="<%=request.getContextPath()%>/assets/css/Login-custome.css">
+
 
 <!--Google Fonts-->
 <link rel="stylesheet"
  href=https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap>
 
+<%@ include file="/assets/webPageSnippet/cssSnippet_navbar_home_1.jsp" %>
+
 </head>
 
 <body class='sc5'>
+    <!-- preloader area start -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div id="wave1">
+            </div>
+            <div class="spinner">
+                <div class="dot1"></div>
+                <div class="dot2"></div>
+            </div>
+        </div>
+    </div>
+    <!-- preloader area end -->
 
  <!-- navbar start -->
- <header class="navbar-area">
-  <nav class="navbar navbar-expand-lg">
-   <div class="container nav-container">
-    <div class="logo">
-     <a class="main-logo" 
-     href="<%=request.getContextPath()%>/home-1.html">
-     <img src="<%=request.getContextPath()%>/assets/img/logo.png"></a>
-    </div>
-   </div>
-  </nav>
- </header>
+<%@ include file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp" %>
  <!-- navbar end -->
  
+ 	<!-- footer area start -->
+	<%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp" %>
+	<!-- footer area end -->
  
 <!-- all plugins here -->
  <script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
@@ -86,5 +90,6 @@
  <!-- main js  -->
  <script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
  
+ <%@ include file="/assets/webPageSnippet/jsSnippet_navbar_home_3.jsp" %>
 </body>
 </html>

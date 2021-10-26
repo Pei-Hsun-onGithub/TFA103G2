@@ -381,7 +381,8 @@ String phone = req.getParameter("phone");
 				/***************************2.開始新增資料***************************************/			
 				MemberInfoService memberInfoSvc = new MemberInfoService();
 				memberInfo = memberInfoSvc.addMemberInfo(email, pwd, userName, gender, birthday, phone,null,registerDate,0,0,1001,null,1,0,1);
-
+				HttpSession session = req.getSession();
+				session.setAttribute("userId", memberInfo.getUserId());
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				
@@ -502,7 +503,10 @@ String phone = req.getParameter("phone");
 				/***************************2.開始新增資料***************************************/			
 				MemberInfoService memberInfoSvc = new MemberInfoService();
 				memberInfo = memberInfoSvc.addMemberInfo(email, pwd, userName, gender, birthday, phone,null,registerDate,0,0,1001,null,1,0,4);
-
+				//System.out.println("memberInfo="+memberInfo);
+				HttpSession session = req.getSession();
+				session.setAttribute("userId", memberInfo.getUserId());
+				
 				
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
 				String url = "/pei_pages/vendor_restaurant_addInfo.jsp";

@@ -32,9 +32,9 @@ public class MemberInfoService {
 		memberinfo.setLv(lv);
 		memberinfo.setExp(exp);
 		memberinfo.setSta(sta);
-		dao.add(memberinfo);
+		
 
-		return memberinfo;
+		return dao.add(memberinfo);
 	}
 
 	public MemberInfo addMemberInfo(MemberInfo memberinfo) {

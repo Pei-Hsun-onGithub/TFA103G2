@@ -51,6 +51,7 @@ public class LoginHandler extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("email", email);
 			session.setAttribute("userId", userId);
+			
 			String location = (String) session.getAttribute("location");
 //*工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
 			if (location != null) {
@@ -58,7 +59,7 @@ public class LoginHandler extends HttpServlet {
 				res.sendRedirect(location);
 				return;
 			} else {
-				res.sendRedirect(req.getContextPath() + "https://www.google.com/"); 															// (-->如無來源網頁:則重導至login_success.jsp)
+				res.sendRedirect(req.getContextPath() + "/pei_pages/monsterChoose.jsp"); 															// (-->如無來源網頁:則重導至login_success.jsp)
 			}
 // 【轉廠商】			
 		} else if (MemberInfo2.getSta().equals(4) || MemberInfo2.getSta().equals(5)) { 
@@ -66,6 +67,7 @@ public class LoginHandler extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("email", email);
 			session.setAttribute("userId", userId);
+			System.out.println(session.toString());
 			String location = (String) session.getAttribute("location");
 			if (location != null) {
 				session.removeAttribute("location"); // *工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)

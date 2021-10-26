@@ -2,6 +2,7 @@ package com.memberinfo.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Arrays;
 
 public class MemberInfo implements Serializable {
 	
@@ -172,6 +173,13 @@ public class MemberInfo implements Serializable {
 
 	public void setSta(Integer sta) {
 		this.sta = sta;
+	}
+	@Override
+	public String toString() {
+		return "MemberInfo [userId=" + userId + ", email=" + email + ", pwd=" + pwd + ", userName=" + userName
+				+ ", gender=" + gender + ", birthday=" + birthday + ", phone=" + phone + ", pic=" + Arrays.toString(pic)
+				+ ", registerDate=" + registerDate + ", gold=" + gold + ", feed=" + feed + ", monsterId=" + monsterId
+				+ ", monsterNickName=" + monsterNickName + ", Lv=" + Lv + ", exp=" + exp + ", sta=" + sta + "]";
 	}
 	
 }
