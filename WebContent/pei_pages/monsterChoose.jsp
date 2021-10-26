@@ -96,6 +96,7 @@
               <div class="row g-0">
                 <div class="col-md-8">
                   <img src="<%=request.getContextPath()%>/PhotoResolver?id=<%=monsterBookSvc.getFirstMonsterNumber("1").getMonsterId()  %>" class="img-fluid rounded-start my-main-img" alt="...">
+<%--                   <img src="<%=request.getContextPath()%>/images/m1.svg" class="img-fluid rounded-start my-main-img" alt="..."> --%>
                 </div>
                 <div class="col-md-4">
                   <div class="card-body">
@@ -118,6 +119,7 @@
               <div class="row g-0">
                 <div class="col-md-8">
                   <img src="<%=request.getContextPath()%>/PhotoResolver?id=<%=monsterBookSvc.getFirstMonsterNumber("2").getMonsterId()  %>" class="img-fluid rounded-start my-main-img" alt="...">
+<%--                   <img src="<%=request.getContextPath()%>/images/qfe.jpg" class="img-fluid rounded-start my-main-img" alt="..."> --%>
                 </div>
                 <div class="col-md-4">
                   <div class="card-body">
@@ -141,6 +143,7 @@
               <div class="row g-0">
                 <div class="col-md-8">
                   <img src="<%=request.getContextPath()%>/PhotoResolver?id=<%=monsterBookSvc.getFirstMonsterNumber("3").getMonsterId()  %>" class="img-fluid rounded-start my-main-img" alt="...">
+<%--                   <img src="<%=request.getContextPath()%>/images/shh.jpg" class="img-fluid rounded-start my-main-img" alt="..."> --%>
                 </div>
                 <div class="col-md-4">
                   <div class="card-body">
@@ -219,6 +222,9 @@
             <li class="active" data-monster="1"><a href="#"><img src="<%=request.getContextPath()%>/PhotoResolver?id=<%=monsterBookSvc.getFirstMonsterNumber("1").getMonsterId()  %>" alt="Image" class="img-fluid"></a></li>
             <li data-monster="2"><a href="#"><img src="<%=request.getContextPath()%>/PhotoResolver?id=<%=monsterBookSvc.getFirstMonsterNumber("2").getMonsterId()  %>" alt="Image" class="img-fluid"></a></li>
             <li data-monster="3"><a href="#"><img src="<%=request.getContextPath()%>/PhotoResolver?id=<%=monsterBookSvc.getFirstMonsterNumber("3").getMonsterId()  %>" alt="Image" class="img-fluid"></a></li>
+<%--             <li class="active" data-monster="1"><a href="#"><img src="<%=request.getContextPath()%>/images/m1.svg" alt="Image" class="img-fluid"></a></li> --%>
+<%--             <li data-monster="2"><a href="#"><img src="<%=request.getContextPath()%>/images/qfe.jpg" alt="Image" class="img-fluid"></a></li> --%>
+<%--             <li data-monster="3"><a href="#"><img src="<%=request.getContextPath()%>/images/shh.jpg" alt="Image" class="img-fluid"></a></li> --%>
           </ul>
         </div>
         <!-- 下縮圖區  結束 -->
