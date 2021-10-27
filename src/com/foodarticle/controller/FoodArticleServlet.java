@@ -7,11 +7,9 @@ import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
-
 import com.foodarticle.model.*;
 import com.message.model.*;
 import com.picturebase.model.*;
-
 
 @MultipartConfig
 public class FoodArticleServlet extends HttpServlet {
@@ -19,146 +17,141 @@ public class FoodArticleServlet extends HttpServlet {
 		doPost(req, res);
 	}
 
-	public void doPost(HttpServletRequest req, HttpServletResponse res) 
-				throws ServletException, IOException{
-        		
-			req.setCharacterEncoding("UTF-8");
-			String action = req.getParameter("action");/*抓html的action屬性用字串變數接值*/
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-			
-			
-           /* 新增文章和圖片都是同一個form表單,同一個request,
-            * 如果要分兩隻servlet可以寫如下程式,
-            * 把第一隻servlet接收到的req&res傳到下一個servletX*/            
+		req.setCharacterEncoding("UTF-8");
+		String action = req.getParameter("action");/* 抓html的action屬性用字串變數接值 */
+
+		/*
+		 * 新增文章和圖片都是同一個form表單,同一個request, 如果要分兩隻servlet可以寫如下程式,
+		 * 把第一隻servlet接收到的req&res傳到下一個servletX
+		 */
 //			req.getRequestDispatcher("PictureBasesServlet的url").forward(req, res);
-										
-			
-            /*當user在前端按"送出"鍵,送請求進來,判斷user送的值有無符合設定*/
-			
-			if("getOne_For_Display".equals(action)){//from select_pageFA的請求
-				List<String> errorMsgs = new LinkedList<String>();
-				req.setAttribute("errorMsgs",errorMsgs);
+
+		/* 當user在前端按"送出"鍵,送請求進來,判斷user送的值有無符合設定 */
+
+		if ("getOne_For_Display".equals(action)) {// from select_pageFA的請求
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
 //				System.out.println(action);
-			
+
+			try {
+
+				String str = req.getParameter("articleNo");
+				if (str == null || (str.trim()).length() == 0) {
+					errorMsgs.add("請輸入文章編號");
+					System.out.println(str);
+				}
+
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher falureView = req.getRequestDispatcher("/article/select_pageFA.jsp");
+					falureView.forward(req, res);
+					return;
+				}
+
+				Integer articleNo = null;
 				try {
-				
-					String str = req.getParameter("articleNo");
-						if(str==null || (str.trim()).length()==0) {
-							errorMsgs.add("請輸入文章編號");
-							System.out.println(str);
-						}
-						
-						if(!errorMsgs.isEmpty()) {
-							RequestDispatcher falureView = req.getRequestDispatcher("/article/select_pageFA.jsp");
-							falureView.forward(req,res);
-							return;
-						}
-						
-						Integer articleNo = null;
-						try {
-							articleNo = new Integer(str);
-							
-						}catch(Exception e) {
-							errorMsgs.add("文章編號格式不對");
-						}
-						
-						if(!errorMsgs.isEmpty()) {
-							RequestDispatcher falureView = req.getRequestDispatcher("/select_pageFA.jsp");
-							falureView.forward(req,res);
-							return;//程式中斷
-						}
-			      /*帶著文章pk進資料庫找相對應的文章VO*/
-						FoodArticleService faSC = new FoodArticleService();
-						FoodArticleVO faVO = faSC.getOneArticle(articleNo) ;
-				  	  
-						PictureBaseService pbSC = new PictureBaseService();
-						MessageService msgSC = new MessageService ();
-						
-					/*-------------------查無資料--------------------------*/	
-						if(faVO ==null) {
-							errorMsgs.add("查無資料");
-						}						
-						if(!errorMsgs.isEmpty()) {
-							RequestDispatcher falureView = req.getRequestDispatcher("/select_pageFA.jsp");
-							falureView.forward(req,res);
-							return;//程式中斷
-						}
-			/*-------------------抓指定pk的文章,準備送給前端-----------------*/	
-						
-						/*帶著文章fk進資料庫找相對應的圖片VO*/
-						List<PictureBaseVO> list =  pbSC.getPicturesOfAr(articleNo);
-						List<MessageVO> msgList = msgSC.getMsgsOfAr(articleNo);
-						HttpSession session = req.getSession();
-						
-						session.setAttribute("list", list);
-						req.setAttribute("faVO", faVO);
-						req.setAttribute("msgList", msgList);
+					articleNo = new Integer(str);
+
+				} catch (Exception e) {
+					errorMsgs.add("文章編號格式不對");
+				}
+
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher falureView = req.getRequestDispatcher("/select_pageFA.jsp");
+					falureView.forward(req, res);
+					return;// 程式中斷
+				}
+				/* 帶著文章pk進資料庫找相對應的文章VO */
+				FoodArticleService faSC = new FoodArticleService();
+				FoodArticleVO faVO = faSC.getOneArticle(articleNo);
+
+				PictureBaseService pbSC = new PictureBaseService();
+				MessageService msgSC = new MessageService();
+
+				/*-------------------查無資料--------------------------*/
+				if (faVO == null) {
+					errorMsgs.add("查無資料");
+				}
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher falureView = req.getRequestDispatcher("/select_pageFA.jsp");
+					falureView.forward(req, res);
+					return;// 程式中斷
+				}
+				/*-------------------抓指定pk的文章,準備送給前端-----------------*/
+
+				/* 帶著文章fk進資料庫找相對應的圖片VO */
+				List<PictureBaseVO> list = pbSC.getPicturesOfAr(articleNo);
+				List<MessageVO> msgList = msgSC.getMsgsOfAr(articleNo);
+				HttpSession session = req.getSession();
+
+				session.setAttribute("list", list);
+				req.setAttribute("faVO", faVO);
+				req.setAttribute("msgList", msgList);
 //						System.out.println(msgList);
-						RequestDispatcher successView = req.getRequestDispatcher("/article/oneFA_allMsg.jsp");//轉交給oneFA_allMsg.jsp
-						successView.forward(req, res);
-		  
-			/*-------------------------其他錯誤-----------------------------*/			
-				}catch(Exception e) {
-					System.out.println(1);
-					e.printStackTrace();
-					errorMsgs.add("無法取得資料"+e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/article/listallFA.jsp");
-					failureView.forward(req, res);
-				 }
-			
+				RequestDispatcher successView = req.getRequestDispatcher("/article/oneFA_allMsg.jsp");// 轉交給oneFA_allMsg.jsp
+				successView.forward(req, res);
+
+				/*-------------------------其他錯誤-----------------------------*/
+			} catch (Exception e) {
+				System.out.println(1);
+				e.printStackTrace();
+				errorMsgs.add("無法取得資料" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/article/listallFA.jsp");
+				failureView.forward(req, res);
 			}
-			
-			
-			
-			if("getOne_For_Update".equals(action)) {//from listallFA的請求
-				List<String> errorMsgs = new LinkedList<String>();
-				req.setAttribute("errorMsgs", errorMsgs);
-				//System.out.println("程式跑到這1");
-				try {
-					Integer articleNo = new Integer(req.getParameter("articleNo"));
-					
-					//抓指定PK的文章
-					FoodArticleService faSvc = new FoodArticleService();
-					FoodArticleVO oldfaVO = faSvc.getOneArticle(articleNo);
-					
-					//抓指定FK圖片
-					PictureBaseService pbSvc = new PictureBaseService();
-					List<PictureBaseVO> list = pbSvc.getPicturesOfAr(articleNo);
-					
-					HttpSession session =req.getSession();
-					
-					req.setAttribute("faVO",oldfaVO);
-					
-					session.setAttribute("list", list);
-																				
-					String url = "/article/updateFA_pic.jsp";
-					RequestDispatcher successView = req.getRequestDispatcher(url);//轉交updateFA_pic.jsp
-					successView.forward(req, res);
-					//System.out.println("程式跑到這3");
-	
-					/*-------------其他錯誤處理----------*/				
-				}catch(Exception e ) {
-					errorMsgs.add("無法取得要修改的資料:"+e.getMessage());
-					RequestDispatcher failure = req.getRequestDispatcher("/listallFA.jsp");
-					failure.forward(req,res);
-					//System.out.println("程式跑到這4");
-				 }
+
+		}
+
+		if ("getOne_For_Update".equals(action)) {// from listallFA的請求
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			// System.out.println("程式跑到這1");
+			try {
+				Integer articleNo = new Integer(req.getParameter("articleNo"));
+
+				// 抓指定PK的文章
+				FoodArticleService faSvc = new FoodArticleService();
+				FoodArticleVO oldfaVO = faSvc.getOneArticle(articleNo);
+
+				// 抓指定FK圖片
+				PictureBaseService pbSvc = new PictureBaseService();
+				List<PictureBaseVO> list = pbSvc.getPicturesOfAr(articleNo);
+
+				HttpSession session = req.getSession();
+
+				req.setAttribute("faVO", oldfaVO);
+
+				session.setAttribute("list", list);
+
+				String url = "/article/updateFA_pic.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 轉交updateFA_pic.jsp
+				successView.forward(req, res);
+				// System.out.println("程式跑到這3");
+
+				/*-------------其他錯誤處理----------*/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				RequestDispatcher failure = req.getRequestDispatcher("/listallFA.jsp");
+				failure.forward(req, res);
+				// System.out.println("程式跑到這4");
 			}
-			
-			if("update".equals(action)) {
-				List<String> errorMsgs = new LinkedList<String>();
-				req.setAttribute("errorMsgs", errorMsgs);
-System.out.println(action);
-				
-				/*檢查前端輸入的資料有沒有符合規定*/	
-				try {
-					Integer articleNo = new Integer(req.getParameter("articleNo").trim());
-					System.out.println("articleNoxxxxxx="+articleNo);
-			System.out.println("1112"+articleNo);
-					String rule = "^[0-9]{4}$";
-					
-					Integer userId =new Integer((req.getParameter("userId").trim()));
-			//System.out.println("hello"+userId);
+		}
+
+		if ("update".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+//System.out.println(action);
+
+			/* 檢查前端輸入的資料有沒有符合規定 */
+			try {
+				Integer articleNo = new Integer(req.getParameter("articleNo").trim());
+				//System.out.println("articleNo=" + articleNo);
+				// System.out.println("1112"+articleNo);
+				String rule = "^[0-9]{4}$";
+
+				Integer userId = new Integer((req.getParameter("userId").trim()));
+				// System.out.println("hello"+userId);
 //					Integer userIdCheck= null;
 //					if(userId == null || (userId.length()) ==0 ) {
 //						errorMsgs.add("會員id: 請勿空白");
@@ -168,233 +161,264 @@ System.out.println(action);
 //					    userIdCheck =new Integer(userId);
 //					}				
 //			System.out.println(userId);
-					
-					String restaurantId = (req.getParameter("restaurantId").trim());
-			     System.out.println(restaurantId);
-					Integer resIdCheck = null;
-					if(restaurantId == null || (restaurantId.length()) ==0 ) {
-						errorMsgs.add("餐廳id: 請勿空白");
-					}else if(!restaurantId.matches(rule)){
-						errorMsgs.add("餐廳id只能是4個數字");
-					}else {
-						resIdCheck = new Integer(restaurantId);
-					}
-					
-					String articleTitle = (req.getParameter("articleTitle")).trim();
-					if(articleTitle == null || (articleTitle.length()) ==0 ) {
-						errorMsgs.add("標題: 請勿空白");
-					}
-					
-					java.sql.Date articleDate = null;
-					try {
-						articleDate = java.sql.Date.valueOf((req.getParameter("articleDate")).trim());
-					}catch(IllegalArgumentException e ) {
-						articleDate = new java.sql.Date(System.currentTimeMillis());
-						errorMsgs.add("請選擇日期");
-					}
-					
-					String articleContent = req.getParameter("articleContent");
-					if(articleContent == null || (articleContent.trim().length()) ==0 ) {
-						errorMsgs.add("內容: 請勿空白");
-					}
-					
-					Integer sta = new Integer(req.getParameter("sta"));
-					
-					FoodArticleService foodArticleSvc = new FoodArticleService();
-					
-					
-					FoodArticleVO faVO = foodArticleSvc.updateFoodArticle(articleNo, userId, resIdCheck, articleTitle, articleDate, articleContent, sta);
-					//System.out.println("faVO"+faVO);
-					
-					
-					
-					/*更新圖片*/
-					
-					List<PictureBaseVO> list = new ArrayList<PictureBaseVO>();
-					PictureBaseVO pbVO = null;					
-					
-					byte[] pic=null;
-					Collection<Part> parts = req.getParts();
-				
-				/*getParts會把form表單裡不管是文字還是檔案都抓進來,
-				 * 所以先用getName取元素的name的值,
-				 * 去比對篩掉檔案以外的文字*/			
-					
-					for(Part part : parts) {
-						String partName = part.getName();
-						
-				/*要在迴圈內創建實體,每跑一次迴圈就是才會是新的vo	*/	
-						pbVO = new PictureBaseVO();
-						if(partName.equals("imgfile")) {
-							if(part.getSize()>0) {
-								InputStream imgIn = part.getInputStream();
-								pic = new byte[imgIn.available()];
-								imgIn.read(pic);
-								pbVO.setPic(pic);
-								list.add(pbVO);
-								System.out.println(pbVO);
-								}else {
-									errorMsgs.add("請新增最少一張圖片");
-								}
-						}
+
+				String restaurantId = (req.getParameter("restaurantId").trim());
 			
-					}
-					
-					
-					PictureBaseService picBaseSvc = new PictureBaseService();
-					
-					System.out.println("picBaseslist=" + list);
-					picBaseSvc.updatePictureBaseByArticleNo(articleNo, list);
-					
-/*如果user更新完資料按送出,有檢查到錯誤,會退回更新頁面,但填過且正確的資料會被保留在頁面上*/				
-					
-					if(!errorMsgs.isEmpty()) {
-						req.setAttribute("faVO", faVO);
-						
-						RequestDispatcher failure = req.getRequestDispatcher("/article/updateFA_pic.jsp");
-						failure.forward(req,res);
-						return;
-					}
-	/*開始修改資料*/			
-				
-	
-					
-					/*修改完成準備轉交*/	
-					
-					req.setAttribute("faVO",  faVO);
-					RequestDispatcher successView = req.getRequestDispatcher("/article/allFA_member.jsp");
-					successView.forward(req,res);
-					
-				}catch(Exception e) {
-					errorMsgs.add("修改資料失敗:"+e.getMessage());
-					e.printStackTrace();
-					System.out.println("我在這");
-					RequestDispatcher failureView = req.getRequestDispatcher("/article/allFA_member.jsp");
-					failureView.forward(req,res);
+				Integer resIdCheck = null;
+				if (restaurantId == null || (restaurantId.length()) == 0) {
+					errorMsgs.add("餐廳id: 請勿空白");
+				} else if (!restaurantId.matches(rule)) {
+					errorMsgs.add("餐廳id只能是4個數字");
+				} else {
+					resIdCheck = new Integer(restaurantId);
 				}
-			}
-			
-			
-			
-            /*新增資料的請求*/			
-			if("insert".equals(action)) {
-				
-				List<String> errorMsgs = new LinkedList<String>();
-				req.setAttribute("errorMsgs", errorMsgs);
-				
+
+				String articleTitle = (req.getParameter("articleTitle")).trim();
+				if (articleTitle == null || (articleTitle.length()) == 0) {
+					errorMsgs.add("標題: 請勿空白");
+				}
+
+				java.sql.Date articleDate = null;
 				try {
-			String userId =(req.getParameter("userId")).trim();
-					String rule1 = "^[0-9]{8}$";
-					Integer userIdCheck= null;
+					articleDate = java.sql.Date.valueOf((req.getParameter("articleDate")).trim());
+				} catch (IllegalArgumentException e) {
+					articleDate = new java.sql.Date(System.currentTimeMillis());
+					errorMsgs.add("請選擇日期");
+				}
 
-					if(userId == null || (userId.length()) ==0 ) {
-						errorMsgs.add("會員id: 請勿空白");
-					}else if(!userId.matches(rule1)){
-						errorMsgs.add("會員id只能是8個數字");
-					}else {
-					    userIdCheck =new Integer(userId);
-					}
-					String rule2 = "^[0-9]{4}$";
-			        String restaurantId = (req.getParameter("restaurantId").trim());
-					Integer resIdCheck = null;
-					if(restaurantId == null || (restaurantId.length()) ==0 ) {
-						errorMsgs.add("餐廳id: 請勿空白");
+				String articleContent = req.getParameter("articleContent");
+				if (articleContent == null || (articleContent.trim().length()) == 0) {
+					errorMsgs.add("內容: 請勿空白");
+				}
 
-					}else if(!restaurantId.matches(rule2)){
-						errorMsgs.add("餐廳id只能是4個數字");
-					}else {
-			            resIdCheck = new Integer(restaurantId);
-					}
-					
-					String articleTitle = (req.getParameter("articleTitle")).trim();
-					if(articleTitle == null || (articleTitle.length()) ==0 ) {
-						errorMsgs.add("標題: 請勿空白");
-					}
-					
-					java.sql.Date articleDate = null;
-					try {
-						articleDate = java.sql.Date.valueOf((req.getParameter("articleDate")).trim());
-					}catch(IllegalArgumentException e ) {
-						articleDate = new java.sql.Date(System.currentTimeMillis());
-						errorMsgs.add("請選擇日期");
-					}
-					
-					String articleContent = req.getParameter("articleContent");
-					if(articleContent == null || (articleContent.trim().length()) ==0 ) {
-						errorMsgs.add("內容: 請勿空白");
-					}
-					
-					Integer sta = new Integer(req.getParameter("sta"));
-//					System.out.println(1);
-					FoodArticleVO faVO = new FoodArticleVO();
-					faVO.setUserId(userIdCheck);
-					faVO.setRestaurantId(resIdCheck);
-					faVO.setArticleTitle(articleTitle);
-					faVO.setArticleDate(articleDate);
-					faVO.setArticleContent(articleContent);
-					faVO.setSta(sta);
-					
-					
-					/*上傳圖片*/						
-					
-					List<PictureBaseVO> list = new ArrayList<PictureBaseVO>();
-					PictureBaseVO pbVO = null;					
-					
-					byte[] pic=null;
-					Collection<Part> parts = req.getParts();
+				Integer sta = new Integer(req.getParameter("sta"));
+
+				FoodArticleService foodArticleSvc = new FoodArticleService();
+
+				FoodArticleVO faVO = foodArticleSvc.updateFoodArticle(articleNo, userId, resIdCheck, articleTitle,
+						articleDate, articleContent, sta);
+				// System.out.println("faVO"+faVO);
+
+				/*=========== 更新圖片 ==============*/
+
+				PictureBaseService picBaseSvc = new PictureBaseService();
+				List<PictureBaseVO> oldPicBases = picBaseSvc.getPicturesOfAr(articleNo);
 				
-				/*getParts會把form表單裡不管是文字還是檔案都抓進來,
-				 * 所以先用getName取元素的name的值,
-				 * 去比對篩掉檔案以外的文字*/			
-					
-					for(Part part : parts) {
-						String partName = part.getName();
-						
-				/*要在迴圈內創建實體,每跑一次迴圈就是才會是新的vo	*/	
-						pbVO = new PictureBaseVO();
-						if(partName.equals("imgfile")) {
-							if(part.getSize()>0) {
-								InputStream imgIn = part.getInputStream();
-								pic = new byte[imgIn.available()];
-								imgIn.read(pic);
+				int oldPicBasesSize = oldPicBases.size();
+				//System.out.println("oldPicBases = " + oldPicBases);
+				//System.out.println("oldPicBases.size() = " + oldPicBases.size());
+
+				PictureBaseVO pbVO = null;
+
+				int pictureObtainedCount = 0;
+				int index = 0;
+				byte[] pic = null;
+				Collection<Part> parts = req.getParts();
+
+				/*
+				 * getParts會把form表單裡不管是文字還是檔案都抓進來, 所以先用getName取元素的name的值, 去比對篩掉檔案以外的文字
+				 */
+
+				for (Part part : parts) {
+					String partName = part.getName();
+
+					/* 要在迴圈內創建實體,每跑一次迴圈就是才會是新的vo */
+
+					if (partName.equals("imgfile")) {
+
+						if (part.getSize() > 0) {
+							// 成功抓到圖片就加一
+							pictureObtainedCount++;
+							
+							InputStream imgIn = part.getInputStream();
+							pic = new byte[imgIn.available()];
+							imgIn.read(pic);
+							
+							// 原本的圖片數量比獲得的數量多或等於就做「更新」
+							if (oldPicBasesSize >= pictureObtainedCount) {
+
+								pbVO = oldPicBases.get(index);
 								pbVO.setPic(pic);
-								list.add(pbVO);
-								System.out.println(pbVO);
-								}else {
-									errorMsgs.add("請新增最少一張圖片");
-								}
+								picBaseSvc.updatePictureBase(pbVO.getPicNo(), pic);
+								index++;
+								
+								// 原本的圖片數量比獲得的數量少就做「新增」
+							} else if (oldPicBasesSize < pictureObtainedCount) {
+								PictureBaseVO picBasVO = picBaseSvc.addPictureBase(articleNo, pic);
+								oldPicBases.add(index, picBasVO);
+								index++;
+							}
+
+						} else {
+							errorMsgs.add("請新增最少一張圖片");
 						}
-			
-					}																			
-					if(!errorMsgs.isEmpty()) {
+					}
+				}
+//				System.out.println(
+//						"oldPicBasesSize = " + oldPicBases.size() + ",pictureObtainedCount=" + pictureObtainedCount);
+
+				// 當原本的圖片數量已經多過獲得的圖片數量，就把多餘的刪除
+				if (oldPicBases.size() > pictureObtainedCount) {
+
+					int oldSize = oldPicBases.size();
+					// 獲得一個縮小的PicBases
+					List<PictureBaseVO> smallPicBases = oldPicBases.subList(0, index);
+					
+					// 逐一刪除資料庫中沒有更新的舊圖片
+					for (int deleteIndex = index; deleteIndex < oldSize; deleteIndex++) {
+						
+						PictureBaseVO deletingPicBasVO = oldPicBases.get(deleteIndex);
+						picBaseSvc.deletePictureBase(deletingPicBasVO.getPicNo());
+					}
+					
+					oldPicBases = smallPicBases;
+				}
+
+			//	System.out.println("UpdatedpicBaseslist=" + oldPicBases + "oldpicBasSize=" + oldPicBases.size());
+				
+				
+
+				/* 如果user更新完資料按送出,有檢查到錯誤,會退回更新頁面,但填過且正確的資料會被保留在頁面上 */
+
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("faVO", faVO);
+
+					RequestDispatcher failure = req.getRequestDispatcher("/article/updateFA_pic.jsp");
+					failure.forward(req, res);
+					return;
+				}
+				/* 開始修改資料 */
+
+				/* 修改完成準備轉交 */
+
+				req.setAttribute("faVO", faVO);
+				RequestDispatcher successView = req.getRequestDispatcher("/article/allFA_member.jsp");
+				successView.forward(req, res);
+
+			} catch (Exception e) {
+				errorMsgs.add("修改資料失敗:" + e.getMessage());
+				e.printStackTrace();
+				System.out.println("我在這");
+				RequestDispatcher failureView = req.getRequestDispatcher("/article/allFA_member.jsp");
+				failureView.forward(req, res);
+			}
+		}
+
+		/* 新增資料的請求 */
+		if ("insert".equals(action)) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				String userId = (req.getParameter("userId")).trim();
+				String rule1 = "^[0-9]{8}$";
+				Integer userIdCheck = null;
+
+				if (userId == null || (userId.length()) == 0) {
+					errorMsgs.add("會員id: 請勿空白");
+				} else if (!userId.matches(rule1)) {
+					errorMsgs.add("會員id只能是8個數字");
+				} else {
+					userIdCheck = new Integer(userId);
+				}
+				String rule2 = "^[0-9]{4}$";
+				String restaurantId = (req.getParameter("restaurantId").trim());
+				Integer resIdCheck = null;
+				if (restaurantId == null || (restaurantId.length()) == 0) {
+					errorMsgs.add("餐廳id: 請勿空白");
+
+				} else if (!restaurantId.matches(rule2)) {
+					errorMsgs.add("餐廳id只能是4個數字");
+				} else {
+					resIdCheck = new Integer(restaurantId);
+				}
+
+				String articleTitle = (req.getParameter("articleTitle")).trim();
+				if (articleTitle == null || (articleTitle.length()) == 0) {
+					errorMsgs.add("標題: 請勿空白");
+				}
+
+				java.sql.Date articleDate = null;
+				try {
+					articleDate = java.sql.Date.valueOf((req.getParameter("articleDate")).trim());
+				} catch (IllegalArgumentException e) {
+					articleDate = new java.sql.Date(System.currentTimeMillis());
+					errorMsgs.add("請選擇日期");
+				}
+
+				String articleContent = req.getParameter("articleContent");
+				if (articleContent == null || (articleContent.trim().length()) == 0) {
+					errorMsgs.add("內容: 請勿空白");
+				}
+
+				Integer sta = new Integer(req.getParameter("sta"));
+//					System.out.println(1);
+				FoodArticleVO faVO = new FoodArticleVO();
+				faVO.setUserId(userIdCheck);
+				faVO.setRestaurantId(resIdCheck);
+				faVO.setArticleTitle(articleTitle);
+				faVO.setArticleDate(articleDate);
+				faVO.setArticleContent(articleContent);
+				faVO.setSta(sta);
+
+				/* 上傳圖片 */
+
+				List<PictureBaseVO> list = new ArrayList<PictureBaseVO>();
+				PictureBaseVO pbVO = null;
+
+				byte[] pic = null;
+				Collection<Part> parts = req.getParts();
+
+				/*
+				 * getParts會把form表單裡不管是文字還是檔案都抓進來, 所以先用getName取元素的name的值, 去比對篩掉檔案以外的文字
+				 */
+
+				for (Part part : parts) {
+					String partName = part.getName();
+
+					/* 要在迴圈內創建實體,每跑一次迴圈就是才會是新的vo */
+					pbVO = new PictureBaseVO();
+					if (partName.equals("imgfile")) {
+						if (part.getSize() > 0) {
+							InputStream imgIn = part.getInputStream();
+							pic = new byte[imgIn.available()];
+							imgIn.read(pic);
+							pbVO.setPic(pic);
+							list.add(pbVO);
+							System.out.println(pbVO);
+						} else {
+							errorMsgs.add("請新增最少一張圖片");
+						}
+					}
+
+				}
+				if (!errorMsgs.isEmpty()) {
 					HttpSession session = req.getSession();
 					req.setAttribute("faVO", faVO);
-			//		req.setAttribute("pbVO", pbVO);
+					// req.setAttribute("pbVO", pbVO);
 					session.setAttribute("list", list);
-					
+
 					RequestDispatcher failureView = req.getRequestDispatcher("/article/addFA.jsp");
 					failureView.forward(req, res);
 					return;
-					}
-					
-					FoodArticleService faSvc = new FoodArticleService();					
-
-					/*文章和圖片同時要新增,所以要同時送文章VO 圖片list給資料庫取文章pk給圖片*/	
-					faSvc.addtWithPic(faVO, list);															
-					RequestDispatcher successView = req.getRequestDispatcher("/article/listOneFA.jsp");
-					successView.forward(req,res);														
-					
-				}catch(Exception e){	
-					e.printStackTrace();
-					errorMsgs.add("新增資料失敗"+e.getMessage());					
-					RequestDispatcher failureView = req.getRequestDispatcher("/article/addFA.jsp");
-					failureView.forward(req, res);
 				}
+
+				FoodArticleService faSvc = new FoodArticleService();
+
+				/* 文章和圖片同時要新增,所以要同時送文章VO 圖片list給資料庫取文章pk給圖片 */
+				faSvc.addtWithPic(faVO, list);
+				RequestDispatcher successView = req.getRequestDispatcher("/article/listOneFA.jsp");
+				successView.forward(req, res);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsgs.add("新增資料失敗" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/article/addFA.jsp");
+				failureView.forward(req, res);
 			}
-			
-			
-			
-			
+		}
+
 //			if("delete".equals(action)) {
 //				List<String> errorMsgs = new LinkedList<String>();
 //				req.setAttribute("errorMsgs",errorMsgs );
