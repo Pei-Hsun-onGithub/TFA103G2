@@ -299,6 +299,7 @@ public class FoodArticleServlet extends HttpServlet {
 			}
 		}
 
+		
 		/* 新增資料的請求 */
 		if ("insert".equals(action)) {
 
