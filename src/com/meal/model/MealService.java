@@ -65,12 +65,16 @@ public class MealService {
 	
 	public void changeMealStateAsOffShelf(Integer mealId) {
 		
-		// ¤U¬[À\ÂI
+		// ï¿½Uï¿½[ï¿½\ï¿½I
 		Integer offShelfStatus = new Integer(2);
 		MealVO offShelfMeal = this.dao.findByPrimaryKey(mealId);
 		offShelfMeal.setSta(offShelfStatus);
 		this.dao.update(offShelfMeal);
 		
+	}
+	
+	public List<MealVO> getMealNew() {
+		return this.dao.getMealNew();
 	}
 
 }

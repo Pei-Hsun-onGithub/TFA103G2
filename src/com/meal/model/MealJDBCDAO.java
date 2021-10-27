@@ -34,6 +34,7 @@ public class MealJDBCDAO implements MealDAO_interface {
 	
 	private static final String GET_ONE_STMT = "SELECT * FROM Meal WHERE mealid = ? ";
 	private static final String GET_ALL_STMT = "SELECT * FROM Meal ";
+	private static final String GET_MEAL_NEW = "SELECT * FROM Meal ORDER BY mealid DESC limit 4";
 
 	static {
 		try {
@@ -71,9 +72,9 @@ public class MealJDBCDAO implements MealDAO_interface {
 			rs = pstmt.getGeneratedKeys();
 			
 			if (rs.next()) {
-				Integer key = rs.getInt(1); // ¥u¤ä´©Äæ¦ì¯Á¤Þ­È¨ú±o¦Û¼W¥DÁä­È
+				Integer key = rs.getInt(1); // ï¿½uï¿½ä´©ï¿½ï¿½ï¿½ï¿½ï¿½Þ­È¨ï¿½ï¿½oï¿½Û¼Wï¿½Dï¿½ï¿½ï¿½
 				mealVO.setMealId(key);
-//				System.out.println("¦Û¼W¥DÁä­È = " + key + "(­è·s¼W¦¨¥\ªºÀ\ÂI½s¸¹)");
+//				System.out.println("ï¿½Û¼Wï¿½Dï¿½ï¿½ï¿½ = " + key + "(ï¿½ï¿½sï¿½Wï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½\ï¿½Iï¿½sï¿½ï¿½)");
 			} 
 			
 		} catch (SQLException se) {
@@ -248,12 +249,73 @@ public class MealJDBCDAO implements MealDAO_interface {
 		Statement stmt = null;
 		ResultSet rs = null;
 		MealVO mealVO = null;
-		List<MealVO> rows = null;
+		List<MealVO> mealrows = null;
 		try {
 			con = DriverManager.getConnection(url, userid, passwd);
 			stmt = con.createStatement();	
 			
 			rs = stmt.executeQuery(GET_ALL_STMT);
+			mealrows = new ArrayList();
+
+			while(rs.next()) {
+				mealVO = new MealVO();
+				mealVO.setMealId(rs.getInt("mealid"));
+				mealVO.setSta(rs.getInt("sta"));
+				mealVO.setMealName(rs.getString("mealname"));
+				mealVO.setMealType(rs.getString("mealtype"));
+				mealVO.setUnitPrice(rs.getInt("unitprice"));
+				mealVO.setLaunchDate(rs.getTimestamp("launchdate"));
+				mealVO.setLaunchDays(rs.getInt("launchdays"));
+				mealVO.setMealDescription(rs.getString("mealDescription"));
+				mealVO.setMealImg(rs.getBytes("mealimg"));
+				mealVO.setRestaurantId(rs.getInt("restaurantid"));
+				
+				mealrows.add(mealVO);
+			}
+			
+		} catch(SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			
+			if(rs != null) {
+				try {
+					rs.close();					
+				} catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(stmt != null) {
+				try {
+					stmt.close();					
+				} catch(SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();					
+				} catch(Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return mealrows;
+	}
+	
+	@Override
+	public List<MealVO> getMealNew() {
+		
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		MealVO mealVO = null;
+		List<MealVO> rows = null;
+		try {
+			con = DriverManager.getConnection(url, userid, passwd);
+			stmt = con.createStatement();	
+			
+			rs = stmt.executeQuery(GET_MEAL_NEW);
 			rows = new ArrayList();
 
 			while(rs.next()) {
@@ -316,12 +378,12 @@ public class MealJDBCDAO implements MealDAO_interface {
 		MealVO mvo = new MealVO();
 		MealJDBCDAO mDAO = new MealJDBCDAO();
 //		mvo.setSta(17);
-//		mvo.setMealName("µh­·¬ü­¹Áç");
-//		mvo.setMealType("®üÂA¤õÁç");
+//		mvo.setMealName("ï¿½hï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+//		mvo.setMealType("ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½");
 //		mvo.setUnitPrice(678);
 //		mvo.setLaunchDate(Timestamp.valueOf(LocalDateTime.of(2021, 4, 1, 07, 00, 00)));
 //		mvo.setLaunchDays(90);
-//		mvo.setMealDescription("«OÃÒ¦Y¨ìµh­·¤~°±¤î");
+//		mvo.setMealDescription("ï¿½Oï¿½Ò¦Yï¿½ï¿½hï¿½ï¿½ï¿½~ï¿½ï¿½ï¿½ï¿½");
 //
 //		try {
 //			mvo.setMealImg(getPictureInByteArray("./images/food.jpg"));
@@ -335,12 +397,12 @@ public class MealJDBCDAO implements MealDAO_interface {
 		/* test Update  */
 //		mvo.setMealId(501);
 //		mvo.setSta(27);
-//		mvo.setMealName("¤»¶ôÂû±í");
-//		mvo.setMealType("¯À­¹¬µÂû");
+//		mvo.setMealName("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+//		mvo.setMealType("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 //		mvo.setUnitPrice(120);
 //		mvo.setLaunchDate(Timestamp.valueOf(LocalDateTime.of(2021, 4, 1, 07, 00, 00)));
 //		mvo.setLaunchDays(90);
-//		mvo.setMealDescription("«OÃÒ¦Y¨ìµh­·¤~°±¤î");
+//		mvo.setMealDescription("ï¿½Oï¿½Ò¦Yï¿½ï¿½hï¿½ï¿½ï¿½~ï¿½ï¿½ï¿½ï¿½");
 //		try {
 //			mvo.setMealImg(getPictureInByteArray("./images/R.png"));
 //		} catch (IOException e) {
@@ -359,4 +421,6 @@ public class MealJDBCDAO implements MealDAO_interface {
 		 }
 		
 	}
+
+	
 }
