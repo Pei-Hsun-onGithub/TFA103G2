@@ -58,27 +58,43 @@ public class MonsterServlet extends HttpServlet {
 			toHomeView.forward(req, res);
 		}
 
-		if ("updateOneMonster".equals(action)) {
-			Integer monsterId = new Integer(req.getParameter("monsterId"));
-
-			// 圖片上傳
-			byte[] monsterImg = null;
-
-			Part part = req.getPart("myUploadImg");
-			if (part.getSize() > 0) {
-				InputStream in = part.getInputStream();
-				monsterImg = new byte[in.available()];
-				in.read(monsterImg);
-				in.close();
-			}
+		
+		if("getOneMonsterForUpdate".equals(action)) {
 			
+			Integer monsterId = new Integer(req.getParameter("monsterId"));
 			MonsterBookService monsterSvc = new MonsterBookService();
 			MonsterBook monsterVO = monsterSvc.getOneMonsterBook(monsterId);
-			monsterSvc.updateMonsterBook(monsterId, monsterVO.getMinDemandLevel(), monsterVO.getMonsterName(), monsterVO.getMonsterAbility(), monsterImg);
+			req.setAttribute("updatingmonsterVO", monsterVO);
 			
-			RequestDispatcher toHomeView = req.getRequestDispatcher("/home.jsp");
-			toHomeView.forward(req, res);
-			
+			RequestDispatcher toUpdateView = req.getRequestDispatcher("/pei_pages/updateOneMonsterInfo.jsp");
+			toUpdateView.forward(req, res);
 		}
+		
+		if("updateOneMonster".equals(action)) {
+			Integer monsterId = new Integer(req.getParameter("monsterId"));
+			String monsterName = req.getParameter("monsterName");
+			Integer monsterMinDemandLevel = new Integer(req.getParameter("monsterMinDemandLevel"));
+			String monsterAbility = req.getParameter("monsterAbility");
+			byte[] monsterPicture = null;
+			
+			Part part =	req.getPart("myUploadImg");
+			if (part.getSize() > 0) {
+				InputStream in = part.getInputStream();
+				monsterPicture = new byte[in.available()];
+				in.read(monsterPicture);
+				in.close();
+
+			}
+			
+			/*==================   錯誤處理驗證   =========================*/
+			
+			
+			/*==================   轉送資料庫   =========================*/
+			
+			MonsterBookService monsterSvc = new MonsterBookService();
+			monsterSvc.updateMonsterBook(monsterId, monsterMinDemandLevel, monsterName, monsterAbility, monsterPicture);
+			RequestDispatcher toUpdateView = req.getRequestDispatcher("/pei_pages/listAllMonster.jsp");
+			toUpdateView.forward(req, res);
+ 		}
 	}
 }

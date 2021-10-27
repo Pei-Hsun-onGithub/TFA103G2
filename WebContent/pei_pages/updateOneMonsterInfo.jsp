@@ -1,3 +1,4 @@
+<%@page import="com.monsterbook.model.MonsterBook"%>
 <%@page import="com.meal.model.MealVO"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -154,8 +155,12 @@ div.card-body ul.my-form-wrapper li a {
 
 
 
-<jsp:useBean id="monsterBookService" scope="page"
-								class="com.monsterbook.model.MonsterBookService" />
+						<%-- <jsp:useBean id="monsterBookService" scope="page" --%>
+						<%-- 								class="com.monsterbook.model.MonsterBookService" /> --%>
+
+						<%
+							MonsterBook updatingmonsterVO = (MonsterBook) request.getAttribute("updatingmonsterVO");
+						%>
 
 						<!--         新增一筆Meal資料                   -->
 						<form class="row row-cols-xxl-auto align-items-center my-form"
@@ -164,80 +169,62 @@ div.card-body ul.my-form-wrapper li a {
 
 
 							<div class="row">
+								<label class="col-sm-3 col-form-label">怪獸編號</label>
+								<div class="col-sm-3">
+									<span><%=updatingmonsterVO.getMonsterId()%></span>
+									<input type="hidden" class="form-control" name="monsterId"
+										value="<%=updatingmonsterVO.getMonsterId()%>">
+								</div>
+								<div class="col-sm-6"></div>
+							</div>
+
+							<div class="row">
 								<label class="col-sm-3 col-form-label">怪獸名稱 </label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" name="monsterName"
+										value="<%=updatingmonsterVO.getMonsterName()%>">
 								</div>
 								<div class="col-sm-6"></div>
 							</div>
 
+
+
+
+
 							<div class="row">
-								<label class="col-sm-3 col-form-label">餐點狀態 </label>
+								<label class="col-sm-3 col-form-label">minDemandLevel</label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" name="monsterMinDemandLevel" value="<%=updatingmonsterVO.getMinDemandLevel()%>">
 								</div>
 								<div class="col-sm-6"></div>
 							</div>
 
+
+
+
 							<div class="row">
-								<label class="col-sm-3 col-form-label">餐點類型</label>
+								<label class="col-sm-3 col-form-label">怪獸能力</label>
 								<div class="col-sm-3">
-									<select class="myclass-select my-select"
-											id="inputGroupSelect01" name="district">
-											<c:forEach var="monsterId" items="<%= monsterBookService.getAll() %>">
-												<option value="${monsterId.monsterId}">${monsterId.monsterId}
-											</c:forEach>
-										</select>
+									<input type="text" class="form-control" name="monsterAbility" value="<%=updatingmonsterVO.getMonsterAbility()%>">
 								</div>
 								<div class="col-sm-6"></div>
 							</div>
 
 							<div class="row">
-								<label class="col-sm-3 col-form-label">單價</label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control">
-								</div>
-								<div class="col-sm-6"></div>
-							</div>
-
-
-							<div class="row">
-								<label class="col-sm-3 col-form-label">上市天數</label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control">
-								</div>
-								<div class="col-sm-6"></div>
-							</div>
-
-							<div class="row">
-								<label class="col-sm-3 col-form-label">餐點描述</label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control">
-								</div>
-								<div class="col-sm-6"></div>
-							</div>
-
-							<div class="row">
-								<label class="col-sm-3 col-form-label">餐點照片</label>
+								<label class="col-sm-3 col-form-label">怪獸圖片</label>
 								<div class="col-sm-3">
 									<input type="file" class="form-control" name="myUploadImg">
 								</div>
 								<div class="col-sm-6"></div>
 							</div>
 
-							<div class="row">
-								<label class="col-sm-3 col-form-label">餐廳</label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control">
-								</div>
-								<div class="col-sm-6"></div>
-							</div>
+							
 							<%--         送出的按鈕                --%>
 
 							<div class="row">
 								<div class="col-sm-3">
-									<input type="hidden" name="action" value="updateOneMonster"> <input
-										type="submit" class="btn btn-primary" value="送出">
+									<input type="hidden" name="action" value="updateOneMonster">
+									<input type="submit" class="btn btn-primary" value="送出">
 								</div>
 								<div class="col-sm-3"></div>
 								<div class="col-sm-6"></div>
@@ -286,7 +273,7 @@ div.card-body ul.my-form-wrapper li a {
 	<!-- new js   -->
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 
-	
+
 
 
 
