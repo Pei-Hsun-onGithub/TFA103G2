@@ -19,6 +19,10 @@ img.my-monster-now {
 	height: 50px;
 }
 
+div.nav-right-part ul.category-menu li.category-wrap div.my-monster-detail {
+	font-family:fantasy;
+	color: red;
+}
 /*********  tooltipªºCSS ¶}©l  ********/
 #tooltip {
 	display: none;

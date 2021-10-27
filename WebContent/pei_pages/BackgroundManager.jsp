@@ -80,10 +80,29 @@ table tr td img {
 	height: 50px;
 }
 
-div.my-btn-group{
-	margin-left: 450px;
-	margin-top: 300px;
-	
+div.my-btn-group-container {
+
+	margin-top: 50px;
+}
+
+div.my-btn-group {
+
+	margin-left: 430px;
+}
+
+div.img-container {
+	margin-top: 50px;
+}
+
+div.img-wrap {
+	width: 300px;
+	height: 300px;
+	margin: 0 auto;
+}
+
+img.wario {
+	width: 300px;
+	height: 300px;
 }
 </style>
 
@@ -141,7 +160,7 @@ div.my-btn-group{
 						</a></li>
 						<li class="menu-cart"><a href="cart.html"
 							style="visibility: hidden;">CART <span>1</span></a></li>
-						
+
 
 
 					</ul>
@@ -162,13 +181,27 @@ div.my-btn-group{
 
 
 	<!-- Content Area Start -->
-	<div class="btn-group my-btn-group" role="group"
-		aria-label="Basic mixed styles example">
-		<a type="button" class="btn btn-danger" href="<%=request.getContextPath()%>/pei_pages/listAllMonster.jsp">怪獸</a>
-		
-		<button type="button" class="btn btn-warning">Middle</button>
-		<button type="button" class="btn btn-success">Right</button>
+
+	<div class="img-container">
+		<div class="img-wrap">
+			<img alt="" src="<%=request.getContextPath()%>/images/wario.png"
+				class="wario">
+		</div>
+
 	</div>
+
+	<div class="my-btn-group-container">
+
+		<div class="btn-group my-btn-group" role="group"
+			aria-label="Basic mixed styles example">
+			<a type="button" class="btn btn-danger"
+				href="<%=request.getContextPath()%>/pei_pages/listAllMonster.jsp">怪獸</a>
+			<button type="button" class="btn btn-warning">任務成就</button>
+			<button type="button" class="btn btn-success">Right</button>
+		</div>
+
+	</div>
+
 	<!-- Content Area End -->
 
 
@@ -202,11 +235,10 @@ div.my-btn-group{
 	<!-- new js   -->
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 
-	
+
 
 	<script>
 		$(document).ready(function() {
-			
 
 		});
 	</script>
