@@ -17,6 +17,11 @@ public class PictureBaseJDBCDAO implements PictureBaseDAO_interface {
 	public static final String FIND_ONE = "SELECT * FROM PictureBase WHERE articleno = ? ";
 	public static final String GET_ALL = "SELECT * FROM PictureBase";
 	public static final String FIND_ONE_IMAGE ="SELECT * FROM PictureBase WHERE articleno = ? ORDER BY picno LIMIT 1";
+	
+	
+	public static final String FIND_ONE_BY_PK ="SELECT * FROM fm01.PictureBase WHERE picno = ?;";
+	
+	
 			                                 
 
 	
@@ -335,6 +340,59 @@ public class PictureBaseJDBCDAO implements PictureBaseDAO_interface {
 			}
 			return pbVO;
 			
+		}
+
+		@Override
+		public PictureBaseVO findOnePicByPK(Integer picNo) {
+			PictureBaseVO pbVO = null;
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+				pstmt = con.prepareStatement(FIND_ONE_BY_PK);
+				
+				
+				pstmt.setInt(1,picNo);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					pbVO = new PictureBaseVO();
+					pbVO.setPicNo(rs.getInt("picNo"));
+					pbVO.setArticleNo(rs.getInt("articleNo"));
+					pbVO.setPic(rs.getBytes("pic"));
+					
+				}
+			}catch(SQLException se) {
+				se.printStackTrace();
+			}finally{
+				
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}			
+				
+				if(pstmt != null) {
+					try {
+					pstmt.close();
+					}catch(SQLException se){
+						se.printStackTrace();
+					}
+				}
+					
+				if( con != null) {
+					try {
+						con.close();
+					}catch(SQLException se) {
+						se.printStackTrace();
+					}
+				}
+			}
+			return pbVO;
 		}
 		
 			
