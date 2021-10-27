@@ -14,6 +14,7 @@ public interface PictureBaseDAO_interface {
 	List<PictureBaseVO> findByFK(Integer articleNo);
 	List<PictureBaseVO> getall();
 	public PictureBaseVO findOnePic(Integer articleNo);
+	public PictureBaseVO findOnePicByPK(Integer picNo);
 	
 	public void insertWithArticle (PictureBaseVO pbVO , java.sql.Connection con);
 }

@@ -234,11 +234,11 @@ button.check_ok {
 						 								
 						<div>
 						<button class="btn cancel" id="img_file">選擇圖片</button>
-						<input type="file" multiple="true" id="add_file" style="display: none;" name="imgfile" >
+						<input type="file" multiple id="add_file" style="display: none;" name="imgfile" >
 						
 						<div class="preview_img">
 							<c:forEach var="oldpicVO" items="${list}" varStatus="index">
-							<img  src="<%=request.getContextPath()%>/PictureBasesServlet?id=${index.index}">						
+							<img src="<%=request.getContextPath()%>/PictureBasesServlet?id=${index.index}">						
 							</c:forEach>
 						</div>
 						
