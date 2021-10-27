@@ -11,5 +11,6 @@ public interface MealDAO_interface {
 	public void delete(Integer mealId);
 	public MealVO findByPrimaryKey(Integer mealId);
 	public List<MealVO> getAll();
+	public List<MealVO> getMealNew();
 
 }

@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.foodarticle.model.*"%>
-<%@ page import="com.restaurant.*"%>
+<%@ page import="com.restaurant.model.*"%>
+<%@ page import="java.util.*"%>
 
 <%
 	FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO");
@@ -82,11 +83,24 @@ form.article {
 	height: 151px; /* height:  151px; */
 }
 
+select.myselect{
+	width:160px;
+	border:none;
+
+}
 
 
 p.p1 {
 	margin: 0 auto;
 	font-size: 23px;
+}
+
+input.myDate{
+	border:none;
+	width: 160px;
+	height: 40px;
+	border-radius: 10px;
+
 }
 
 input.title_input {
@@ -173,22 +187,36 @@ button.check_ok {
 		          </c:forEach>
 	                 </ul>
 	                 </div>
-                  </c:if>
-					
-				
-				
-				
+                  </c:if>																	
 				</div>
+				
+<%
+ 	
+	RestaurantService reSvc = new RestaurantService();
+	List<RestaurantVO> resList = reSvc.getAllRes();
+	pageContext.setAttribute("resList",resList);
+	
+%>				
+<%-- 	<%	out.print(resList.toString());%>		 --%>
+				
+<!-- 				<p class="p1">選擇餐廳</p> -->
+<!-- 				<input class="res_input" name="restaurantId"> -->
+				
 				
 				<!-- 中間 -->
 				<div class="col-md-7">
 					<form class="article" method="post" action="fa.do" name="form1" enctype="multipart/form-data">
-					    
-					    <p class="p1">會員id</p>
-						<input class="res_input" name="userId">
+					    					    
+						<input type="hidden" name="userId" value="1">
 						
-						<p class="p1">選擇餐廳</p>
-						<input class="res_input" name="restaurantId">
+						<p class="p1">餐廳</p>
+						<select class="form-select myselect" name="restaurant">
+							<option >請選擇餐廳</option>
+							<c:forEach  var="resVO" items="${resList}" >							
+							<option value="${resVO.restaurantId }" ${(faVO.restaurantId==resVO.restaurantId)? 'selected':'' }>${resVO.restaurantName}</option>	   
+							</c:forEach>							
+						
+						</select>
 
 						<p class="p1">標題</p>
 						<input class="title_input" type="TEXT" name="articleTitle"
@@ -196,7 +224,7 @@ button.check_ok {
 							value="<%=(faVO == null) ? "" : faVO.getArticleTitle()%>" />
 
 						<p class="p1">發表日期</p>
-						<input name="articleDate" id="f_date1" type="text">
+						<input name="articleDate" id="f_date1" class="myDate" type="text">
 
 						<p class="p1">內容</p>
 

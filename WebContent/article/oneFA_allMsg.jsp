@@ -1,14 +1,24 @@
+<%@page import="com.memberinfo.model.MemberInfo"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.foodarticle.model.*"%>
 <%@ page import="com.message.model.*"%>
 <%@ page import="com.picturebase.model.*"%>
+<%@ page import="com.meal.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
   FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO"); //FoodArticleServlet.java(Concroller), 存入req的faVO物件
-   List<MessageVO> msgList = (List<MessageVO>) request.getAttribute("msgList");
+  List<MessageVO> msgList = (List<MessageVO>) request.getAttribute("msgList");
 //    request.setAttribute("msgList", msgList);
+
+  MealService mealSc = new MealService();
+  List<MealVO> mealList = mealSc.getMealNew();
+  pageContext.setAttribute("mealList",mealList);
+  
+  FoodArticleService faSvc = new FoodArticleService();
+  List<FoodArticleVO> popularList = faSvc.getPopularArticle();
+  pageContext.setAttribute("popularList",popularList);
 %>
 
 <!DOCTYPE html>
@@ -58,6 +68,14 @@
 div.authorname {
 	font-weight: 600;
 	font-size: 20px;
+}
+
+img.faImage{
+	width: 280px;
+    height: 280px;
+    border-radius: 8px;
+
+
 }
 </style>
 
@@ -109,11 +127,11 @@ div.authorname {
 			<div class="row justify-content-center">
 				<div class="col-lg-6 align-self-center">
 					<div class="banner-inner text-center">
-						<h3>Blog Details</h3>
-						<h1>Food Blog</h1>
+						<h3>delicacy</h3>
+						<h1>Dining Brief </h1>
 						<nav aria-label="breadcrumb">
 							<ul class="breadcrumb">
-								<li class="breadcrumb-item"><a href="home.html">Home</a></li>
+								<li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/article/allFA.jsp">Home</a></li>
 								<li class="breadcrumb-item"><a href="blog.html">Blog</a></li>
 								<li class="breadcrumb-item active" aria-current="page">Blog
 									Details</li>
@@ -157,12 +175,12 @@ div.authorname {
 
 
 						<div class="row">
-							<div class="col-6">
-
-								 <c:forEach var="adf" items="${list}" varStatus="index">
-								       <img class="w-100" src="<%=request.getContextPath()%>/PictureBasesServlet?id=${index.index}">                                
-								 </c:forEach>
+							
+							<c:forEach var="adf" items="${list}" varStatus="index">
+							<div class="col-6">								 
+								<img class="faImage" src="<%=request.getContextPath()%>/PictureBasesServlet?id=${index.index}">                                								 
 						   </div>
+						   </c:forEach>
 
 						</div>								                               
 							
@@ -189,13 +207,10 @@ div.authorname {
 						</div>
 					</div>
 					<div class="comment-area">
-						<h5 class="title">03 Comments</h5>
+						<h5 class="title">留言區</h5>
 
 						<c:forEach var="msgVO" items="${msgList}">
-							<div class="media">
-								<!--                             <div class="media-left"> -->
-								<%--                                 <img src="<%=request.getContextPath()%>/assets/img/blog/comment.png" alt="img"> --%>
-								<!--                             </div>                             -->
+							<div class="media">								                         
 								<div class="media-body">
 									<h6>${msgVO.userId}</h6>
 									<span>${msgVO.msgDate}</span>
@@ -206,11 +221,14 @@ div.authorname {
 						</c:forEach>
 
 					</div>
-<%
 
- MemberInfo meVO = session.getAttribute(name);
+<!-- 要讓頁面在登入狀況下，要加下面這一行 -->
+<%-- <%MemberInfo meVO =(MemberInfo)session.getAttribute("MemberInfo");%> --%>
 
-%>
+
+  
+
+
 
 					<form class="default-form-wrap" method="post" action="msg.do">
 						<h5 class="title">留言</h5>
@@ -218,15 +236,11 @@ div.authorname {
 							<div class="col-md-6">
 								<div class="single-input-wrap">
 									<input type="text" class="form-control" placeholder="Your Name"
-										name="userId" value=<%se %>> <input type="hidden" name="articleNo"
-										value="<%=faVO.getArticleNo()%>" />
+										name="userId" > <input type="hidden" name="articleNo"
+										 />
 								</div>
 							</div>
-							<div class="col-md-6">
-								<!--                                  <div class="single-input-wrap"> -->
-								<!--                                      <input type="text" class="form-control" placeholder="Your Email">  -->
-								<!--                                  </div>   -->
-
+							<div class="col-md-6">								
 
 							</div>
 							<div class="col-12">
@@ -246,19 +260,33 @@ div.authorname {
 				
 				<div class="col-lg-4">
 					<div class="sidebar-area">
-						<div class="widget widget_search">
-							<form class="search-form">
-								<div class="form-group">
-									<input type="text" placeholder="Search your itmes">
-								</div>
-								<button class="submit-btn" type="submit">
-									<i class="ri-search-line"></i>
-								</button>
-							</form>
+						
+						<div class="widget widget-recent-post">
+							<h4 class="widget-title">最新食記</h4>
+							
+							<ul>
+								<c:forEach  var="latestfaVO" items="${popularList}">
+								<li>
+									<div class="media">
+										<div class="media-left">
+											<img
+												src="<%=request.getContextPath()%>/article/pic.do?Id=${latestfaVO.articleNo}" alt="圖片">												
+										</div>
+										<div class="media-body">
+											<h6 class="title">
+												<a href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${latestfaVO.articleNo}">${latestfaVO.articleTitle}</a>
+											</h6>
+										</div>
+									</div>
+								</li>
+								</c:forEach>																						
+							</ul>
+						
 						</div>
 						<div class="widget widget-recent-post">
-							<h4 class="widget-title">熱門食記(待處理)</h4>
+							<h4 class="widget-title">精選餐點</h4>
 							<ul>
+								<c:forEach var="mealVO" items="${mealList}">
 								<li>
 									<div class="media">
 										<div class="media-left">
@@ -268,69 +296,13 @@ div.authorname {
 										</div>
 										<div class="media-body">
 											<h6 class="title">
-												<a href="#">Greek yogurt breakfast bowls with toppings</a>
+												<a href="<%=request.getContextPath()%>/Mealsingle?id=${mealVO.mealId}">${mealVO.mealName}</a>
 											</h6>
 										</div>
 									</div>
 								</li>
-								<li>
-									<div class="media">
-										<div class="media-left">
-											<img
-												src="<%=request.getContextPath()%>/assets/img/widget/2.png"
-												alt="widget">
-										</div>
-										<div class="media-body">
-											<h6 class="title">
-												<a href="#">Broad, garlic & mozzarella cheese bruschetta
-												</a>
-											</h6>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="media">
-										<div class="media-left">
-											<img
-												src="<%=request.getContextPath()%>/assets/img/widget/3.png"
-												alt="widget">
-										</div>
-										<div class="media-body">
-											<h6 class="title">
-												<a href="#">Make authentic Italian margherita pizza at
-													home </a>
-											</h6>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="media">
-										<div class="media-left">
-											<img
-												src="<%=request.getContextPath()%>/assets/img/widget/4.png"
-												alt="widget">
-										</div>
-										<div class="media-body">
-											<h6 class="title">
-												<a href="#">BBQ Chicken Classic Pizza Large</a>
-											</h6>
-										</div>
-									</div>
-								</li>
+								</c:forEach>																							
 							</ul>
-						</div>
-						<div class="widget widget-newsletter">
-							<h4 class="widget-title">熱門餐廳(待處理)</h4>
-							<p>Subscribe to get the latest news, update and offer
-								information. Don't worry, we won't send spam!</p>
-							<form class="newsletter-form">
-								<div class="form-group">
-									<input type="email" placeholder="Enter e-mail">
-								</div>
-								<button class="submit-btn" type="submit">
-									<i class="ri-arrow-right-line"></i>
-								</button>
-							</form>
 						</div>
 						<!-- <div class="widget widget_categories">
                             <h4 class="widget-title">Categories</h4>

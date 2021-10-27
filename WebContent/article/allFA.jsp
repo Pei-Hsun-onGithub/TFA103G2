@@ -113,9 +113,8 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6 align-self-center">
                     <div class="banner-inner text-center">
-                        <h3>Blog
-                        </h3>
-                        <h1>Food Blog</h1>
+                        <h3>delicacy</h3>
+                        <h1>Dining Brief</h1>
                         <nav aria-label="breadcrumb">
                             <ul class="breadcrumb">
                               <li class="breadcrumb-item"><a href="<%=request.getContextPath()%>/home-1.html">Home</a></li>
