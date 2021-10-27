@@ -199,14 +199,12 @@ public class FoodArticleServlet extends HttpServlet {
 						articleDate, articleContent, sta);
 				// System.out.println("faVO"+faVO);
 
-				/*=========== 更新圖片 ==============*/
+				/*=========== 更新多筆圖片 ==============*/
 
 				PictureBaseService picBaseSvc = new PictureBaseService();
 				List<PictureBaseVO> oldPicBases = picBaseSvc.getPicturesOfAr(articleNo);
 				
 				int oldPicBasesSize = oldPicBases.size();
-				//System.out.println("oldPicBases = " + oldPicBases);
-				//System.out.println("oldPicBases.size() = " + oldPicBases.size());
 
 				PictureBaseVO pbVO = null;
 
@@ -254,10 +252,8 @@ public class FoodArticleServlet extends HttpServlet {
 						}
 					}
 				}
-//				System.out.println(
-//						"oldPicBasesSize = " + oldPicBases.size() + ",pictureObtainedCount=" + pictureObtainedCount);
 
-				// 當原本的圖片數量已經多過獲得的圖片數量，就把多餘的刪除
+				// 當原本的圖片數量已經多過獲得的圖片數量，就把多餘的「刪除」
 				if (oldPicBases.size() > pictureObtainedCount) {
 
 					int oldSize = oldPicBases.size();
@@ -274,7 +270,6 @@ public class FoodArticleServlet extends HttpServlet {
 					oldPicBases = smallPicBases;
 				}
 
-			//	System.out.println("UpdatedpicBaseslist=" + oldPicBases + "oldpicBasSize=" + oldPicBases.size());
 				
 				
 
