@@ -1,26 +1,24 @@
-package com.monsterbook.controller;
+package com.memberinfo.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.meal.model.MealService;
-import com.meal.model.MealVO;
+import com.memberinfo.model.MemberInfo;
+import com.memberinfo.model.MemberInfoService;
 import com.monsterbook.model.MonsterBook;
 import com.monsterbook.model.MonsterBookService;
 
-/**
- * Servlet implementation class PhotoResolver
- */
-@WebServlet("/PhotoResolver")
-public class PhotoResolver extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-  
+@WebServlet("/MonsterPhotoShow.do")
+public class MonsterPhotoShow extends HttpServlet{
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 		
@@ -32,10 +30,14 @@ public class PhotoResolver extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		// res.setContentType("image/png");
 		
-		Integer monsterId = new Integer(request.getParameter("id"));
-		// System.out.println("mealId=" + mealId);
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		MemberInfoService memberSvc = new MemberInfoService();
+		MemberInfo memberVO = memberSvc.getOneMemberInfo(userId);
 		MonsterBookService monsterBookSvc = new MonsterBookService();
-		MonsterBook monsterBookVO = monsterBookSvc.getOneMonsterBook(monsterId);
+		MonsterBook monsterBookVO = monsterBookSvc.getOneMonsterBook(memberVO.getMonsterId());
+		
 		try {
 
 			byte[] imgBytes = monsterBookVO.getMonsterPic();

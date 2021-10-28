@@ -54,9 +54,7 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/vendors/DataTables/datatables.css">
 <style>
-
 header.my-navbar-area {
-
 	background: #a30481;
 	border-bottom: none;
 }
@@ -81,6 +79,31 @@ table tr td img {
 	width: 60px;
 	height: 50px;
 }
+
+div.my-btn-group-container {
+
+	margin-top: 50px;
+}
+
+div.my-btn-group {
+
+	margin-left: 430px;
+}
+
+div.img-container {
+	margin-top: 50px;
+}
+
+div.img-wrap {
+	width: 300px;
+	height: 300px;
+	margin: 0 auto;
+}
+
+img.wario {
+	width: 300px;
+	height: 300px;
+}
 </style>
 
 </head>
@@ -99,7 +122,8 @@ table tr td img {
 					</button>
 				</div>
 				<div class="logo">
-					<a class="main-logo" href="<%=request.getContextPath()%>/pei_pages/vendor_restaurant_updateInfo.jsp"><img
+					<a class="main-logo"
+						href="<%=request.getContextPath()%>/pei_pages/vendor_restaurant_updateInfo.jsp"><img
 						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
 				</div>
 				<div class="collapse navbar-collapse" id="themefie_main_menu">
@@ -129,13 +153,16 @@ table tr td img {
 				</div>
 				<div class="nav-right-part nav-right-part-desktop">
 					<ul>
-						<li style="visibility: hidden;"><a class="search" href="#"><i class="ri-search-line"></i></a>
-						</li>
-						<li class="menu-cart"><a href="#" style="visibility: hidden;">小鈴鐺 <span>4</span></a></li>
-						<li class="menu-cart"><a href="cart.html" style="visibility: hidden;">CART <span>1</span></a></li>
-						<li class="phone-contact"><a href="#">登出</a></li>
-						
-						
+						<li style="visibility: hidden;"><a class="search" href="#"><i
+								class="ri-search-line"></i></a></li>
+						<li class="menu-cart"><a href="#" style="visibility: hidden;">小鈴鐺
+								<span>4</span>
+						</a></li>
+						<li class="menu-cart"><a href="cart.html"
+							style="visibility: hidden;">CART <span>1</span></a></li>
+
+
+
 					</ul>
 				</div>
 			</div>
@@ -154,72 +181,27 @@ table tr td img {
 
 
 	<!-- Content Area Start -->
-	<section class="work-area">
-		<div class="container my-content">
 
-			<div class="row justify-content-center">
-				<table id="table_id" class="display">
-					<thead>
-						<tr>
-							<th>怪獸編號</th>
-							<th>minDemandLevel</th>
-							<th>怪獸名稱</th>
-							<th>怪獸能力</th>
-							<th>怪獸圖片</th>
-							
-							
-							<th></th>
-							<th></th>
-						</tr>
-					</thead>
-					<tbody>
-
-							
-							<% 
-							
-							MonsterBookService monsterSvc = new MonsterBookService();
-							List<MonsterBook> list = monsterSvc.getAll();
-							request.setAttribute("list", list);
-							%>
-
-						<c:forEach var="monsterVO" items="${list}">
-
-							<tr>
-								<td>${monsterVO.monsterId}</td>
-								<td>${monsterVO.minDemandLevel}</td>
-								<td>${monsterVO.monsterName}</td>
-								<td>${monsterVO.monsterAbility}</td>
-								<td><img
-									src="/TFA103G2/PhotoResolver?id=${monsterVO.monsterId}" /></td>
-								
-								<td>
-									<FORM METHOD="post"
-										ACTION="/TFA103G2/monsterbook/MonsterServlet.do?action=getOneMonsterForUpdate"
-										style="margin-bottom: 0px;">
-										<input type="submit" class="btn btn-warning my-btn" value="更新">
-										<input type="hidden" name="monsterId" value="${monsterVO.monsterId}">
-									</FORM>
-								</td>
-								<td>
-									<FORM METHOD="post"
-										ACTION="/TFA103G2/meal/meal.do?action=delete"
-										style="margin-bottom: 0px;">
-
-										<input type="submit" class="btn btn-warning my-btn"
-											id="my-delete-submit" value="下架"> <input
-											type="hidden" name="monsterId" value="${monsterVO.monsterId}">
-
-
-									</FORM>
-								</td>
-
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
+	<div class="img-container">
+		<div class="img-wrap">
+			<img alt="" src="<%=request.getContextPath()%>/images/wario.png"
+				class="wario">
 		</div>
-	</section>
+
+	</div>
+
+	<div class="my-btn-group-container">
+
+		<div class="btn-group my-btn-group" role="group"
+			aria-label="Basic mixed styles example">
+			<a type="button" class="btn btn-danger"
+				href="<%=request.getContextPath()%>/pei_pages/listAllMonster.jsp">怪獸</a>
+			<button type="button" class="btn btn-warning">任務成就</button>
+			<button type="button" class="btn btn-success">Right</button>
+		</div>
+
+	</div>
+
 	<!-- Content Area End -->
 
 
@@ -253,12 +235,10 @@ table tr td img {
 	<!-- new js   -->
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 
-	<script type="text/javascript" charset="utf8"
-		src="<%=request.getContextPath()%>/vendors/DataTables/datatables.js"></script>
+
 
 	<script>
 		$(document).ready(function() {
-			$('#table_id').DataTable();
 
 		});
 	</script>
