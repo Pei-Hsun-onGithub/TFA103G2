@@ -37,10 +37,10 @@
 
 			<div class="collapse navbar-collapse" id="themefie_main_menu">
 				<ul class="navbar-nav menu-open">
-					<li><a href="<%=request.getContextPath()%>/menu.html">璹繺</a></li>
-					<li><a href="<%=request.getContextPath()%>/checkout.html">钡挡眀</a></li>
-					<li><a href="<%=request.getContextPath()%>/about.html">琩高癘</a></li>
-					<li><a href="<%=request.getContextPath()%>/contact.html">癘级糶</a></li>
+					<li><a href="<%=request.getContextPath()%>/meal/Meal-list.jsp">璹繺</a></li>
+					<li><a href="<%=request.getContextPath()%>/meal/checkout.jsp">钡挡眀</a></li>
+					<li><a href="<%=request.getContextPath()%>/article/allFA.jsp">琩高癘</a></li>
+					<li><a href="<%=request.getContextPath()%>/article/addFA.jsp">癘级糶</a></li>
 				</ul>
 			</div>
 
@@ -50,7 +50,7 @@
 						href="/TFA103G2/login/memberinfo.do?action=getOne"><i
 							class="far fa-user"></i> <%=memberVO.getUserName()%></a></li>
 					<li class="menu-cart"><a
-						href="<%=request.getContextPath()%>/cart.html"><i
+						href="<%=request.getContextPath()%>/meal/cart.jsp"><i
 							class="fas fa-shopping-cart"></i> <span>1</span></a></li>
 					<li><i class="fas fa-crown"></i> <span>23</span></li>
 				</ul>
@@ -140,7 +140,7 @@
 						<div id="arrow" data-popper-arrow></div>
 					</div>
 
-					<li><a href="<%=request.getContextPath()%>/cart.html"><i
+					<li><a href="<%=request.getContextPath()%>/meal/cart.jsp"><i
 							class="fas fa-shopping-cart"></i> <span>1</span></a></li>
 					<li><i class="fas fa-crown"></i> <span>23</span></li>
 				</ul>
