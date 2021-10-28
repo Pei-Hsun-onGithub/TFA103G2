@@ -9,7 +9,7 @@ public interface MemberInfoDAO {
 	void delete(Integer userId);
 	boolean selectEmail(String email);
 
-	boolean selectPwd(String pwd);
+	
 
 	MemberInfo selectEmail2(String email,String pwd);
 

@@ -43,14 +43,6 @@ public class MemberInfoService {
 	}
 
 	
-	
-	public MemberInfo updateMemberInfo	(Integer userId, String email, String pwd, String userName, String gender, Date birthday, String phone,byte[] pic, Date registerDate, Integer gold, Integer feed, Integer monsterId, String monsterNickName, Integer lv, Integer exp, Integer sta) {
-		
-		MemberInfo memberinfo = new MemberInfo();
-		
-		memberinfo.setUserId(userId);
-
-
 	public MemberInfo updateMemberInfo(String email, String pwd, String userName, String gender, Date birthday,
 			String phone, byte[] pic, Date registerDate, Integer gold, Integer feed, Integer monsterId,
 			String monsterNickName, Integer lv, Integer exp, Integer sta) {
@@ -127,9 +119,7 @@ public class MemberInfoService {
 	}
 
 	
-	public boolean findByPwd(String pwd) {
-		return dao.selectPwd(pwd);
-	}
+
 
 
 	public MemberInfo findByEmail2(String email, String pwd) {
