@@ -30,9 +30,9 @@ public class RsOrderDAOService {
 		rsOrderVO.setCount(count);
 		rsOrderVO.setTexts(texts);
 		rsOrderVO.setSta(sta);
-		dao.insert(rsOrderVO);
 		
-		return rsOrderVO;
+		
+		return dao.insert(rsOrderVO);
 	}
 	
 	public RsOrderVO updateRsOrderDAO(Integer userId, Integer restaurantId, Integer cardId, Integer deliveryAddId, Integer deliveryMethods, Date orderDay, Date resStrTime, Date resEndTime, Date delStrTime, Date delEndTime, Integer count, String texts, Integer sta) {

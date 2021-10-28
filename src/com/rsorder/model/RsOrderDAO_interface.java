@@ -4,7 +4,7 @@ import java.util.*;
 
 public interface RsOrderDAO_interface {
 	
-	public void insert(RsOrderVO rsOrderVO);
+	public RsOrderVO insert(RsOrderVO rsOrderVO);
 	public void update(RsOrderVO rsOrderVO);
 	public void delete(Integer orderId);
 	public RsOrderVO findByPK(Integer orderId);

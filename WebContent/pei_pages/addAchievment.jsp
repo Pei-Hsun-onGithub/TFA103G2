@@ -232,117 +232,13 @@ div.my-chooseType ul li button{
 
 						<div style="overflow: hidden;">
 							<h4 class="my-query-title" style="float: left;">新增成就</h4>
-
 						</div>
-
 						<br>
 
-
-
-
-
-
-						<!--         新增一筆Meal資料                   -->
-						<form class="row row-cols-xxl-auto align-items-center my-form"
-							method="post" action="/TFA103G2/meal/meal.do"
-							enctype="multipart/form-data">
-
-
-							<div class="row">
-								<label class="col-sm-3 col-form-label">餐點名稱 </label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control">
-								</div>
-								<div class="col-sm-6"></div>
-							</div>
-
-							<div class="row">
-								<label class="col-sm-3 col-form-label">餐點狀態 </label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control">
-								</div>
-								<div class="col-sm-6"></div>
-							</div>
-
-							<div class="row">
-								<label class="col-sm-3 col-form-label">餐點類型</label>
-								<div class="col-sm-3">
-									<select class="form-select my-select"
-										aria-label="Default select example" name="mealType">
-										<option
-											value=""
-											selected>日式</option>
-										<option>火鍋</option>
-										<option>中式</option>
-										<option>地中海</option>
-									</select>
-								</div>
-								<div class="col-sm-6"></div>
-							</div>
-
-							<div class="row">
-								<label class="col-sm-3 col-form-label">單價</label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control">
-								</div>
-								<div class="col-sm-6"></div>
-							</div>
-
-
-							<div class="row">
-								<label class="col-sm-3 col-form-label">上市天數</label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control">
-								</div>
-								<div class="col-sm-6"></div>
-							</div>
-
-							<div class="row">
-								<label class="col-sm-3 col-form-label">餐點描述</label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control">
-								</div>
-								<div class="col-sm-6"></div>
-							</div>
-
-							<div class="row">
-								<label class="col-sm-3 col-form-label">餐點照片</label>
-								<div class="col-sm-3">
-									<input type="file" class="form-control">
-								</div>
-								<div class="col-sm-6"></div>
-							</div>
-
-							<div class="row">
-								<label class="col-sm-3 col-form-label">餐廳</label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control">
-								</div>
-								<div class="col-sm-6"></div>
-							</div>
-							<%--         送出的按鈕                --%>
-
-							<div class="row">
-								<div class="col-sm-3">
-									<input type="hidden" name="action" value="insert"> <input
-										type="submit" class="btn btn-primary" value="送出">
-								</div>
-								<div class="col-sm-3"></div>
-								<div class="col-sm-6"></div>
-							</div>
-
-
-						</form>
-
+						<a href="<%=request.getContextPath()%>/SimulateOrder.do?action=makeOrderSuccess" class="btn btn-primary">送出一筆訂單模擬</a>
 					</div>
 
-					<!-- 					<div class="card-body model2-body"> -->
-					<!-- 						<h5 class="card-title">Model2</h5> -->
-					<!-- 					</div> -->
-
-					<!-- 					<div class="card-body model3-body"> -->
-					<!-- 						<h5 class="card-title">Model3</h5> -->
-					<!-- 					</div> -->
+					
 				</div>
 			</div>
 		</div>
@@ -373,11 +269,6 @@ div.my-chooseType ul li button{
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 	<!-- new js   -->
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
-
-	
-
-
-
 
 
 
