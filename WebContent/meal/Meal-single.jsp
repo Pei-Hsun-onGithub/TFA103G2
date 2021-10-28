@@ -84,6 +84,7 @@
                             <div class="single-thumbnail-slider">
                                 <div class="slider-item">
                                     <img src="<%=request.getContextPath()%>/meal/photoServlet?id=${MealVO.mealId}" alt="item">
+                                   
                                 </div>
                 
                             </div>
@@ -113,15 +114,18 @@
                             </div>                            
                         </div>   
                         <p class="mt-4">${mealVO.mealdescription}</p>  
-                        <form>
+                        <form name="shoppingForm" action="<%=request.getContextPath()%>/ShoppingServlet" method="POST">
                             <div class="quantity buttons_added">
                                 <input type="button" value="-" class="minus">
                                 <input type="number" class="input-text qty text" step="1" min="1" max="10000" name="quantity" value="1">
                                 <input type="button" value="+" class="plus">
+                                <input type="hidden" name="mealId" value="${MealVO.mealId}">
+      							<input type="hidden" name="mealName" value="${MealVO.mealName}">
+      							<input type="hidden" name="unitPrice" value="${MealVO.unitPrice}">
+                                <input type="hidden" name="action" value="ADD">
                             </div>
                             <button type="submit" class="btn btn-secondary">ADD TO CART</button>
                         </form>
-  
                     </div>
                 </div>
             </div>
@@ -170,7 +174,7 @@
                                     </div>                            
                                 </div>
                                 <div class="btn-area">
-                                    <a class="btn btn-secondary" href="<%=request.getContextPath()%>/Mealsingle?mealId=${mealVO1.mealId}">CHOOSE OPTIONS </a>         
+                                    <a class="btn btn-secondary" href="<%=request.getContextPath()%>/Mealsingle?mealId=${mealVO1.mealId}">CHOOSE OPTIONS </a>        
                                 </div>          
                             </div>
                         </div>

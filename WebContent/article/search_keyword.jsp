@@ -7,11 +7,10 @@
 
 
 <% 
+	List<FoodArticleVO>	someFaList =(List<FoodArticleVO>) request.getAttribute("someFaList");
 	FoodArticleService faSvc = new FoodArticleService();
-    List<FoodArticleVO> faList =faSvc.getall();
-    List<FoodArticleVO> popularList = faSvc.getPopularArticle();
-    pageContext.setAttribute("faList",faList);
-    pageContext.setAttribute("popularList",popularList);   	
+	List<FoodArticleVO> popularList = faSvc.getPopularArticle();
+	pageContext.setAttribute("popularList",popularList);
 %>
 
 
@@ -148,28 +147,28 @@
                         
 <%--                        <c:forEach var="faVO" items="${list}"> </c:forEach> --%>
                        
-                       <c:forEach var="faVO" items="${faList}"  >
+                       <c:forEach var="somefaVO" items="${someFaList}"  >
                         <div class="col-sm-6">                                                                                                                 
                             <div class="single-blog-wrap">
                                 <div class="thumb">                                    
-                                    <img class ="articleimg" src="<%=request.getContextPath()%>/ImageSingleServlet?Id=${faVO.articleNo}" alt="img">                                	
+                                    <img class ="articleimg" src="<%=request.getContextPath()%>/ImageSingleServlet?Id=${somefaVO.articleNo}" alt="img">                                	
                                 </div>
                                 <div class="wrap-details">
                                     <span class="cat">
                                         <span class="date">
-                                            <i class="ri-calendar-todo-fill"></i>${faVO.articleDate}
+                                            <i class="ri-calendar-todo-fill"></i>${somefaVO.articleDate}
                                         </span>
                                         <a href="#" class="tag me-0">
                                             <i class="ri-price-tag-3-fill"></i>Burgar
                                         </a>
                                     </span>
 
-                                     <h5><a href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${faVO.articleNo}">${faVO.articleTitle}
+                                     <h5><a href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${somefaVO.articleNo}">${somefaVO.articleTitle}
                                     </a></h5> 
                                     <div class="wrap-hover-area">
-                                        <p class="ellipsis"> ${faVO.articleContent}
+                                        <p class="ellipsis"> ${somefaVO.articleContent}
                                         </p> 
-                                        <a class="link-btn" href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${faVO.articleNo}">Read More</a> 
+                                        <a class="link-btn" href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${somefaVO.articleNo}">Read More</a> 
                                     </div>                       
                                 </div> 
                             </div>                                                                                  
