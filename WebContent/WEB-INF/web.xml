@@ -149,6 +149,16 @@
 		<url-pattern>/article/pic.do</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>MealImageUtil</servlet-name>
+		<servlet-class>com.picturebases.controller.MealImageUtil</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MealImageUtil</servlet-name>
+		<url-pattern>/article/mealpic.do</url-pattern>
+	</servlet-mapping>
+	
 
 <!-- 以下為Filter的註冊 -->
 

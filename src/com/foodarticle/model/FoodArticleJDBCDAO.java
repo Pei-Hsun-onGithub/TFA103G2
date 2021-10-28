@@ -25,6 +25,7 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 	public static final String FIND_BY_PK = "SELECT * FROM FoodArticle WHERE articleno = ?";
 	public static final String GET_ALL = "SELECT * FROM FoodArticle";
 	public static final String GET_POPULAR ="SELECT * FROM FoodArticle ORDER BY articleno DESC LIMIT 4";
+	public static final String GET_KEYWORD ="SELECT * FROM FoodArticle WHERE articletitle like '%?%'";
 	
 	static {
 		try {
@@ -408,6 +409,65 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 		}									
 		
 		return popularList;
+	}
+
+	@Override
+	public List<FoodArticleVO> searchKeyWord(String words) {
+		List<FoodArticleVO> keyWordList = new ArrayList<>();
+		FoodArticleVO faVO =null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(GET_KEYWORD);
+			rs = pstmt.executeQuery();
+			
+			pstmt.setString(1,words);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				faVO = new FoodArticleVO();
+				faVO.setArticleNo(rs.getInt("articleNo"));
+				faVO.setUserId(rs.getInt("userId"));
+				faVO.setRestaurantId(rs.getInt("restaurantId"));
+				faVO.setArticleTitle(rs.getString("articleTitle"));
+				faVO.setArticleDate(rs.getDate("articleDate"));
+				faVO.setArticleContent(rs.getString("articleContent"));
+				faVO.setSta(rs.getInt("sta"));
+				keyWordList.add(faVO);
+			}
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}			
+			
+			if(pstmt != null) {
+				try {
+				pstmt.close();
+				}catch(SQLException se){
+					se.printStackTrace();
+				}
+			}
+				
+			if( con != null) {
+				try {
+					con.close();
+				}catch(SQLException se) {
+					se.printStackTrace();
+				}
+			}
+		}									
+		
+		return keyWordList;
+		
 	}
 	
 }

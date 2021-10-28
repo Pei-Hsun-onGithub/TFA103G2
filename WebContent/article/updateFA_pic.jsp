@@ -190,12 +190,10 @@ button.check_ok {
                   </c:if>																	
 				</div>
 				
-<%
- 	
+<% 	
 	RestaurantService reSvc = new RestaurantService();
 	List<RestaurantVO> resList = reSvc.getAllRes();
-	pageContext.setAttribute("resList",resList);
-	
+	pageContext.setAttribute("resList",resList);	
 %>				
 <%-- 	<%	out.print(resList.toString());%>		 --%>
 				
@@ -207,13 +205,15 @@ button.check_ok {
 				<div class="col-md-7">
 					<form class="article" method="post" action="fa.do" name="form1" enctype="multipart/form-data">
 					    					    
-						<input type="hidden" name="userId" value="1">
+						<input type="hidden" name="userId" value="<%=faVO.getUserId()%>">
+						<input type="hidden" name="articleNo" value="<%=faVO.getArticleNo()%>">
 						
 						<p class="p1">餐廳</p>
-						<select class="form-select myselect" name="restaurant">
+						<select class="form-select myselect" name="restaurantId">
 							<option >請選擇餐廳</option>
 							<c:forEach  var="resVO" items="${resList}" >							
-							<option value="${resVO.restaurantId }" ${(faVO.restaurantId==resVO.restaurantId)? 'selected':'' }>${resVO.restaurantName}</option>	   
+							<option  value="${resVO.restaurantId }" ${(faVO.restaurantId==resVO.restaurantId)? 'selected':'' }>${resVO.restaurantName}</option>	   
+							
 							</c:forEach>							
 						
 						</select>
@@ -257,7 +257,7 @@ button.check_ok {
 								<div>
 									<button type="reset" class="cancel">清除</button>
 									<button type="submit" class="check_ok">送出</button>
-									<input type="hidden" name="action" value="insert">
+									<input type="hidden" name="action" value="update">
 									
 									
 								</div>

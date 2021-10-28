@@ -31,6 +31,7 @@ public class MessageServlet extends HttpServlet {
 			
 			try {
 				Integer articleNo =new Integer(req.getParameter("articleNo"));
+				System.out.println(articleNo);
 				
 				String userId = req.getParameter("userId");
 				String rule1 = "^[0-9]{8}$";
