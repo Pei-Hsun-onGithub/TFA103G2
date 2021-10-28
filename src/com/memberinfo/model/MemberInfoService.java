@@ -42,11 +42,13 @@ public class MemberInfoService {
 		return memberinfo;
 	}
 
+	
 	public MemberInfo updateMemberInfo(String email, String pwd, String userName, String gender, Date birthday,
 			String phone, byte[] pic, Date registerDate, Integer gold, Integer feed, Integer monsterId,
 			String monsterNickName, Integer lv, Integer exp, Integer sta) {
 
 		MemberInfo memberinfo = new MemberInfo();
+
 
 		memberinfo.setEmail(email);
 		memberinfo.setPwd(pwd);
@@ -116,8 +118,13 @@ public class MemberInfoService {
 		return dao.selectEmail(email);
 	}
 
+	
+
+
+
 	public MemberInfo findByEmail2(String email, String pwd) {
 		return dao.selectEmail2(email, pwd);
 	}
+
 
 }

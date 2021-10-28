@@ -121,7 +121,7 @@
 }
 
 .information .newpassword2 {
-  height:100px;
+  height:px;
   position:relative;
   left:280px;
   top:40px;
@@ -131,9 +131,8 @@
 
 .information .storebutton {
   /* height:100px; */
-  /* position:relative;
-  left:280px;
-  top:40px; */
+  position:relative;
+  top:80px;
   display: inline;
   margin-left: 420px;
   /* border: 1px black solid; */
@@ -141,9 +140,8 @@
 
 .information .backbutton {
   /* height:100px; */
-  /* position:relative;
-  left:280px;
-  top:40px; */
+  position:relative;
+  top:80px;
   display: inline;
   margin-left: 20px;
   /* border: 1px black solid; */

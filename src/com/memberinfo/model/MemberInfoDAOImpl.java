@@ -12,15 +12,19 @@ import java.util.List;
 import util.Util;
 
 public class MemberInfoDAOImpl implements MemberInfoDAO {
-	
+
 	private static final String INSERT_STMT = "INSERT INTO MEMBERINFO(EMAIL, PWD, USERNAME, GENDER, BIRTHDAY, PHONE, PIC, REGISTERDATE, GOLD, FEED, MONSTERID, MONSTERNICKNAME, LV, EXP, STA) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)";
 	private static final String UPDATE_STMT = "UPDATE MEMBERINFO SET EMAIL = ?, PWD = ?, USERNAME = ?, GENDER = ?, BIRTHDAY = ?, PHONE = ?, PIC = ?, REGISTERDATE = ?, GOLD = ?, FEED = ?, MONSTERID = ?, MONSTERNICKNAME = ?, LV = ?, EXP = ?, STA = ? WHERE USERID = ?";
 	private static final String DELETE_STMT = "DELETE FROM MEMBERINFO WHERE USERID = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM MEMBERINFO WHERE USERID = ?";
-	private static final String GET_ALL = "SELECT * FROM MEMBERINFO"; 
+	private static final String GET_ALL = "SELECT * FROM MEMBERINFO";
 	private static final String FIND_BY_EMAIL = "SELECT * FROM MEMBERINFO WHERE EMAIL = ?";
+
+	private static final String FIND_BY_PWD = "SELECT * FROM MEMBERINFO WHERE PWD = ?";
+
 	private static final String FIND_BY_EMAIL2 = "SELECT * FROM MEMBERINFO WHERE EMAIL = ? AND PWD = ?";
-	
+
+
 	static {
 		try {
 			Class.forName(Util.DRIVER);
@@ -34,14 +38,14 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			
+
 			String[] cols = { "userId" };
-			
-			
+
+
 			pstmt = con.prepareStatement(INSERT_STMT, cols);
 
 			pstmt.setString(1, memberinfo.getEmail());
@@ -59,17 +63,17 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 			pstmt.setInt(13, memberinfo.getLv());
 			pstmt.setInt(14, memberinfo.getExp());
 			pstmt.setInt(15, memberinfo.getSta());
-		
+
 			pstmt.executeUpdate();
-			
+
 			rs = pstmt.getGeneratedKeys();
-			
+
 			if (rs.next()) {
 				Integer key = rs.getInt(1); // �u�䴩�����ޭȨ��o�ۼW�D���
 				memberinfo.setUserId(key);;
 //				System.out.println("�ۼW�D��� = " + key + "(��s�W���\���\�I�s��)");
 			}
-			
+
 			// Handle any driver errors
 		} catch (SQLException se) {
 			se.printStackTrace();
@@ -97,7 +101,7 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 				}
 			}
 		}
-		
+
 		return memberinfo;
 	}
 
@@ -163,7 +167,7 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 			pstmt = con.prepareStatement(DELETE_STMT);
 
 			pstmt.setInt(1, userId);
-			
+
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -321,7 +325,7 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
@@ -361,6 +365,7 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 		return false;
 	}
 
+
 	@Override
 	public MemberInfo selectEmail2(String email,String pwd) {
 		Connection con = null;
@@ -374,7 +379,7 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 			pstmt.setString(1, email);
 			pstmt.setString(2, pwd);
 			rs = pstmt.executeQuery();
-			
+
 			while(rs.next()) {
 				mem = new MemberInfo();
 				mem.setUserId(rs.getInt("USERID"));
@@ -393,7 +398,7 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 				mem.setLv(rs.getInt("LV"));
 				mem.setExp(rs.getInt("EXP"));
 				mem.setSta(rs.getInt("STA"));
-				
+
 			}
 		} catch (SQLException se) {
 				se.printStackTrace();
@@ -421,6 +426,8 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 					}
 				}
 			}
+
+
 		return mem;
 	}
 }

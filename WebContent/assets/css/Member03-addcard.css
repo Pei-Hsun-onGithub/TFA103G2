@@ -132,7 +132,7 @@
 }
 
 .information .zipcode {
-  height:80px;
+  height:40px;
   position:relative;
   left:260px;
   top:20px;
@@ -152,9 +152,9 @@
 
 .information .storebutton {
   /* height:100px; */
-  /* position:relative;
-  left:280px;
-  top:40px; */
+  position:relative;
+  
+  top:40px;
   display: inline;
   margin-left: 400px;
   /* border: 1px black solid; */
@@ -162,9 +162,9 @@
 
 .information .backbutton {
   /* height:100px; */
-  /* position:relative;
-  left:280px;
-  top:40px; */
+  position:relative;
+  left:5px;
+  top:40px;
   display: inline;
   margin-left: 20px;
   /* border: 1px black solid; */

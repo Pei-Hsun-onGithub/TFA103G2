@@ -1,7 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="com.card.model.*"%>
 <%@ page import="com.memberinfo.model.*"%>
+
+<%
+	CardVO cardVO = (CardVO) request.getAttribute("cardvo");
+%>
 
 <%
 	MemberInfo memberinfo = (MemberInfo) request.getAttribute("memberinfo");
@@ -14,7 +19,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>會員中心-個人檔案</title>
+<title>會員中心-新增信用卡</title>
 <!--fivicon icon-->
 <link rel="icon"
 	href="<%=request.getContextPath()%>/assets/img/Image4.png">
@@ -43,7 +48,7 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/responsive.css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/assets/css/Member01.css">
+	href="<%=request.getContextPath()%>/assets/css/Member03-addcard.css">
 
 <!--Google Fonts-->
 <link
@@ -52,7 +57,9 @@
 
 
 </head>
-<body style="background-color: #dbdbdb">
+
+<
+<body style="background-color: #dbdbdb";>
 	<!-- navbar start -->
 	<header class="navbar-area ">
 		<nav class="navbar navbar-expand-lg">
@@ -108,8 +115,6 @@
 	</header>
 	<!-- navbar end -->
 
-
-
 	<div class="total">
 		<div class="profile">
 			<img
@@ -117,7 +122,8 @@
 				alt="img">
 			<ul>
 				<li class="nickname"><%=memberinfo.getUserName()%></li>
-				<li class="edit"><a href="/TFA103G2/login/memberinfo.do?action=getOne">編輯個人資料</a></li>
+				<li class="edit"><a
+					href="/TFA103G2/login/memberinfo.do?action=getOne">編輯個人資料</a></li>
 			</ul>
 		</div>
 
@@ -138,191 +144,99 @@
 				<li class="seven"><a href="#">我的收藏</a></li>
 			</ul>
 		</div>
-		
-		<form method="post" action="/TFA103G2/login/memberinfo.do"
+
+
+		<form method="post" action="/TFA103G2/memberinfo/CardServlet.do"
 			enctype="multipart/form-data">
 			<div class="content">
 				<div class="title">
-					<div class="titlebigname">個人檔案Profile</div>
-					<div class="titlesmallname">管理你的個人資料</div>
+					<div class="titlebigname">修改信用卡UpdateCard</div>
+					<div class="titlesmallname">修改信用卡資訊</div>
 					<div class="editarea">
 
 
-
 						<div class="information">
-							<div class="account">
-								<div></div>
-								<div class="lebel1">電子郵件帳號</div>
-								<div class="input1"><%=memberinfo.getEmail()%>
-									<input type="hidden" name="email"
-										value="<%=memberinfo.getEmail()%>">
+							<div class="holder">
+								<div class="lebel1">持卡人姓名</div>
+								<div class="input1">
+									<input type="hidden" maxlength="255" name="userId" value="<%=memberinfo.getUserId()%>">
+									<input type="text" name="cardholder" maxlength="255" value="<%=cardVO.getCardHolder()%>">
 								</div>
 							</div>
-							<div class="name">
-								<div class="lebel2">姓名</div>
-								<div class="input2">
-									<input type="text"  maxlength="255" name="userName"
-										value="<%=memberinfo.getUserName()%>"> <input
-										type="hidden" name="userId"
-										value="<%=memberinfo.getUserId()%>"> <input
-										type="hidden" name="pwd" value="<%=memberinfo.getPwd()%>">
-									<input type="hidden" name="registerDate"
-										value="<%=memberinfo.getRegisterDate()%>"> <input
-										type="hidden" name="gold" value="<%=memberinfo.getGold()%>">
-									<input type="hidden" name="feed"
-										value="<%=memberinfo.getFeed()%>"> <input
-										type="hidden" name="monsterId"
-										value="<%=memberinfo.getMonsterId()%>"> <input
-										type="hidden" name="monsterNickName"
-										value="<%=memberinfo.getMonsterNickName()%>"> <input
-										type="hidden" name="lv" value="<%=memberinfo.getLv()%>">
-									<input type="hidden" name="exp"
-										value="<%=memberinfo.getExp()%>"> <input type="hidden"
-										name="sta" value="<%=memberinfo.getSta()%>">
+							<div class="number">
+								<div class="lebel2">信用卡卡號</div>
+								<div class="input1">
+									<input type="text" name="cardnumber" style="width: 300px"
+										maxlength="20" oninput="value=value.replace(/[^\d]/g,'')"
+										value="<%=cardVO.getCardNumber()%>">
 								</div>
+
 							</div>
-							<div class="phone">
-								<div class="lebel3">電話號碼</div>
+							<div class="expirydate">
+								<div class="lebel3">到期日</div>
 								<div class="input3">
-									<input type="text" maxlength="255" name="phone"
-										value="<%=memberinfo.getPhone()%>">
+									<input type="date" id="date" name="deadline"
+										style="width: 141px" min="2021-01" max="2030-12" value="<%=cardVO.getDeadLine()%>">
+								</div>
+								<div class="CVV">
+									<div class="lebel4">CVV</div>
+									<div class="input4">
+										<input type="text" style="width: 95px; height: 30px"
+											name="cvv" maxlength="3"
+											oninput="value=value.replace(/[^\d]/g,'')" value="<%=cardVO.getCvv()%>">
+									</div>
 								</div>
 							</div>
-							<div class="gender">
-								<div class="lebel4">性別</div>
-								<div class="input4">
-									<input type="radio" name="gender" value="male"
-										<%="男".equals(memberinfo.getGender()) ? "checked" : ""%>>男性
-									<input type="radio" name="gender" value="female"
-										<%="女".equals(memberinfo.getGender()) ? "checked" : ""%>>女性
-									<input type="radio" name="gender" value="other"
-										<%="其他".equals(memberinfo.getGender()) ? "checked" : ""%>>其他
-									<p>
-								</div>
-							</div>
-							<div class="birthday">
-								<div class="lebel5">生日</div>
+
+							<div class="billaddress">
+								<div class="lebel5">帳單地址</div>
 								<div class="input5">
-									<input id="date" type="date" name="birthday"
-										value="<%=memberinfo.getBirthday()%>">
+									<input type="text" name="billaddress" maxlength="255" value="<%=cardVO.getBillAddress()%>">
+								</div>
+							</div>
+							<div class="zipcode">
+								<div class="lebel6">郵遞區號</div>
+								<div class="input6">
+									<input type="text" name="zipcode" maxlength="6"
+										oninput="value=value.replace(/[^\d]/g,'')" value="<%=cardVO.getZipCode()%>"> <input
+										type="hidden" maxlength="255" name="sta" value="">
 								</div>
 							</div>
 							<div class="storebutton">
-								<input type="hidden" name="action" value="update">
-								<button type="submit" name="button">儲存</button>
+								<input type="hidden" name="action" value="insertOneCard">
+								<button type="submit" name="submit">確定</button>
+							</div>
+							<div class="backbutton">
+							<button type="reset" name="button">重填</button>
+								
 							</div>
 						</div>
-						<div class="editpic">
-							<div class="pic">
-								<img
-									src="/TFA103G2/memberinfo/MemberPic.do?userId=<%=memberinfo.getUserId()%>"
-									alt="img">
-							</div>
-							<div class="selectbutton">
-								<button id="photo_upload" type="button" name="button">上傳照片</button>
-								<input id="img_file" type="file" style="display: none;"
-									name="imgfile"
-									value="<%=(memberinfo == null) ? null : memberinfo.getPic()%>">
-							</div>
-							<div class="illustrate">
-								檔案大小:最大1MB<br> 檔案限制:.JEPG, .PNG
-							</div>
-			
-							<c:if test="${not empty errorMsgs}">
-								<div style="margin-top: 50px; margin-left: 140px">
-									<font style="color: red">請修正以下錯誤:</font>
-									<ul>
-										<c:forEach var="message" items="${errorMsgs}">
-											<li style="color: red">${message}</li>
-										</c:forEach>
-									</ul>
-								</div>
-							</c:if>
-						</div>
-
-
-
-
-
-
-
 					</div>
 				</div>
+					<c:if test="${not empty errorMsgs}">
+				<div style="margin-top:300px; margin-left: 750px">
+					<font style="color: red">請修正以下錯誤:</font>
+					<ul>
+						<c:forEach var="message" items="${errorMsgs}">
+							<li style="color: red">${message}</li>
+						</c:forEach>
+					</ul>
+				</div>
+			</c:if>
 			</div>
+		
 		</form>
 	</div>
-
-	<script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/bootstrap.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/imageloded.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/counterup.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/waypoint.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/magnific.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/owl.min.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/tweenmax.min.js"></script>
-
-
-	<!-- main js  -->
-	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.js"></script>
-	<script
-		src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
-
-	<script>
-		$(document)
-				.ready(
-						function() {
-
-							$('#photo_upload').on("click", function(e) {
-								$('#img_file').click();
-								return false;
-							});
-
-							var pic = document.getElementsByClassName("pic");
-							var img_file_element = document
-									.getElementById("img_file");
-							img_file_element
-									.addEventListener(
-											"change",
-											function(e) {
-
-												let reader = new FileReader();
-												reader
-														.readAsDataURL(this.files[0]);
-												reader
-														.addEventListener(
-																"load",
-																function() {
-																	var img_tag = "<img src='" + reader.result + "' class='preview_img'>";
-																	console
-																			.log(reader.result);
-																	//     			pic.insertAdjacentHTML("afterend",img_tag);
-																	$('.pic')
-																			.html(
-																					img_tag);
-																	//     			pic.append(img_tag);
-																})
-
-											})
-
-						});
-	</script>
+</body>
 
 
 
-	<!-- footer area start -->
-	<!-- <footer class="footer-area pd-top-100">
+
+
+
+
+<!-- footer area start -->
+<!-- <footer class="footer-area pd-top-100">
       <div class="footer-inner padding-top-100 padding-bottom-65">
           <div class="container">
               <div class="row">
@@ -415,8 +329,8 @@
           </div>
       </div>
   </footer> -->
-	<!-- footer area end -->
+<!-- footer area end -->
 
 
-</body>
+
 </html>
