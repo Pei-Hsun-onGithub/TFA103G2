@@ -64,6 +64,10 @@ public class FoodArticleService {
 	public List<FoodArticleVO> getPopularArticle(){
 		return dao.getPopular();
 	}
+	
+	public List<FoodArticleVO> getByKeyWord(String words){
+		return dao.searchKeyWord(words);
+	}
 
 	
 	

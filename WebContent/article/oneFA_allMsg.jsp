@@ -5,6 +5,7 @@
 <%@ page import="com.message.model.*"%>
 <%@ page import="com.picturebase.model.*"%>
 <%@ page import="com.meal.model.*"%>
+<%@ page import="com.memberinfo.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
@@ -19,6 +20,13 @@
   FoodArticleService faSvc = new FoodArticleService();
   List<FoodArticleVO> popularList = faSvc.getPopularArticle();
   pageContext.setAttribute("popularList",popularList);
+
+%>
+
+<jsp:useBean id="memtSvc" scope="page" class="com.memberinfo.model.MemberInfoService" />
+
+<% MemberInfo oneMebVO = memtSvc.getOneMemberInfo(faVO.getUserId());
+pageContext.setAttribute("oneMebVO",oneMebVO);
 %>
 
 <!DOCTYPE html>
@@ -74,7 +82,12 @@ img.faImage{
 	width: 280px;
     height: 280px;
     border-radius: 8px;
+}
 
+p.myP{
+
+	color:black;
+	font-size:15px;
 
 }
 </style>
@@ -157,14 +170,12 @@ img.faImage{
 
 
 							<!--   取作者id     -->
-							<div class="authorname"><%=faVO.getUserId()%></div>
+							<div class="authorname">${oneMebVO.userName}</div>
 
 						</div>
 						<span class="cat"> <span class="date"> <i
 								class="ri-calendar-todo-fill"></i> <%=faVO.getArticleDate()%>
-						</span> <input type="hidden" value="時間"> <a href="#"
-							class="tag me-0"> <i class="ri-price-tag-3-fill"></i>Burgar
-						</a>
+						</span> <input type="hidden" value="時間"> 
 						</span>
 						<h3><%=faVO.getArticleTitle()%></h3>
 						<input type="hidden" value="文章標題">
@@ -190,29 +201,41 @@ img.faImage{
 						<div class="row">
 							<div class="col-sm-6 align-self-center">
 								<div class="tag-inner">
-									<span>Tags: </span> <a href="#">Fresh Food, </a> <a href="#">Spicy,
-									</a> <a href="#">Delicious</a>
+									<span>Tags: </span> <a href="#">Fresh Food, </a>  <a href="#">Delicious</a>
 								</div>
 							</div>
 							<div class="col-sm-6 mt-3 mt-sm-0 align-items-center">
 								<ul class="social-area text-sm-end mt-md-0 mt-2">
+									
+									<li>分享</li>
 									<li><a href="https://zh-tw.facebook.com/"><i
 											class="fab fa-facebook-f"></i></a></li>
-									<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-									<li><a href="#"><i class="fab fa-behance"></i></a></li>
-									<li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-									<li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+									<li><a href="https://twitter.com/?lang=zh-tw"><i class="fab fa-twitter"></i></a></li>
+									
+									
+									
 								</ul>
 							</div>
 						</div>
 					</div>
+
+	
+				
+					
 					<div class="comment-area">
 						<h5 class="title">留言區</h5>
 
-						<c:forEach var="msgVO" items="${msgList}">
+						<c:forEach var="msgVO" items="${msgList}">											
 							<div class="media">								                         
 								<div class="media-body">
-									<h6>${msgVO.userId}</h6>
+																	
+									<p class="myP">
+									<c:forEach  var="memVO" items="${memtSvc.all}">
+									<c:if test ="${msgVO.userId==memVO.userId}">
+									 ${memVO.userName}									 
+									</c:if>
+									</c:forEach>
+									</p>																	
 									<span>${msgVO.msgDate}</span>
 									<p>${msgVO.msgContent}</p>
 									<input type="hidden" value="${msgVO.sta}">
@@ -235,9 +258,9 @@ img.faImage{
 						<div class="row">
 							<div class="col-md-6">
 								<div class="single-input-wrap">
-									<input type="text" class="form-control" placeholder="Your Name"
-										name="userId" > <input type="hidden" name="articleNo"
-										 />
+									<input type="text" class="form-control" name="userId" value="20210003">
+									<input type="hidden" name="articleNo" value="<%=faVO.getArticleNo()%>"/>
+										 
 								</div>
 							</div>
 							<div class="col-md-6">								
@@ -291,12 +314,12 @@ img.faImage{
 									<div class="media">
 										<div class="media-left">
 											<img
-												src="<%=request.getContextPath()%>/assets/img/widget/1.png"
-												alt="widget">
+												src="<%=request.getContextPath()%>/article/mealpic.do?Id=${mealVO.mealId}"
+												alt="圖片">
 										</div>
 										<div class="media-body">
 											<h6 class="title">
-												<a href="<%=request.getContextPath()%>/Mealsingle?id=${mealVO.mealId}">${mealVO.mealName}</a>
+												<a href="<%=request.getContextPath()%>/Mealsingle?mealId=${mealVO.mealId}">${mealVO.mealName}</a>
 											</h6>
 										</div>
 									</div>

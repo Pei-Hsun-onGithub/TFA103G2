@@ -207,10 +207,10 @@ button.check_ok {
 				<div class="col-md-7">
 					<form class="article" method="post" action="fa.do" name="form1" enctype="multipart/form-data">
 					    					    
-						<input type="hidden" name="userId" value="1">
+						<input type="text" name="userId" value="<%=(faVO == null) ? "" : faVO.getUserId()%>">
 						
 						<p class="p1">餐廳</p>
-						<select class="form-select myselect" name="restaurant">
+						<select class="form-select myselect" name="restaurantId">
 							<option >請選擇餐廳</option>
 							<c:forEach  var="resVO" items="${resList}" >							
 							<option value="${resVO.restaurantId }" ${(faVO.restaurantId==resVO.restaurantId)? 'selected':'' }>${resVO.restaurantName}</option>	   
