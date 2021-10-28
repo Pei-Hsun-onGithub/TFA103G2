@@ -6,6 +6,8 @@
 
 <%
 	FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO");
+    MemberInfo userNow = (MemberInfo) session.getAttribute("MemberInfo");
+
 %>
 <!DOCTYPE html>
 
@@ -257,19 +259,11 @@ button.check_ok {
 								<div>
 									<button type="reset" class="cancel">清除</button>
 									<button type="submit" class="check_ok">送出</button>
-									<input type="hidden" name="action" value="update">
-									
+									<input type="hidden" name="action" value="update">									
 									
 								</div>
-
-
 							</div>
-
-
-						</div>
-
-
-						
+						</div>						
 					</form>
 				</div>
 

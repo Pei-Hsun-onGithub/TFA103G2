@@ -20,6 +20,8 @@
   FoodArticleService faSvc = new FoodArticleService();
   List<FoodArticleVO> popularList = faSvc.getPopularArticle();
   pageContext.setAttribute("popularList",popularList);
+  
+  MemberInfo userNow = (MemberInfo) session.getAttribute("MemberInfo");
 
 %>
 
@@ -72,6 +74,11 @@ pageContext.setAttribute("oneMebVO",oneMebVO);
 <%@ include file="/assets/webPageSnippet/cssSnippet_navbar_home_1.jsp" %>
 
 <style>
+
+div.author {
+	display:inline-block;
+
+}
 
 div.authorname {
 	font-weight: 600;
@@ -165,14 +172,19 @@ p.myP{
 					<div class="blog-details-inner">
 						<!-- <div class="thumb pb-4">
                             <img src="<%=request.getContextPath()%>/assets/img/blog/single.png" alt="img">
-                        </div>  -->
-						<div class="author">
-
-
-							<!--   取作者id     -->
-							<div class="authorname">${oneMebVO.userName}</div>
-
-						</div>
+                        </div>  -->	
+                        
+                        
+                        <!--   取作者id     -->											
+						<div class="author" >							
+							<div class="authorname">${oneMebVO.userName}</div>			                                                                                       
+                        </div>
+                        
+                        <div class="thumb">                                    
+                            <a class="fav-btn" href="<%=request.getContextPath()%>/favofoodarticle/FavoArticle.do?action=insertFavoArticle&articleNo=<%=faVO.getArticleNo()%>&userId=<%=userNow.getUserId()%>">
+                            <i class="ri-heart-line"></i></a>
+                         </div>
+						
 						<span class="cat"> <span class="date"> <i
 								class="ri-calendar-todo-fill"></i> <%=faVO.getArticleDate()%>
 						</span> <input type="hidden" value="時間"> 
@@ -201,7 +213,11 @@ p.myP{
 						<div class="row">
 							<div class="col-sm-6 align-self-center">
 								<div class="tag-inner">
-									<span>Tags: </span> <a href="#">Fresh Food, </a>  <a href="#">Delicious</a>
+									<form>
+									input
+									
+									
+									</form>> 
 								</div>
 							</div>
 							<div class="col-sm-6 mt-3 mt-sm-0 align-items-center">
@@ -258,7 +274,7 @@ p.myP{
 						<div class="row">
 							<div class="col-md-6">
 								<div class="single-input-wrap">
-									<input type="text" class="form-control" name="userId" value="20210003">
+									<input type="hidden" class="form-control" name="userId" value="<%=userNow.getUserId() %>">
 									<input type="hidden" name="articleNo" value="<%=faVO.getArticleNo()%>"/>
 										 
 								</div>

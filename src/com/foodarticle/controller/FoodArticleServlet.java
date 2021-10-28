@@ -419,12 +419,43 @@ public class FoodArticleServlet extends HttpServlet {
 				req.setAttribute("errorMsgs", errorMsgs);
 				
 				try {
+					String words = req.getParameter("keyword");
+					
+					if (words == null || (words.trim()).length() == 0) {
+						errorMsgs.add("請輸入關鍵字");
+//						System.out.println(words);										
+					}				
+					
+					FoodArticleService faSvc = new FoodArticleService();
+					List<FoodArticleVO> someFaList = faSvc.getByKeyWord(words);
+					
+//					if (someFaList.size()<=0) {
+//						errorMsgs.add("尚無相關食記");						
+//					}
+					
+					//沒有輸入關鍵字導回原頁面,出示error訊息	
+					if (!errorMsgs.isEmpty()) {
+						RequestDispatcher falureView = req.getRequestDispatcher("/article/allFA.jsp");
+						falureView.forward(req, res);
+						return;
+					}
+					
+					req.setAttribute("someFaList", someFaList);
+					RequestDispatcher successView = req.getRequestDispatcher("/article/search_keyword.jsp");
+					successView.forward(req, res);																				
 					
 				}catch(Exception e ) {
-					
+//					System.out.println(1);
+					e.printStackTrace();
+					errorMsgs.add("無法取得資料" + e.getMessage());
+					RequestDispatcher failureView = req.getRequestDispatcher("/article/allFA.jsp");
+					failureView.forward(req, res);
 				}
 				
 			}
+
+			
+			
 //			if("delete".equals(action)) {
 //				List<String> errorMsgs = new LinkedList<String>();
 //				req.setAttribute("errorMsgs",errorMsgs );

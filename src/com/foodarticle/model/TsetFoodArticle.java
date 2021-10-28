@@ -8,36 +8,36 @@ public class TsetFoodArticle {
 		
 		FoodArticleDAO_interface dao = new FoodArticleJDBCDAO();
 		
-		//·s¼W
+		//ï¿½sï¿½W
 		
 		FoodArticleVO far1 = new FoodArticleVO();
 //		far1.setUserId(1113);
 //		far1.setRestaurantId(55592);
-//		far1.setArticleTitle("¤p»X¤û¤Ó¶Q");
+//		far1.setArticleTitle("ï¿½pï¿½Xï¿½ï¿½ï¿½Ó¶Q");
 //		far1.setArticleDate(java.sql.Date.valueOf("2016-01-01"));
-//		far1.setArticleContent("¤]¤Ó¶Q¤F¬O¦bÂd´XÂI,ªA°È¥Í¯äÁy¹ï¶Ü");
+//		far1.setArticleContent("ï¿½]ï¿½Ó¶Qï¿½Fï¿½Oï¿½bï¿½dï¿½Xï¿½I,ï¿½Aï¿½È¥Í¯ï¿½ï¿½yï¿½ï¿½ï¿½");
 //		far1.setSta(0);
 //		dao.add(far1);
 		
-		//­×§ï
+		//ï¿½×§ï¿½
 		
 		//FoodArticle far2 = new FoodArticle();
 		
 //		far1.setArticleNo(3);
 //		far1.setUserId(1113);
 //		far1.setRestaurantId(55592);
-//		far1.setArticleTitle("¤p»X¤û¤Ó¶Q");
+//		far1.setArticleTitle("ï¿½pï¿½Xï¿½ï¿½ï¿½Ó¶Q");
 //		far1.setArticleDate(java.sql.Date.valueOf("2021-09-10"));
-//		far1.setArticleContent("¤]¤Ó¶Q¤F¬O¦bÂd´XÂI,ªA°È¥Í¯äÁy¹ï¶Ü");
+//		far1.setArticleContent("ï¿½]ï¿½Ó¶Qï¿½Fï¿½Oï¿½bï¿½dï¿½Xï¿½I,ï¿½Aï¿½È¥Í¯ï¿½ï¿½yï¿½ï¿½ï¿½");
 //		far1.setSta(0);
 //		dao.update(far1);
 		//dao.update(far2);
 		
-		//§R°£
+		//ï¿½Rï¿½ï¿½
 		
 		//dao.delete(4);
 		
-		//¬d¸ßone
+		//ï¿½dï¿½ï¿½one
 		
 //		FoodArticle far2 = dao.findByPrimaryKey(3);
 //		System.out.print(far2.getArticleNo() + ",");
@@ -48,19 +48,22 @@ public class TsetFoodArticle {
 //		System.out.print(far2.getArticleContent() + ",");
 //		System.out.println(far2.getSta());
 		
-		//¬d¸ß all
+		//ï¿½dï¿½ï¿½ all
 		
-		List<FoodArticleVO> List = dao.getall();
-		for (FoodArticleVO far3 : List) {
-			System.out.print(far3.getArticleNo() + ",");
-			System.out.print(far3.getUserId() + ",");
-			System.out.print(far3.getRestaurantId() + ",");
-			System.out.print(far3.getArticleTitle() + ",");
-			System.out.print(far3.getArticleDate() + ",");
-			System.out.print(far3.getArticleContent() + ",");
-			System.out.println(far3.getSta());
-			System.out.println();
-		}
+//		List<FoodArticleVO> List = dao.getall();
+//		for (FoodArticleVO far3 : List) {
+//			System.out.print(far3.getArticleNo() + ",");
+//			System.out.print(far3.getUserId() + ",");
+//			System.out.print(far3.getRestaurantId() + ",");
+//			System.out.print(far3.getArticleTitle() + ",");
+//			System.out.print(far3.getArticleDate() + ",");
+//			System.out.print(far3.getArticleContent() + ",");
+//			System.out.println(far3.getSta());
+//			System.out.println();
+//		}
+		 String words ="è‚¯";
+		List<FoodArticleVO> List = dao.searchKeyWord(words);
+		System.out.println(List);
 		
 		
 		
