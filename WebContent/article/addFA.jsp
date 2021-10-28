@@ -196,18 +196,17 @@ button.check_ok {
 	List<RestaurantVO> resList = reSvc.getAllRes();
 	pageContext.setAttribute("resList",resList);
 	
+	MemberInfo userNow = (MemberInfo) session.getAttribute("MemberInfo");
+	
 %>				
-<%-- 	<%	out.print(resList.toString());%>		 --%>
-				
-<!-- 				<p class="p1">選擇餐廳</p> -->
-<!-- 				<input class="res_input" name="restaurantId"> -->
+
 				
 				
 				<!-- 中間 -->
 				<div class="col-md-7">
 					<form class="article" method="post" action="fa.do" name="form1" enctype="multipart/form-data">
 					    					    
-						<input type="text" name="userId" value="<%=(faVO == null) ? "" : faVO.getUserId()%>">
+						<input type="hidden" name="userId" value="<%=(faVO == null) ? "" : userNow.getUserId()%>">
 						
 						<p class="p1">餐廳</p>
 						<select class="form-select myselect" name="restaurantId">
@@ -237,9 +236,6 @@ button.check_ok {
 						<input type="file" multiple="true" id="add_file" style="display: none;" name="imgfile" >
 						</div>						
 
-<!-- 						<div class="preview_img"> -->
-<!-- 							<span class="text">預覽圖</span> -->
-<!-- 						</div> -->
 
 						<div class="row">
 							<div class="col-md-4"></div>
@@ -257,10 +253,7 @@ button.check_ok {
 							</div>
 
 
-						</div>
-
-
-						
+						</div>						
 					</form>
 				</div>
 

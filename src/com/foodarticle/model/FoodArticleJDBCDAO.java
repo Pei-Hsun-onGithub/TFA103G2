@@ -25,7 +25,7 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 	public static final String FIND_BY_PK = "SELECT * FROM FoodArticle WHERE articleno = ?";
 	public static final String GET_ALL = "SELECT * FROM FoodArticle";
 	public static final String GET_POPULAR ="SELECT * FROM FoodArticle ORDER BY articleno DESC LIMIT 4";
-	public static final String GET_KEYWORD ="SELECT * FROM FoodArticle WHERE articletitle like '%?%'";
+	public static final String GET_KEYWORD ="SELECT * FROM FoodArticle WHERE articletitle like ?";
 	
 	static {
 		try {
@@ -422,9 +422,9 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 		try {
 			con = DriverManager.getConnection(URL, USER, PASSWORD);
 			pstmt = con.prepareStatement(GET_KEYWORD);
-			rs = pstmt.executeQuery();
 			
-			pstmt.setString(1,words);
+			
+			pstmt.setString(1, "%"+words+"%");
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -436,6 +436,7 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 				faVO.setArticleDate(rs.getDate("articleDate"));
 				faVO.setArticleContent(rs.getString("articleContent"));
 				faVO.setSta(rs.getInt("sta"));
+				
 				keyWordList.add(faVO);
 			}
 		}catch(SQLException se) {
