@@ -21,11 +21,11 @@ public class OrderListDAOService {
 		orderListVO.setQuantity(quantity);
 		orderListVO.setUnitPrice(quantity);
 		orderListVO.setNote(note);
-		dao.insert(orderListVO);
 		
-		return orderListVO;
+		
+		return dao.insert(orderListVO);
 	}
-
+	
 	public OrderListVO updateOrderListDAO( Integer orderId, Integer mealId, String quantity, String unitPrice, String note) {
 		
 		OrderListVO orderListVO = new OrderListVO();

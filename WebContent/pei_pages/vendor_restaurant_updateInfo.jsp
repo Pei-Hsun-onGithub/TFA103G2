@@ -550,7 +550,9 @@ RestaurantService restSvc = new RestaurantService();
 			</div>
 		</div>
 	</div>
-
+	
+	<%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp" %>
+	
 	<!-- all plugins here -->
 	<script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
@@ -656,6 +658,9 @@ RestaurantService restSvc = new RestaurantService();
 			/*********************************************   縣市地區的操作       **********************************************************/
 										
 							
+									
+								
+									
 										$('select.my-distrc-select').on('change', function(e){
 											
 											var selectedDistrict = this.options[this.selectedIndex].text.trim();

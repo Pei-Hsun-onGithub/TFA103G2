@@ -60,6 +60,14 @@ public class FoodArticleService {
 	public void addtWithPic(FoodArticleVO foodArticleVO, List<PictureBaseVO> list) {
 		  dao.insertWithPic(foodArticleVO,list);	
 	}
+	
+	public List<FoodArticleVO> getPopularArticle(){
+		return dao.getPopular();
+	}
+	
+	public List<FoodArticleVO> getByKeyWord(String words){
+		return dao.searchKeyWord(words);
+	}
 
 	
 	

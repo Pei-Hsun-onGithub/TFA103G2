@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.foodarticle.model.*"%>
-<%@ page import="com.restaurant.*"%>
+<%@ page import="com.restaurant.model.*"%>
+<%@ page import="java.util.*"%>
 
 <%
 	FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO");
@@ -52,6 +53,7 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.css" />
 
+<%@ include file="/assets/webPageSnippet/cssSnippet_navbar_home_1.jsp" %>
 
 
 <style>
@@ -81,11 +83,24 @@ form.article {
 	height: 151px; /* height:  151px; */
 }
 
+select.myselect{
+	width:160px;
+	border:none;
+
+}
 
 
 p.p1 {
 	margin: 0 auto;
 	font-size: 23px;
+}
+
+input.myDate{
+	border:none;
+	width: 160px;
+	height: 40px;
+	border-radius: 10px;
+
 }
 
 input.title_input {
@@ -149,67 +164,7 @@ button.check_ok {
 
 <body>
 
-	<header class="navbar-area ">
-		<nav class="navbar navbar-expand-lg">
-			
-			<!-- 要用boostrap的格線系統要一定要有div class="container nav-container" -->			
-			<div class="container nav-container">
-				
-				<div class="responsive-mobile-menu">
-					<button class="menu toggle-btn d-block d-lg-none"
-						data-target="#themefie_main_menu" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="icon-left"></span> <span class="icon-right"></span>
-					</button>
-				</div>
-				<div class="logo">
-					<a class="main-logo"
-						href="<%=request.getContextPath()%>/home-1.html"><img
-						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
-				</div>
-				<div class="collapse navbar-collapse" id="themefie_main_menu">
-					<ul class="navbar-nav menu-open">
-						<li class="current-menu-item menu-item-has-children"><a
-							href="home-1.html">訂餐</a>
-							<ul class="sub-menu ps-0">
-								<li><a href="<%=request.getContextPath()%>/shop.html">Shop</a></li>
-								<li><a href="<%=request.getContextPath()%>/menu.html">Menu</a></li>
-								<li><a href="<%=request.getContextPath()%>/cart.html">Cart</a></li>
-								<li><a href="<%=request.getContextPath()%>/checkout.html">Checkout</a></li>
-							</ul></li>
-						<li><a href="<%=request.getContextPath()%>/blog.html">食記</a>
-						</li>
-						<li><a href="<%=request.getContextPath()%>/about.html">ABOUT
-								US</a></li>
-						<li><a href="<%=request.getContextPath()%>/contact.html">CONTACTS</a>
-						</li>
-					</ul>
-				</div>
-				<div class="nav-right-part nav-right-part-mobile">
-					<ul>
-						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
-						</li>
-						<li class="phone-contact d-md-block d-none"><i
-							class="ri-phone-fill float-start"></i> +997 509 153 849</li>
-						<li class="menu-cart"><a
-							href="<%=request.getContextPath()%>/cart.html">CART <span>1</span></a></li>
-						<li>49.50 $</li>
-					</ul>
-				</div>
-				<div class="nav-right-part nav-right-part-desktop">
-					<ul>
-						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
-						</li>
-						<li class="phone-contact"><a href="#">sign in</a></li>
-						<li class="menu-cart"><a href="#">小鈴鐺 <span>4</span></a></li>
-						<li class="menu-cart"><a
-							href="<%=request.getContextPath()%>/cart.html">CART <span>1</span></a></li>
-						<li>49.50 $</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
+	<%@ include file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp" %>
 
 	<div class="main">
 		
@@ -232,22 +187,36 @@ button.check_ok {
 		          </c:forEach>
 	                 </ul>
 	                 </div>
-                  </c:if>
-					
-				
-				
-				
+                  </c:if>																	
 				</div>
+				
+<%
+ 	
+	RestaurantService reSvc = new RestaurantService();
+	List<RestaurantVO> resList = reSvc.getAllRes();
+	pageContext.setAttribute("resList",resList);
+	
+%>				
+<%-- 	<%	out.print(resList.toString());%>		 --%>
+				
+<!-- 				<p class="p1">選擇餐廳</p> -->
+<!-- 				<input class="res_input" name="restaurantId"> -->
+				
 				
 				<!-- 中間 -->
 				<div class="col-md-7">
 					<form class="article" method="post" action="fa.do" name="form1" enctype="multipart/form-data">
-					    
-					    <p class="p1">會員id</p>
-						<input class="res_input" name="userId">
+					    					    
+						<input type="text" name="userId" value="<%=(faVO == null) ? "" : faVO.getUserId()%>">
 						
-						<p class="p1">選擇餐廳</p>
-						<input class="res_input" name="restaurantId">
+						<p class="p1">餐廳</p>
+						<select class="form-select myselect" name="restaurantId">
+							<option >請選擇餐廳</option>
+							<c:forEach  var="resVO" items="${resList}" >							
+							<option value="${resVO.restaurantId }" ${(faVO.restaurantId==resVO.restaurantId)? 'selected':'' }>${resVO.restaurantName}</option>	   
+							</c:forEach>							
+						
+						</select>
 
 						<p class="p1">標題</p>
 						<input class="title_input" type="TEXT" name="articleTitle"
@@ -255,14 +224,12 @@ button.check_ok {
 							value="<%=(faVO == null) ? "" : faVO.getArticleTitle()%>" />
 
 						<p class="p1">發表日期</p>
-						<input name="articleDate" id="f_date1" type="text">
+						<input name="articleDate" id="f_date1" class="myDate" type="text">
 
 						<p class="p1">內容</p>
 
-						<textarea class="editor" name="articleContent">
-			            <%=(faVO == null) ? "" : faVO.getArticleContent()%>
-                        </textarea>
-
+						<textarea class="editor" name="articleContent"><%=(faVO == null) ? "" : faVO.getArticleContent()%></textarea>			            
+                        
 						<input type="hidden" name="sta" size="2" value="1" />
 						 								
 						<div>
@@ -302,6 +269,8 @@ button.check_ok {
 			</div>
 		</div>
 	</div>
+	<%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp" %>
+	
 
 	<script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
@@ -324,7 +293,7 @@ button.check_ok {
     <script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.js"></script>
     <script src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
 	
-	
+	<%@ include file="/assets/webPageSnippet/jsSnippet_navbar_home_3.jsp" %>
 			
 
 <%

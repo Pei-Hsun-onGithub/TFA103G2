@@ -1,6 +1,7 @@
 package com.restaurant.model;
 
 import java.sql.Time;
+import java.util.List;
 
 public class RestaurantService {
 
@@ -118,5 +119,10 @@ public class RestaurantService {
 
 		return "";
 
+	}
+	
+	public List<RestaurantVO> getAllRes(){
+		return this.dao.getAll();										
+		
 	}
 }

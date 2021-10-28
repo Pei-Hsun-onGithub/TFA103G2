@@ -7,11 +7,9 @@ import javax.servlet.*;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
-
 import com.foodarticle.model.*;
 import com.message.model.*;
 import com.picturebase.model.*;
-
 
 @MultipartConfig
 public class FoodArticleServlet extends HttpServlet {
@@ -19,337 +17,414 @@ public class FoodArticleServlet extends HttpServlet {
 		doPost(req, res);
 	}
 
-	public void doPost(HttpServletRequest req, HttpServletResponse res) 
-				throws ServletException, IOException{
-        		
-			req.setCharacterEncoding("UTF-8");
-			String action = req.getParameter("action");/*§ìhtmlªºactionÄİ©Ê¥Î¦r¦êÅÜ¼Æ±µ­È*/
-//			res.setContentType("image/gif");
-//			ServletOutputStream out = res.getOutputStream();
-			
-			
-           /* ·s¼W¤å³¹©M¹Ï¤ù³£¬O¦P¤@­Óformªí³æ,¦P¤@­Órequest,
-            * ¦pªG­n¤À¨â°¦servlet¥i¥H¼g¦p¤Uµ{¦¡,
-            * §â²Ä¤@°¦servlet±µ¦¬¨ìªºreq&res¶Ç¨ì¤U¤@­ÓservletX*/            
-//			req.getRequestDispatcher("PictureBasesServletªºurl").forward(req, res);
-										
-			
-            /*·íuser¦b«eºİ«ö"°e¥X"Áä,°e½Ğ¨D¶i¨Ó,§PÂ_user°eªº­È¦³µL²Å¦X³]©w*/
-			
-			if("getOne_For_Display".equals(action)){//from select_pageFAªº½Ğ¨D
-				List<String> errorMsgs = new LinkedList<String>();
-				req.setAttribute("errorMsgs",errorMsgs);
-			//	System.out.println(action);
-			
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
+		req.setCharacterEncoding("UTF-8");
+		String action = req.getParameter("action");/* æŠ“htmlçš„actionå±¬æ€§ç”¨å­—ä¸²è®Šæ•¸æ¥å€¼ */
+
+		/*
+		 * æ–°å¢æ–‡ç« å’Œåœ–ç‰‡éƒ½æ˜¯åŒä¸€å€‹formè¡¨å–®,åŒä¸€å€‹request, å¦‚æœè¦åˆ†å…©éš»servletå¯ä»¥å¯«å¦‚ä¸‹ç¨‹å¼,
+		 * æŠŠç¬¬ä¸€éš»servletæ¥æ”¶åˆ°çš„req&reså‚³åˆ°ä¸‹ä¸€å€‹servletX
+		 */
+//			req.getRequestDispatcher("PictureBasesServletçš„url").forward(req, res);
+
+		/* ç•¶useråœ¨å‰ç«¯æŒ‰"é€å‡º"éµ,é€è«‹æ±‚é€²ä¾†,åˆ¤æ–·useré€çš„å€¼æœ‰ç„¡ç¬¦åˆè¨­å®š */
+
+		if ("getOne_For_Display".equals(action)) {// from select_pageFAçš„è«‹æ±‚
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+//				System.out.println(action);
+
+			try {
+
+				String str = req.getParameter("articleNo");
+				if (str == null || (str.trim()).length() == 0) {
+					errorMsgs.add("è«‹è¼¸å…¥æ–‡ç« ç·¨è™Ÿ");
+					System.out.println(str);
+				}
+
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher falureView = req.getRequestDispatcher("/article/select_pageFA.jsp");
+					falureView.forward(req, res);
+					return;
+				}
+
+				Integer articleNo = null;
 				try {
-				
-					String str = req.getParameter("articleNo");
-						if(str==null || (str.trim()).length()==0) {
-							errorMsgs.add("½Ğ¿é¤J¤å³¹½s¸¹");
-							System.out.println(str);
-						}
-						
-						if(!errorMsgs.isEmpty()) {
-							RequestDispatcher falureView = req.getRequestDispatcher("/select_pageFA.jsp");
-							falureView.forward(req,res);
-							return;
-						}
-						
-						Integer articleNo = null;
-						try {
-							articleNo = new Integer(str);
-							
-						}catch(Exception e) {
-							errorMsgs.add("¤å³¹½s¸¹®æ¦¡¤£¹ï");
-						}
-						
-						if(!errorMsgs.isEmpty()) {
-							RequestDispatcher falureView = req.getRequestDispatcher("/select_pageFA.jsp");
-							falureView.forward(req,res);
-							return;//µ{¦¡¤¤Â_
-						}
-			      /*±aµÛ¤å³¹pk¶i¸ê®Æ§ä¬Û¹ïÀ³ªº¤å³¹VO*/
-						FoodArticleService faSC = new FoodArticleService();
-						FoodArticleVO faVO = faSC.getOneArticle(articleNo) ;
-				  	  
-						PictureBaseService pbSC = new PictureBaseService();
-						MessageService msgSC = new MessageService ();
-						
-					/*-------------------¬dµL¸ê®Æ--------------------------*/	
-						if(faVO ==null) {
-							errorMsgs.add("¬dµL¸ê®Æ");
-						}						
-						if(!errorMsgs.isEmpty()) {
-							RequestDispatcher falureView = req.getRequestDispatcher("/select_pageFA.jsp");
-							falureView.forward(req,res);
-							return;//µ{¦¡¤¤Â_
-						}
-			/*-------------------§ì«ü©wpkªº¤å³¹,·Ç³Æ°eµ¹«eºİ-----------------*/	
-						
-						/*±aµÛ¤å³¹fk¶i¸ê®Æ§ä¬Û¹ïÀ³ªº¹Ï¤ùVO*/
-						List<PictureBaseVO> list =  pbSC.getPicturesOfAr(articleNo);
-						List<MessageVO> msgList = msgSC.getMsgsOfAr(articleNo);
-						HttpSession session = req.getSession();
-						
-						session.setAttribute("list", list);
-						req.setAttribute("faVO", faVO);
-						req.setAttribute("msgList", msgList);
-						System.out.println(msgList);
-						RequestDispatcher successView = req.getRequestDispatcher("/article/oneFA_allMsg.jsp");//Âà¥æµ¹oneFA_allMsg.jsp
-						successView.forward(req, res);
-		  
-			/*-------------------------¨ä¥L¿ù»~-----------------------------*/			
-				}catch(Exception e) {
-					System.out.println(1);
-					e.printStackTrace();
-					errorMsgs.add("µLªk¨ú±o¸ê®Æ"+e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/article/listallFA.jsp");
-					failureView.forward(req, res);
-				 }
-			
+					articleNo = new Integer(str);
+
+				} catch (Exception e) {
+					errorMsgs.add("æ–‡ç« ç·¨è™Ÿæ ¼å¼ä¸å°");
+				}
+
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher falureView = req.getRequestDispatcher("/select_pageFA.jsp");
+					falureView.forward(req, res);
+					return;// ç¨‹å¼ä¸­æ–·
+				}
+				/* å¸¶è‘—æ–‡ç« pké€²è³‡æ–™åº«æ‰¾ç›¸å°æ‡‰çš„æ–‡ç« VO */
+				FoodArticleService faSC = new FoodArticleService();
+				FoodArticleVO faVO = faSC.getOneArticle(articleNo);
+
+				PictureBaseService pbSC = new PictureBaseService();
+				MessageService msgSC = new MessageService();
+
+				/*-------------------æŸ¥ç„¡è³‡æ–™--------------------------*/
+				if (faVO == null) {
+					errorMsgs.add("æŸ¥ç„¡è³‡æ–™");
+				}
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher falureView = req.getRequestDispatcher("/select_pageFA.jsp");
+					falureView.forward(req, res);
+					return;// ç¨‹å¼ä¸­æ–·
+				}
+				/*-------------------æŠ“æŒ‡å®špkçš„æ–‡ç« ,æº–å‚™é€çµ¦å‰ç«¯-----------------*/
+
+				/* å¸¶è‘—æ–‡ç« fké€²è³‡æ–™åº«æ‰¾ç›¸å°æ‡‰çš„åœ–ç‰‡VO */
+				List<PictureBaseVO> list = pbSC.getPicturesOfAr(articleNo);
+				List<MessageVO> msgList = msgSC.getMsgsOfAr(articleNo);
+				HttpSession session = req.getSession();
+
+				session.setAttribute("list", list);
+				req.setAttribute("faVO", faVO);
+				req.setAttribute("msgList", msgList);
+//						System.out.println(msgList);
+				RequestDispatcher successView = req.getRequestDispatcher("/article/oneFA_allMsg.jsp");// è½‰äº¤çµ¦oneFA_allMsg.jsp
+				successView.forward(req, res);
+
+				/*-------------------------å…¶ä»–éŒ¯èª¤-----------------------------*/
+			} catch (Exception e) {
+				System.out.println(1);
+				e.printStackTrace();
+				errorMsgs.add("ç„¡æ³•å–å¾—è³‡æ–™" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/article/listallFA.jsp");
+				failureView.forward(req, res);
 			}
-			
-			if("getOne_For_Update".equals(action)) {//from listallFAªº½Ğ¨D
-				List<String> errorMsgs = new LinkedList<String>();
-				req.setAttribute("errorMsgs", errorMsgs);
-				//System.out.println("µ{¦¡¶]¨ì³o1");
-				try {
-					Integer articleNo = new Integer(req.getParameter("articleNo"));
-					
-					FoodArticleService faSvc = new FoodArticleService();
-					FoodArticleVO faVO = faSvc.getOneArticle(articleNo);
-					//System.out.println("µ{¦¡¶]¨ì³o2");
-					
-					req.setAttribute("faVO",faVO);
-					String url = "/updateFA.jsp";
-					RequestDispatcher successView = req.getRequestDispatcher(url);//Âà¥æupdateFA.jsp
-					successView.forward(req, res);
-					//System.out.println("µ{¦¡¶]¨ì³o3");
-	
-					/*-------------¨ä¥L¿ù»~³B²z----------*/				
-				}catch(Exception e ) {
-					errorMsgs.add("µLªk¨ú±o­n­×§ïªº¸ê®Æ:"+e.getMessage());
-					RequestDispatcher failure = req.getRequestDispatcher("/listallFA.jsp");
-					failure.forward(req,res);
-					//System.out.println("µ{¦¡¶]¨ì³o4");
-				 }
+
+		}
+
+		if ("getOne_For_Update".equals(action)) {// from listallFAçš„è«‹æ±‚
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			// System.out.println("ç¨‹å¼è·‘åˆ°é€™1");
+			try {
+				Integer articleNo = new Integer(req.getParameter("articleNo"));
+
+				// æŠ“æŒ‡å®šPKçš„æ–‡ç« 
+				FoodArticleService faSvc = new FoodArticleService();
+				FoodArticleVO oldfaVO = faSvc.getOneArticle(articleNo);
+
+				// æŠ“æŒ‡å®šFKåœ–ç‰‡
+				PictureBaseService pbSvc = new PictureBaseService();
+				List<PictureBaseVO> list = pbSvc.getPicturesOfAr(articleNo);
+
+				HttpSession session = req.getSession();
+
+				req.setAttribute("faVO", oldfaVO);
+
+				session.setAttribute("list", list);
+
+				String url = "/article/updateFA_pic.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// è½‰äº¤updateFA_pic.jsp
+				successView.forward(req, res);
+				// System.out.println("ç¨‹å¼è·‘åˆ°é€™3");
+
+				/*-------------å…¶ä»–éŒ¯èª¤è™•ç†----------*/
+			} catch (Exception e) {
+				errorMsgs.add("ç„¡æ³•å–å¾—è¦ä¿®æ”¹çš„è³‡æ–™:" + e.getMessage());
+				RequestDispatcher failure = req.getRequestDispatcher("/listallFA.jsp");
+				failure.forward(req, res);
+				// System.out.println("ç¨‹å¼è·‘åˆ°é€™4");
 			}
-			
-			if("update".equals(action)) {
-				List<String> errorMsgs = new LinkedList<String>();
-				req.setAttribute("errorMsgs", errorMsgs);
-//System.out.println("update");
-				
-				/*ÀË¬d«eºİ¿é¤Jªº¸ê®Æ¦³¨S¦³²Å¦X³W©w*/	
-				try {
-					Integer articleNo = new Integer(req.getParameter("articleNo").trim());
-//			System.out.println("1112"+articleNo);
-					String rule = "^[1-9]{5}$";
-					
-					Integer userId =new Integer((req.getParameter("userId").trim()));
-			//System.out.println("hello"+userId);
+		}
+
+		if ("update".equals(action)) {
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+//System.out.println(action);
+
+			/* æª¢æŸ¥å‰ç«¯è¼¸å…¥çš„è³‡æ–™æœ‰æ²’æœ‰ç¬¦åˆè¦å®š */
+			try {
+				Integer articleNo = new Integer(req.getParameter("articleNo").trim());
+				//System.out.println("articleNo=" + articleNo);
+				System.out.println("1112"+articleNo);
+				String rule = "^[0-9]{4}$";
+
+				Integer userId = new Integer((req.getParameter("userId").trim()));
+				// System.out.println("hello"+userId);
 //					Integer userIdCheck= null;
 //					if(userId == null || (userId.length()) ==0 ) {
-//						errorMsgs.add("·|­ûid: ½Ğ¤ÅªÅ¥Õ");
+//						errorMsgs.add("æœƒå“¡id: è«‹å‹¿ç©ºç™½");
 //					}else if(!userId.matches(rule)){
-//						errorMsgs.add("·|­ûid¥u¯à¬O4­Ó¼Æ¦r");
+//						errorMsgs.add("æœƒå“¡idåªèƒ½æ˜¯4å€‹æ•¸å­—");
 //					}else {
 //					    userIdCheck =new Integer(userId);
 //					}				
 //			System.out.println(userId);
-					
-					String restaurantId = (req.getParameter("restaurantId").trim());
-//			System.out.println(restaurantId);
-					Integer resIdCheck = null;
-					if(restaurantId == null || (restaurantId.length()) ==0 ) {
-						errorMsgs.add("À\ÆUid: ½Ğ¤ÅªÅ¥Õ");
-					}else if(!restaurantId.matches(rule)){
-						errorMsgs.add("À\ÆUid¥u¯à¬O5­Ó¼Æ¦r");
-					}else {
-						resIdCheck = new Integer(restaurantId);
-					}
-					
-					String articleTitle = (req.getParameter("articleTitle")).trim();
-					if(articleTitle == null || (articleTitle.length()) ==0 ) {
-						errorMsgs.add("¼ĞÃD: ½Ğ¤ÅªÅ¥Õ");
-					}
-					
-					java.sql.Date articleDate = null;
-					try {
-						articleDate = java.sql.Date.valueOf((req.getParameter("articleDate")).trim());
-					}catch(IllegalArgumentException e ) {
-						articleDate = new java.sql.Date(System.currentTimeMillis());
-						errorMsgs.add("½Ğ¿ï¾Ü¤é´Á");
-					}
-					
-					String articleContent = req.getParameter("articleContent");
-					if(articleContent == null || (articleContent.trim().length()) ==0 ) {
-						errorMsgs.add("¤º®e: ½Ğ¤ÅªÅ¥Õ");
-					}
-					
-					Integer sta = new Integer(req.getParameter("sta"));
-					
-					
-					FoodArticleVO faVO = new FoodArticleVO();
-					faVO.setArticleNo(articleNo);
-					faVO.setUserId(userId);
-					faVO.setRestaurantId(resIdCheck);
-					faVO.setArticleTitle(articleTitle);
-					faVO.setArticleDate(articleDate);
-					faVO.setArticleContent(articleContent);
-					faVO.setSta(sta);
-					
-//System.out.println(articleNo);
-//System.out.println(userId);
-//System.out.println(resIdCheck);
-//System.out.println(articleTitle);
-//System.out.println(articleDate);
-//System.out.println(articleContent);
-//System.out.println(sta);				
-					
-/*¦pªGuser§ó·s§¹¸ê®Æ«ö°e¥X,¦³ÀË¬d¨ì¿ù»~,·|°h¦^§ó·s­¶­±,¦ı¶ñ¹L¥B¥¿½Tªº¸ê®Æ·|³Q«O¯d¦b­¶­±¤W*/				
-					
-					if(!errorMsgs.isEmpty()) {
-						req.setAttribute("faVO", faVO);
-						RequestDispatcher failure = req.getRequestDispatcher("/updateFA.jsp");
-						failure.forward(req,res);
-						return;
-					}
-	/*¶}©l­×§ï¸ê®Æ*/			
-					FoodArticleService faSVC = new FoodArticleService();
-					faVO = faSVC.updateFoodArticle(articleNo, userId, resIdCheck, articleTitle, articleDate, articleContent, sta);
-	/*­×§ï§¹¦¨·Ç³ÆÂà¥æ*/	
-					
-					req.setAttribute("faVO",  faVO);
-					RequestDispatcher successView = req.getRequestDispatcher("/listoneFA.jsp");
-					successView.forward(req,res);
-					
-				}catch(Exception e) {
-					errorMsgs.add("­×§ï¸ê®Æ¥¢±Ñ:"+e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/updateFA.jsp");
-					failureView.forward(req,res);
+
+				String restaurantId = (req.getParameter("restaurantId").trim());
+			
+				Integer resIdCheck = null;
+				if (restaurantId == null || (restaurantId.length()) == 0) {
+					errorMsgs.add("é¤å»³id: è«‹å‹¿ç©ºç™½");
+				} else if (!restaurantId.matches(rule)) {
+					errorMsgs.add("é¤å»³idåªèƒ½æ˜¯4å€‹æ•¸å­—");
+				} else {
+					resIdCheck = new Integer(restaurantId);
 				}
+
+				String articleTitle = (req.getParameter("articleTitle")).trim();
+				if (articleTitle == null || (articleTitle.length()) == 0) {
+					errorMsgs.add("æ¨™é¡Œ: è«‹å‹¿ç©ºç™½");
+				}
+
+				java.sql.Date articleDate = null;
+				try {
+					articleDate = java.sql.Date.valueOf((req.getParameter("articleDate")).trim());
+				} catch (IllegalArgumentException e) {
+					articleDate = new java.sql.Date(System.currentTimeMillis());
+					errorMsgs.add("è«‹é¸æ“‡æ—¥æœŸ");
+				}
+
+				String articleContent = req.getParameter("articleContent");
+				if (articleContent == null || (articleContent.trim().length()) == 0) {
+					errorMsgs.add("å…§å®¹: è«‹å‹¿ç©ºç™½");
+				}
+
+				Integer sta = new Integer(req.getParameter("sta"));
+
+				FoodArticleService foodArticleSvc = new FoodArticleService();
+
+				FoodArticleVO faVO = foodArticleSvc.updateFoodArticle(articleNo, userId, resIdCheck, articleTitle,
+						articleDate, articleContent, sta);
+				// System.out.println("faVO"+faVO);
+
+				/*=========== æ›´æ–°å¤šç­†åœ–ç‰‡ ==============*/
+
+				PictureBaseService picBaseSvc = new PictureBaseService();
+				List<PictureBaseVO> oldPicBases = picBaseSvc.getPicturesOfAr(articleNo);
+				
+				int oldPicBasesSize = oldPicBases.size();
+
+				PictureBaseVO pbVO = null;
+
+				int pictureObtainedCount = 0;
+				int index = 0;
+				byte[] pic = null;
+				Collection<Part> parts = req.getParts();
+
+				/*
+				 * getPartsæœƒæŠŠformè¡¨å–®è£¡ä¸ç®¡æ˜¯æ–‡å­—é‚„æ˜¯æª”æ¡ˆéƒ½æŠ“é€²ä¾†, æ‰€ä»¥å…ˆç”¨getNameå–å…ƒç´ çš„nameçš„å€¼, å»æ¯”å°ç¯©æ‰æª”æ¡ˆä»¥å¤–çš„æ–‡å­—
+				 */
+
+				for (Part part : parts) {
+					String partName = part.getName();
+
+					/* è¦åœ¨è¿´åœˆå…§å‰µå»ºå¯¦é«”,æ¯è·‘ä¸€æ¬¡è¿´åœˆå°±æ˜¯æ‰æœƒæ˜¯æ–°çš„vo */
+
+					if (partName.equals("imgfile")) {
+
+						if (part.getSize() > 0) {
+							// æˆåŠŸæŠ“åˆ°åœ–ç‰‡å°±åŠ ä¸€
+							pictureObtainedCount++;
+							
+							InputStream imgIn = part.getInputStream();
+							pic = new byte[imgIn.available()];
+							imgIn.read(pic);
+							
+							// åŸæœ¬çš„åœ–ç‰‡æ•¸é‡æ¯”ç²å¾—çš„æ•¸é‡å¤šæˆ–ç­‰æ–¼å°±åšã€Œæ›´æ–°ã€
+							if (oldPicBasesSize >= pictureObtainedCount) {
+
+								pbVO = oldPicBases.get(index);
+								pbVO.setPic(pic);
+								picBaseSvc.updatePictureBase(pbVO.getPicNo(), pic);
+								index++;
+								
+								// åŸæœ¬çš„åœ–ç‰‡æ•¸é‡æ¯”ç²å¾—çš„æ•¸é‡å°‘å°±åšã€Œæ–°å¢ã€
+							} else if (oldPicBasesSize < pictureObtainedCount) {
+								PictureBaseVO picBasVO = picBaseSvc.addPictureBase(articleNo, pic);
+								oldPicBases.add(index, picBasVO);
+								index++;
+							}
+
+						} else {
+							errorMsgs.add("è«‹æ–°å¢æœ€å°‘ä¸€å¼µåœ–ç‰‡");
+						}
+					}
+				}
+
+				// ç•¶åŸæœ¬çš„åœ–ç‰‡æ•¸é‡å·²ç¶“å¤šéç²å¾—çš„åœ–ç‰‡æ•¸é‡ï¼Œå°±æŠŠå¤šé¤˜çš„ã€Œåˆªé™¤ã€
+				if (oldPicBases.size() > pictureObtainedCount) {
+
+					int oldSize = oldPicBases.size();
+					// ç²å¾—ä¸€å€‹ç¸®å°çš„PicBases
+					List<PictureBaseVO> smallPicBases = oldPicBases.subList(0, index);
+					
+					// é€ä¸€åˆªé™¤è³‡æ–™åº«ä¸­æ²’æœ‰æ›´æ–°çš„èˆŠåœ–ç‰‡
+					for (int deleteIndex = index; deleteIndex < oldSize; deleteIndex++) {
+						
+						PictureBaseVO deletingPicBasVO = oldPicBases.get(deleteIndex);
+						picBaseSvc.deletePictureBase(deletingPicBasVO.getPicNo());
+					}
+					
+					oldPicBases = smallPicBases;
+				}
+
+				
+				
+
+				/* å¦‚æœuseræ›´æ–°å®Œè³‡æ–™æŒ‰é€å‡º,æœ‰æª¢æŸ¥åˆ°éŒ¯èª¤,æœƒé€€å›æ›´æ–°é é¢,ä½†å¡«éä¸”æ­£ç¢ºçš„è³‡æ–™æœƒè¢«ä¿ç•™åœ¨é é¢ä¸Š */
+
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("faVO", faVO);
+
+					RequestDispatcher failure = req.getRequestDispatcher("/article/updateFA_pic.jsp");
+					failure.forward(req, res);
+					return;
+				}
+				/* é–‹å§‹ä¿®æ”¹è³‡æ–™ */
+
+				/* ä¿®æ”¹å®Œæˆæº–å‚™è½‰äº¤ */
+
+				req.setAttribute("faVO", faVO);
+				RequestDispatcher successView = req.getRequestDispatcher("/article/allFA_member.jsp");
+				successView.forward(req, res);
+
+			} catch (Exception e) {
+				errorMsgs.add("ä¿®æ”¹è³‡æ–™å¤±æ•—:" + e.getMessage());
+				e.printStackTrace();
+				System.out.println("æˆ‘åœ¨é€™");
+				RequestDispatcher failureView = req.getRequestDispatcher("/article/allFA_member.jsp");
+				failureView.forward(req, res);
 			}
-/*·s¼W¸ê®Æªº½Ğ¨D*/			
-			if("insert".equals(action)) {
-				System.out.println("insert");
+		}
+
+		
+		/* æ–°å¢è³‡æ–™çš„è«‹æ±‚ */
+		if ("insert".equals(action)) {
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				String userId = (req.getParameter("userId")).trim();
+				String rule1 = "^[0-9]{8}$";
+				Integer userIdCheck = null;
+
+				if (userId == null || (userId.length()) == 0) {
+					errorMsgs.add("æœƒå“¡id: è«‹å‹¿ç©ºç™½");
+				} else if (!userId.matches(rule1)) {
+					errorMsgs.add("æœƒå“¡idåªèƒ½æ˜¯8å€‹æ•¸å­—");
+				} else {
+					userIdCheck = new Integer(userId);
+				}
+				String rule2 = "^[0-9]{4}$";
+				String restaurantId = (req.getParameter("restaurantId").trim());
+				Integer resIdCheck = null;
+				if (restaurantId == null || (restaurantId.length()) == 0) {
+					errorMsgs.add("é¤å»³id: è«‹å‹¿ç©ºç™½");
+
+				} else if (!restaurantId.matches(rule2)) {
+					errorMsgs.add("é¤å»³idåªèƒ½æ˜¯4å€‹æ•¸å­—");
+				} else {
+					resIdCheck = new Integer(restaurantId);
+				}
+
+				String articleTitle = (req.getParameter("articleTitle")).trim();
+				if (articleTitle == null || (articleTitle.length()) == 0) {
+					errorMsgs.add("æ¨™é¡Œ: è«‹å‹¿ç©ºç™½");
+				}
+
+				java.sql.Date articleDate = null;
+				try {
+					articleDate = java.sql.Date.valueOf((req.getParameter("articleDate")).trim());
+				} catch (IllegalArgumentException e) {
+					articleDate = new java.sql.Date(System.currentTimeMillis());
+					errorMsgs.add("è«‹é¸æ“‡æ—¥æœŸ");
+				}
+
+				String articleContent = req.getParameter("articleContent");
+				if (articleContent == null || (articleContent.trim().length()) == 0) {
+					errorMsgs.add("å…§å®¹: è«‹å‹¿ç©ºç™½");
+				}
+
+				Integer sta = new Integer(req.getParameter("sta"));
+//					System.out.println(1);
+				FoodArticleVO faVO = new FoodArticleVO();
+				faVO.setUserId(userIdCheck);
+				faVO.setRestaurantId(resIdCheck);
+				faVO.setArticleTitle(articleTitle);
+				faVO.setArticleDate(articleDate);
+				faVO.setArticleContent(articleContent);
+				faVO.setSta(sta);
+
+				/* ä¸Šå‚³åœ–ç‰‡ */
+
+				List<PictureBaseVO> list = new ArrayList<PictureBaseVO>();
+				PictureBaseVO pbVO = null;
+
+				byte[] pic = null;
+				Collection<Part> parts = req.getParts();
+
+				/*
+				 * getPartsæœƒæŠŠformè¡¨å–®è£¡ä¸ç®¡æ˜¯æ–‡å­—é‚„æ˜¯æª”æ¡ˆéƒ½æŠ“é€²ä¾†, æ‰€ä»¥å…ˆç”¨getNameå–å…ƒç´ çš„nameçš„å€¼, å»æ¯”å°ç¯©æ‰æª”æ¡ˆä»¥å¤–çš„æ–‡å­—
+				 */
+
+				for (Part part : parts) {
+					String partName = part.getName();
+
+					/* è¦åœ¨è¿´åœˆå…§å‰µå»ºå¯¦é«”,æ¯è·‘ä¸€æ¬¡è¿´åœˆå°±æ˜¯æ‰æœƒæ˜¯æ–°çš„vo */
+					pbVO = new PictureBaseVO();
+					if (partName.equals("imgfile")) {
+						if (part.getSize() > 0) {
+							InputStream imgIn = part.getInputStream();
+							pic = new byte[imgIn.available()];
+							imgIn.read(pic);
+							pbVO.setPic(pic);
+							list.add(pbVO);
+							System.out.println(pbVO);
+						} else {
+							errorMsgs.add("è«‹æ–°å¢æœ€å°‘ä¸€å¼µåœ–ç‰‡");
+						}
+					}
+
+				}
+				if (!errorMsgs.isEmpty()) {
+					HttpSession session = req.getSession();
+					req.setAttribute("faVO", faVO);
+					// req.setAttribute("pbVO", pbVO);
+					session.setAttribute("list", list);
+
+					RequestDispatcher failureView = req.getRequestDispatcher("/article/addFA.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+
+				FoodArticleService faSvc = new FoodArticleService();
+
+				/* æ–‡ç« å’Œåœ–ç‰‡åŒæ™‚è¦æ–°å¢,æ‰€ä»¥è¦åŒæ™‚é€æ–‡ç« VO åœ–ç‰‡listçµ¦è³‡æ–™åº«å–æ–‡ç« pkçµ¦åœ–ç‰‡ */
+				faSvc.addtWithPic(faVO, list);
+				RequestDispatcher successView = req.getRequestDispatcher("/article/allFA_member.jsp");
+				successView.forward(req, res);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsgs.add("æ–°å¢è³‡æ–™å¤±æ•—" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/article/addFA.jsp");
+				failureView.forward(req, res);
+			}
+		}
+			if("searchArticle".equals(action)) {
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
 				
 				try {
-			String userId =(req.getParameter("userId")).trim();
-					String rule1 = "^[0-9]{8}$";
-					Integer userIdCheck= null;
-//System.out.println("userId");
-//System.out.println(userId);
-					if(userId == null || (userId.length()) ==0 ) {
-						errorMsgs.add("·|­ûid: ½Ğ¤ÅªÅ¥Õ");
-					}else if(!userId.matches(rule1)){
-						errorMsgs.add("·|­ûid¥u¯à¬O8­Ó¼Æ¦r");
-					}else {
-					    userIdCheck =new Integer(userId);
-					}
-					String rule2 = "^[0-9]{4}$";
-			        String restaurantId = (req.getParameter("restaurantId").trim());
-					Integer resIdCheck = null;
-					if(restaurantId == null || (restaurantId.length()) ==0 ) {
-						errorMsgs.add("À\ÆUid: ½Ğ¤ÅªÅ¥Õ");
-//System.out.println(restaurantId);
-					}else if(!restaurantId.matches(rule2)){
-						errorMsgs.add("À\ÆUid¥u¯à¬O4­Ó¼Æ¦r");
-					}else {
-			resIdCheck = new Integer(restaurantId);
-					}
 					
-					String articleTitle = (req.getParameter("articleTitle")).trim();
-					if(articleTitle == null || (articleTitle.length()) ==0 ) {
-						errorMsgs.add("¼ĞÃD: ½Ğ¤ÅªÅ¥Õ");
-					}
+				}catch(Exception e ) {
 					
-					java.sql.Date articleDate = null;
-					try {
-						articleDate = java.sql.Date.valueOf((req.getParameter("articleDate")).trim());
-					}catch(IllegalArgumentException e ) {
-						articleDate = new java.sql.Date(System.currentTimeMillis());
-						errorMsgs.add("½Ğ¿ï¾Ü¤é´Á");
-					}
-					
-					String articleContent = req.getParameter("articleContent");
-					if(articleContent == null || (articleContent.trim().length()) ==0 ) {
-						errorMsgs.add("¤º®e: ½Ğ¤ÅªÅ¥Õ");
-					}
-					
-					Integer sta = new Integer(req.getParameter("sta"));
-					System.out.println(1);
-					FoodArticleVO faVO = new FoodArticleVO();
-					faVO.setUserId(userIdCheck);
-					faVO.setRestaurantId(resIdCheck);
-					faVO.setArticleTitle(articleTitle);
-					faVO.setArticleDate(articleDate);
-					faVO.setArticleContent(articleContent);
-					faVO.setSta(sta);
-					
-					
-					/*¤W¶Ç¹Ï¤ù*/						
-					
-					List<PictureBaseVO> list = new ArrayList<PictureBaseVO>();
-					PictureBaseVO pbVO = null;					
-					
-					byte[] pic=null;
-					Collection<Part> parts = req.getParts();
-				
-				/*getParts·|§âformªí³æ¸Ì¤£ºŞ¬O¤å¦rÁÙ¬OÀÉ®×³£§ì¶i¨Ó,
-				 * ©Ò¥H¥ı¥ÎgetName¨ú¤¸¯Àªºnameªº­È,
-				 * ¥h¤ñ¹ï¿z±¼ÀÉ®×¥H¥~ªº¤å¦r*/			
-					
-					for(Part part : parts) {
-						String partName = part.getName();
-						
-				/*­n¦b°j°é¤º³Ğ«Ø¹êÅé,¨C¶]¤@¦¸°j°é´N¬O¤~·|¬O·sªºvo	*/	
-						pbVO = new PictureBaseVO();
-						if(partName.equals("imgfile")) {
-							if(part.getSize()>0) {
-								InputStream imgIn = part.getInputStream();
-								pic = new byte[imgIn.available()];
-								imgIn.read(pic);
-								pbVO.setPic(pic);
-								list.add(pbVO);
-								System.out.println(pbVO);
-								}else {
-									errorMsgs.add("½Ğ·s¼W³Ì¤Ö¤@±i¹Ï¤ù");
-								}
-						}
-			
-					}																			
-					if(!errorMsgs.isEmpty()) {
-					HttpSession session = req.getSession();
-					req.setAttribute("faVO", faVO);
-			//		req.setAttribute("pbVO", pbVO);
-					session.setAttribute("list", list);
-					
-					RequestDispatcher failureView = req.getRequestDispatcher("/article/addFA.jsp");
-					failureView.forward(req, res);
-					return;
-					}
-					
-					FoodArticleService faSvc = new FoodArticleService();					
-
-					/*¤å³¹©M¹Ï¤ù¦P®É­n·s¼W,©Ò¥H­n¦P®É°e¤å³¹VO ¹Ï¤ùlistµ¹¸ê®Æ®w¨ú¤å³¹pkµ¹¹Ï¤ù*/	
-					faSvc.addtWithPic(faVO, list);															
-					RequestDispatcher successView = req.getRequestDispatcher("/article/listOneFA.jsp");
-					successView.forward(req,res);														
-					
-				}catch(Exception e){	
-					e.printStackTrace();
-					errorMsgs.add("·s¼W¸ê®Æ¥¢±Ñ"+e.getMessage());					
-					RequestDispatcher failureView = req.getRequestDispatcher("/article/addFA.jsp");
-					failureView.forward(req, res);
 				}
+				
 			}
-			
-			
-			
-			
 //			if("delete".equals(action)) {
 //				List<String> errorMsgs = new LinkedList<String>();
 //				req.setAttribute("errorMsgs",errorMsgs );
@@ -364,7 +439,7 @@ public class FoodArticleServlet extends HttpServlet {
 //					RequestDispatcher successView = req.getRequestDispatcher("/listallFA.jsp");
 //					successView.forward(req,res);
 //				}catch(Exception e) {
-//					errorMsgs.add("¸ê®Æ§R°£¥¢±Ñ"+e.getMessage());
+//					errorMsgs.add("è³‡æ–™åˆªé™¤å¤±æ•—"+e.getMessage());
 //					RequestDispatcher failureView = req.getRequestDispatcher("/listallFA.jsp");
 //					failureView.forward(req,res);
 //					

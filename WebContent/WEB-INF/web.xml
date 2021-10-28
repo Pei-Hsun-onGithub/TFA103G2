@@ -4,8 +4,9 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	version="3.0">
 	<display-name>TFA103G2</display-name>
+
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>/login/Login-login.jsp</welcome-file>
 		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 		<welcome-file>default.html</welcome-file>
@@ -33,7 +34,7 @@
 		<param-value>123456</param-value>
 	</context-param>
 
-	<!-- 葉力德 -->
+<!-- 力德 -->
 	<servlet>
 		<servlet-name>AddressServlet</servlet-name>
 		<servlet-class>com.address.controller.AddressServlet</servlet-class>
@@ -54,9 +55,7 @@
 		<url-pattern>/login/memberinfo.do</url-pattern>
 	</servlet-mapping>
 
-
-
-	<!-- 周沛勳 -->
+<!-- 沛勳	 -->
 	<servlet>
 		<servlet-name>MealServlet</servlet-name>
 		<servlet-class>com.meal.controller.MealServlet</servlet-class>
@@ -76,8 +75,6 @@
 		<servlet-name>PhotoServlet</servlet-name>
 		<url-pattern>/meal/photoServlet</url-pattern>
 	</servlet-mapping>
-
-
 
 
 	<servlet>
@@ -100,7 +97,57 @@
 		<url-pattern>/restaurantstyle/restaurantstyle.do</url-pattern>
 	</servlet-mapping>
 
-	<!-- 黃楚鈞 -->
+
+	<servlet>
+		<servlet-name>MonsterServlet</servlet-name>
+		<servlet-class>com.monsterbook.controller.MonsterServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MonsterServlet</servlet-name>
+		<url-pattern>/monsterbook/MonsterServlet.do</url-pattern>
+	</servlet-mapping>
+
+<!--
+	<error-page>
+        <error-code>
+            400
+        </error-code>
+        <location>
+            /pei_pages/ErrorPage.jsp
+        </location>
+    </error-page>
+
+    <error-page>
+        <error-code>
+            404
+        </error-code>
+        <location>
+            /pei_pages/ErrorPage.jsp
+        </location>
+    </error-page>
+
+    <error-page>
+        <error-code>
+            500
+        </error-code>
+        <location>
+            /pei_pages/ErrorPage.jsp
+        </location>
+    </error-page>
+
+    <error-page>
+        <exception-type>
+            javax.servlet.ServletException
+        </exception-type>
+        <location>
+            /pei_pages/ErrorPage.jsp
+        </location>
+    </error-page>
+
+-->
+
+<!-- 楚鈞 -->
 	<servlet>
 		<servlet-name>AchieveProgressServlet</servlet-name>
 		<servlet-class>com.achieveprogress.controller.AchieveProgressServlet</servlet-class>
@@ -109,6 +156,7 @@
 		<servlet-name>AchieveProgressServlet</servlet-name>
 		<url-pattern>/Gary_pages/achieveprogress.do</url-pattern>
 	</servlet-mapping>
+
 
 	<servlet>
 		<servlet-name>MemberPic</servlet-name>
@@ -130,7 +178,10 @@
 		<url-pattern>/memberinfo/CardServlet.do</url-pattern>
 	</servlet-mapping>
 
-	<!-- 鄭伊芸 -->
+
+
+<!-- 伊芸 -->
+
 	<servlet>
 		<servlet-name>FoodArticleServlet</servlet-name>
 		<servlet-class>com.foodarticle.controller.FoodArticleServlet</servlet-class>
@@ -141,7 +192,72 @@
 		<url-pattern>/article/fa.do</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>MessageServlet</servlet-name>
+		<servlet-class>com.message.controller.MessageServlet</servlet-class>
+	</servlet>
 
+	<servlet-mapping>
+		<servlet-name>MessageServlet</servlet-name>
+		<url-pattern>/article/msg.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ImageUtilServlet</servlet-name>
+		<servlet-class>com.picturebases.controller.ImageUtilServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ImageUtilServlet</servlet-name>
+		<url-pattern>/article/pic.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>MealImageUtil</servlet-name>
+		<servlet-class>com.picturebases.controller.MealImageUtil</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MealImageUtil</servlet-name>
+		<url-pattern>/article/mealpic.do</url-pattern>
+	</servlet-mapping>
+
+
+<!-- 以下為Filter的註冊 -->
+
+<!-- 以下為SetCharacterEncodingFilter的註冊-->
+    <!--【以後不用再撰寫 req.setCharacterEncoding("UTF-8"); 這行程式碼於程式中了】-->
+    <!-- Example filter to set character encoding on each request -->
+    <!-- Example filter mapping to apply the "SetCharacterEncodingFilter" filter to *all* requests processed by this web application -->
+	<filter>
+		<filter-name>setCharacterEncoding</filter-name>
+		<filter-class>filters.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>setCharacterEncoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+
+  <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>filters.LoginFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern></url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+    <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
 
 
 </web-app>

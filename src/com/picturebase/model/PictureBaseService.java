@@ -21,16 +21,26 @@ public class PictureBaseService {
 	}
 	
 	public PictureBaseVO updatePictureBase(Integer picNo, byte[]  pic) {
-		PictureBaseVO picVO = new PictureBaseVO();
 		
-		picVO.setPicNo(picNo);
+		PictureBaseVO picVO = this.dao.findOnePicByPK(picNo);
+		
 		picVO.setPic(pic);
-		
+		this.dao.update(picVO);
 		return picVO;
 	}
 	
+	public List<PictureBaseVO> updatePictureBaseByArticleNo(Integer articleNo, List<PictureBaseVO> pictureBases) {
+		
+		for(PictureBaseVO picBase : pictureBases) {
+			Integer picNo = picBase.getPicNo();
+			updatePictureBase(picNo, picBase.getPic());
+		}
+		
+		return null;
+	}
+	
 	public void deletePictureBase(Integer picNo) {
-		dao.delete(picNo);
+		this.dao.delete(picNo);
 	}
 	
 	public  List<PictureBaseVO> getPicturesOfAr(Integer articleNo) {
@@ -39,6 +49,10 @@ public class PictureBaseService {
 	
 	public List<PictureBaseVO> getall(){
 		return dao.getall();
+	}
+	
+	public PictureBaseVO OnePicOfAr(Integer articleNo) {		
+		return dao.findOnePic(articleNo);		
 	}
 	
 	

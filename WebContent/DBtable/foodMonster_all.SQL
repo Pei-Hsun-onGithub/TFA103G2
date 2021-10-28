@@ -42,6 +42,11 @@ INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic
 VALUES (10, '中中怪', '訂單加成', '我是圖片');
 INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
 VALUES (20, '大大怪', '訂單加成', '我是圖片');
+INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
+VALUES (1, '小小獸', '偏好食記', '我是圖片');
+INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
+VALUES (1, '小小鬼', '訂餐最愛', '我是圖片');
+
 
 
 # 等級經驗
@@ -104,9 +109,9 @@ CREATE TABLE MemberInfo (
 ) AUTO_INCREMENT = 20210001;
 
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('EdwardLDawkins@teleworm.us', 'Qu4GNM4Y', '謝依冰', '女', '1966-12-27', '0921562069', '這是大頭貼', '2000-11-26', 20, 100, 1001, '小之', 1, 20, 4);
+VALUES ('1qaz@y.com', '1qaz@WSX', '謝依冰', '女', '1966-12-27', '0921562069', '這是大頭貼', '2000-11-26', 20, 100, 1001, '小之', 1, 20, 1);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('JohnEDay@dayrep.com', 'MgD8QpXB', '陳佳燕', '女', '1992-10-16', '0987459122', '這是大頭貼', '2019-09-24', 1000, 20, 1002, '南風', 2, 100, 4);
+VALUES ('2wsx@y.com', '1qaz@WSX', '陳佳燕', '女', '1992-10-16', '0987459122', '這是大頭貼', '2019-09-24', 1000, 20, 1002, '南風', 2, 100, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
 VALUES ('SteveMJackson@teleworm.us', 'PR3W9q2f', '王宜君', '女', '2006-01-12', '0921618067', '這是大頭貼', '2001-10-26', 20, 100, 1001, '雅亦', 1, 20, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
@@ -212,11 +217,11 @@ CREATE TABLE Meal (
 	CONSTRAINT Meal_mealid_PK PRIMARY KEY (mealid)
 ) AUTO_INCREMENT = 501;
 
-INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '六塊雞桶', '炸物', 199, '2021-04-19 22:12:34', 60, '適合居家和樂享用', null, 7002);
-INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '麻辣藥膳鍋', '火鍋', 450, '2021-07-15 23:04:54', 90, '嗆辣不死鹹', null, 7004);
-INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '阿古豬', '燒烤', 150, '2021-09-15 23:04:54', 90, '來自沖繩的滋味', null, 7003);
-INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '東京豚骨拉麵', '日式', 200, '2005-09-15 23:04:54', 90, '來自東京值人拉麵', null, 7006);
-INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '豪華和菜', '中式', 5000, '2000-09-15 23:04:54', 90, '宴席料理的領導品牌', null, 7002);
+ INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '六塊雞桶', '炸物', 199, '2021-04-19 22:12:34', 60, '適合居家和樂享用', null, 7002);
+ INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '麻辣藥膳鍋', '火鍋', 450, '2021-07-15 23:04:54', 90, '嗆辣不死鹹', null, 7004);
+ INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '阿古豬', '燒烤', 150, '2021-09-15 23:04:54', 90, '來自沖繩的滋味', null, 7003);
+ INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '東京豚骨拉麵', '日式', 200, '2005-09-15 23:04:54', 90, '來自東京值人拉麵', null, 7006);
+ INSERT INTO Meal (sta, mealname, mealtype, unitprice, launchdate, launchdays, mealdescription, mealimg, restaurantid)  VALUES(4, '豪華和菜', '中式', 5000, '2000-09-15 23:04:54', 90, '宴席料理的領導品牌', null, 7002);
 
 
 # 風格類型
@@ -440,9 +445,21 @@ create table FoodArticle(
     constraint FoodArticle_restaurantid_FK foreign key(restaurantid)references Restaurant (restaurantid)
     );
 insert into FoodArticle (userid,restaurantid,articletitle,articledate,articlecontent,sta)
-values(20210002,7001,'賣噹噹好好吃',now(),'薯條酥脆,炸雞好辣哈哈哈哈哈哈',1),
-(20210002,7001,'肯德基好好吃',now(),'青花椒麻雞香辣,太辣!!!!',1),
-(20210002,7002,'迷克夏好喝到爆',now(),'紅茶拿鐵太好喝啦,好喝到不行',1);
+values(20210002,7001,'肯德基好好吃',now(),'青花椒麻雞香辣,太辣!!!!',1),
+      (20210002,7002,'迷克夏好喝到爆',now(),'紅茶拿鐵太好喝啦,好喝到不行',1),
+      (20210003,7003,'Ashidori好好吃',now(),'這位廚師長的好清秀，傑尼斯型的。
+       日本居酒屋文化裡，服務生都會先送上下酒菜，稱之為 “先付” or “付出”(Tsukidashi)。
+       結帳時就會多出一筆 “先付” 的費用，也可以算是服務費吧，先付大約在每人 JPY150～JPY500 左右。
+       這家的先付算貴的，一人 JPY480。今日先付是醃竹筍和一碗蘿蔔泥～這盤薩摩地雞(炭燒帶皮雞腿肉)原價 JPY840，
+       可先下載 coupon 給店家看就可以享用一份免費的好吃雞腿肉。好好吃而且份量頗大，配啤酒很爽，感覺吃完就半飽了，
+	   還附上小黃瓜片和高麗菜解膩用。',1),
+      (20210004,7004,'齊味火鍋',now(),'位在縣民大道跟民權路交叉口的齊味，離板南線的板橋站2號出口很近，交通上算是方便。齊味是愛吃麻辣鍋的好友夫妻檔大力推薦，住新莊的他們都會特地來板橋包齊味回去吃，我自己以前倒是常吃新莊的詹記，
+       齊味離我這麼近，怎麼可以錯過，今天就約這家啦~~松阪豬肉及培根豬肉各三百，培根豬肉油花多，口感嫩，但薄了點，松阪豬則是厚度比較夠，吃起來比較有彈性。這裡肉的份量不算少，三個人點二盤肉有點太多。吃完結帳花了一千六百多，三個人吃下來一個人平均超過五百，價格不算便宜，也可能是點太多料。整體吃下來口味不錯，有飽足感，但口味有點太重，白湯不算清淡，
+       有一點點偏鹹，不吃辣的朋友說他吃白湯也不用沾醬，而辣湯本身就一定是重口味囉！',1),
+      (20210005,7005,'安格士貴!!!!!',now(),'用餐心得：我覺得安格士牛排真的很適合朋友聚餐，自助吧的種類超多，點最
+       便宜的牛排在吃自助吧吃到飽飽飽！真的超划算的，而且大家來這邊都很輕鬆自在的聊天，座位又很大，這樣看來你是不是心動了呢？',1);
+
+
     
     #圖片庫table
     create table PictureBase(
@@ -460,17 +477,17 @@ values(20210002,7001,'賣噹噹好好吃',now(),'薯條酥脆,炸雞好辣哈哈
 		msgno int not null auto_increment primary key,
 		articleno int,
         userid int,
-		msgdate datetime,
+		msgdate timestamp default current_timestamp,
 		msgcontent varchar(100),
 		sta int,
 		constraint Message_articleno_FK foreign key(articleno) references FoodArticle (articleno),
 		constraint Message_userid_FK foreign key(userid) references MemberInFo (userid)
     );    
-    insert into Message (articleno,userid,msgdate,msgcontent,sta) 
-	values(1,20210001,now(),"好吃讚讚",1),
-	(1,20210001,now(),"流口水ing",1),
-	(2,20210002,now(),"難吃",1),
-	(2,20210003,now(),"太辣啦",1);
+    insert into Message (articleno,userid,msgcontent,sta) 
+	values(1,20210001,"好吃讚讚",1),
+	(1,20210001,"流口水ing",1),
+	(2,20210002,"難吃",1),
+	(2,20210003,"太辣啦",1);
     
     
     

@@ -13,5 +13,6 @@ public interface FoodArticleDAO_interface {
 	List<FoodArticleVO> getall();
 //	public boolean insertWithPic(FoodArticleVO foodArticleVO, List<PictureBaseVO> list);
 	public void insertWithPic(FoodArticleVO foodArticleVO, List<PictureBaseVO> list);
-	
+	List<FoodArticleVO> getPopular();
+	List<FoodArticleVO> searchKeyWord (String words);
 }
