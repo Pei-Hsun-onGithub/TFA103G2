@@ -7,13 +7,11 @@
 
 
 <% 
-
 	FoodArticleService faSvc = new FoodArticleService();
     List<FoodArticleVO> faList =faSvc.getall();
     List<FoodArticleVO> popularList = faSvc.getPopularArticle();
     pageContext.setAttribute("faList",faList);
     pageContext.setAttribute("popularList",popularList);   	
-
 %>
 
 
@@ -135,7 +133,7 @@
         <div class="widget widget_search">
             <form class="search-form" method="post" action="fa.do">
                 <div class="form-group">
-                    <input type="text" placeholder="肯德基" name="keyword">
+                    <input type="text" placeholder="食記搜尋">
                     <button class="submit-btn" type="submit"><i class="ri-search-line"></i></button>
                    	<input type="hidden" name="action" value="searchArticle">
                 </div>

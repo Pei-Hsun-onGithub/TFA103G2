@@ -147,7 +147,7 @@ public class FoodArticleServlet extends HttpServlet {
 			try {
 				Integer articleNo = new Integer(req.getParameter("articleNo").trim());
 				//System.out.println("articleNo=" + articleNo);
-				// System.out.println("1112"+articleNo);
+				System.out.println("1112"+articleNo);
 				String rule = "^[0-9]{4}$";
 
 				Integer userId = new Integer((req.getParameter("userId").trim()));
@@ -404,7 +404,7 @@ public class FoodArticleServlet extends HttpServlet {
 
 				/* 文章和圖片同時要新增,所以要同時送文章VO 圖片list給資料庫取文章pk給圖片 */
 				faSvc.addtWithPic(faVO, list);
-				RequestDispatcher successView = req.getRequestDispatcher("/article/listOneFA.jsp");
+				RequestDispatcher successView = req.getRequestDispatcher("/article/allFA_member.jsp");
 				successView.forward(req, res);
 
 			} catch (Exception e) {
@@ -414,7 +414,17 @@ public class FoodArticleServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
-
+			if("searchArticle".equals(action)) {
+				List<String> errorMsgs = new LinkedList<String>();
+				req.setAttribute("errorMsgs", errorMsgs);
+				
+				try {
+					
+				}catch(Exception e ) {
+					
+				}
+				
+			}
 //			if("delete".equals(action)) {
 //				List<String> errorMsgs = new LinkedList<String>();
 //				req.setAttribute("errorMsgs",errorMsgs );
