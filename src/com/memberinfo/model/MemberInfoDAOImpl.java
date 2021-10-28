@@ -19,6 +19,7 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 	private static final String FIND_BY_PK = "SELECT * FROM MEMBERINFO WHERE USERID = ?";
 	private static final String GET_ALL = "SELECT * FROM MEMBERINFO"; 
 	private static final String FIND_BY_EMAIL = "SELECT * FROM MEMBERINFO WHERE EMAIL = ?";
+	private static final String FIND_BY_PWD = "SELECT * FROM MEMBERINFO WHERE PWD = ?";
 	static {
 		try {
 			Class.forName(Util.DRIVER);
@@ -303,6 +304,51 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
 			pstmt = con.prepareStatement(FIND_BY_EMAIL);
 			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				return true;
+			}
+		} catch (SQLException se) {
+				se.printStackTrace();
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+
+		return false;
+	}
+	
+	@Override
+	public boolean selectPwd(String pwd) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(FIND_BY_PWD);
+			pstmt.setString(1, pwd);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				return true;

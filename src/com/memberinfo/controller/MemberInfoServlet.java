@@ -1,23 +1,25 @@
 package com.memberinfo.controller;
 
 import java.io.*;
+import java.sql.Timestamp;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
-import com.memberinfo.model.*;
 
+import com.memberinfo.model.*;
+@MultipartConfig
 public class MemberInfoServlet extends HttpServlet {
 
-	public void doGet(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
 
-	public void doPost(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
@@ -219,33 +221,228 @@ public class MemberInfoServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 		
-		if("getOneEmail".equals(action)) {
+		if("getOnePwd".equals(action)) {
 
-			// List<String> errorMsgs = new LinkedList<String>();
-				// Store this set in the request scope, in case we need to
-				// send the ErrorPage view.
-			//	req.setAttribute("errorMsgs", errorMsgs);
-				MemberInfoService memberSvc2 = new MemberInfoService();
-				MemberInfo member2 = memberSvc2.getOneMemberInfo(20210001);
-				req.setAttribute("memberinfo", member2);
-				String url = "/Gary_pages/Member01-email.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
-				successView.forward(req, res);
+		// List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+		//	req.setAttribute("errorMsgs", errorMsgs);
+			MemberInfoService memberSvc = new MemberInfoService();
+			MemberInfo member = memberSvc.getOneMemberInfo(20210001);
+			req.setAttribute("memberinfo", member);
+			String url = "/Gary_pages/Member02.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+			successView.forward(req, res);
 		}
 		
-		if("getOnePhone".equals(action)) {
 
-			// List<String> errorMsgs = new LinkedList<String>();
-				// Store this set in the request scope, in case we need to
-				// send the ErrorPage view.
-			//	req.setAttribute("errorMsgs", errorMsgs);
-				MemberInfoService memberSvc3 = new MemberInfoService();
-				MemberInfo member3 = memberSvc3.getOneMemberInfo(20210001);
-				req.setAttribute("memberinfo", member3);
-				String url = "/Gary_pages/Member01-phone.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneEmp.jsp
+		
+		if("update".equals(action)) {
+			
+
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			// 1. 抓取表單資料，錯誤資料處理
+			try {
+
+				Integer userId = new Integer(req.getParameter("userId"));
+				String userName = req.getParameter("userName");
+				String userNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+
+				if (userName == null || (userName.trim().length()) == 0) {
+					errorMsgs.add("姓名: 請勿空白");
+				} else if(!userName.trim().matches(userNameReg)) { //以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間");
+	            }
+				
+				String email = req.getParameter("email");
+				String pwd = req.getParameter("pwd");
+				Date registerDate = java.sql.Date.valueOf(req.getParameter("registerDate").trim());
+				
+				String gender = req.getParameter("gender");
+//				System.out.println("gender="+gender);
+				
+				Date birthday = java.sql.Date.valueOf(req.getParameter("birthday").trim());
+				Integer gold = new Integer(req.getParameter("gold"));
+				Integer feed = new Integer(req.getParameter("feed"));
+				Integer monsterId = new Integer(req.getParameter("monsterId"));
+				String monsterNickName = req.getParameter("monsterNickName");
+				Integer lv = new Integer(req.getParameter("lv"));
+				Integer exp = new Integer(req.getParameter("exp"));
+				Integer sta = new Integer(req.getParameter("sta"));
+
+				String phone = req.getParameter("phone");
+				String phoneReg = "^09\\d{2}(\\d{6}|-\\d{3}-\\d{3})$";
+				if (phone == null || (phone.trim().length() == 0)) {
+					errorMsgs.add("電話號碼: 請勿空白");
+				} else if(!phone.trim().matches(phoneReg)) { //以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("電話號碼:數字 , 且長度必需為10，開頭為09開頭");					
+	            }	
+
+				// 圖片上傳
+				byte[] pic = null;
+
+				Part part = req.getPart("imgfile");
+				if (part.getSize() > 0) {
+					InputStream in = part.getInputStream();
+					pic = new byte[in.available()];
+					in.read(pic);
+					in.close();
+				}
+				
+				MemberInfo memberInfo = new MemberInfo();
+				memberInfo.setUserId(userId);
+				memberInfo.setEmail(email);
+				memberInfo.setPwd(pwd);
+				memberInfo.setUserName(userName);
+				memberInfo.setGender(gender);
+				memberInfo.setBirthday(birthday);
+				memberInfo.setPhone(phone);
+				memberInfo.setPic(pic);
+				memberInfo.setRegisterDate(registerDate);
+				memberInfo.setGold(gold);
+				memberInfo.setFeed(feed);
+				memberInfo.setMonsterId(monsterId);
+				memberInfo.setMonsterNickName(monsterNickName);
+				memberInfo.setLv(lv);
+				memberInfo.setExp(exp);
+				memberInfo.setSta(sta);
+				
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("memberinfo", memberInfo); // 含有輸入格式錯誤的empVO物件,也存入req
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/Gary_pages/Member01.jsp");
+					failureView.forward(req, res);
+					System.out.println("aaa");
+					return;
+				}
+
+				// 2. 持久化
+				MemberInfoService memberInfoSvc = new MemberInfoService();
+				memberInfo = memberInfoSvc.updateMemberInfo(userId, email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, lv, exp, sta);
+				System.out.println("bbb");
+				// 3. 轉交至展示層
+
+				req.setAttribute("memberinfo", memberInfo); // 資料庫update成功後,正確的的empVO物件,存入req
+				String url = "/Gary_pages/Member01.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
+
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/Gary_pages/Member01.jsp");
+				failureView.forward(req, res);
+			}
+
 		}
+		
+		if("updatePwd".equals(action)) {
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+			// 1. 抓取表單資料，錯誤資料處理
+			try {
+				
+				Integer userId = new Integer(req.getParameter("userId"));
+				String userName = req.getParameter("userName");
+				String pwd = req.getParameter("pwd");
+				String email = req.getParameter("email");
+				Date registerDate = java.sql.Date.valueOf(req.getParameter("registerDate").trim());
+				String gender = req.getParameter("gender");
+				Date birthday = java.sql.Date.valueOf(req.getParameter("birthday").trim());
+				Integer gold = new Integer(req.getParameter("gold"));
+				Integer feed = new Integer(req.getParameter("feed"));
+				Integer monsterId = new Integer(req.getParameter("monsterId"));
+				String monsterNickName = req.getParameter("monsterNickName");
+				Integer lv = new Integer(req.getParameter("lv"));
+				Integer exp = new Integer(req.getParameter("exp"));
+				Integer sta = new Integer(req.getParameter("sta"));
+				String phone = req.getParameter("phone");
+				byte[] pic = null;
+
+				
+				String newPwd = req.getParameter("newpwd");
+				String newPwdReg = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$";
+				if (newPwd == null || newPwd.trim().length() == 0) {
+					errorMsgs.add("密碼: 請勿空白");
+				} else if(!newPwd.trim().matches(newPwdReg)) { 
+					errorMsgs.add("密碼: 密碼長度至少應該設定 8 碼以上，而且要混合大小寫英文字母、數字和特殊符號");
+	            } 
+//				else {
+//	            	MemberInfoService memberInfoSvc1 = new MemberInfoService();
+//	            	boolean MemberInfo= memberInfoSvc1.findByPwd(pwd);
+//	            	
+//	            	if (MemberInfo) {
+////	            		System.out.println("有經過");
+//	            		errorMsgs.add("此密碼與當前密碼重複，請重新輸入");
+//	            	}
+//	            }
+				
+				String newPwd2 = req.getParameter("newpwd2");
+				if (newPwd2 == null || newPwd2.trim().length() == 0) {
+					errorMsgs.add("密碼2: 請勿空白");
+				} else if(newPwd.equals(newPwd2) == false) { 
+					errorMsgs.add("密碼: 您兩次輸入密碼不一致");
+	            }
+				
+				MemberInfo memberInfo2 = new MemberInfo();
+				memberInfo2.setPwd(newPwd2);
+				
+				MemberInfo memberInfo = new MemberInfo();
+				memberInfo.setUserId(userId);
+				memberInfo.setEmail(email);
+				memberInfo.setPwd(newPwd);
+				memberInfo.setUserName(userName);
+				memberInfo.setGender(gender);
+				memberInfo.setBirthday(birthday);
+				memberInfo.setPhone(phone);
+				memberInfo.setPic(pic);
+				memberInfo.setRegisterDate(registerDate);
+				memberInfo.setGold(gold);
+				memberInfo.setFeed(feed);
+				memberInfo.setMonsterId(monsterId);
+				memberInfo.setMonsterNickName(monsterNickName);
+				memberInfo.setLv(lv);
+				memberInfo.setExp(exp);
+				memberInfo.setSta(sta);
+				
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("memberinfo", memberInfo); // 含有輸入格式錯誤的empVO物件,也存入req
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/Gary_pages/Member02.jsp");
+					failureView.forward(req, res);
+					System.out.println("aaa");
+					return;
+				}
+
+				// 2. 持久化
+				MemberInfoService memberInfoSvc = new MemberInfoService();
+				memberInfo = memberInfoSvc.updateMemberInfo(userId, email, newPwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, lv, exp, sta);
+				System.out.println("bbb");
+				// 3. 轉交至展示層
+
+				req.setAttribute("memberinfo", memberInfo); // 資料庫update成功後,正確的的empVO物件,存入req
+				String url = "/Gary_pages/Member02.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
+				successView.forward(req, res);
+
+			
+			} catch (Exception e) {
+				errorMsgs.add(e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/Gary_pages/Member02.jsp");
+				failureView.forward(req, res);
+			}
+			
+		}
+		
+
 		
         if ("insert".equals(action)) { // 來自addEmp.jsp的請求  
 			

@@ -2,6 +2,7 @@ package com.card.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 import com.card.model.CardVO;
 
@@ -47,16 +48,20 @@ public class CardDAOService {
 		return cardVO;
 	}	
 
-	public void deleteCardDAO(Integer carId) {
-		dao.delete(carId);
+	public void deleteCardDAO(Integer cardId) {
+		dao.delete(cardId);
 	}	
 	
-		public CardVO getCardVAO(Integer carId) {
-		return dao.findByPK(carId);
+		public CardVO getCardDAO(Integer cardId) {
+		return dao.findByPK(cardId);
 	}
 		
 		public List<CardVO> getAll() {
 		return dao.getAll();
 	}	
+		
+		public Set<CardVO> getCardByUserId(Integer userId) {
+		return dao.getCardByUserId(userId);
+	}
 	
 }

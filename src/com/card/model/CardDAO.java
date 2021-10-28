@@ -18,7 +18,7 @@ public class CardDAO implements CardDAO_interface{
 	private static final String DELETE = "DELETE FROM Card WHERE cardId = ?";	
 	private static final String GET_ALL = "SELECT * FROM Card";
 	private static final String FIND_BY_PK = "SELECT * FROM Card WHERE cardId = ?";
-
+	private static final String GET_CARD_BY_USERID = "SELECT * FROM Card WHERE userId = ? order by cardId";
 
 	static {
 		try {
@@ -269,5 +269,64 @@ public class CardDAO implements CardDAO_interface{
 			}
 		}
 		return cardList;
+	}
+	
+
+	@Override
+	public Set<CardVO> getCardByUserId(Integer userId) {
+		Set<CardVO> cardset = new LinkedHashSet<CardVO>();
+		CardVO card = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(GET_CARD_BY_USERID);
+			pstmt.setInt(1, userId);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				card = new CardVO();
+				card.setCardId(rs.getInt("cardId"));
+//				card.setUserId(rs.getInt("userId"));
+				card.setCardHolder(rs.getString("cardHolder"));
+				card.setCardNumber(rs.getString("cardNumber"));
+				card.setDeadLine(rs.getDate("deadLine"));
+				card.setCvv(rs.getString("cvv"));
+				card.setBillAddress(rs.getString("billAddress"));
+				card.setZipCode(rs.getString("zipCode"));
+				card.setSta(rs.getInt("sta"));
+				cardset.add(card);
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return cardset;
 	}
 }

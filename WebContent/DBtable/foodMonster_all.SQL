@@ -354,8 +354,10 @@ CREATE TABLE Card (
  	VALUES(20210011, '蔡吉友', 6956674759132833, '2024-08-31', '171', '新竹縣關西鎮中山東路39號', '632', 1);
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
  	VALUES(20210012, '陳冠軒', 3597905196233614, '2023-12-31', '044', '台北市文山區萬美街一段85巷3號7樓', '269', 1);
- 	
- 	
+ INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
+ 	VALUES(20210001, '賴國滄', 4716329842362253, '2023-12-31', '466', '新竹市北區經國路一段238號', '632', 1);	
+ INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
+ 	VALUES(20210001, '黃志成', 4716329842362253, '2023-12-31', '466', '新竹市北區經國路一段238號', '632', 1);	
    # 餐點訂單
 CREATE TABLE RsOrder (
 	orderid 		INT AUTO_INCREMENT NOT NULL,

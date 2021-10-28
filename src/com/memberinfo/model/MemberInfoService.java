@@ -43,10 +43,11 @@ public class MemberInfoService {
 	}
 	
 	
-	public MemberInfo updateMemberInfo	(String email, String pwd, String userName, String gender, Date birthday, String phone,byte[] pic, Date registerDate, Integer gold, Integer feed, Integer monsterId, String monsterNickName, Integer lv, Integer exp, Integer sta) {
+	public MemberInfo updateMemberInfo	(Integer userId, String email, String pwd, String userName, String gender, Date birthday, String phone,byte[] pic, Date registerDate, Integer gold, Integer feed, Integer monsterId, String monsterNickName, Integer lv, Integer exp, Integer sta) {
 		
 		MemberInfo memberinfo = new MemberInfo();
 		
+		memberinfo.setUserId(userId);
 		memberinfo.setEmail(email);
 		memberinfo.setPwd(pwd);
 		memberinfo.setUserName(userName);
@@ -81,5 +82,9 @@ public class MemberInfoService {
 	
 	public boolean findByEmail(String email) {
 		return dao.selectEmail(email);
+	}
+	
+	public boolean findByPwd(String pwd) {
+		return dao.selectPwd(pwd);
 	}
 }

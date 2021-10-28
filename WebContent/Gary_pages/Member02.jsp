@@ -14,7 +14,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>會員中心-個人檔案</title>
+<title>會員中心-修改密碼</title>
 <!--fivicon icon-->
 <link rel="icon"
 	href="<%=request.getContextPath()%>/assets/img/Image4.png">
@@ -43,7 +43,7 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/responsive.css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/assets/css/Member01.css">
+	href="<%=request.getContextPath()%>/assets/css/Member02.css">
 
 <!--Google Fonts-->
 <link
@@ -108,8 +108,6 @@
 	</header>
 	<!-- navbar end -->
 
-
-
 	<div class="total">
 		<div class="profile">
 			<img
@@ -117,7 +115,8 @@
 				alt="img">
 			<ul>
 				<li class="nickname"><%=memberinfo.getUserName()%></li>
-				<li class="edit"><a href="/TFA103G2/login/memberinfo.do?action=getOne">編輯個人資料</a></li>
+				<li class="edit"><a
+					href="/TFA103G2/login/memberinfo.do?action=getOne">編輯個人資料</a></li>
 			</ul>
 		</div>
 
@@ -138,34 +137,32 @@
 				<li class="seven"><a href="#">我的收藏</a></li>
 			</ul>
 		</div>
-		
+
 		<form method="post" action="/TFA103G2/login/memberinfo.do"
 			enctype="multipart/form-data">
 			<div class="content">
 				<div class="title">
-					<div class="titlebigname">個人檔案Profile</div>
-					<div class="titlesmallname">管理你的個人資料</div>
+					<div class="titlebigname">修改密碼Password</div>
+					<div class="titlesmallname">修改你的密碼</div>
 					<div class="editarea">
 
 
-
 						<div class="information">
-							<div class="account">
-								<div></div>
-								<div class="lebel1">電子郵件帳號</div>
-								<div class="input1"><%=memberinfo.getEmail()%>
-									<input type="hidden" name="email"
-										value="<%=memberinfo.getEmail()%>">
-								</div>
-							</div>
-							<div class="name">
-								<div class="lebel2">姓名</div>
-								<div class="input2">
-									<input type="text"  maxlength="255" name="userName"
-										value="<%=memberinfo.getUserName()%>"> <input
-										type="hidden" name="userId"
+							<div class="nowpassword">
+								<div class="lebel1">目前的密碼</div>
+								<div class="input1"><%=memberinfo.getPwd()%>
+									<input type="hidden" name="userId"
 										value="<%=memberinfo.getUserId()%>"> <input
 										type="hidden" name="pwd" value="<%=memberinfo.getPwd()%>">
+									<input type="hidden" name="email"
+										value="<%=memberinfo.getEmail()%>"> <input
+										type="hidden" name="userName"
+										value="<%=memberinfo.getUserName()%>"> <input
+										type="hidden" name="gender"
+										value="<%=memberinfo.getGender()%>"> <input
+										type="hidden" name="birthday"
+										value="<%=memberinfo.getBirthday()%>"> <input
+										type="hidden" name="phone" value="<%=memberinfo.getPhone()%>">
 									<input type="hidden" name="registerDate"
 										value="<%=memberinfo.getRegisterDate()%>"> <input
 										type="hidden" name="gold" value="<%=memberinfo.getGold()%>">
@@ -181,55 +178,29 @@
 										name="sta" value="<%=memberinfo.getSta()%>">
 								</div>
 							</div>
-							<div class="phone">
-								<div class="lebel3">電話號碼</div>
+							<div class="newpassword">
+								<div class="lebel2">輸入新的密碼</div>
+								<div class="input2">
+									<input class="newpwd" type="text" name="newpwd" maxlength="255"
+										value="">
+								</div>
+							</div>
+							<div class="newpassword2">
+								<div class="lebel3">再次輸入新密碼</div>
 								<div class="input3">
-									<input type="text" maxlength="255" name="phone"
-										value="<%=memberinfo.getPhone()%>">
-								</div>
-							</div>
-							<div class="gender">
-								<div class="lebel4">性別</div>
-								<div class="input4">
-									<input type="radio" name="gender" value="male"
-										<%="男".equals(memberinfo.getGender()) ? "checked" : ""%>>男性
-									<input type="radio" name="gender" value="female"
-										<%="女".equals(memberinfo.getGender()) ? "checked" : ""%>>女性
-									<input type="radio" name="gender" value="other"
-										<%="其他".equals(memberinfo.getGender()) ? "checked" : ""%>>其他
-									<p>
-								</div>
-							</div>
-							<div class="birthday">
-								<div class="lebel5">生日</div>
-								<div class="input5">
-									<input id="date" type="date" name="birthday"
-										value="<%=memberinfo.getBirthday()%>">
+									<input class="newpwd2" type="text" name="newpwd2"
+										maxlength="255" value="">
 								</div>
 							</div>
 							<div class="storebutton">
-								<input type="hidden" name="action" value="update">
-								<button type="submit" name="button">儲存</button>
+								<input type="hidden" name="action" value="updatePwd">
+								<button type="submit" name="button">確認</button>
 							</div>
-						</div>
-						<div class="editpic">
-							<div class="pic">
-								<img
-									src="/TFA103G2/memberinfo/MemberPic.do?userId=<%=memberinfo.getUserId()%>"
-									alt="img">
+							<div class="backbutton">
+								<button type="reset" name="button">重填</button>
 							</div>
-							<div class="selectbutton">
-								<button id="photo_upload" type="button" name="button">上傳照片</button>
-								<input id="img_file" type="file" style="display: none;"
-									name="imgfile"
-									value="<%=(memberinfo == null) ? null : memberinfo.getPic()%>">
-							</div>
-							<div class="illustrate">
-								檔案大小:最大1MB<br> 檔案限制:.JEPG, .PNG
-							</div>
-			
 							<c:if test="${not empty errorMsgs}">
-								<div style="margin-top: 50px; margin-left: 140px">
+								<div>
 									<font style="color: red">請修正以下錯誤:</font>
 									<ul>
 										<c:forEach var="message" items="${errorMsgs}">
@@ -239,13 +210,6 @@
 								</div>
 							</c:if>
 						</div>
-
-
-
-
-
-
-
 					</div>
 				</div>
 			</div>
@@ -279,45 +243,7 @@
 	<script
 		src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
 
-	<script>
-		$(document)
-				.ready(
-						function() {
 
-							$('#photo_upload').on("click", function(e) {
-								$('#img_file').click();
-								return false;
-							});
-
-							var pic = document.getElementsByClassName("pic");
-							var img_file_element = document
-									.getElementById("img_file");
-							img_file_element
-									.addEventListener(
-											"change",
-											function(e) {
-
-												let reader = new FileReader();
-												reader
-														.readAsDataURL(this.files[0]);
-												reader
-														.addEventListener(
-																"load",
-																function() {
-																	var img_tag = "<img src='" + reader.result + "' class='preview_img'>";
-																	console
-																			.log(reader.result);
-																	//     			pic.insertAdjacentHTML("afterend",img_tag);
-																	$('.pic')
-																			.html(
-																					img_tag);
-																	//     			pic.append(img_tag);
-																})
-
-											})
-
-						});
-	</script>
 
 
 
