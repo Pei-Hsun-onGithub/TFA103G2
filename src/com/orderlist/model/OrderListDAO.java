@@ -28,16 +28,20 @@ public class OrderListDAO implements OrderListDAO_interface{
 	
 	
 	@Override
-	public void insert(OrderListVO orderListVO) {
+	public OrderListVO insert(OrderListVO orderListVO) {
 
 		Connection con = null;
+		
+		String[] cols = { "orderListId" };
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
 		try {
 
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			pstmt = con.prepareStatement(INSERT);
+			pstmt = con.prepareStatement(INSERT, cols);
 
+			
 			pstmt.setInt(1, orderListVO.getOrderId());
 			pstmt.setInt(2, orderListVO.getMealId());
 			pstmt.setString(3, orderListVO.getQuantity());
@@ -46,11 +50,28 @@ public class OrderListDAO implements OrderListDAO_interface{
 
 
 			pstmt.executeUpdate();
+			
+			rs = pstmt.getGeneratedKeys();
+			
+			if (rs.next()) {
+				Integer key = rs.getInt(1); // �u�䴩�����ޭȨ��o�ۼW�D���
+				orderListVO.setOrderListId(key);
+//				System.out.println("�ۼW�D��� = " + key + "(��s�W���\���\�I�s��)");
+			} 
 
 			// Handle any driver errors
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} finally {
+			
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -67,7 +88,7 @@ public class OrderListDAO implements OrderListDAO_interface{
 				}
 			}
 		}
-
+		return orderListVO;
 	}
 
 	@Override

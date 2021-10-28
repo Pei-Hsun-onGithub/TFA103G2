@@ -23,6 +23,14 @@ div.nav-right-part ul.category-menu li.category-wrap div.my-monster-detail {
 	font-family:fantasy;
 	color: red;
 }
+
+#tooltip div.my-mission-title {
+	font-size: 18px;
+}
+
+#tooltip div.my-mission-content {
+
+}
 /*********  tooltipªºCSS ¶}©l  ********/
 #tooltip {
 	display: none;

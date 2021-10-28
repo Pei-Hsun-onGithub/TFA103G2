@@ -25,10 +25,19 @@
 
 			</div>
 
+<%
+				MemberInfoService memberSvc = new MemberInfoService();
+				Integer usrId = (Integer) session.getAttribute("userId");
+				MemberInfo memberVO = memberSvc.getOneMemberInfo(usrId);
+
+				MonsterBookService mstrSvc = new MonsterBookService();
+				MonsterBook monsterVO = mstrSvc.getOneMonsterBook(memberVO.getMonsterId());
+			%>
+
+
 			<div class="collapse navbar-collapse" id="themefie_main_menu">
 				<ul class="navbar-nav menu-open">
 					<li><a href="<%=request.getContextPath()%>/menu.html">訂餐去</a></li>
-					<li><a href="<%=request.getContextPath()%>/shop.html">訂餐去2</a></li>
 					<li><a href="<%=request.getContextPath()%>/checkout.html">直接結帳</a></li>
 					<li><a href="<%=request.getContextPath()%>/about.html">查詢食記</a></li>
 					<li><a href="<%=request.getContextPath()%>/contact.html">食記撰寫</a></li>
@@ -39,21 +48,14 @@
 				<ul>
 					<li class="phone-contact"><a
 						href="/TFA103G2/login/memberinfo.do?action=getOne"><i
-							class="far fa-user"></i> username</a></li>
+							class="far fa-user"></i> <%=memberVO.getUserName()%></a></li>
 					<li class="menu-cart"><a
 						href="<%=request.getContextPath()%>/cart.html"><i
 							class="fas fa-shopping-cart"></i> <span>1</span></a></li>
 					<li><i class="fas fa-crown"></i> <span>23</span></li>
 				</ul>
 			</div>
-			<%
-				MemberInfoService memberSvc = new MemberInfoService();
-				Integer usrId = (Integer) session.getAttribute("userId");
-				MemberInfo memberVO = memberSvc.getOneMemberInfo(usrId);
-
-				MonsterBookService mstrSvc = new MonsterBookService();
-				MonsterBook monsterVO = mstrSvc.getOneMonsterBook(memberVO.getMonsterId());
-			%>
+			
 
 			<div class="nav-right-part nav-right-part-desktop">
 				<ul>
@@ -117,22 +119,24 @@
 
 					<li class="phone-contact"><a
 						href="/TFA103G2/login/memberinfo.do?action=getOne"><i
-							class="far fa-user"></i> username</a></li>
+							class="far fa-user"></i> <%=memberVO.getUserName()%></a></li>
 
 					<li><a id="my-bell" href="#" onclick="toggleTheTooltip()"><i
 							class="far fa-bell"></i> <span>4</span></a></li>
 					<!--   放入想要提醒的事項!    -->
 					<div id="tooltip" role="tooltip">
-						<div>Popcorn</div>
-						<div>sizes</div>
-						<div>&amp; Price</div>
-						<div>XXS: $1.99</div>
-						<div>XS: $2.99</div>
-						<div>S: $3.99</div>
-						<div>M: $4.99</div>
-						<div>L: $5.99</div>
-						<div>XL: $6.99</div>
-						<div>XXL: $7.99</div>
+						<div class="my-mission-title">今日任務</div>
+						<div class="my-mission-content">大胃王</div>
+						<div class="my-mission-title">完成獎勵</div>
+						<div class="my-mission-content">金幣 20 枚</div>
+						<div class="my-mission-content">怪獸飼料 100個</div>
+						<div class="my-mission-title">描述</div>
+						<div class="my-mission-content">成功完成50筆訂單可獲得100個飼料</div>
+						<div class="my-mission-title">目前進度</div>
+						<div class="my-mission-content">食記提交: 0/0</div>
+						<div class="my-mission-content">訂餐成功: 23/50</div>
+						<div class="my-mission-title">剩餘天數</div>
+						<div class="my-mission-content">39</div>
 						<div id="arrow" data-popper-arrow></div>
 					</div>
 

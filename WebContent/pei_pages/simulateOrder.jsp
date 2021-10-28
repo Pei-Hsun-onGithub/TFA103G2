@@ -57,7 +57,7 @@ header.my-navbar-area {
 }
 
 div.my-content {
-	margin-top: 80px;
+	margin-top: 110px;
 }
 
 div.my-aside-left-container img{
@@ -224,14 +224,14 @@ div.my-chooseType ul li button{
 						<ul class="nav nav-tabs card-header-tabs">
 							<!-- using active | disabled  -->
 							<li class="nav-item"><a class="nav-link model1 active"
-								aria-current="true" href="#">Meal</a></li>
+								aria-current="true" href="#">Order</a></li>
 						</ul>
 					</div>
 					<div class="card-body model1-body active">
-						<h5 class="card-title">新增一筆餐點</h5>
+						<h5 class="card-title">任務成就</h5>
 
 						<div style="overflow: hidden;">
-							<h4 class="my-query-title" style="float: left;">新增餐點</h4>
+							<h4 class="my-query-title" style="float: left;">新增成就</h4>
 
 						</div>
 
@@ -324,7 +324,7 @@ div.my-chooseType ul li button{
 
 							<div class="row">
 								<div class="col-sm-3">
-									<input type="hidden" name="action" value="insert"> <input
+									<input type="hidden" name="action" value="simulateOrder"> <input
 										type="submit" class="btn btn-primary" value="送出">
 								</div>
 								<div class="col-sm-3"></div>
