@@ -38,7 +38,9 @@ public class SimulateOrderSuccess extends HttpServlet{
 		
 		if ("makeOrderSuccess".equals(action)) {
 			
-		
+			//TODO: 擷取前端資料
+			
+			
 			RsOrderDAOService OrderItemSvc = new RsOrderDAOService();
 			// 模擬一筆訂單成功送出
 			RsOrderVO orderVO = OrderItemSvc.addRsOrderDAO(20210001, 7001, 1, 1, 0, Date.valueOf(LocalDate.of(2021, 4, 1)), Date.valueOf(LocalDate.of(2021, 4, 2)), Date.valueOf(LocalDate.of(2021, 4, 3)), Date.valueOf(LocalDate.of(2021, 4, 1)), Date.valueOf(LocalDate.of(2021, 4, 1)), 10, "很快送達", 1);
@@ -52,11 +54,11 @@ public class SimulateOrderSuccess extends HttpServlet{
 			
 			Integer userId = 20210001;
 			
-			Achieve nowAchieve = archieveSvc.getOneAchieve(2003);
+//			Achieve nowAchieve = archieveSvc.getOneAchieve(2003);
 			
 			// 先模擬放入ServletContext中一個Mission
 			ServletContext servletContext = this.getServletContext();
-			servletContext.setAttribute("achieveMission", nowAchieve);
+//			servletContext.setAttribute("achieveMission", nowAchieve);
 			
 			Achieve achieveVO = archieveSvc.getAvailableAchieve(servletContext);
 			Integer achieveId = achieveVO.getAchiId();
@@ -76,12 +78,12 @@ public class SimulateOrderSuccess extends HttpServlet{
 
 			
 			
-//			System.out.println("orders=" + orders);
-//			System.out.println("此使用者訂單總數=" + orders.size());
-//			System.out.println("AchiName = " + achieveVO.getAchiName());
-			//System.out.println("achieveProgressVO : " + "userId = " + achieveProgressVO.getUserId()+ " achieveId " + achieveProgressVO.getAchiId());
+			System.out.println("orders=" + orders);
+			System.out.println("此使用者訂單總數=" + orders.size());
+			System.out.println("AchiName = " + achieveVO.getAchiName());
+		//	System.out.println("achieveProgressVO : " + "userId = " + achieveProgressVO.getUserId()+ " achieveId " + achieveProgressVO.getAchiId());
 			
-			servletContext.removeAttribute("achieveMission");
+			//servletContext.removeAttribute("achieveMission");
 			//System.out.println("servletContext的achieveMission = " + servletContext.getAttribute("achieveMission"));
 			
 			

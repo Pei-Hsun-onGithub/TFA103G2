@@ -1,3 +1,5 @@
+<%@page import="com.achieve.model.AchieveService"%>
+<%@page import="com.achieve.model.Achieve"%>
 <%@page import="com.meal.model.MealVO"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -44,14 +46,14 @@
 	href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap"
 	rel="stylesheet">
 
-
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/vendors/DataTables/datatables.css">
 <style>
 * {
 	list-style: none;
 }
 
 header.my-navbar-area {
-
 	background: #a30481;
 	border-bottom: none;
 }
@@ -60,11 +62,10 @@ div.my-content {
 	margin-top: 110px;
 }
 
-div.my-aside-left-container img{
+div.my-aside-left-container img {
 	width: 42px;
 	height: 42px;
 }
-
 
 .timepicker div.title {
 	display: none;
@@ -124,25 +125,25 @@ div.my-time-setting-block-weekly-picker label.form-check-label:after {
 div.my-chooseType>ul {
 	
 }
+
 div.my-chooseType>ul>li {
 	display: inline-block;
 }
 
-div.my-chooseType ul li button{
-	width: 100px; 
+div.my-chooseType ul li button {
+	width: 100px;
 	height: 50px;
-	border-radius:5px;
-	background:white;
+	border-radius: 5px;
+	background: white;
 	text-align: center;
-	vertical-align:middle;
+	vertical-align: middle;
 	border: 1px solid #198754;
-	color:#198754;
-	line-height:56px;
+	color: #198754;
+	line-height: 56px;
 	text-align: center;
 	margin-left: 3px;
 	font-weight: 600px;
 }
-
 </style>
 
 </head>
@@ -160,7 +161,7 @@ div.my-chooseType ul li button{
 					</button>
 				</div>
 				<div class="logo">
-					<a class="main-logo" href="#"><img
+					<a class="main-logo" href="<%=request.getContextPath()%>/pei_pages/BackgroundManager.jsp"><img
 						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
 				</div>
 				<div class="collapse navbar-collapse" id="themefie_main_menu">
@@ -190,13 +191,16 @@ div.my-chooseType ul li button{
 				</div>
 				<div class="nav-right-part nav-right-part-desktop">
 					<ul>
-						<li style="visibility: hidden;"><a class="search" href="#"><i class="ri-search-line"></i></a>
-						</li>
-						<li class="menu-cart"><a href="#" style="visibility: hidden;">小鈴鐺 <span>4</span></a></li>
-						<li class="menu-cart"><a href="cart.html" style="visibility: hidden;">CART <span>1</span></a></li>
-						
-						
-						
+						<li style="visibility: hidden;"><a class="search" href="#"><i
+								class="ri-search-line"></i></a></li>
+						<li class="menu-cart"><a href="#" style="visibility: hidden;">小鈴鐺
+								<span>4</span>
+						</a></li>
+						<li class="menu-cart"><a href="cart.html"
+							style="visibility: hidden;">CART <span>1</span></a></li>
+
+
+
 					</ul>
 				</div>
 			</div>
@@ -231,14 +235,98 @@ div.my-chooseType ul li button{
 						<h5 class="card-title">任務成就</h5>
 
 						<div style="overflow: hidden;">
-							<h4 class="my-query-title" style="float: left;">新增成就</h4>
+							<h4 class="my-query-title" style="float: left;">訂單模擬</h4>
 						</div>
-						<br>
+						<br> <a
+							href="<%=request.getContextPath()%>/SimulateOrder.do?action=makeOrderSuccess"
+							class="btn btn-primary">送出一筆訂單模擬</a>
 
-						<a href="<%=request.getContextPath()%>/SimulateOrder.do?action=makeOrderSuccess" class="btn btn-primary">送出一筆訂單模擬</a>
+						<div style="overflow: hidden;">
+							<h4 class="my-query-title" style="float: left;">成就列表</h4>
+						</div>
+						<!-- Achieve start -->
+						<section class="work-area">
+							<div class="container my-content">
+
+								<div class="row justify-content-center">
+									<table id="table_id" class="display">
+										<thead>
+											<tr>
+												<th>成就編號</th>
+												<th>成就名稱</th>
+												<th>描述</th>
+												<th>開始日期</th>
+												<th>有效天數</th>
+												<th>達標食記數量</th>
+												<th>達標訂單數量</th>
+												<th>獲得飼料數目</th>
+												<th>獲得金幣數目</th>
+												<th>徽章圖案</th>
+
+												<th></th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+
+<%
+	AchieveService achieveSvc = new AchieveService();
+	java.util.List<Achieve> list = achieveSvc.getAll();
+	request.setAttribute("list", list);
+
+%>
+											
+
+											<c:forEach var="achieveVO" items="${list}">
+
+											<tr>
+													<td>${achieveVO.achiId}</td>
+													<td>${achieveVO.achiName}</td>
+													<td>${achieveVO.descript}</td>
+													<td>${achieveVO.openDate}</td>
+													<td>${achieveVO.validDays}</td>
+													<td>${achieveVO.achiArticle}</td>
+													<td>${achieveVO.achiOrder}</td>
+													<td>${achieveVO.gainFeed}</td>
+													<td>${achieveVO.gainGold}</td>
+													<td><img
+														src="/TFA103G2/meal/photoServlet?id=${achieveVO.achiId}" /></td>
+
+													<td>
+														<FORM METHOD="post"
+															ACTION="/TFA103G2/meal/meal.do?action=getOne_For_Update"
+															style="margin-bottom: 0px;">
+															<input type="submit" class="btn btn-warning my-btn"
+																value="修改"> <input type="hidden" name="mealId"
+																value="${achieveVO.achiId}">
+														</FORM>
+													</td>
+													<td>
+														<FORM METHOD="post"
+															ACTION="/TFA103G2/achieve/AchieveQualify.do?action=triggerAchieveMission&achieveId=${achieveVO.achiId}"
+															style="margin-bottom: 0px;">
+
+															<input type="submit" class="btn btn-warning my-btn"
+																id="my-delete-submit" value="上線"> <input
+																type="hidden" name="mealId" value="${achieveVO.achiId}">
+
+
+														</FORM>
+													</td>
+													
+													
+
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</section>
+						<!-- Achieve End -->
 					</div>
 
-					
+
 				</div>
 			</div>
 		</div>
@@ -270,7 +358,15 @@ div.my-chooseType ul li button{
 	<!-- new js   -->
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 
+	<script type="text/javascript" charset="utf8"
+		src="<%=request.getContextPath()%>/vendors/DataTables/datatables.js"></script>
 
+	<script>
+		$(document).ready(function() {
+			$('#table_id').DataTable();
+
+		});
+	</script>
 
 
 </body>
