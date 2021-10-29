@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.card.model.*"%>
 <%@ page import="com.memberinfo.model.*"%>
+<%@ page import="java.util.Set"%>
 
 <%
 	CardVO cardVO = (CardVO) request.getAttribute("cardvo");
@@ -128,15 +129,15 @@
 		</div>
 
 		<div class="memberlist">
-			<ul>
+						<ul>
 				<li class="one"><a
-					href="/TFA103G2/login/memberinfo.do?action=getOne">個人檔案</a></li>
+					href="<%=request.getContextPath()%>/login/memberinfo.do?action=getOne">個人檔案</a></li>
 				<li class="two"><a
-					href="/TFA103G2/login/memberinfo.do?action=getOnePwd">密碼修改</a></li>
+					href="<%=request.getContextPath()%>/login/memberinfo.do?action=getOnePwd">密碼修改</a></li>
 				<li class="three"><a
-					href="/TFA103G2/memberinfo/CardServlet.do?action=getAllCard">銀行/信用卡資訊</a></li>
+					href="<%=request.getContextPath()%>/memberinfo/CardServlet.do?action=getAllCard">銀行/信用卡資訊</a></li>
 				<li class="four"><a
-					href="<%=request.getContextPath()%>/Member04.html">外送地址管理</a></li>
+					href="<%=request.getContextPath()%>/address/address.do?action=getAllAddress">外送地址管理</a></li>
 				<li class="five"><a
 					href="<%=request.getContextPath()%>/Member05.html">歷史訂單</a></li>
 				<li class="six"><a
@@ -160,14 +161,14 @@
 								<div class="lebel1">持卡人姓名</div>
 								<div class="input1">
 									<input type="hidden" maxlength="255" name="userId"
-										value="<%=memberinfo.getUserId()%>"> <input
-										type="text" name="cardholder" maxlength="255" value="">
+										value="<%=memberinfo.getUserId()%>"> 
+									<input type="text" name="cardHolder" maxlength="255" value="">
 								</div>
 							</div>
 							<div class="number">
 								<div class="lebel2">信用卡卡號</div>
 								<div class="input1">
-									<input type="text" name="cardnumber" style="width: 300px"
+									<input type="text" name="cardNumber" style="width: 300px"
 										maxlength="20" oninput="value=value.replace(/[^\d]/g,'')"
 										value="">
 								</div>
@@ -176,7 +177,7 @@
 							<div class="expirydate">
 								<div class="lebel3">到期日</div>
 								<div class="input3">
-									<input type="date" id="date" name="deadline"
+									<input type="date" id="date" name="deadLine"
 										style="width: 141px" min="2021-01" max="2030-12" value="">
 								</div>
 								<div class="CVV">
@@ -192,19 +193,20 @@
 							<div class="billaddress">
 								<div class="lebel5">帳單地址</div>
 								<div class="input5">
-									<input type="text" name="billaddress" maxlength="255" value="">
+									<input type="text" name="billAddress" maxlength="255" value="">
 								</div>
 							</div>
 							<div class="zipcode">
 								<div class="lebel6">郵遞區號</div>
 								<div class="input6">
-									<input type="text" name="zipcode" maxlength="6"
+									<input type="text" name="zipCode" maxlength="6"
 										oninput="value=value.replace(/[^\d]/g,'')" value=""> <input
 										type="hidden" maxlength="255" name="sta" value="">
 								</div>
 							</div>
 							<div class="storebutton">
-								<input type="hidden" name="action" value="insertOneCard">
+								<input type="hidden" name="cardId" value=""> <input
+									type="hidden" name="action" value="insertOneCard">
 								<button type="submit" id="certain" name="submit">確定</button>
 							</div>
 							<div class="backbutton">

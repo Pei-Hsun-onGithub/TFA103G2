@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
 
+import com.card.model.CardVO;
+
 import util.Util;
 
 
@@ -19,6 +21,7 @@ public class AddressDAO implements AddressDAO_interface{
 //	private static final String GET_ONE = "SELECT * FROM Address where deliveryAddid = ?";
 	private static final String DELETE = "DELETE FROM Address WHERE deliveryAddid = ?";	
 	private static final String FIND_BY_PK = "SELECT * FROM Address WHERE deliveryAddId = ?";
+	private static final String GET_ADDRESS_BY_USERID = "SELECT * FROM ADDRESS WHERE userId = ? order by deliveryAddId";
 
 
 	static {
@@ -266,5 +269,65 @@ public class AddressDAO implements AddressDAO_interface{
 		}
 		return addresList;
 	}
+	
+	
+	@Override
+	public Set<AddressVO> getAddressByUserId(Integer userId) {
+		Set<AddressVO> addressset = new LinkedHashSet<AddressVO>();
+		AddressVO address = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
+		try {
+
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(GET_ADDRESS_BY_USERID);
+			pstmt.setInt(1, userId);
+			rs = pstmt.executeQuery();
+			
+			
+			while (rs.next()) {
+				address = new AddressVO();
+				address.setDeliveryAddId(rs.getInt("deliveryAddId"));
+				address.setUserId(rs.getInt("userId"));
+				address.setCustomerName(rs.getString("customerName"));
+				address.setDeliverPhone(rs.getString("deliverPhone"));
+				address.setDeliverAddress(rs.getString("deliverAddress"));
+				address.setBuildingName(rs.getString("buildingName"));
+				address.setNote(rs.getString("note"));
+				address.setSta(rs.getInt("sta"));
+				addressset.add(address);
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return addressset;
+	}
 }
+
+

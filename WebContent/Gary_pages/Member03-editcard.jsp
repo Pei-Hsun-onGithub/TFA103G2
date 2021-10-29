@@ -19,7 +19,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>會員中心-新增信用卡</title>
+<title>會員中心-修改信用卡</title>
 <!--fivicon icon-->
 <link rel="icon"
 	href="<%=request.getContextPath()%>/assets/img/Image4.png">
@@ -130,13 +130,13 @@
 		<div class="memberlist">
 			<ul>
 				<li class="one"><a
-					href="/TFA103G2/login/memberinfo.do?action=getOne">個人檔案</a></li>
+					href="<%=request.getContextPath()%>/login/memberinfo.do?action=getOne">個人檔案</a></li>
 				<li class="two"><a
-					href="/TFA103G2/login/memberinfo.do?action=getOnePwd">密碼修改</a></li>
+					href="<%=request.getContextPath()%>/login/memberinfo.do?action=getOnePwd">密碼修改</a></li>
 				<li class="three"><a
-					href="/TFA103G2/memberinfo/CardServlet.do?action=getAllCard">銀行/信用卡資訊</a></li>
+					href="<%=request.getContextPath()%>/memberinfo/CardServlet.do?action=getAllCard">銀行/信用卡資訊</a></li>
 				<li class="four"><a
-					href="<%=request.getContextPath()%>/Member04.html">外送地址管理</a></li>
+					href="<%=request.getContextPath()%>/address/address.do?action=getAllAddress">外送地址管理</a></li>
 				<li class="five"><a
 					href="<%=request.getContextPath()%>/Member05.html">歷史訂單</a></li>
 				<li class="six"><a
@@ -159,14 +159,19 @@
 							<div class="holder">
 								<div class="lebel1">持卡人姓名</div>
 								<div class="input1">
-									<input type="hidden" maxlength="255" name="userId" value="<%=memberinfo.getUserId()%>">
-									<input type="text" name="cardholder" maxlength="255" value="<%=cardVO.getCardHolder()%>">
+									<input type="hidden" maxlength="255" name="userId"
+										value="<%=cardVO.getUserId()%>"> <input type="hidden"
+										maxlength="255" name="cardId" value="<%=cardVO.getCardId()%>">
+									<input type="hidden" maxlength="255" name="sta"
+										value="<%=cardVO.getSta()%>"> <input type="text"
+										name="cardHolder" maxlength="255"
+										value="<%=cardVO.getCardHolder()%>">
 								</div>
 							</div>
 							<div class="number">
 								<div class="lebel2">信用卡卡號</div>
 								<div class="input1">
-									<input type="text" name="cardnumber" style="width: 300px"
+									<input type="text" name="cardNumber" style="width: 300px"
 										maxlength="20" oninput="value=value.replace(/[^\d]/g,'')"
 										value="<%=cardVO.getCardNumber()%>">
 								</div>
@@ -175,15 +180,17 @@
 							<div class="expirydate">
 								<div class="lebel3">到期日</div>
 								<div class="input3">
-									<input type="date" id="date" name="deadline"
-										style="width: 141px" min="2021-01" max="2030-12" value="<%=cardVO.getDeadLine()%>">
+									<input type="date" id="date" name="deadLine"
+										style="width: 141px" min="2021-01" max="2030-12"
+										value="<%=cardVO.getDeadLine()%>">
 								</div>
 								<div class="CVV">
 									<div class="lebel4">CVV</div>
 									<div class="input4">
 										<input type="text" style="width: 95px; height: 30px"
 											name="cvv" maxlength="3"
-											oninput="value=value.replace(/[^\d]/g,'')" value="<%=cardVO.getCvv()%>">
+											oninput="value=value.replace(/[^\d]/g,'')"
+											value="<%=cardVO.getCvv()%>">
 									</div>
 								</div>
 							</div>
@@ -191,40 +198,41 @@
 							<div class="billaddress">
 								<div class="lebel5">帳單地址</div>
 								<div class="input5">
-									<input type="text" name="billaddress" maxlength="255" value="<%=cardVO.getBillAddress()%>">
+									<input type="text" name="billAddress" maxlength="255"
+										value="<%=cardVO.getBillAddress()%>">
 								</div>
 							</div>
 							<div class="zipcode">
 								<div class="lebel6">郵遞區號</div>
 								<div class="input6">
-									<input type="text" name="zipcode" maxlength="6"
-										oninput="value=value.replace(/[^\d]/g,'')" value="<%=cardVO.getZipCode()%>"> <input
-										type="hidden" maxlength="255" name="sta" value="">
+									<input type="text" name="zipCode" maxlength="6"
+										oninput="value=value.replace(/[^\d]/g,'')"
+										value="<%=cardVO.getZipCode()%>">
 								</div>
 							</div>
 							<div class="storebutton">
-								<input type="hidden" name="action" value="insertOneCard">
+								<input type="hidden" name="action" value="updateOneCard">
 								<button type="submit" name="submit">確定</button>
 							</div>
 							<div class="backbutton">
-							<button type="reset" name="button">重填</button>
-								
+								<button type="reset" name="button">重填</button>
+
 							</div>
 						</div>
 					</div>
 				</div>
-					<c:if test="${not empty errorMsgs}">
-				<div style="margin-top:300px; margin-left: 750px">
-					<font style="color: red">請修正以下錯誤:</font>
-					<ul>
-						<c:forEach var="message" items="${errorMsgs}">
-							<li style="color: red">${message}</li>
-						</c:forEach>
-					</ul>
-				</div>
-			</c:if>
+				<c:if test="${not empty errorMsgs}">
+					<div style="margin-top: 300px; margin-left: 750px">
+						<font style="color: red">請修正以下錯誤:</font>
+						<ul>
+							<c:forEach var="message" items="${errorMsgs}">
+								<li style="color: red">${message}</li>
+							</c:forEach>
+						</ul>
+					</div>
+				</c:if>
 			</div>
-		
+
 		</form>
 	</div>
 </body>

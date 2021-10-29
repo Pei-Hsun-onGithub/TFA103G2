@@ -51,7 +51,7 @@
 	padding-left: 10px;
 }
 
-.memberlist li.three {
+.memberlist li.four {
 	background-color: rgba(88, 169, 175, 1);
 	color: white;
 	font-weight: bold;
@@ -94,7 +94,7 @@
 .showinfo {
 	width: 1000px;
 	height: 50px;
-/* 	position: relative; */
+	/*   position:relative; */
 	/* top:20px; */
 	display: flex;
 	flex-direction: row;
@@ -106,8 +106,8 @@
 .showinfo2 {
 	width: 1000px;
 	height: 60px;
-/* 	position: relative; */
-	/* top:20px; */
+	/* position:relative; */
+	/* top:40px; */
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -115,22 +115,26 @@
 	/* border: 1px black solid; */
 }
 
-.showinfo .cardNo {
+.showinfo .addressNo {
 	font-weight: bold;
 }
 
-.showinfo .cardHolder {
+.showinfo .customerName {
 	font-weight: bold;
 }
 
-.showinfo .cardNumber {
+.showinfo .deliverPhone {
 	font-weight: bold;
 }
 
-.showinfo .cardNo, .showinfo2 .cardNo {
+.showinfo .deliverAddress {
+	font-weight: bold;
+}
+
+.showinfo .addressNo, .showinfo2 .addressNo {
 	width: 50px;
 	height: 60px;
-/* 	margin-left: px; */
+	margin-left: 50px;
 	font-size: 16px;
 	line-height: 100px;
 	text-align: center;
@@ -138,8 +142,8 @@
 	vertical-align: middle;
 }
 
-.showinfo .cardHolder, .showinfo2 .cardHolder{
-	width: 100px;
+.showinfo .customerName, .showinfo2 .customerName {
+	width: 80px;
 	height: 60px;
 	/* margin-left: 30px; */
 	font-size: 16px;
@@ -149,14 +153,27 @@
 	vertical-align: middle;
 }
 
-.showinfo .cardNumber, .showinfo2 .cardNumber {
-	width: 140px;
+.showinfo .deliverPhone, .showinfo2 .deliverPhone {
+	width: 80px;
 	height: 60px;
-	/* margin-left: 30px; */
-	font-size: 16px;
-	line-height: 100px;
-	text-align: center;
+	/* margin-left: 80px; */
+	/* font-size: 30px; */
 	/* display:inline; */
+	line-height: 100px;
+	font-size: 16px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.showinfo .deliverAddress, .showinfo2 .deliverAddress {
+	width: 300px;
+	height: 60px;
+	/* margin-left: 80px; */
+	/* font-size: 30px; */
+	/* display:inline; */
+	line-height: 100px;
+	font-size: 16px;
+	text-align: center;
 	vertical-align: middle;
 }
 
@@ -168,12 +185,19 @@
 	visibility: hidden;
 }
 
-.showinfo2 .deletecard{
-	position: relative;
-	left: 80px;
+.showinfo .delete, .showinfo .edit{
+	background-color: rgba(88, 169, 175, 1);
+	width: 60px;
+	height: 40px;
+	border: none;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	visibility: hidden;
 }
 
-.showinfo .delete, .showinfo .edit, .showinfo2 .deletecard .delete, .showinfo2 .editcard .edit {
+.showinfo2 .deleteaddress .delete, .showinfo2 .editaddress .edit {
 	background-color: rgba(88, 169, 175, 1);
 	width: 60px;
 	height: 40px;
@@ -183,10 +207,10 @@
 	text-decoration: none;
 	font-size: 16px;
 	position: relative;
-	top: 20px;
+	top:20px;
 }
 
-.newcard {
+.newaddress {
 	width: 900px;
 	height: 100px;
 	position: relative;
@@ -195,7 +219,7 @@
 	border-top: 1px lightgray solid;
 }
 
-.newcard .insertcard {
+.newaddress .insertaddress {
 	position: relative;
 	top: 30px;
 	left: 400px;
@@ -207,17 +231,6 @@
 	font-size: 20px;
 }
 
-/* .newcard a { */
-/*   position: relative; */
-/*   top: 30px; */
-/*   left: 400px; */
-/*   background-color: rgba(88, 169, 175, 1); */
-/*   border: none; */
-/*   color: white; */
-/*   text-align: center; */
-/*   text-decoration: none; */
-/*   font-size: 20px; */
-/* } */
 .total {
 	zoom: 80%;
 }
