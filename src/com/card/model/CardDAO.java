@@ -290,7 +290,7 @@ public class CardDAO implements CardDAO_interface{
 			while (rs.next()) {
 				card = new CardVO();
 				card.setCardId(rs.getInt("cardId"));
-//				card.setUserId(rs.getInt("userId"));
+				card.setUserId(rs.getInt("userId"));
 				card.setCardHolder(rs.getString("cardHolder"));
 				card.setCardNumber(rs.getString("cardNumber"));
 				card.setDeadLine(rs.getDate("deadLine"));

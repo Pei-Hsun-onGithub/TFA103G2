@@ -41,6 +41,17 @@ public class AddressServlet extends HttpServlet {
 
 		}
 		
+		if ("showInsertAddress".equals(action)) {
+			MemberInfoService memberSvc = new MemberInfoService();
+			HttpSession session = req.getSession();
+			MemberInfo member = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
+			req.setAttribute("memberinfo", member);
+			String url = "/Gary_pages/Member04-addaddress.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
+			successView.forward(req, res);
+		
+		}
+		
 		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 			System.out.println("hello--1");

@@ -41,8 +41,8 @@ public class CardServlet extends HttpServlet {
 
 		}
 
-		if ("showInsertCard".equals(action)) {	
-			
+		if ("showInsertCard".equals(action)) {
+
 			MemberInfoService memberSvc = new MemberInfoService();
 			HttpSession session = req.getSession();
 			MemberInfo member = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
@@ -72,10 +72,9 @@ public class CardServlet extends HttpServlet {
 		if ("insertOneCard".equals(action)) {
 			MemberInfoService memberSvc = new MemberInfoService();
 			HttpSession session = req.getSession();
-			MemberInfo member = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
-			req.setAttribute("memberinfo", member);
-			
-			
+			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
+			req.setAttribute("memberinfo", mem);
+
 			List<String> errorMsgs = new LinkedList<String>();
 //			System.out.println("1="+errorMsgs);
 			// Store this set in the request scope, in case we need to
@@ -109,8 +108,7 @@ public class CardServlet extends HttpServlet {
 						&& !cardNumber.trim().matches(cardDiscoverReg) && !cardNumber.trim().matches(cardJCBReg)
 						&& !cardNumber.trim().matches(cardExpressReg) && !cardNumber.trim().matches(cardUnionPayReg)
 						&& !cardNumber.trim().matches(cardMaestroReg)) { // �H�U�m�ߥ��h(�W)��ܦ�(regular-expression)
-					errorMsgs.add(
-							"不符合卡規");
+					errorMsgs.add("不符合卡規");
 				}
 
 				Date deadLine = java.sql.Date.valueOf(req.getParameter("deadLine").trim());
@@ -148,7 +146,9 @@ public class CardServlet extends HttpServlet {
 
 				CardDAOService cardSvc = new CardDAOService();
 				cardVO = cardSvc.addCardDAO(userId, cardHolder, cardNumber, deadLine, cvv, billAddress, zipCode, 1);
-
+				Integer member = mem.getUserId();
+				Set<CardVO> cardset = cardSvc.getCardByUserId(member);
+				req.setAttribute("cardset", cardset);
 				String url = "/Gary_pages/Member03.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
 				successView.forward(req, res);
@@ -156,7 +156,7 @@ public class CardServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 				errorMsgs.add("錯誤:" + e.getMessage());
-				System.out.println("2="+errorMsgs);
+				System.out.println("2=" + errorMsgs);
 //				System.out.println(e);
 				RequestDispatcher failureView = req.getRequestDispatcher("/Gary_pages/Member03-addcard.jsp");
 				failureView.forward(req, res);
@@ -168,8 +168,8 @@ public class CardServlet extends HttpServlet {
 
 			MemberInfoService memberSvc = new MemberInfoService();
 			HttpSession session = req.getSession();
-			MemberInfo member = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
-			req.setAttribute("memberinfo", member);
+			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
+			req.setAttribute("memberinfo", mem);
 
 			List<String> errorMsgs = new LinkedList<String>();
 //			System.out.println("1="+errorMsgs);
@@ -179,6 +179,18 @@ public class CardServlet extends HttpServlet {
 
 			try {
 				Integer cardId = new Integer(req.getParameter("cardId"));
+
+				Set<CardVO> cardset = (Set<CardVO>) session.getAttribute("cardset");
+
+				CardVO waitingForUpdatecCardVO = null;
+
+				for (CardVO cardvo : cardset) {
+
+					if (cardId.equals(cardvo.getCardId())) {
+						waitingForUpdatecCardVO = cardvo;
+					}
+				}
+
 				Integer userId = new Integer(req.getParameter("userId"));
 
 				String cardHolder = req.getParameter("cardHolder");
@@ -224,29 +236,32 @@ public class CardServlet extends HttpServlet {
 				if (zipCode == null || zipCode.trim().length() == 0) {
 					errorMsgs.add("�l���ϸ�: �ФŪť�");
 				}
-				
+
 				Integer sta = new Integer(req.getParameter("sta"));
 
-				CardVO cardVO = new CardVO();
-				cardVO.setCardId(cardId);
-				cardVO.setUserId(userId);
-				cardVO.setCardHolder(cardHolder);
-				cardVO.setCardNumber(cardNumber);
-				cardVO.setDeadLine(deadLine);
-				cardVO.setCvv(cvv);
-				cardVO.setBillAddress(billAddress);
-				cardVO.setZipCode(zipCode);
-				cardVO.setSta(sta);
+				waitingForUpdatecCardVO.setCardId(cardId);
+				waitingForUpdatecCardVO.setUserId(userId);
+				waitingForUpdatecCardVO.setCardHolder(cardHolder);
+				waitingForUpdatecCardVO.setCardNumber(cardNumber);
+				waitingForUpdatecCardVO.setDeadLine(deadLine);
+				waitingForUpdatecCardVO.setCvv(cvv);
+				waitingForUpdatecCardVO.setBillAddress(billAddress);
+				waitingForUpdatecCardVO.setZipCode(zipCode);
+				waitingForUpdatecCardVO.setSta(sta);
 
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("cardvo", cardVO); // �t����J�榡���~��empVO����,�]�s�Jreq
+					req.setAttribute("cardvo", waitingForUpdatecCardVO); // �t����J�榡���~��empVO����,�]�s�Jreq
 					RequestDispatcher failureView = req.getRequestDispatcher("/Gary_pages/Member03-editcard.jsp");
 					failureView.forward(req, res);
 					return;
 				}
 
 				CardDAOService cardSvc = new CardDAOService();
-				cardVO = cardSvc.updateCardDAO(userId, cardHolder, cardNumber, deadLine, cvv, billAddress, zipCode, sta);
+				waitingForUpdatecCardVO = cardSvc.updateCardDAO(cardId, userId, cardHolder, cardNumber, deadLine, cvv,
+						billAddress, zipCode, sta);
+
+				req.setAttribute("cardset", cardset);
+				session.setAttribute("cardset", cardset);
 
 				String url = "/Gary_pages/Member03.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
@@ -264,6 +279,42 @@ public class CardServlet extends HttpServlet {
 
 		}
 
+		if ("deleteCard".equals(action)) {
+
+			MemberInfoService memberSvc = new MemberInfoService();
+			HttpSession session = req.getSession();
+			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
+			req.setAttribute("memberinfo", mem);
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				
+				Integer cardId = new Integer(req.getParameter("cardId"));
+
+				Set<CardVO> cardset = (Set<CardVO>) session.getAttribute("cardset");
+
+				CardDAOService cardSvc = new CardDAOService();
+				CardVO cardVO = cardSvc.getCardDAO(cardId);
+				cardSvc.deleteCardDAO(cardId);
+
+				cardset.remove(cardVO);
+
+				req.setAttribute("cardset", cardset);
+				session.setAttribute("cardset", cardset);
+				
+				String url = "/Gary_pages/Member03.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
+				successView.forward(req, res);
+			} catch (Exception e) {
+				errorMsgs.add("刪除資料失敗:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/Gary_pages/Member03.jsp");
+				failureView.forward(req, res);
+			}
+		}
 	}
 
 }

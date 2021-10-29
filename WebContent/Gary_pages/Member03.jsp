@@ -12,6 +12,11 @@
 	MemberInfo memberinfo = (MemberInfo) request.getAttribute("memberinfo");
 %>
 
+<%
+  response.setHeader("Cache-Control","no-store"); //HTTP 1.1
+  response.setHeader("Pragma","no-cache");        //HTTP 1.0
+  response.setDateHeader ("Expires", 0);
+%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -108,6 +113,11 @@
 					</div>
 				</div>
 
+<%
+
+	session.setAttribute("cardset", request.getAttribute("cardset"));
+
+%>
 				<c:forEach var="CardVO" items="${cardset}" varStatus="count">
 					<div class="showinfo2">
 						<div class="cardNo">${count.count}</div>
