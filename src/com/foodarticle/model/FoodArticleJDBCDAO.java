@@ -26,6 +26,8 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 	public static final String GET_ALL = "SELECT * FROM FoodArticle";
 	public static final String GET_POPULAR ="SELECT * FROM FoodArticle ORDER BY articleno DESC LIMIT 4";
 	public static final String GET_KEYWORD ="SELECT * FROM FoodArticle WHERE articletitle like ?";
+	public static final String GET_BY_USERID ="SELECT * FROM FoodArticle WHERE userid = ?";
+	
 	
 	static {
 		try {
@@ -270,6 +272,63 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 		return farList;
 	}
 
+	
+	@Override
+	public List<FoodArticleVO> getByUserId(Integer userId) {
+		// TODO Auto-generated method stub
+		List<FoodArticleVO> farList = new ArrayList<>();
+		FoodArticleVO far =null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DriverManager.getConnection(URL, USER, PASSWORD);
+			pstmt = con.prepareStatement(GET_BY_USERID);
+			pstmt.setInt(1,userId);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				far = new FoodArticleVO();
+				far.setArticleNo(rs.getInt("articleNo"));
+				far.setUserId(rs.getInt("userId"));
+				far.setRestaurantId(rs.getInt("restaurantId"));
+				far.setArticleTitle(rs.getString("articleTitle"));
+				far.setArticleDate(rs.getDate("articleDate"));
+				far.setArticleContent(rs.getString("articleContent"));
+				far.setSta(rs.getInt("sta"));
+				farList.add(far);
+			}
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}			
+			
+			if(pstmt != null) {
+				try {
+				pstmt.close();
+				}catch(SQLException se){
+					se.printStackTrace();
+				}
+			}
+				
+			if( con != null) {
+				try {
+					con.close();
+				}catch(SQLException se) {
+					se.printStackTrace();
+				}
+			}
+		}									
+		
+		return farList;
+	}
 	@Override
 	public void insertWithPic(FoodArticleVO foodArticleVO, List<PictureBaseVO> list){
 		Connection con = null;

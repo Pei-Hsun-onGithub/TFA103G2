@@ -9,5 +9,6 @@ public interface RsOrderDAO_interface {
 	public void delete(Integer orderId);
 	public RsOrderVO findByPK(Integer orderId);
 	public List<RsOrderVO> getAll();
+	public List<RsOrderVO> getOrdersByUserId(Integer userId);
 
 }

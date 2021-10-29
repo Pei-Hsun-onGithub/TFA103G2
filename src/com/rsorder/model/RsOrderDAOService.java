@@ -3,6 +3,7 @@ package com.rsorder.model;
 import java.sql.Date;
 import java.util.List;
 
+
 import com.rsorder.model.RsOrderVO;
 
 public class RsOrderDAOService {
@@ -13,8 +14,10 @@ public class RsOrderDAOService {
 		dao = new RsOrderDAO();
 	}
 
-	public RsOrderVO addRsOrderDAO(Integer userId, Integer restaurantId, Integer cardId, Integer deliveryAddId, Integer deliveryMethods, Date orderDay, Date resStrTime, Date resEndTime, Date delStrTime, Date delEndTime, Integer count, String texts, Integer sta) {
-		
+	public RsOrderVO addRsOrderDAO(Integer userId, Integer restaurantId, Integer cardId, Integer deliveryAddId,
+			Integer deliveryMethods, Date orderDay, Date resStrTime, Date resEndTime, Date delStrTime, Date delEndTime,
+			Integer count, String texts, Integer sta) {
+
 		RsOrderVO rsOrderVO = new RsOrderVO();
 
 		rsOrderVO.setUserId(userId);
@@ -30,13 +33,14 @@ public class RsOrderDAOService {
 		rsOrderVO.setCount(count);
 		rsOrderVO.setTexts(texts);
 		rsOrderVO.setSta(sta);
-		
-		
+
 		return dao.insert(rsOrderVO);
 	}
-	
-	public RsOrderVO updateRsOrderDAO(Integer userId, Integer restaurantId, Integer cardId, Integer deliveryAddId, Integer deliveryMethods, Date orderDay, Date resStrTime, Date resEndTime, Date delStrTime, Date delEndTime, Integer count, String texts, Integer sta) {
-		
+
+	public RsOrderVO updateRsOrderDAO(Integer userId, Integer restaurantId, Integer cardId, Integer deliveryAddId,
+			Integer deliveryMethods, Date orderDay, Date resStrTime, Date resEndTime, Date delStrTime, Date delEndTime,
+			Integer count, String texts, Integer sta) {
+
 		RsOrderVO rsOrderVO = new RsOrderVO();
 		rsOrderVO.setUserId(userId);
 		rsOrderVO.setRestaurantId(restaurantId);
@@ -52,20 +56,24 @@ public class RsOrderDAOService {
 		rsOrderVO.setTexts(texts);
 		rsOrderVO.setSta(sta);
 		dao.update(rsOrderVO);
-		
+
 		return rsOrderVO;
-	}	
+	}
 
 	public void deleteRsOrderDAO(Integer orderId) {
 		dao.delete(orderId);
-	}	
-	
-		public RsOrderVO getCardVAO(Integer orderId) {
+	}
+
+	public RsOrderVO getCardVAO(Integer orderId) {
 		return dao.findByPK(orderId);
 	}
-		
-		public List<RsOrderVO> getAll() {
+
+	public List<RsOrderVO> getAll() {
 		return dao.getAll();
-	}	
-	
+	}
+
+	public List<RsOrderVO> getOrdersByUserId(Integer userId) {
+		
+		return this.dao.getOrdersByUserId(userId);
+	}
 }

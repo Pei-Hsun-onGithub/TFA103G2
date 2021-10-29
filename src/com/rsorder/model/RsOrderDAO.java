@@ -18,8 +18,8 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 	private static final String DELETE = "DELETE FROM RsOrder WHERE orderId = ?";	
 	private static final String FIND_BY_PK = "SELECT * FROM RsOrder WHERE orderId = ?";
 	private static final String GET_ALL = "SELECT * FROM RsOrder";
-
-
+	private static final String GET_ALL_BY_USERID = "SELECT * FROM RsOrder WHERE userId = ?";
+	
 	static {
 		try {
 			Class.forName(Util.DRIVER);
@@ -266,6 +266,71 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
+				ord = new RsOrderVO();
+				ord.setOrderId(rs.getInt("orderId"));
+				ord.setUserId(rs.getInt("userId"));
+				ord.setRestaurantId(rs.getInt("restaurantId"));
+				ord.setCardId(rs.getInt("cardId"));
+				ord.setDeliveryAddId(rs.getInt("deliveryAddId"));
+				ord.setDeliveryMethods(rs.getInt("deliveryMethods"));
+				ord.setOrderDay(rs.getDate("orderDay"));
+				ord.setResStrTime(rs.getDate("delEndTime"));
+				ord.setResEndTime(rs.getDate("resEndTime"));
+				ord.setDelStrTime(rs.getDate("delStrTime"));
+				ord.setDelEndTime(rs.getDate("delEndTime"));
+				ord.setCount(rs.getInt("count"));
+				ord.setTexts(rs.getString("texts"));
+				ord.setSta(rs.getInt("sta"));
+				rsOrderList.add(ord);
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return rsOrderList;
+	}
+	
+	@Override
+	public List<RsOrderVO> getOrdersByUserId(Integer userId) {
+		
+		List<RsOrderVO> rsOrderList = new ArrayList<>();
+		RsOrderVO ord = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(GET_ALL_BY_USERID);
+			pstmt.setInt(1, userId);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				
 				ord = new RsOrderVO();
 				ord.setOrderId(rs.getInt("orderId"));
 				ord.setUserId(rs.getInt("userId"));
