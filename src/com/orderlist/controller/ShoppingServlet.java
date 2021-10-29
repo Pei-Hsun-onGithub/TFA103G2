@@ -46,34 +46,24 @@ public class ShoppingServlet extends HttpServlet {
 						Cart innerCart = buylist.get(buylist.indexOf(acart));
 						innerCart.setQuantity(innerCart.getQuantity() + acart.getQuantity());
 					} else {
-						buylist.add(acart);
+						buylist.add(acart);			
 						
 					}
+					
 				}
+				
 			}
 			session.setAttribute("shoppingcart", buylist);
 			String url = "/meal/Cart.jsp";
 			RequestDispatcher rd = req.getRequestDispatcher(url);
 			rd.forward(req, res);
-			
+//			System.out.println(buylist.toString());
 		}
 
 		// 結帳，計算購物車書籍價錢總數
-		else if (action.equals("CHECKOUT")) {
-			double total = 0;
-			for (int i = 0; i < buylist.size(); i++) {
-				Cart order = buylist.get(i);
-				Integer unitPrice = order.getUnitPrice();
-				Integer quantity = order.getQuantity();
-				total += (unitPrice * quantity);
-			}
+		
 
-			String amount = String.valueOf(total);
-			req.setAttribute("amount", amount);
-			String url = "/meal/checkout.jsp";
-			RequestDispatcher rd = req.getRequestDispatcher(url);
-			rd.forward(req, res);
-		}
+
 	}
 
 	private Cart getCart(HttpServletRequest req) {
@@ -85,7 +75,7 @@ public class ShoppingServlet extends HttpServlet {
 
 		Cart cart = new Cart();
 
-		cart.setMealId(mealId);
+		cart.setMealId((new Integer(mealId)).intValue());
 		cart.setMealName(mealName);
 		cart.setUnitPrice((new Integer(unitPrice)).intValue());
 		cart.setQuantity((new Integer(quantity)).intValue());
