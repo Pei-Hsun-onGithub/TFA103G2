@@ -51,7 +51,7 @@ public class LoginHandler extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.setAttribute("email", email);
 			session.setAttribute("userId", userId);
-			session.setAttribute("MemberInfo", memberInfo2);
+			session.setAttribute("memberInfo", memberInfo2);
 			
 			String location = (String) session.getAttribute("location");
 //*工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
