@@ -17,8 +17,7 @@
  href="<%=request.getContextPath()%>/assets/img/Image4.png">
 
 <!-- Stylesheet -->
-<link rel="stylesheet"
- href="<%=request.getContextPath()%>/assets/css/animate.min.css">
+<link rel="stylesheet"  href="<%=request.getContextPath()%>/assets/css/animate.min.css">
 <link rel="stylesheet"
  href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
 <link rel="stylesheet"
