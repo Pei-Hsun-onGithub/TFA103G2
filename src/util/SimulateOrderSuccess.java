@@ -74,8 +74,14 @@ public class SimulateOrderSuccess extends HttpServlet{
 			
 			// 將目前的成就任務與使用者訂單成立的狀態，更新到成就進度DB
 			// 注意 :userId 與 AchieveId是「複合主鍵」
-			archieveProgressSvc.updateAchieveProgress(userId, achieveVO.getAchiId(), articles.size(), orders.size(), achieveVO.getOpenDate(), 13);
+			AchieveProgress userAchieveProgress = archieveProgressSvc.updateAchieveProgress(userId, achieveVO.getAchiId(), articles.size(), orders.size(), achieveVO.getOpenDate(), 13);
 
+			// 檢查達標
+			ArchieveChecker archieveChecker = new ArchieveChecker();
+			
+			if(archieveChecker.isComplete(achieveVO, userAchieveProgress)) {
+				
+			}
 			
 			
 			System.out.println("orders=" + orders);

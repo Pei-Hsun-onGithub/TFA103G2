@@ -249,6 +249,8 @@ div.my-chooseType ul li button {
 							<div class="container my-content">
 
 								<div class="row justify-content-center">
+									<h3>目前的成就是 : </h3>
+									<h4></h4>
 									<table id="table_id" class="display">
 										<thead>
 											<tr>
@@ -320,10 +322,15 @@ div.my-chooseType ul li button {
 											</c:forEach>
 										</tbody>
 									</table>
+									
+									
 								</div>
+								
 							</div>
 						</section>
 						<!-- Achieve End -->
+					
+					
 					</div>
 
 
