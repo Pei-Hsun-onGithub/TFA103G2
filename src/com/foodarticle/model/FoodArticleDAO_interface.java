@@ -11,6 +11,7 @@ public interface FoodArticleDAO_interface {
 	public void delete(Integer articleNo);
 	FoodArticleVO findByPrimaryKey(Integer articleNo);
 	List<FoodArticleVO> getall();
+	List<FoodArticleVO> getByUserId(Integer userId);
 //	public boolean insertWithPic(FoodArticleVO foodArticleVO, List<PictureBaseVO> list);
 	public void insertWithPic(FoodArticleVO foodArticleVO, List<PictureBaseVO> list);
 	List<FoodArticleVO> getPopular();

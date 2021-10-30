@@ -99,7 +99,7 @@ table tr td img {
 					</button>
 				</div>
 				<div class="logo">
-					<a class="main-logo" href="<%=request.getContextPath()%>/pei_pages/vendor_restaurant_updateInfo.jsp"><img
+					<a class="main-logo" href="<%=request.getContextPath()%>/pei_pages/BackgroundManager.jsp"><img
 						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
 				</div>
 				<div class="collapse navbar-collapse" id="themefie_main_menu">

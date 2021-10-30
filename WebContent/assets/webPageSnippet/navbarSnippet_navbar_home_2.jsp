@@ -1,3 +1,6 @@
+<%@page import="com.achieveprogress.model.AchieveProgress"%>
+<%@page import="com.achieveprogress.model.AchieveProgressService"%>
+<%@page import="com.achieve.model.Achieve"%>
 <%@page import="com.monsterbook.model.MonsterBook"%>
 <%@page import="com.monsterbook.model.MonsterBookService"%>
 <%@page import="com.memberinfo.model.MemberInfo"%>
@@ -120,21 +123,29 @@
 					<li class="phone-contact"><a
 						href="/TFA103G2/login/memberinfo.do?action=getOne"><i
 							class="far fa-user"></i> <%=memberVO.getUserName()%></a></li>
+<%
 
+Achieve achieveVO = (Achieve)application.getAttribute("achieveMission");
+
+AchieveProgressService achieveProgressSvc = new AchieveProgressService();
+
+AchieveProgress achiProgress = achieveProgressSvc.getOneAchieveProgress((Integer)session.getAttribute("userId"), achieveVO.getAchiId());
+
+%>
 					<li><a id="my-bell" href="#" onclick="toggleTheTooltip()"><i
-							class="far fa-bell"></i> <span>4</span></a></li>
+							class="far fa-bell"></i> <span>1</span></a></li>
 					<!--   放入想要提醒的事項!    -->
 					<div id="tooltip" role="tooltip">
 						<div class="my-mission-title">今日任務</div>
-						<div class="my-mission-content">大胃王</div>
+						<div class="my-mission-content"><%= achieveVO.getAchiName() %></div>
 						<div class="my-mission-title">完成獎勵</div>
-						<div class="my-mission-content">金幣 20 枚</div>
-						<div class="my-mission-content">怪獸飼料 100個</div>
+						<div class="my-mission-content">金幣<%= achieveVO.getGainGold() %>枚</div>
+						<div class="my-mission-content">怪獸飼料<%= achieveVO.getGainFeed() %>個</div>
 						<div class="my-mission-title">描述</div>
-						<div class="my-mission-content">成功完成50筆訂單可獲得100個飼料</div>
+						<div class="my-mission-content"><%= achieveVO.getDescript() %></div>
 						<div class="my-mission-title">目前進度</div>
-						<div class="my-mission-content">食記提交: 0/0</div>
-						<div class="my-mission-content">訂餐成功: 23/50</div>
+						<div class="my-mission-content">食記提交: <%= achiProgress.getCurrentArticle() %>/<%= achieveVO.getAchiArticle() %></div>
+						<div class="my-mission-content">訂餐成功: <%= achiProgress.getCurrentOrder() %>/<%= achieveVO.getAchiOrder() %></div>
 						<div class="my-mission-title">剩餘天數</div>
 						<div class="my-mission-content">39</div>
 						<div id="arrow" data-popper-arrow></div>

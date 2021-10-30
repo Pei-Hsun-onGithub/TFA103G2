@@ -56,6 +56,9 @@ public class FoodArticleService {
 	public List<FoodArticleVO> getall(){
 		return dao.getall();
 	}
+	public List<FoodArticleVO> getArticlesByUserId(Integer userId) {
+		return this.dao.getByUserId(userId);
+	}
 	
 	public void addtWithPic(FoodArticleVO foodArticleVO, List<PictureBaseVO> list) {
 		  dao.insertWithPic(foodArticleVO,list);	
