@@ -35,7 +35,7 @@ public class RestInsert extends Command {
 		
 		RestaurantService restSvc = new RestaurantService();
 		
-		// 1. Â^¨ú«eºÝ¸ê®Æ
+		// 1. ï¿½^ï¿½ï¿½ï¿½eï¿½Ý¸ï¿½ï¿½
 		
 		String restaurantName = req.getParameter("restaurantName");
 //		System.out.println("restaurantName=" + restaurantName);
@@ -72,12 +72,12 @@ public class RestInsert extends Command {
 		
 		
 		
-		// 2. »P«ù¤[¼h·¾³q
+		// 2. ï¿½Pï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½ï¿½q
 		
 		RestaurantVO restVO = restSvc.addRestaurant(restaurantName, boss, phone, district, city, location, openTime, closeTime, dayoffId, weeklyLeave, sta);
 //		System.out.println("restVO=" + restVO);
 		
-		// Â^¨úÃöÁpÃþ§ORestaurantStyle©Ò»Ýªº¸ê®Æ
+		// ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ORestaurantStyleï¿½Ò»Ýªï¿½ï¿½ï¿½ï¿½
 //		Integer styleId = new Integer(req.getParameter("restaurantStyle"));
 		Integer styleId1 = null;
 		Integer styleId2 = null;
@@ -97,7 +97,7 @@ public class RestInsert extends Command {
 		
 		
 		
-		// 3.1 Âà°e¸ê®Æ¨ìÃöÁpÃþ§ORestaurantStyleªºcontroller¨Ó±N¸ê®Æ¤J®w,¥Ñrestaurantstyleªºcontroller¨Óforward¨ìview
+		// 3.1 ï¿½ï¿½eï¿½ï¿½Æ¨ï¿½ï¿½ï¿½ï¿½pï¿½ï¿½ï¿½ORestaurantStyleï¿½ï¿½controllerï¿½Ó±Nï¿½ï¿½Æ¤Jï¿½w,ï¿½ï¿½restaurantstyleï¿½ï¿½controllerï¿½ï¿½forwardï¿½ï¿½view
 		
 		req.setAttribute("restVO", restVO);
 		
@@ -108,7 +108,7 @@ public class RestInsert extends Command {
 		req.setAttribute("styleId3", styleId3);
 		
 		HttpSession session = req.getSession();
-		// «O¦s·s¼W¦¨¥\ªºÀ\ÆU½s¸¹
+		// ï¿½Oï¿½sï¿½sï¿½Wï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½\ï¿½Uï¿½sï¿½ï¿½
 		session.setAttribute("restaurantId", restaurantId);
 		
 		
@@ -132,10 +132,10 @@ public class RestInsert extends Command {
 		StringBuffer weeklyLeaveBuilder = new StringBuffer();
 		for(String day : days) {
 			if("on".equals(day)) 
-				// ¤£Àç·~
+				// ï¿½ï¿½ï¿½ï¿½~
 				weeklyLeaveBuilder.append("1");
 			else
-				//Àç·~
+				//ï¿½ï¿½~
 				weeklyLeaveBuilder.append("0");
 		}
 		return weeklyLeaveBuilder.toString();
