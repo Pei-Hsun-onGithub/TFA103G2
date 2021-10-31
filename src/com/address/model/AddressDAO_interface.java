@@ -2,13 +2,16 @@ package com.address.model;
 
 import java.util.*;
 
+import com.address.model.AddressVO;
+
 public interface AddressDAO_interface {
 	 public void insert(AddressVO addressVO);
      public void update(AddressVO addressVO);
      public void delete(Integer deliveryAddid);
      public AddressVO findByPK(Integer deliveryAddid);
      public List<AddressVO> getAll();
-     //¬d¸ß¬Y³¡ªùªº­û¤u(¤@¹ï¦h)(¦^¶Ç Set)
+     public Set<AddressVO> getAddressByUserId(Integer userId);
+     //ï¿½dï¿½ß¬Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½u(ï¿½@ï¿½ï¿½h)(ï¿½^ï¿½ï¿½ Set)
 //     public Set<EmpVO> getEmpsByDeptno(Integer deliveryAddid);
 
 }

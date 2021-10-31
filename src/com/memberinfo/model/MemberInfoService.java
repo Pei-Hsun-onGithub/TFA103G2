@@ -119,6 +119,13 @@ public class MemberInfoService {
 	}
 
 
+	
+	public MemberInfo findMemberPwd(String pwd) {
+		return dao.findMemberPwd(pwd);
+	}
+
+
+
 	public MemberInfo findByEmail2(String email, String pwd) {
 		return dao.selectEmail2(email, pwd);
 	}
