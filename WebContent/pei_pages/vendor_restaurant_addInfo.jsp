@@ -288,9 +288,9 @@ div.my-chooseType ul li button {
 									<a href="#" tabindex="-1"
 										class="btn btn-primary disabled placeholder col-4"
 										aria-hidden="true" style="visibility: hidden; height: 45px;"></a>
-									<div data-restnameError-empty style="display: none;">*名稱不能是空白</div>
-									<div data-restnameError-special style="display: none;">*員工姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間</div>
-									<div data-restnameError-pass style="">V</div>
+									<div data-restnameError-empty style="display: none;color: red;">*餐廳名稱不能是空白</div>
+									<div data-restnameError-special style="display: none;color: red;">*餐廳名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間</div>
+									<div data-restnameError-pass style=""><i class="far fa-check-circle"></i></div>
 								</div>
 
 							</div>
@@ -459,10 +459,10 @@ div.my-chooseType ul li button {
 								<div class="col-md-5 my-error-location">
 									<a href="#" tabindex="-1"
 										class="btn btn-primary disabled placeholder col-4"
-										aria-hidden="true" style="visibility: hidden; height: 0px;margin-top:12px;"></a>
-									<div data-locationError-empty style="display: none;">*地址不能是空白</div>
-									<div data-locationError-special style="display: none;">*地址: 只能是中、英文字母、數字，且長度必需在2到15之間</div>
-									<div data-locationError-pass style="">V</div>
+										aria-hidden="true" style="visibility: hidden; height: 5px;margin-top:12px;"></a>
+									<div data-locationError-empty style="display: none;color: red;">*地址不能是空白</div>
+									<div data-locationError-special style="display: none;color: red;">*地址: 只能是中、英文字母、數字，且長度必需在2到15之間</div>
+									<div data-locationError-pass style=""><i class="far fa-check-circle"></i></div>
 								</div>
 								
 
@@ -523,8 +523,17 @@ div.my-chooseType ul li button {
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="boss"
-											value="劉德華">
+											value="劉德華" onkeyup="errorHandler(2);">
 									</div>
+								</div>
+								
+								<div class="col-md-5 my-error-boss">
+									<a href="#" tabindex="-1"
+										class="btn btn-primary disabled placeholder col-4"
+										aria-hidden="true" style="visibility: hidden; height: 55px;margin-top:12px;"></a>
+									<div data-bossError-empty style="display: none;color: red;">*名字不能是空白</div>
+									<div data-bossError-special style="display: none;color: red;">*名字: 只能是中、英文字母，且長度必需在3到10之間</div>
+									<div data-bossError-pass style=""><i class="far fa-check-circle"></i></div>
 								</div>
 
 							</div>
@@ -535,8 +544,17 @@ div.my-chooseType ul li button {
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="phone"
-											value="0933345667">
+											value="0933345667" onkeyup="errorHandler(3);">
 									</div>
+								</div>
+								
+								<div class="col-md-5 my-error-phone">
+									<a href="#" tabindex="-1"
+										class="btn btn-primary disabled placeholder col-4"
+										aria-hidden="true" style="visibility: hidden; height: 55px;margin-top:12px;"></a>
+									<div data-phoneError-empty style="display: none;color: red;">*電話不能是空白</div>
+									<div data-phoneError-special style="display: none;color: red;">*電話: 只能0~9數字，且長度必需在8到10之間</div>
+									<div data-phoneError-pass style=""><i class="far fa-check-circle"></i></div>
 								</div>
 
 							</div>
@@ -758,7 +776,7 @@ div.my-chooseType ul li button {
 		/*********************************************   錯誤處理       **********************************************************/
 			function errorHandler(item) {
 							//console.log(item);
-							let items = ["restaurantName","location"];
+							let items = ["restaurantName","location", "boss", "phone"];
 							
 								$.ajax({
 									  url: "<%=request.getContextPath()%>/restaurant/restaurant.do?action=errorVerify&param="+ item,  
@@ -802,6 +820,42 @@ div.my-chooseType ul li button {
 											  
 											  
 										}
+										if(item === 2) {
+											
+											$('div.my-error-boss div[data-bossError-empty]').hide();
+											  $('div.my-error-boss div[data-bossError-special]').hide();
+											  $('div.my-error-boss div[data-bossError-pass]').hide();
+											  
+											  if(isExistError(data.noEmpty)) {
+												  $('div.my-error-boss div[data-bossError-empty]').show();
+											  }
+											  else if(isExistError(data.errorFormatName)) {
+												  $('div.my-error-boss div[data-bossError-special]').show();
+												  
+											  } else {
+												  $('div.my-error-boss div[data-bossError-pass]').show();
+											  }
+											  
+											  
+										}
+										if(item === 3) {
+											
+											$('div.my-error-phone div[data-phoneError-empty]').hide();
+											  $('div.my-error-phone div[data-phoneError-special]').hide();
+											  $('div.my-error-phone div[data-phoneError-pass]').hide();
+											  
+											  if(isExistError(data.noEmpty)) {
+												  $('div.my-error-phone div[data-phoneError-empty]').show();
+											  }
+											  else if(isExistError(data.errorFormatName)) {
+												  $('div.my-error-phone div[data-phoneError-special]').show();
+												  
+											  } else {
+												  $('div.my-error-phone div[data-phoneError-pass]').show();
+											  }
+											  
+											  
+										}
 									  
 									  }
 									  
@@ -824,8 +878,13 @@ div.my-chooseType ul li button {
 				} else if($('div[data-locationError-pass]').attr('style')) {
 					$('input[name="location"]').focus();
 					return false;
+				} else if($('div[data-bossError-pass]').attr('style')) {
+					$('input[name="boss"]').focus();
+					return false;
+				} else if($('div[data-phoneError-pass]').attr('style')) {
+					$('input[name="phone"]').focus();
+					return false;
 				}
-				
 				
 				
 				// 如果沒有錯誤才能submit

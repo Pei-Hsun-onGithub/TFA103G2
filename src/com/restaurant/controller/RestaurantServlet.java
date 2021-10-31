@@ -86,6 +86,44 @@ public class RestaurantServlet extends HttpServlet {
 				return;
 
 			}
+			if ("2".equals(item)) {
+				// 做其他的錯誤處理
+				String boss = req.getParameter("item");
+				String bossReg = "^[(\u4e00-\u9fa5)(a-zA-Z_)]{3,10}$";
+				
+				if (boss == null || boss.trim().length() == 0) {
+					errors.setNoEmpty("no name empty");
+					out.write(gson.toJson(errors));
+					return;
+				} else if (!(boss.trim().matches(bossReg))) {
+					errors.setErrorFormatName("formate Errors");
+					out.write(gson.toJson(errors));
+					return;
+				}
+				// 都沒有錯誤回傳空的錯誤訊息物件
+				out.write(gson.toJson(errors));
+				return;
+				
+			}
+			if ("3".equals(item)) {
+				// 做其他的錯誤處理
+				String phone = req.getParameter("item");
+				String phoneReg = "^[(0-9_)]{8,10}$";
+				
+				if (phone == null || phone.trim().length() == 0) {
+					errors.setNoEmpty("no name empty");
+					out.write(gson.toJson(errors));
+					return;
+				} else if (!(phone.trim().matches(phoneReg))) {
+					errors.setErrorFormatName("formate Errors");
+					out.write(gson.toJson(errors));
+					return;
+				}
+				// 都沒有錯誤回傳空的錯誤訊息物件
+				out.write(gson.toJson(errors));
+				return;
+				
+			}
 
 		}
 	}

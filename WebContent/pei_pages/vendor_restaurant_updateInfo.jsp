@@ -274,8 +274,17 @@ div.my-chooseType ul li button{
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="restaurantName"
-											value="<%=(restVO == null) ? "欣葉日本料理" : restVO.getRestaurantName()%>">
+											value="<%=(restVO == null) ? "欣葉日本料理" : restVO.getRestaurantName()%>" onkeyup="errorHandler(0);">
 									</div>
+								</div>
+								
+								<div class="col-md-5 my-error-restName">
+									<a href="#" tabindex="-1"
+										class="btn btn-primary disabled placeholder col-4"
+										aria-hidden="true" style="visibility: hidden; height: 45px;"></a>
+									<div data-restnameError-empty style="display: none;color: red;">*餐廳名稱不能是空白</div>
+									<div data-restnameError-special style="display: none;color: red;">*餐廳名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間</div>
+									<div data-restnameError-pass style=""><i class="far fa-check-circle"></i></div>
 								</div>
 
 							</div>
@@ -433,10 +442,17 @@ RestaurantService restSvc = new RestaurantService();
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="location"
-											value="<%=(restVO == null) ? "復興北路一段100號" : restVO.getLocation()%>">
+											value="<%=(restVO == null) ? "復興北路一段100號" : restVO.getLocation()%>" onkeyup="errorHandler(1);">
 									</div>
 								</div>
-
+								<div class="col-md-5 my-error-location">
+									<a href="#" tabindex="-1"
+										class="btn btn-primary disabled placeholder col-4"
+										aria-hidden="true" style="visibility: hidden; height: 5px;margin-top:12px;"></a>
+									<div data-locationError-empty style="display: none;color: red;">*地址不能是空白</div>
+									<div data-locationError-special style="display: none;color: red;">*地址: 只能是中、英文字母、數字，且長度必需在2到15之間</div>
+									<div data-locationError-pass style=""><i class="far fa-check-circle"></i></div>
+								</div>
 							</div>
 
 
@@ -501,8 +517,17 @@ RestaurantService restSvc = new RestaurantService();
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="boss"
-											value="<%=(restVO == null) ? "劉德華" : restVO.getBoss()%>">
+											value="<%=(restVO == null) ? "劉德華" : restVO.getBoss()%>" onkeyup="errorHandler(2);">
 									</div>
+								</div>
+								
+								<div class="col-md-5 my-error-boss">
+									<a href="#" tabindex="-1"
+										class="btn btn-primary disabled placeholder col-4"
+										aria-hidden="true" style="visibility: hidden; height: 55px;margin-top:12px;"></a>
+									<div data-bossError-empty style="display: none;color: red;">*名字不能是空白</div>
+									<div data-bossError-special style="display: none;color: red;">*名字: 只能是中、英文字母，且長度必需在3到10之間</div>
+									<div data-bossError-pass style=""><i class="far fa-check-circle"></i></div>
 								</div>
 
 							</div>
@@ -513,8 +538,17 @@ RestaurantService restSvc = new RestaurantService();
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="phone"
-											value="<%=(restVO == null) ? "0933345667" : restVO.getPhone()%>">
+											value="<%=(restVO == null) ? "0933345667" : restVO.getPhone()%>" onkeyup="errorHandler(3);">
 									</div>
+								</div>
+								
+								<div class="col-md-5 my-error-phone">
+									<a href="#" tabindex="-1"
+										class="btn btn-primary disabled placeholder col-4"
+										aria-hidden="true" style="visibility: hidden; height: 55px;margin-top:12px;"></a>
+									<div data-phoneError-empty style="display: none;color: red;">*電話不能是空白</div>
+									<div data-phoneError-special style="display: none;color: red;">*電話: 只能0~9數字，且長度必需在8到10之間</div>
+									<div data-phoneError-pass style=""><i class="far fa-check-circle"></i></div>
 								</div>
 
 							</div>
@@ -704,6 +738,135 @@ RestaurantService restSvc = new RestaurantService();
 						
 
 						});
-	</script>
+		
+		/*********************************************   錯誤處理       **********************************************************/
+	function errorHandler(item) {
+							//console.log(item);
+							let items = ["restaurantName","location", "boss", "phone"];
+							
+								$.ajax({
+									  url: "<%=request.getContextPath()%>/restaurant/restaurant.do?action=errorVerify&param="+ item,  
+									  type: "POST",                  // GET | POST | PUT | DELETE | PATCH
+									  data: {"item" : $('input[name=' + items[item] + ']').val()
+									  },         // 傳送資料到指定的 url
+									  dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
+									  success: function(data){      // request 成功取得回應後執行
+										if(item === 0) {
+											
+											 $('div.my-error-restName div[data-restnameError-empty]').hide();
+											  $('div.my-error-restName div[data-restnameError-special]').hide();
+											  $('div.my-error-restName div[data-restnameError-pass]').hide();
+											  
+											  if(isExistError(data.noEmpty)) {
+												  $('div.my-error-restName div[data-restnameError-empty]').show();
+											  }
+											  else if(isExistError(data.errorFormatName)) {
+												  $('div.my-error-restName div[data-restnameError-special]').show();
+												  
+											  } else {
+												  $('div.my-error-restName div[data-restnameError-pass]').show();
+											  }
+										}
+									  
+										if(item === 1) {
+											
+											$('div.my-error-location div[data-locationError-empty]').hide();
+											  $('div.my-error-location div[data-locationError-special]').hide();
+											  $('div.my-error-location div[data-locationError-pass]').hide();
+											  
+											  if(isExistError(data.noEmpty)) {
+												  $('div.my-error-location div[data-locationError-empty]').show();
+											  }
+											  else if(isExistError(data.errorFormatName)) {
+												  $('div.my-error-location div[data-locationError-special]').show();
+												  
+											  } else {
+												  $('div.my-error-location div[data-locationError-pass]').show();
+											  }
+											  
+											  
+										}
+										if(item === 2) {
+											
+											$('div.my-error-boss div[data-bossError-empty]').hide();
+											  $('div.my-error-boss div[data-bossError-special]').hide();
+											  $('div.my-error-boss div[data-bossError-pass]').hide();
+											  
+											  if(isExistError(data.noEmpty)) {
+												  $('div.my-error-boss div[data-bossError-empty]').show();
+											  }
+											  else if(isExistError(data.errorFormatName)) {
+												  $('div.my-error-boss div[data-bossError-special]').show();
+												  
+											  } else {
+												  $('div.my-error-boss div[data-bossError-pass]').show();
+											  }
+											  
+											  
+										}
+										if(item === 3) {
+											
+											$('div.my-error-phone div[data-phoneError-empty]').hide();
+											  $('div.my-error-phone div[data-phoneError-special]').hide();
+											  $('div.my-error-phone div[data-phoneError-pass]').hide();
+											  
+											  if(isExistError(data.noEmpty)) {
+												  $('div.my-error-phone div[data-phoneError-empty]').show();
+											  }
+											  else if(isExistError(data.errorFormatName)) {
+												  $('div.my-error-phone div[data-phoneError-special]').show();
+												  
+											  } else {
+												  $('div.my-error-phone div[data-phoneError-pass]').show();
+											  }
+											  
+											  
+										}
+									  
+									  }
+									  
+									  
+									  
+									});
+								
+								
+								
+							}
+								
+			$('button#btn_submit').on("click", function(e) {
+				
+				
+				// 如果有錯誤導回錯誤處
+				if($('div[data-restnameError-pass]').attr('style')) {
+					$('input[name="restaurantName"]').focus();
+					//要加return false否則一樣會送出
+					return false;
+				} else if($('div[data-locationError-pass]').attr('style')) {
+					$('input[name="location"]').focus();
+					return false;
+				} else if($('div[data-bossError-pass]').attr('style')) {
+					$('input[name="boss"]').focus();
+					return false;
+				} else if($('div[data-phoneError-pass]').attr('style')) {
+					$('input[name="phone"]').focus();
+					return false;
+				}
+				
+				
+				// 如果沒有錯誤才能submit
+				this.click();
+				
+				
+				
+				
+			});
+								
+		function isExistError(errorMsg) {
+			//console.log(errorMsg);
+			if(errorMsg.length != 0)
+				return true;
+			return false;
+		}
+		</script>
 </body>
 </html>
