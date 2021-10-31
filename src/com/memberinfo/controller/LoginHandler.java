@@ -27,14 +27,14 @@ public class LoginHandler extends HttpServlet {
 		String pwd = req.getParameter("pwd");
 
 		MemberInfoService memberInfoSvc = new MemberInfoService();
-		boolean MemberInfo = memberInfoSvc.findByEmail(email);
+		boolean memberInfo = memberInfoSvc.findByEmail(email);
 
 		MemberInfoService memberInfoSvc2 = new MemberInfoService();
 		MemberInfo memberInfo2 = memberInfoSvc2.findByEmail2(email, pwd);
 
 		// 【檢查該帳號 , 密碼是否有效】
 // 【帳號無效時】
-		if (!MemberInfo) {
+		if (!memberInfo) {
 			out.println("<HTML><HEAD><TITLE>Access Denied</TITLE></HEAD>");
 			out.println("<BODY>帳號不存在!<BR>");
 			out.println("請按此重新登入 <A HREF=" + req.getContextPath() + "/login/Login-login.jsp>重新登入</A>");
