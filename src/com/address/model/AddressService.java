@@ -1,6 +1,7 @@
 package com.address.model;
 
 import java.util.List;
+import java.util.Set;
 
 public class AddressService {
 
@@ -52,6 +53,10 @@ public class AddressService {
 
 	public List<AddressVO> getAll() {
 		return dao.getAll();
+	}
+	
+	public Set<AddressVO> getAddressByUserId(Integer userId) {
+		return dao.getAddressByUserId(userId);
 	}
 
 }

@@ -49,69 +49,17 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap"
 	rel="stylesheet">
-
+<%@ include file="/assets/webPageSnippet/cssSnippet_navbar_home_1.jsp" %>
 
 </head>
 <body style="background-color: #dbdbdb">
-	<!-- navbar start -->
-	<header class="navbar-area ">
-		<nav class="navbar navbar-expand-lg">
-			<div class="container nav-container">
-				<div class="responsive-mobile-menu">
-					<button class="menu toggle-btn d-block d-lg-none"
-						data-target="#themefie_main_menu" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="icon-left"></span> <span class="icon-right"></span>
-					</button>
-				</div>
-				<div class="logo">
-					<a class="main-logo" href="home-1.html"><img
-						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
-				</div>
-				<div class="collapse navbar-collapse" id="themefie_main_menu">
-					<ul class="navbar-nav menu-open">
-						<li class="current-menu-item menu-item-has-children"><a
-							href="home-1.html">訂餐</a>
-							<ul class="sub-menu ps-0">
-								<li><a href="shop.html">Shop</a></li>
-								<li><a href="menu.html">Menu</a></li>
-								<li><a href="cart.html">Cart</a></li>
-								<li><a href="checkout.html">Checkout</a></li>
-							</ul></li>
-						<li><a href="blog.html">食記</a></li>
-						<li><a href="about.html">ABOUT US</a></li>
-						<li><a href="contact.html">CONTACTS</a></li>
-					</ul>
-				</div>
-				<div class="nav-right-part nav-right-part-mobile">
-					<ul>
-						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
-						</li>
-						<li class="phone-contact d-md-block d-none"><i
-							class="ri-phone-fill float-start"></i> +997 509 153 849</li>
-						<li class="menu-cart"><a href="cart.html">CART <span>1</span></a></li>
-						<li>49.50 $</li>
-					</ul>
-				</div>
-				<div class="nav-right-part nav-right-part-desktop">
-					<ul>
-						<li><a class="search" href="#"><i class="ri-search-line"></i></a>
-						</li>
-						<li class="phone-contact"><a href="#">sign in</a></li>
-						<li class="menu-cart"><a href="#">小鈴鐺 <span>4</span></a></li>
-						<li class="menu-cart"><a href="cart.html">CART <span>1</span></a></li>
-						<li>49.50 $</li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-	</header>
-	<!-- navbar end -->
+	<%@ include file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp" %>
+	
 
-	<div class="total">
+	<div class="total" style="width:1000px;height:700px;">
 		<div class="profile">
 			<img
-				src="/TFA103G2/memberinfo/MemberPic.do?userId=<%=memberinfo.getUserId()%>"
+				src="<%=request.getContextPath()%>/memberinfo/MemberPic.do?userId=<%=memberinfo.getUserId()%>"
 				alt="img">
 			<ul>
 				<li class="nickname"><%=memberinfo.getUserName()%></li>
@@ -121,15 +69,15 @@
 		</div>
 
 		<div class="memberlist">
-			<ul>
+						<ul>
 				<li class="one"><a
-					href="/TFA103G2/login/memberinfo.do?action=getOne">個人檔案</a></li>
+					href="<%=request.getContextPath()%>/login/memberinfo.do?action=getOne">個人檔案</a></li>
 				<li class="two"><a
-					href="/TFA103G2/login/memberinfo.do?action=getOnePwd">密碼修改</a></li>
+					href="<%=request.getContextPath()%>/login/memberinfo.do?action=getOnePwd">密碼修改</a></li>
 				<li class="three"><a
-					href="/TFA103G2/memberinfo/CardServlet.do?action=getAllCard">銀行/信用卡資訊</a></li>
+					href="<%=request.getContextPath()%>/memberinfo/CardServlet.do?action=getAllCard">銀行/信用卡資訊</a></li>
 				<li class="four"><a
-					href="<%=request.getContextPath()%>/Member04.html">外送地址管理</a></li>
+					href="<%=request.getContextPath()%>/address/address.do?action=getAllAddress">外送地址管理</a></li>
 				<li class="five"><a
 					href="<%=request.getContextPath()%>/Member05.html">歷史訂單</a></li>
 				<li class="six"><a
@@ -149,8 +97,10 @@
 
 						<div class="information">
 							<div class="nowpassword">
-								<div class="lebel1">目前的密碼</div>
-								<div class="input1"><%=memberinfo.getPwd()%>
+								<div class="lebel1">請輸入當前密碼</div>
+								<div class="input1">
+								<input class="nowpwd" type="text" name="nowpwd" maxlength="255"
+										value="">
 									<input type="hidden" name="userId"
 										value="<%=memberinfo.getUserId()%>"> <input
 										type="hidden" name="pwd" value="<%=memberinfo.getPwd()%>">
@@ -215,6 +165,7 @@
 			</div>
 		</form>
 	</div>
+	<%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp" %>
 
 	<script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
@@ -235,7 +186,7 @@
 	<script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/tweenmax.min.js"></script>
 
-
+<%@ include file="/assets/webPageSnippet/jsSnippet_navbar_home_3.jsp" %>
 	<!-- main js  -->
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 	<script

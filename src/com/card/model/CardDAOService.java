@@ -31,10 +31,11 @@ public class CardDAOService {
 		return cardVO;
 	}
 	
-	public CardVO updateCardDAO(Integer userId, String cardHolder, String cardNumber, Date deadLine, String cvv, String billAddress, String zipCode, Integer sta) {
+	public CardVO updateCardDAO(Integer cardId, Integer userId, String cardHolder, String cardNumber, Date deadLine, String cvv, String billAddress, String zipCode, Integer sta) {
 		
 		CardVO cardVO = new CardVO();
 		
+		cardVO.setCardId(cardId);
 		cardVO.setUserId(userId);
 		cardVO.setCardHolder(cardHolder);
 		cardVO.setCardNumber(cardNumber);

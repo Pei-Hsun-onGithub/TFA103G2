@@ -28,47 +28,52 @@ public class CardServlet extends HttpServlet {
 
 		if ("getAllCard".equals(action)) {
 			MemberInfoService memberSvc = new MemberInfoService();
-			MemberInfo member = memberSvc.getOneMemberInfo(20210001);
+			HttpSession session = req.getSession();
+			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
+			req.setAttribute("memberinfo", mem);
+			Integer member = mem.getUserId();
 			CardDAOService cardSvc = new CardDAOService();
-			CardVO card = cardSvc.getCardDAO(1);
-			req.setAttribute("cardvo", card);
-			req.setAttribute("memberinfo", member);
+			Set<CardVO> cardset = cardSvc.getCardByUserId(member);
+			req.setAttribute("cardset", cardset);
 			String url = "/Gary_pages/Member03.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // ¦¨¥\Âà¥æ listOneEmp.jsp
+			RequestDispatcher successView = req.getRequestDispatcher(url); // ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ listOneEmp.jsp
 			successView.forward(req, res);
 
 		}
 
 		if ("showInsertCard".equals(action)) {
+
 			MemberInfoService memberSvc = new MemberInfoService();
-			MemberInfo member = memberSvc.getOneMemberInfo(20210001);
+			HttpSession session = req.getSession();
+			MemberInfo member = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
 			req.setAttribute("memberinfo", member);
 			String url = "/Gary_pages/Member03-addcard.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // ¦¨¥\Âà¥æ listOneEmp.jsp
+			RequestDispatcher successView = req.getRequestDispatcher(url); // ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ listOneEmp.jsp
 			successView.forward(req, res);
-
 		}
-		
+
 		if ("showUpdateCard".equals(action)) {
 			MemberInfoService memberSvc = new MemberInfoService();
-			MemberInfo member = memberSvc.getOneMemberInfo(20210001);
+			HttpSession session = req.getSession();
+			MemberInfo member = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
 			req.setAttribute("memberinfo", member);
-			
-			Integer cardid = new Integer(req.getParameter("cardid"));
+//
+			Integer cardid = new Integer(req.getParameter("cardId"));
 			CardDAOService cardSvc = new CardDAOService();
 			CardVO card = cardSvc.getCardDAO(cardid);
 			req.setAttribute("cardvo", card);
-			
+
 			String url = "/Gary_pages/Member03-editcard.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); // ¦¨¥\Âà¥æ listOneEmp.jsp
+			RequestDispatcher successView = req.getRequestDispatcher(url); // ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ listOneEmp.jsp
 			successView.forward(req, res);
 
 		}
 
 		if ("insertOneCard".equals(action)) {
 			MemberInfoService memberSvc = new MemberInfoService();
-			MemberInfo member = memberSvc.getOneMemberInfo(20210001);
-			req.setAttribute("memberinfo", member);
+			HttpSession session = req.getSession();
+			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
+			req.setAttribute("memberinfo", mem);
 
 			List<String> errorMsgs = new LinkedList<String>();
 //			System.out.println("1="+errorMsgs);
@@ -80,16 +85,16 @@ public class CardServlet extends HttpServlet {
 
 				Integer userId = new Integer(req.getParameter("userId"));
 
-				String cardHolder = req.getParameter("cardholder");
+				String cardHolder = req.getParameter("cardHolder");
 				String cardHolderReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 
 				if (cardHolder == null || cardHolder.trim().length() == 0) {
-					errorMsgs.add("«ù¥d¤H: ½Ğ¤ÅªÅ¥Õ");
-				} else if (!cardHolder.trim().matches(cardHolderReg)) { // ¥H¤U½m²ß¥¿«h(³W)ªí¥Ü¦¡(regular-expression)
-					errorMsgs.add("©m¦W: ¥u¯à¬O¤¤¡B­^¤å¦r¥À¡B¼Æ¦r©M_ , ¥Bªø«×¥²»İ¦b2¨ì10¤§¶¡");
+					errorMsgs.add("ä¿¡ç”¨å¡æŒæœ‰è€…ç©º");
+				} else if (!cardHolder.trim().matches(cardHolderReg)) { // ï¿½Hï¿½Uï¿½mï¿½ß¥ï¿½ï¿½h(ï¿½W)ï¿½ï¿½Ü¦ï¿½(regular-expression)
+					errorMsgs.add("æŒæœ‰è€…åç¨±éŒ¯èª¤");
 				}
 
-				String cardNumber = req.getParameter("cardnumber");
+				String cardNumber = req.getParameter("cardNumber");
 				String cardVISAReg = "^4\\d{15}$";
 				String cardMasterReg = "^5[1-5]\\d{14}$";
 				String cardDiscoverReg = "^6(?:011\\d\\d|5\\d{4}|4[4-9]\\d{3}|22(?:1(?:2[6-9]|[3-9]\\d)|[2-8]\\d\\d|9(?:[01]\\d|2[0-5])))\\d{10}$";
@@ -98,34 +103,30 @@ public class CardServlet extends HttpServlet {
 				String cardUnionPayReg = "^62[0-5]\\d{13,16}$";
 				String cardMaestroReg = "^(?:5[0678]\\d\\d|6304|6390|67\\d\\d)\\d{8,15}$";
 				if (cardNumber == null || cardNumber.trim().length() == 0) {
-					errorMsgs.add("«H¥Î¥d¥d¸¹: ½Ğ¤ÅªÅ¥Õ");
+					errorMsgs.add("ä¿¡ç”¨å¡è™Ÿç‚ºç©ºç™½");
 				} else if (!cardNumber.trim().matches(cardVISAReg) && !cardNumber.trim().matches(cardMasterReg)
 						&& !cardNumber.trim().matches(cardDiscoverReg) && !cardNumber.trim().matches(cardJCBReg)
 						&& !cardNumber.trim().matches(cardExpressReg) && !cardNumber.trim().matches(cardUnionPayReg)
-						&& !cardNumber.trim().matches(cardMaestroReg)) { // ¥H¤U½m²ß¥¿«h(³W)ªí¥Ü¦¡(regular-expression)
-					errorMsgs.add(
-							"±z¿é¤Jªº¥d¸¹¤£²Å¦X:VISA¡BMaster¡BDiscover¡BJCB¡BAmerican Express¡BChina UnionPay¡BMaestro¥dºØ¤§³W©w®æ¦¡¡A½Ğ­«·s½T»{«á¿é¤J¡I");
+						&& !cardNumber.trim().matches(cardMaestroReg)) { // ï¿½Hï¿½Uï¿½mï¿½ß¥ï¿½ï¿½h(ï¿½W)ï¿½ï¿½Ü¦ï¿½(regular-expression)
+					errorMsgs.add("ä¸ç¬¦åˆå¡è¦");
 				}
 
-				Date deadLine = java.sql.Date.valueOf(req.getParameter("deadline").trim());
+				Date deadLine = java.sql.Date.valueOf(req.getParameter("deadLine").trim());
 
 				String cvv = req.getParameter("cvv");
 				if (cvv == null || cvv.trim().length() == 0) {
-					errorMsgs.add("¦w¥ş½X: ½Ğ¤ÅªÅ¥Õ");
-				} 
-				
-				String billAddress = req.getParameter("billaddress");
+					errorMsgs.add("cvvç‚ºç©º");
+				}
+
+				String billAddress = req.getParameter("billAddress");
 				if (billAddress == null || billAddress.trim().length() == 0) {
-					errorMsgs.add("¦a§}: ½Ğ¤ÅªÅ¥Õ");
+					errorMsgs.add("åœ°å€ç‚ºç©º");
 				}
-				
-				String zipCode = req.getParameter("zipcode");
+
+				String zipCode = req.getParameter("zipCode");
 				if (zipCode == null || zipCode.trim().length() == 0) {
-					errorMsgs.add("¶l»¼°Ï¸¹: ½Ğ¤ÅªÅ¥Õ");
+					errorMsgs.add("éƒµéå€è™Ÿç‚ºç©º");
 				}
-				
-			
-		
 
 				CardVO cardVO = new CardVO();
 				cardVO.setUserId(userId);
@@ -135,10 +136,9 @@ public class CardServlet extends HttpServlet {
 				cardVO.setCvv(cvv);
 				cardVO.setBillAddress(billAddress);
 				cardVO.setZipCode(zipCode);
-			
 
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("cardvo", cardVO); // §t¦³¿é¤J®æ¦¡¿ù»~ªºempVOª«¥ó,¤]¦s¤Jreq
+					req.setAttribute("cardvo", cardVO); // ï¿½tï¿½ï¿½ï¿½ï¿½Jï¿½æ¦¡ï¿½ï¿½ï¿½~ï¿½ï¿½empVOï¿½ï¿½ï¿½ï¿½,ï¿½]ï¿½sï¿½Jreq
 					RequestDispatcher failureView = req.getRequestDispatcher("/Gary_pages/Member03-addcard.jsp");
 					failureView.forward(req, res);
 					return;
@@ -146,24 +146,175 @@ public class CardServlet extends HttpServlet {
 
 				CardDAOService cardSvc = new CardDAOService();
 				cardVO = cardSvc.addCardDAO(userId, cardHolder, cardNumber, deadLine, cvv, billAddress, zipCode, 1);
-
+				Integer member = mem.getUserId();
+				Set<CardVO> cardset = cardSvc.getCardByUserId(member);
+				req.setAttribute("cardset", cardset);
 				String url = "/Gary_pages/Member03.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // ¦¨¥\Âà¥æ listOneEmp.jsp
+				RequestDispatcher successView = req.getRequestDispatcher(url); // ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ listOneEmp.jsp
 				successView.forward(req, res);
 
-			}  
-			catch (Exception e) {
-//				e.printStackTrace();
-				errorMsgs.add("·s¼W¥¢±Ñ:"+e.getMessage());
-//				System.out.println("2="+errorMsgs);
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsgs.add("éŒ¯èª¤:" + e.getMessage());
+				System.out.println("2=" + errorMsgs);
 //				System.out.println(e);
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/Gary_pages/Member03-addcard.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/Gary_pages/Member03-addcard.jsp");
 				failureView.forward(req, res);
 			}
 
 		}
 
+		if ("updateOneCard".equals(action)) {
+
+			MemberInfoService memberSvc = new MemberInfoService();
+			HttpSession session = req.getSession();
+			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
+			req.setAttribute("memberinfo", mem);
+
+			List<String> errorMsgs = new LinkedList<String>();
+//			System.out.println("1="+errorMsgs);
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				Integer cardId = new Integer(req.getParameter("cardId"));
+
+				Set<CardVO> cardset = (Set<CardVO>) session.getAttribute("cardset");
+
+				CardVO waitingForUpdatecCardVO = null;
+
+				for (CardVO cardvo : cardset) {
+
+					if (cardId.equals(cardvo.getCardId())) {
+						waitingForUpdatecCardVO = cardvo;
+					}
+				}
+
+				Integer userId = new Integer(req.getParameter("userId"));
+
+				String cardHolder = req.getParameter("cardHolder");
+				String cardHolderReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+
+				if (cardHolder == null || cardHolder.trim().length() == 0) {
+					errorMsgs.add("ï¿½ï¿½ï¿½dï¿½H: ï¿½Ğ¤ÅªÅ¥ï¿½");
+				} else if (!cardHolder.trim().matches(cardHolderReg)) { // ï¿½Hï¿½Uï¿½mï¿½ß¥ï¿½ï¿½h(ï¿½W)ï¿½ï¿½Ü¦ï¿½(regular-expression)
+					errorMsgs.add("ï¿½mï¿½W: ï¿½uï¿½ï¿½Oï¿½ï¿½ï¿½Bï¿½^ï¿½ï¿½rï¿½ï¿½ï¿½Bï¿½Æ¦rï¿½M_ , ï¿½Bï¿½ï¿½ï¿½×¥ï¿½ï¿½İ¦b2ï¿½ï¿½10ï¿½ï¿½ï¿½ï¿½");
+				}
+
+				String cardNumber = req.getParameter("cardNumber");
+				String cardVISAReg = "^4\\d{15}$";
+				String cardMasterReg = "^5[1-5]\\d{14}$";
+				String cardDiscoverReg = "^6(?:011\\d\\d|5\\d{4}|4[4-9]\\d{3}|22(?:1(?:2[6-9]|[3-9]\\d)|[2-8]\\d\\d|9(?:[01]\\d|2[0-5])))\\d{10}$";
+				String cardJCBReg = "^35(?:2[89]|[3-8]\\d)\\d{12}$";
+				String cardExpressReg = "^3[47]\\d{13}$";
+				String cardUnionPayReg = "^62[0-5]\\d{13,16}$";
+				String cardMaestroReg = "^(?:5[0678]\\d\\d|6304|6390|67\\d\\d)\\d{8,15}$";
+				if (cardNumber == null || cardNumber.trim().length() == 0) {
+					errorMsgs.add("ï¿½Hï¿½Î¥dï¿½dï¿½ï¿½: ï¿½Ğ¤ÅªÅ¥ï¿½");
+				} else if (!cardNumber.trim().matches(cardVISAReg) && !cardNumber.trim().matches(cardMasterReg)
+						&& !cardNumber.trim().matches(cardDiscoverReg) && !cardNumber.trim().matches(cardJCBReg)
+						&& !cardNumber.trim().matches(cardExpressReg) && !cardNumber.trim().matches(cardUnionPayReg)
+						&& !cardNumber.trim().matches(cardMaestroReg)) { // ï¿½Hï¿½Uï¿½mï¿½ß¥ï¿½ï¿½h(ï¿½W)ï¿½ï¿½Ü¦ï¿½(regular-expression)
+					errorMsgs.add(
+							"ï¿½zï¿½ï¿½Jï¿½ï¿½ï¿½dï¿½ï¿½ï¿½ï¿½ï¿½Å¦X:VISAï¿½BMasterï¿½BDiscoverï¿½BJCBï¿½BAmerican Expressï¿½BChina UnionPayï¿½BMaestroï¿½dï¿½Ø¤ï¿½ï¿½Wï¿½wï¿½æ¦¡ï¿½Aï¿½Ğ­ï¿½ï¿½sï¿½Tï¿½{ï¿½ï¿½ï¿½Jï¿½I");
+				}
+
+				Date deadLine = java.sql.Date.valueOf(req.getParameter("deadLine").trim());
+
+				String cvv = req.getParameter("cvv");
+				if (cvv == null || cvv.trim().length() == 0) {
+					errorMsgs.add("ï¿½wï¿½ï¿½ï¿½X: ï¿½Ğ¤ÅªÅ¥ï¿½");
+				}
+
+				String billAddress = req.getParameter("billAddress");
+				if (billAddress == null || billAddress.trim().length() == 0) {
+					errorMsgs.add("ï¿½aï¿½}: ï¿½Ğ¤ÅªÅ¥ï¿½");
+				}
+
+				String zipCode = req.getParameter("zipCode");
+				if (zipCode == null || zipCode.trim().length() == 0) {
+					errorMsgs.add("ï¿½lï¿½ï¿½ï¿½Ï¸ï¿½: ï¿½Ğ¤ÅªÅ¥ï¿½");
+				}
+
+				Integer sta = new Integer(req.getParameter("sta"));
+
+				waitingForUpdatecCardVO.setCardId(cardId);
+				waitingForUpdatecCardVO.setUserId(userId);
+				waitingForUpdatecCardVO.setCardHolder(cardHolder);
+				waitingForUpdatecCardVO.setCardNumber(cardNumber);
+				waitingForUpdatecCardVO.setDeadLine(deadLine);
+				waitingForUpdatecCardVO.setCvv(cvv);
+				waitingForUpdatecCardVO.setBillAddress(billAddress);
+				waitingForUpdatecCardVO.setZipCode(zipCode);
+				waitingForUpdatecCardVO.setSta(sta);
+
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("cardvo", waitingForUpdatecCardVO); // ï¿½tï¿½ï¿½ï¿½ï¿½Jï¿½æ¦¡ï¿½ï¿½ï¿½~ï¿½ï¿½empVOï¿½ï¿½ï¿½ï¿½,ï¿½]ï¿½sï¿½Jreq
+					RequestDispatcher failureView = req.getRequestDispatcher("/Gary_pages/Member03-editcard.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+
+				CardDAOService cardSvc = new CardDAOService();
+				waitingForUpdatecCardVO = cardSvc.updateCardDAO(cardId, userId, cardHolder, cardNumber, deadLine, cvv,
+						billAddress, zipCode, sta);
+
+				req.setAttribute("cardset", cardset);
+				session.setAttribute("cardset", cardset);
+
+				String url = "/Gary_pages/Member03.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ listOneEmp.jsp
+				successView.forward(req, res);
+
+			} catch (Exception e) {
+//				e.printStackTrace();
+				errorMsgs.add("ï¿½sï¿½Wï¿½ï¿½ï¿½ï¿½:" + e.getMessage());
+//				System.out.println("2="+errorMsgs);
+//				System.out.println(e);
+				RequestDispatcher failureView = req.getRequestDispatcher("/Gary_pages/Member03-editcard.jsp");
+				e.printStackTrace();
+				failureView.forward(req, res);
+			}
+
+		}
+
+		if ("deleteCard".equals(action)) {
+
+			MemberInfoService memberSvc = new MemberInfoService();
+			HttpSession session = req.getSession();
+			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
+			req.setAttribute("memberinfo", mem);
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				
+				Integer cardId = new Integer(req.getParameter("cardId"));
+
+				Set<CardVO> cardset = (Set<CardVO>) session.getAttribute("cardset");
+
+				CardDAOService cardSvc = new CardDAOService();
+				CardVO cardVO = cardSvc.getCardDAO(cardId);
+				cardSvc.deleteCardDAO(cardId);
+
+				cardset.remove(cardVO);
+
+				req.setAttribute("cardset", cardset);
+				session.setAttribute("cardset", cardset);
+				
+				String url = "/Gary_pages/Member03.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ listOneEmp.jsp
+				successView.forward(req, res);
+			} catch (Exception e) {
+				errorMsgs.add("åˆªé™¤è³‡æ–™å¤±æ•—:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/Gary_pages/Member03.jsp");
+				failureView.forward(req, res);
+			}
+		}
 	}
 
 }

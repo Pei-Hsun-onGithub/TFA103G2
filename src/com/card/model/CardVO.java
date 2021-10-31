@@ -13,6 +13,79 @@ public class CardVO implements java.io.Serializable {
 	private String zipCode;
 	private Integer sta;
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((billAddress == null) ? 0 : billAddress.hashCode());
+		result = prime * result + ((cardHolder == null) ? 0 : cardHolder.hashCode());
+		result = prime * result + ((cardId == null) ? 0 : cardId.hashCode());
+		result = prime * result + ((cardNumber == null) ? 0 : cardNumber.hashCode());
+		result = prime * result + ((cvv == null) ? 0 : cvv.hashCode());
+		result = prime * result + ((deadLine == null) ? 0 : deadLine.hashCode());
+		result = prime * result + ((sta == null) ? 0 : sta.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CardVO other = (CardVO) obj;
+		if (billAddress == null) {
+			if (other.billAddress != null)
+				return false;
+		} else if (!billAddress.equals(other.billAddress))
+			return false;
+		if (cardHolder == null) {
+			if (other.cardHolder != null)
+				return false;
+		} else if (!cardHolder.equals(other.cardHolder))
+			return false;
+		if (cardId == null) {
+			if (other.cardId != null)
+				return false;
+		} else if (!cardId.equals(other.cardId))
+			return false;
+		if (cardNumber == null) {
+			if (other.cardNumber != null)
+				return false;
+		} else if (!cardNumber.equals(other.cardNumber))
+			return false;
+		if (cvv == null) {
+			if (other.cvv != null)
+				return false;
+		} else if (!cvv.equals(other.cvv))
+			return false;
+		if (deadLine == null) {
+			if (other.deadLine != null)
+				return false;
+		} else if (!deadLine.equals(other.deadLine))
+			return false;
+		if (sta == null) {
+			if (other.sta != null)
+				return false;
+		} else if (!sta.equals(other.sta))
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		if (zipCode == null) {
+			if (other.zipCode != null)
+				return false;
+		} else if (!zipCode.equals(other.zipCode))
+			return false;
+		return true;
+	}
+
 	public Integer getCardId() {
 		return cardId;
 	}

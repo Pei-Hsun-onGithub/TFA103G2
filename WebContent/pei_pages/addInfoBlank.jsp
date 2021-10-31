@@ -244,14 +244,14 @@ div.my-chooseType ul li button{
 
 						<!--         新增一筆Meal資料                   -->
 						<form class="row row-cols-xxl-auto align-items-center my-form"
-							method="post" action="/TFA103G2/meal/meal.do"
+							method="post" action="/TFA103G2/SimulateOrderSuccess"
 							enctype="multipart/form-data">
 
 
 							<div class="row">
 								<label class="col-sm-3 col-form-label">餐點名稱 </label>
 								<div class="col-sm-3">
-									<input type="text" class="form-control">
+									<input type="text" class="form-control" name="mealname">
 								</div>
 								<div class="col-sm-6"></div>
 							</div>

@@ -107,6 +107,8 @@
 		<servlet-name>MonsterServlet</servlet-name>
 		<url-pattern>/monsterbook/MonsterServlet.do</url-pattern>
 	</servlet-mapping>
+	
+	
 
 <!--
 	<error-page>
