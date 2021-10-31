@@ -131,7 +131,7 @@ public class MealInsert2 extends Command {
 			for (int i = 0; i < s.length; i++) {
 				String img = path + "\\" + s[i];
 				mealImg = getPictureByteArray(img);
-				mealVO = service.addMeal(sta, mealName, mealType, unitPrice, launchDate, launchDays,
+				mealVO = service.addMeal(sta, mealName + i, mealType, unitPrice, launchDate, launchDays,
 						mealDescription, mealImg, restaurantId);
 			}
 			

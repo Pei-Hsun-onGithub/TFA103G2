@@ -180,8 +180,8 @@
 								<%}%>
 							</ul>
 						</div>
-						<a class="btn btn-secondary w-100" href="#"> PROCEED TO
-							CHECKOUT</a>
+<%-- 						<a id="CHECKOUT" class="btn btn-secondary w-100" href="<%=request.getContextPath()%>/MealAjax?action=CHECKOUT"> PROCEED TO CHECKOUT</a> --%>
+						<a id="CHECKOUT" class="btn btn-secondary w-100" href="<%=request.getContextPath()%>/meal/Checkout.jsp"> PROCEED TO CHECKOUT</a>	
 					</div>
 				</div>
 			</div>
@@ -214,6 +214,8 @@
 	<script>
 	
 		var mealURL = "<%=request.getContextPath()%>/MealAjax";
+		
+		
 		$("div.quantity.buttons_added input#minus").on("click", function(){
 			var mealId = $(this).closest("div").attr("data-meal");
 			var count = $(this).siblings("input#realcount").val();
@@ -229,11 +231,7 @@
 				$("ul#total li span").eq(index).text("$"+price);
 				totalprice()
 			} 
-			
-			
-			
 		})
-		
 		
 		
 		$("div.quantity.buttons_added input#plus").on("click", function(){
@@ -255,12 +253,22 @@
 		
 		function totalprice(){
 			var total = 0;
-			$("ul#total li span").last().prevAll().each(function(){
-				total += $(this).text().substr(1);
+			$("ul#total li").last().prevAll().each(function(){
+				total += Number($(this).find("span").text().substr(1));
 			})
-			
-			$("ul#total li span").last().text("$" + total);
+			$("ul#total li").last().find("span").text("$" + total);
 		}
+		
+		
+// 		$("a#CHECKOUT").on("click", function(){
+// 			$("ul#total li").last().prevAll().each(function(){
+// 				count = Number($(this).find("span").text().substr(1));
+			
+			
+// 			order(mealId, count);
+// 			})	
+// 		})
+		
 		
 		function order(mealId, count){
 			var mealdata = {};

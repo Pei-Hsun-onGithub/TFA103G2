@@ -3,6 +3,9 @@ package com.achieve.model;
 import java.sql.Date;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
+
 public class AchieveService {
 	
 	private AchieveDAO dao;
@@ -57,6 +60,13 @@ public class AchieveService {
 	
 	public List<Achieve> getAll() {
 		return dao.getAll();
+	}
+	
+	public Achieve getAvailableAchieve(ServletContext servletContext) {
+		
+		Achieve achieveVO = (Achieve)servletContext.getAttribute("achieveMission");
+		
+		return achieveVO;
 	}
 	
 }

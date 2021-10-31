@@ -27,6 +27,7 @@ public class MemberInfoServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
+
 //		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp?��?��?
 //
 //			List<String> errorMsgs = new LinkedList<String>();
@@ -256,6 +257,7 @@ public class MemberInfoServlet extends HttpServlet {
 		 * ?�員中�?
 		 ***************************************/
 		if ("getOne".equals(action)) {
+
 
 			// List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to

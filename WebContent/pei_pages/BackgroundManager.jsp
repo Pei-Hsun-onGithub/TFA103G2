@@ -81,12 +81,10 @@ table tr td img {
 }
 
 div.my-btn-group-container {
-
 	margin-top: 50px;
 }
 
 div.my-btn-group {
-
 	margin-left: 430px;
 }
 
@@ -196,7 +194,8 @@ img.wario {
 			aria-label="Basic mixed styles example">
 			<a type="button" class="btn btn-danger"
 				href="<%=request.getContextPath()%>/pei_pages/listAllMonster.jsp">怪獸</a>
-			<button type="button" class="btn btn-warning">任務成就</button>
+			<a type="button" class="btn btn-warning"
+				href="<%=request.getContextPath()%>/pei_pages/addAchievment.jsp">任務成就</a>
 			<button type="button" class="btn btn-success">Right</button>
 		</div>
 

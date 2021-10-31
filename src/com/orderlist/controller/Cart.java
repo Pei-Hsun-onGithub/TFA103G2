@@ -4,50 +4,67 @@ public class Cart implements java.io.Serializable {
 
 
 	private static final long serialVersionUID = 1L;
-	private String mealId;
+	private Integer mealId;
 	private String mealName;
 	private Integer unitPrice;
 	private Integer quantity;
 	
 	public Cart() {
-		mealId = "";
+		mealId = 0;
 		mealName = "";
 		quantity = 0;
 		unitPrice = 0;
 	}
 
-	public String getMealId() {
+
+
+	public Integer getMealId() {
 		return mealId;
 	}
 
-	public void setMealId(String mealId) {
+
+
+	public void setMealId(Integer mealId) {
 		this.mealId = mealId;
 	}
+
+
 
 	public String getMealName() {
 		return mealName;
 	}
 
+
+
 	public void setMealName(String mealName) {
 		this.mealName = mealName;
 	}
 
-	public Integer getQuantity() {
-		return quantity;
-	}
 
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
 
 	public Integer getUnitPrice() {
 		return unitPrice;
 	}
 
 
+
 	public void setUnitPrice(Integer unitPrice) {
 		this.unitPrice = unitPrice;
 	}
+
+
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+
 
 	@Override
 	public String toString() {

@@ -26,7 +26,7 @@ public class MealSingle extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html; charset=UTF-8");
 
-		PrintWriter out = res.getWriter();
+//		PrintWriter out = res.getWriter();
 
 		Integer mealId = new Integer(req.getParameter("mealId"));
 
@@ -46,8 +46,7 @@ public class MealSingle extends HttpServlet {
 			
 		}
 		
-		
-		
+
 		req.setAttribute("MealVO", MealVo); // 資料庫update成功後,正確的的empVO物件,存入req
 		req.setAttribute("mealList", mealList); // 資料庫update成功後,正確的的empVO物件,存入req
 		
