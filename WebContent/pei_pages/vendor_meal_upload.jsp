@@ -2,6 +2,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%
+	response.setHeader("Cache-Control", "no-store"); //HTTP 1.1
+	response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+	response.setDateHeader("Expires", 0);
+%>
+
+
+
 <html lang="zxx">
 <head>
 <meta charset="UTF-8">
@@ -202,25 +210,28 @@ form div.my-img-btn-wrapper .my-btn {
 								MealVO mealVO = (MealVO) request.getAttribute("UpdatingMealVO");
 							%>
 
-							<%-- 錯誤表列 --%>
-							<c:if test="${not empty errMsgs}">
-								<font style="color: red">請修正以下錯誤:</font>
-								<ul>
-									<c:forEach var="message" items="${errMsgs}">
-										<li style="color: red">${message}</li>
-									</c:forEach>
-								</ul>
-							</c:if>
+							
 
 
 							<div class="row">
 								<div class="row">
 									<div class="col-md-8">
-										<label>餐點名稱</label>
+									
+										<div class="row error-title">
+											<div class="col-md-4">
+												<label>餐點名稱</label>
+											</div>
+											<div class="col-md-8 my-error-mealName">
+												<div style="height: 10px;"></div>
+												<div data-mealNameError-empty style="display: none;color: red;">*餐點名稱不能是空白</div>
+												<div data-mealNameError-pass style=""><i class="far fa-check-circle"></i></div>
+											</div>
+										</div>
+										
 										<div class="single-input-wrap">
 
 											<input type="text" class="form-control" name="mealName"
-												value="<%=(mealVO == null) ? "飛騨高山拉麵" : mealVO.getMealName()%>">
+												value="<%=(mealVO == null) ? "飛騨高山拉麵" : mealVO.getMealName()%>" onkeyup="errorHandler(0);">
 										</div>
 									</div>
 
@@ -265,8 +276,16 @@ form div.my-img-btn-wrapper .my-btn {
 												<label>單價</label>
 												<div class="single-input-wrap">
 													<input type="text" class="form-control" name="unitPrice"
-														value="<%=(mealVO == null) ? "369" : mealVO.getUnitPrice()%>">
+														value="<%=(mealVO == null) ? "369" : mealVO.getUnitPrice()%>" onkeyup="errorHandler(1);">
 												</div>
+											</div>
+											<div class="col-md-5 my-error-unitPrice">
+												<a href="#" tabindex="-1"
+												class="btn btn-primary disabled placeholder col-4"
+												aria-hidden="true" style="visibility: hidden; height: 55px;margin-top:12px;"></a>
+												<div data-unitPriceError-empty style="display: none;color: red;">*單價不能是空白</div>
+												<div data-unitPriceError-special style="display: none;color: red;">*單價: 只能0~9數字，且長度必需在1到6之間</div>
+												<div data-unitPriceError-pass style=""><i class="far fa-check-circle"></i></div>
 											</div>
 										</div>
 
@@ -346,15 +365,13 @@ form div.my-img-btn-wrapper .my-btn {
 								<div class="col-md-12">
 
 									<div class="row my-btn-wrapper">
-										<div class="col-md-2"></div>
+										<div class="col-md-4"></div>
 										<div class="col-md-4">
 											<input type="hidden" name="action" value="insert">
 											<button type="submit" class="btn btn-base" id="btn_submit">確認</button>
 										</div>
-										<div class="col-md-4">
-											<button type="reset" class="btn btn-base">重填</button>
-										</div>
-										<div class="col-md-2"></div>
+										
+										
 
 									</div>
 								</div>
@@ -451,6 +468,90 @@ form div.my-img-btn-wrapper .my-btn {
 			});
 
 						});
+		
+		
+		/*********************************************   錯誤處理       **********************************************************/
+		function errorHandler(item) {
+						//console.log(item);
+						let items = ["mealName","unitPrice"];
+						
+							$.ajax({
+								  url: "<%=request.getContextPath()%>/meal/meal.do?action=mealErrorVerify&param="+ item,  
+								  type: "POST",                  // GET | POST | PUT | DELETE | PATCH
+								  data: {"item" : $('input[name=' + items[item] + ']').val()
+								  },         // 傳送資料到指定的 url
+								  dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
+								  success: function(data){      // request 成功取得回應後執行
+									if(item === 0) {
+										
+										 $('div.my-error-mealName div[data-mealNameError-empty]').hide();
+										  $('div.my-error-mealName div[data-mealNameError-pass]').hide();
+										  
+										  if(isExistError(data.noEmpty)) {
+											  $('div.my-error-mealName div[data-mealNameError-empty]').show();
+										  }
+										 else {
+											  $('div.my-error-mealName div[data-mealNameError-pass]').show();
+										  }
+									}
+								  
+									if(item === 1) {
+										
+										$('div.my-error-unitPrice div[data-unitPriceError-empty]').hide();
+										  $('div.my-error-unitPrice div[data-unitPriceError-special]').hide();
+										  $('div.my-error-unitPrice div[data-unitPriceError-pass]').hide();
+										  
+										  if(isExistError(data.noEmpty)) {
+											  $('div.my-error-unitPrice div[data-unitPriceError-empty]').show();
+										  }
+										  else if(isExistError(data.errorFormatName)) {
+											  $('div.my-error-unitPrice div[data-unitPriceError-special]').show();
+											  
+										  } else {
+											  $('div.my-error-unitPrice div[data-unitPriceError-pass]').show();
+										  }
+										  
+										  
+									}
+									
+									
+								  }
+								  
+								  
+								  
+							});
+						
+						
+						
+					}
+		
+		$('button#btn_submit').on("click", function(e) {
+			
+			// 如果有錯誤導回錯誤處
+			if($('div[data-mealNameError-pass ]').attr('style') === "display: none;") {
+				$('input[name="mealName"]').focus();
+				//要加return false否則一樣會送出
+				return false;
+			} else if($('div[data-unitPriceError-pass]').attr('style') === "display: none;") {
+				$('input[name="unitPrice"]').focus();
+				return false;
+			}
+			
+			
+			// 如果沒有錯誤才能submit
+			this.click();
+			
+			
+			
+			
+		});
+		
+		function isExistError(errorMsg) {
+			//console.log(errorMsg);
+			if(errorMsg.length != 0)
+				return true;
+			return false;
+		}
 	</script>
 </body>
 </html>
