@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.memberinfo.model.*"%>
-
+<%@ page import="java.util.* ,com.orderlist.controller.Cart"%>
 <%
  MemberInfo memberinfo = (MemberInfo) request.getAttribute("memberInfo");
 %>
@@ -49,6 +49,11 @@
 </head>
 
 <body class='sc5'>
+	<%
+		@SuppressWarnings("unchecked")
+		Vector<Cart> buylist = (Vector<Cart>) session.getAttribute("shoppingcart");
+	%>
+
     <!-- preloader area start -->
     <div class="preloader" id="preloader">
         <div class="preloader-inner">
@@ -63,7 +68,7 @@
     <!-- preloader area end -->
 
  <!-- navbar start -->
-<%@ include file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp" %>
+<%-- <%@ include file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp" %> --%>
  <!-- navbar end -->
 
   <!-- checkout area start -->
@@ -113,14 +118,22 @@
                 <div class="col-lg-5">
                     <div class="order-area">
                         <h5 class="title">Your order</h5>
+                        								<%
+									for (int index = 0; index < buylist.size(); index++) {
+											Cart order = buylist.get(index);
+								%>
+                        
+                        
                         <div class="order-product">
                             <div class="thumb">
-                                <img src="assets/img/widget/01.png" alt="img">
+                                <img src="<%=request.getContextPath()%>/CartImageUtil?Id=<%=order.getMealId()%> alt="img">
                             </div>
                             <div class="details">
-                                <h6>All Season Gulliver Pizza</h6>
+                                <h6><%=order.getMealName()%></h6>
                             </div>
                         </div>
+                        
+                        <%}%>
                         <ul class="amount">
                             <li>Subtotal<span>$50.00</span></li>
                             <li class="total">Total<span>$50.00</span></li>
@@ -135,21 +148,10 @@
                                         </label>
                                     </div>
                                     <div class="details">
-                                        <h6>Credit Cart <img src="assets/img/icon/peyment-card.png" alt="img"></h6>
+                                        <h6>Credit Cart </h6>
                                         <p>Pay with visa, Anex, MasterCard, Maestro,Discover and many other credit and debit credit vai paypal</p>
                                     </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                        </label>
-                                    </div>
-                                    <div class="details">
-                                        <h6>PayPal <img src="assets/img/icon/paypal-card.png" alt="img"></h6>
-                                        <p>Pay easily, fast and secure with PayPal.</p>
-                                    </div>
-                                </li>
+                                </li>   
                             </ul>
                         </div>
                         <a class="btn btn-secondary w-100" href="#"> PLACE ORDER</a>

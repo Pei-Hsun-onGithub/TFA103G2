@@ -123,37 +123,37 @@
 					<li class="phone-contact"><a
 						href="/TFA103G2/login/memberinfo.do?action=getOne"><i
 							class="far fa-user"></i> <%=memberVO.getUserName()%></a></li>
-<%
+<%-- <% --%>
 
-Achieve achieveVO = (Achieve)application.getAttribute("achieveMission");
+// Achieve achieveVO = (Achieve)application.getAttribute("achieveMission");
 
-AchieveProgressService achieveProgressSvc = new AchieveProgressService();
+// AchieveProgressService achieveProgressSvc = new AchieveProgressService();
 
-AchieveProgress achiProgress = achieveProgressSvc.getOneAchieveProgress((Integer)session.getAttribute("userId"), achieveVO.getAchiId());
+// AchieveProgress achiProgress = achieveProgressSvc.getOneAchieveProgress((Integer)session.getAttribute("userId"), achieveVO.getAchiId());
 
-%>
-					<li><a id="my-bell" href="#" onclick="toggleTheTooltip()"><i
-							class="far fa-bell"></i> <span>1</span></a></li>
-					<!--   放入想要提醒的事項!    -->
-					<div id="tooltip" role="tooltip">
-						<div class="my-mission-title">今日任務</div>
-						<div class="my-mission-content"><%= achieveVO.getAchiName() %></div>
-						<div class="my-mission-title">完成獎勵</div>
-						<div class="my-mission-content">金幣<%= achieveVO.getGainGold() %>枚</div>
-						<div class="my-mission-content">怪獸飼料<%= achieveVO.getGainFeed() %>個</div>
-						<div class="my-mission-title">描述</div>
-						<div class="my-mission-content"><%= achieveVO.getDescript() %></div>
-						<div class="my-mission-title">目前進度</div>
-						<div class="my-mission-content">食記提交: <%= achiProgress.getCurrentArticle() %>/<%= achieveVO.getAchiArticle() %></div>
-						<div class="my-mission-content">訂餐成功: <%= achiProgress.getCurrentOrder() %>/<%= achieveVO.getAchiOrder() %></div>
-						<div class="my-mission-title">剩餘天數</div>
-						<div class="my-mission-content">39</div>
-						<div id="arrow" data-popper-arrow></div>
-					</div>
+<%-- %> --%>
+<!-- 					<li><a id="my-bell" href="#" onclick="toggleTheTooltip()"><i -->
+<!-- 							class="far fa-bell"></i> <span>1</span></a></li> -->
+<!-- 					  放入想要提醒的事項!    -->
+<!-- 					<div id="tooltip" role="tooltip"> -->
+<!-- 						<div class="my-mission-title">今日任務</div> -->
+<%-- 						<div class="my-mission-content"><%= achieveVO.getAchiName() %></div> --%>
+<!-- 						<div class="my-mission-title">完成獎勵</div> -->
+<%-- 						<div class="my-mission-content">金幣<%= achieveVO.getGainGold() %>枚</div> --%>
+<%-- 						<div class="my-mission-content">怪獸飼料<%= achieveVO.getGainFeed() %>個</div> --%>
+<!-- 						<div class="my-mission-title">描述</div> -->
+<%-- 						<div class="my-mission-content"><%= achieveVO.getDescript() %></div> --%>
+<!-- 						<div class="my-mission-title">目前進度</div> -->
+<%-- 						<div class="my-mission-content">食記提交: <%= achiProgress.getCurrentArticle() %>/<%= achieveVO.getAchiArticle() %></div> --%>
+<%-- 						<div class="my-mission-content">訂餐成功: <%= achiProgress.getCurrentOrder() %>/<%= achieveVO.getAchiOrder() %></div> --%>
+<!-- 						<div class="my-mission-title">剩餘天數</div> -->
+<!-- 						<div class="my-mission-content">39</div> -->
+<!-- 						<div id="arrow" data-popper-arrow></div> -->
+<!-- 					</div> -->
 
-					<li><a href="<%=request.getContextPath()%>/meal/cart.jsp"><i
-							class="fas fa-shopping-cart"></i> <span>1</span></a></li>
-					<li><i class="fas fa-crown"></i> <span>23</span></li>
+<%-- 					<li><a href="<%=request.getContextPath()%>/meal/cart.jsp"><i --%>
+<!-- 							class="fas fa-shopping-cart"></i> <span>1</span></a></li> -->
+<!-- 					<li><i class="fas fa-crown"></i> <span>23</span></li> -->
 				</ul>
 			</div>
 
