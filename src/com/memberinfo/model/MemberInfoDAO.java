@@ -8,7 +8,7 @@ public interface MemberInfoDAO {
 	void update(MemberInfo memberinfo);
 	void delete(Integer userId);
 	boolean selectEmail(String email);
-
+	MemberInfo findMemberPwd(String pwd);
 	
 
 	MemberInfo selectEmail2(String email,String pwd);

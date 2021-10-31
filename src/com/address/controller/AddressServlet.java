@@ -8,6 +8,10 @@ import javax.servlet.http.*;
 
 import com.address.model.*;
 import com.address.model.AddressVO;
+import com.card.model.CardDAOService;
+import com.card.model.CardVO;
+import com.memberinfo.model.MemberInfo;
+import com.memberinfo.model.MemberInfoService;
 
 public class AddressServlet extends HttpServlet {
 
@@ -22,6 +26,33 @@ public class AddressServlet extends HttpServlet {
 
 //===============================================================================================	
 
+		if ("getAllAddress".equals(action)) {
+			MemberInfoService memberSvc = new MemberInfoService();
+			HttpSession session = req.getSession();
+			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
+			req.setAttribute("memberinfo", mem);
+			Integer member = mem.getUserId();
+			AddressService addressSvc = new AddressService();
+			Set<AddressVO> addressset = addressSvc.getAddressByUserId(member);
+			req.setAttribute("addressset", addressset);
+			String url = "/Gary_pages/Member04.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
+			successView.forward(req, res);
+
+		}
+		
+		if ("showInsertAddress".equals(action)) {
+			MemberInfoService memberSvc = new MemberInfoService();
+			HttpSession session = req.getSession();
+			MemberInfo member = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
+			req.setAttribute("memberinfo", member);
+			String url = "/Gary_pages/Member04-addaddress.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
+			successView.forward(req, res);
+		
+		}
+		
+		
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 			System.out.println("hello--1");
 

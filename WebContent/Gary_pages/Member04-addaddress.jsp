@@ -1,16 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="com.card.model.*"%>
+<%@ page import="com.address.model.*"%>
 <%@ page import="com.memberinfo.model.*"%>
-
-<%
-	CardVO cardVO = (CardVO) request.getAttribute("cardvo");
-%>
 
 <%
 	MemberInfo memberinfo = (MemberInfo) request.getAttribute("memberinfo");
 %>
+
+<%
+	AddressVO addressVO = (AddressVO) request.getAttribute("addressvo");
+%>
+
 
 
 <!DOCTYPE html>
@@ -19,7 +20,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>會員中心-修改信用卡</title>
+<title>會員中心-新增外送地址</title>
 <!--fivicon icon-->
 <link rel="icon"
 	href="<%=request.getContextPath()%>/assets/img/Image4.png">
@@ -48,20 +49,18 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/responsive.css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/assets/css/Member03-addcard.css">
+	href="<%=request.getContextPath()%>/assets/css/Member04-insertaddress.css">
 
 <!--Google Fonts-->
 <link
 	href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap"
 	rel="stylesheet">
-	<%@ include file="/assets/webPageSnippet/cssSnippet_navbar_home_1.jsp"%>
-
+<%@ include file="/assets/webPageSnippet/cssSnippet_navbar_home_1.jsp"%>
 
 </head>
-<body style="background-color: #dbdbdb">
+<body style="background-color: #dbdbdb";>
 	<%@ include
 		file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp"%>
-	
 
 	<div class="total" style="width: 1000px; height: 700px;">
 		<div class="profile">
@@ -93,96 +92,57 @@
 			</ul>
 		</div>
 
-
-		<form method="post" action="/TFA103G2/memberinfo/CardServlet.do"
-			enctype="multipart/form-data">
-			<div class="content">
-				<div class="title">
-					<div class="titlebigname">修改信用卡UpdateCard</div>
-					<div class="titlesmallname">修改信用卡資訊</div>
-					<div class="editarea">
+		<div class="content">
+			<div class="title">
+				<div class="titlebigname">新增外送地址AddAddress</div>
+				<div class="titlesmallname">新增外送地址資訊</div>
+				<div class="editarea">
 
 
-						<div class="information">
-							<div class="holder">
-								<div class="lebel1">持卡人姓名</div>
-								<div class="input1">
-									<input type="hidden" maxlength="255" name="userId"
-										value="<%=cardVO.getUserId()%>"> <input type="hidden"
-										maxlength="255" name="cardId" value="<%=cardVO.getCardId()%>">
-									<input type="hidden" maxlength="255" name="sta"
-										value="<%=cardVO.getSta()%>"> <input type="text"
-										name="cardHolder" maxlength="255"
-										value="<%=cardVO.getCardHolder()%>">
-								</div>
+					<div class="information">
+						<div class="customername">
+							<div class="lebel1">取餐者姓名</div>
+							<div class="input1">
+								<input type="text" name="" maxlength="255" value="">
 							</div>
-							<div class="number">
-								<div class="lebel2">信用卡卡號</div>
-								<div class="input1">
-									<input type="text" name="cardNumber" style="width: 300px"
-										maxlength="20" oninput="value=value.replace(/[^\d]/g,'')"
-										value="<%=cardVO.getCardNumber()%>">
-								</div>
-
+						</div>
+						<div class="deliverphone">
+							<div class="lebel2">連絡電話</div>
+							<div class="input2">
+								<input type="text" name="" maxlength="255" value="">
 							</div>
-							<div class="expirydate">
-								<div class="lebel3">到期日</div>
-								<div class="input3">
-									<input type="date" id="date" name="deadLine"
-										style="width: 141px" min="2021-01" max="2030-12"
-										value="<%=cardVO.getDeadLine()%>">
-								</div>
-								<div class="CVV">
-									<div class="lebel4">CVV</div>
-									<div class="input4">
-										<input type="text" style="width: 95px; height: 30px"
-											name="cvv" maxlength="3"
-											oninput="value=value.replace(/[^\d]/g,'')"
-											value="<%=cardVO.getCvv()%>">
-									</div>
-								</div>
+						</div>
+						<div class="deliveraddress">
+							<div class="lebel3">外送地址</div>
+							<div class="input3">
+								<input type="text" name="" maxlength="255" value="">
 							</div>
-
-							<div class="billaddress">
-								<div class="lebel5">帳單地址</div>
-								<div class="input5">
-									<input type="text" name="billAddress" maxlength="255"
-										value="<%=cardVO.getBillAddress()%>">
-								</div>
+						</div>
+						<div class="buildingname">
+							<div class="lebel4">大樓名稱(選填)</div>
+							<div class="input4">
+								<input type="text" name="" maxlength="255" value="">
 							</div>
-							<div class="zipcode">
-								<div class="lebel6">郵遞區號</div>
-								<div class="input6">
-									<input type="text" name="zipCode" maxlength="6"
-										oninput="value=value.replace(/[^\d]/g,'')"
-										value="<%=cardVO.getZipCode()%>">
-								</div>
+						</div>
+						<div class="note">
+							<div class="lebel5">備註(選填)</div>
+							<div class="input5">
+								<input type="text" name="" maxlength="255" value="">
 							</div>
-							<div class="storebutton">
-								<input type="hidden" name="action" value="updateOneCard">
-								<button type="submit" name="submit">確定</button>
-							</div>
-							<div class="backbutton">
-								<button type="reset" name="button">重填</button>
-
-							</div>
+						</div>
+						<div class="storebutton">
+							<button type="button" name="button">確定</button>
+						</div>
+						<div class="backbutton">
+							<button type="button" name="button">取消</button>
 						</div>
 					</div>
 				</div>
-				<c:if test="${not empty errorMsgs}">
-					<div style="margin-top: 300px; margin-left: 750px">
-						<font style="color: red">請修正以下錯誤:</font>
-						<ul>
-							<c:forEach var="message" items="${errorMsgs}">
-								<li style="color: red">${message}</li>
-							</c:forEach>
-						</ul>
-					</div>
-				</c:if>
 			</div>
+		</div>
 
-		</form>
 	</div>
+
 	<%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp"%>
 
 	<script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
@@ -212,15 +172,6 @@
 	<script
 		src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
 	<%@ include file="/assets/webPageSnippet/jsSnippet_navbar_home_3.jsp"%>
+
 </body>
-
-
-
-
-
-
-
-
-
-
 </html>
