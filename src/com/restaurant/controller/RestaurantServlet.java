@@ -38,27 +38,55 @@ public class RestaurantServlet extends HttpServlet {
 			update.execute();
 		}
 
-		if ("test".equals(action)) {
+		if ("errorVerify".equals(action)) {
+
 			Gson gson = new Gson();
-
 			ErrorMessages errors = new ErrorMessages();
-			PrintWriter out = res.getWriter();
-			String restaurantName = req.getParameter("restaurantName");
-			
-			String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
-			if (restaurantName == null || restaurantName.trim().length() == 0) {
-				errors.setNoEmpty("no name empty");
-				out.write(gson.toJson(errors));
-				return;
 
-			} else if (!(restaurantName.trim().matches(enameReg))) {
-				errors.setErrorFormatName("formate Errors");
+			String item = req.getParameter("param");
+		
+			PrintWriter out = res.getWriter();
+			
+			if ("0".equals(item)) {
+
+				String restaurantName = req.getParameter("item");
+
+				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+				if (restaurantName == null || restaurantName.trim().length() == 0) {
+					errors.setNoEmpty("no name empty");
+					out.write(gson.toJson(errors));
+					return;
+
+				} else if (!(restaurantName.trim().matches(enameReg))) {
+					errors.setErrorFormatName("formate Errors");
+					out.write(gson.toJson(errors));
+					return;
+				}
+				// 都沒有錯誤回傳空的錯誤訊息物件
 				out.write(gson.toJson(errors));
 				return;
 			}
-			// 都沒有錯誤回傳空的錯誤訊息物件
-			out.write(gson.toJson(errors));
-			return;
+			
+			if ("1".equals(item)) {
+				// 做其他的錯誤處理
+				String location = req.getParameter("item");
+				String locationReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,20}$";
+
+				if (location == null || location.trim().length() == 0) {
+					errors.setNoEmpty("no name empty");
+					out.write(gson.toJson(errors));
+					return;
+				} else if (!(location.trim().matches(locationReg))) {
+					errors.setErrorFormatName("formate Errors");
+					out.write(gson.toJson(errors));
+					return;
+				}
+				// 都沒有錯誤回傳空的錯誤訊息物件
+				out.write(gson.toJson(errors));
+				return;
+
+			}
+
 		}
 	}
 }

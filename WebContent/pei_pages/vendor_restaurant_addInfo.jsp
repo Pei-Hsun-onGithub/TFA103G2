@@ -280,16 +280,17 @@ div.my-chooseType ul li button {
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="restaurantName"
-											value="欣葉日本料理" onkeyup="errorHandler();">
+											value="欣葉日本料理" onkeyup="errorHandler(0);">
 									</div>
 								</div>
+								
 								<div class="col-md-5 my-error-restName">
 									<a href="#" tabindex="-1"
 										class="btn btn-primary disabled placeholder col-4"
 										aria-hidden="true" style="visibility: hidden; height: 45px;"></a>
 									<div data-restnameError-empty style="display: none;">*名稱不能是空白</div>
 									<div data-restnameError-special style="display: none;">*員工姓名: 只能是中、英文字母、數字和_ , 且長度必需在2到10之間</div>
-									<div data-restnameError-pass style="display: none;">V</div>
+									<div data-restnameError-pass style="">V</div>
 								</div>
 
 							</div>
@@ -451,9 +452,19 @@ div.my-chooseType ul li button {
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="location"
-											value="復興北路一段100號">
+											value="復興北路一段100號" onkeyup="errorHandler(1);">
 									</div>
 								</div>
+								
+								<div class="col-md-5 my-error-location">
+									<a href="#" tabindex="-1"
+										class="btn btn-primary disabled placeholder col-4"
+										aria-hidden="true" style="visibility: hidden; height: 0px;margin-top:12px;"></a>
+									<div data-locationError-empty style="display: none;">*地址不能是空白</div>
+									<div data-locationError-special style="display: none;">*地址: 只能是中、英文字母、數字，且長度必需在2到15之間</div>
+									<div data-locationError-pass style="">V</div>
+								</div>
+								
 
 							</div>
 
@@ -745,40 +756,85 @@ div.my-chooseType ul li button {
 						});
 
 		/*********************************************   錯誤處理       **********************************************************/
-			function errorHandler() {
+			function errorHandler(item) {
+							//console.log(item);
+							let items = ["restaurantName","location"];
 							
-								
 								$.ajax({
-									  url: "<%=request.getContextPath()%>/restaurant/restaurant.do?action=test",           // 資料請求的網址
+									  url: "<%=request.getContextPath()%>/restaurant/restaurant.do?action=errorVerify&param="+ item,  
 									  type: "POST",                  // GET | POST | PUT | DELETE | PATCH
-									  data: {"restaurantName": $('input[name="restaurantName"]').val()
+									  data: {"item" : $('input[name=' + items[item] + ']').val()
 									  },         // 傳送資料到指定的 url
 									  dataType: "json",             // 預期會接收到回傳資料的格式： json | xml | html
 									  success: function(data){      // request 成功取得回應後執行
-										
-									  $('div.my-error-restName div[data-restnameError-empty]').hide();
-									  $('div.my-error-restName div[data-restnameError-special]').hide();
-									  $('div.my-error-restName div[data-restnameError-pass]').hide();
+										if(item === 0) {
+											
+											 $('div.my-error-restName div[data-restnameError-empty]').hide();
+											  $('div.my-error-restName div[data-restnameError-special]').hide();
+											  $('div.my-error-restName div[data-restnameError-pass]').hide();
+											  
+											  if(isExistError(data.noEmpty)) {
+												  $('div.my-error-restName div[data-restnameError-empty]').show();
+											  }
+											  else if(isExistError(data.errorFormatName)) {
+												  $('div.my-error-restName div[data-restnameError-special]').show();
+												  
+											  } else {
+												  $('div.my-error-restName div[data-restnameError-pass]').show();
+											  }
+										}
 									  
-									  if(isExistError(data.noEmpty)) {
-										  $('div.my-error-restName div[data-restnameError-empty]').show();
-
-									  }
-									  else if(isExistError(data.errorFormatName)) {
-										  $('div.my-error-restName div[data-restnameError-special]').show();
-										  
-									  } else {
-										  $('div.my-error-restName div[data-restnameError-pass]').show();
-									  }
+										if(item === 1) {
+											
+											$('div.my-error-location div[data-locationError-empty]').hide();
+											  $('div.my-error-location div[data-locationError-special]').hide();
+											  $('div.my-error-location div[data-locationError-pass]').hide();
+											  
+											  if(isExistError(data.noEmpty)) {
+												  $('div.my-error-location div[data-locationError-empty]').show();
+											  }
+											  else if(isExistError(data.errorFormatName)) {
+												  $('div.my-error-location div[data-locationError-special]').show();
+												  
+											  } else {
+												  $('div.my-error-location div[data-locationError-pass]').show();
+											  }
+											  
+											  
+										}
 									  
 									  }
 									  
 									  
 									  
 									});
+								
+								
+								
 							}
 								
-			
+			$('button#btn_submit').on("click", function(e) {
+				
+				
+				// 如果有錯誤導回錯誤處
+				if($('div[data-restnameError-pass]').attr('style')) {
+					$('input[name="restaurantName"]').focus();
+					//要加return false否則一樣會送出
+					return false;
+				} else if($('div[data-locationError-pass]').attr('style')) {
+					$('input[name="location"]').focus();
+					return false;
+				}
+				
+				
+				
+				// 如果沒有錯誤才能submit
+				this.click();
+				
+				
+				
+				
+			});
 								
 		function isExistError(errorMsg) {
 			//console.log(errorMsg);
