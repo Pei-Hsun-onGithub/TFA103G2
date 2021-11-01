@@ -128,8 +128,12 @@
 Achieve achieveVO = (Achieve)application.getAttribute("achieveMission");
 
 AchieveProgressService achieveProgressSvc = new AchieveProgressService();
-
-AchieveProgress achiProgress = achieveProgressSvc.getOneAchieveProgress((Integer)session.getAttribute("userId"), achieveVO.getAchiId());
+Integer nowUserId = (Integer)session.getAttribute("userId");
+Integer achiId = achieveVO.getAchiId();
+AchieveProgress achiProgress = achieveProgressSvc.getOneAchieveProgress(nowUserId, achiId);
+if(achiProgress == null) {
+	achiProgress = achieveProgressSvc.addAchieveProgress(nowUserId, achiId, 0, 0,  new java.sql.Date(System.currentTimeMillis()), 13);
+}
 
 %>
 					<li><a id="my-bell" href="#" onclick="toggleTheTooltip()"><i
