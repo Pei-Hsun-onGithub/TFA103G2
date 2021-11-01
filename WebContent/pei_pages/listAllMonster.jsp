@@ -133,7 +133,7 @@ table tr td img {
 						</li>
 						<li class="menu-cart"><a href="#" style="visibility: hidden;">小鈴鐺 <span>4</span></a></li>
 						<li class="menu-cart"><a href="cart.html" style="visibility: hidden;">CART <span>1</span></a></li>
-						<li class="phone-contact"><a href="#">登出</a></li>
+						
 						
 						
 					</ul>
@@ -166,10 +166,8 @@ table tr td img {
 							<th>怪獸名稱</th>
 							<th>怪獸能力</th>
 							<th>怪獸圖片</th>
-							
-							
 							<th></th>
-							<th></th>
+							
 						</tr>
 					</thead>
 					<tbody>
@@ -200,18 +198,7 @@ table tr td img {
 										<input type="hidden" name="monsterId" value="${monsterVO.monsterId}">
 									</FORM>
 								</td>
-								<td>
-									<FORM METHOD="post"
-										ACTION="/TFA103G2/meal/meal.do?action=delete"
-										style="margin-bottom: 0px;">
-
-										<input type="submit" class="btn btn-warning my-btn"
-											id="my-delete-submit" value="下架"> <input
-											type="hidden" name="monsterId" value="${monsterVO.monsterId}">
-
-
-									</FORM>
-								</td>
+								
 
 							</tr>
 						</c:forEach>

@@ -9,20 +9,32 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>FoodMonster</title>
 <!--fivicon icon-->
-<link rel="icon" href="<%=request.getContextPath()%>/assets/img/fevicon.png">
+<link rel="icon"
+	href="<%=request.getContextPath()%>/assets/img/fevicon.png">
 
 <!-- Stylesheet -->
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/animate.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/magnific.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/jquery-ui.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/nice-select.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/owl.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/slick-slide.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/fontawesome.min.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/remixicon/remixicon.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/style.css">
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/responsive.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/animate.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/magnific.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/jquery-ui.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/nice-select.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/owl.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/slick-slide.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/fontawesome.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/remixicon/remixicon.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/assets/css/responsive.css">
 
 
 <!--Google Fonts-->
@@ -30,7 +42,19 @@
 	href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap"
 	rel="stylesheet">
 
-<%@ include file="/assets/webPageSnippet/cssSnippet_navbar_home_1.jsp" %>
+<%@ include file="/assets/webPageSnippet/cssSnippet_navbar_home_1.jsp"%>
+
+<style>
+div.carouselExampleInterval div.carousel-item img {
+	width: 800px;
+	height: 400px;
+}
+
+div.single-blog-wrap img {
+	width: 420px;
+	height: 420px;
+}
+</style>
 
 </head>
 <body class='sc5'>
@@ -66,7 +90,8 @@
 		MemberInfoService memInfoSvc = new MemberInfoService();
 	%>
 
-	<%@ include file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp" %>
+	<%@ include
+		file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp"%>
 
 
 	<!-- category Area Start-->
@@ -93,23 +118,23 @@
 	<div id="carouselExampleInterval" class="carousel slide"
 		data-bs-ride="carousel">
 		<div class="carousel-inner">
-			<div class="carousel-item active" data-bs-interval="2000">
-				<div style="margin: 0 auto; width: 800px;">
+			<div class="carousel-item active" data-bs-interval="1500">
+				<div style="margin: 0 auto; width: 800px; height: 400px;">
 					<img class="bg-img my-carousel-img"
-						src="https://via.placeholder.com/800x400" alt="img">
+						src="<%=request.getContextPath()%>/images/testFA3.JPG" alt="img">
 				</div>
 			</div>
-			<div class="carousel-item my-carousel-img" data-bs-interval="2000">
-				<div style="margin: 0 auto; width: 800px;">
-					<img class="bg-img" src="https://via.placeholder.com/800x400"
-						alt="img">
+			<div class="carousel-item my-carousel-img" data-bs-interval="1500">
+				<div style="margin: 0 auto; width: 800px; height: 400px;">
+					<img class="bg-img"
+						src="<%=request.getContextPath()%>/images/testFA4.JPG" alt="img">
 				</div>
 
 			</div>
-			<div class="carousel-item my-carousel-img" data-bs-interval="2000">
-				<div style="margin: 0 auto; width: 800px;">
-					<img class="bg-img" src="https://via.placeholder.com/800x400"
-						alt="img">
+			<div class="carousel-item my-carousel-img" data-bs-interval="1500">
+				<div style="margin: 0 auto; width: 800px; height: 400px;">
+					<img class="bg-img"
+						src="<%=request.getContextPath()%>/images/testFA5.JPG" alt="img">
 				</div>
 			</div>
 		</div>
@@ -143,7 +168,8 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-blog-wrap">
 						<div class="thumb">
-							<img src="<%=request.getContextPath()%>/assets/img/blog/1.png" alt="img">
+							<img src="<%=request.getContextPath()%>/images/testFA4.JPG"
+								alt="img">
 						</div>
 						<div class="wrap-details">
 							<span class="cat"> <span class="date"> <i
@@ -152,14 +178,12 @@
 							</a>
 							</span>
 							<h5>
-								<a href="<%=request.getContextPath()%>/blog-details.html">Greek yogurt breakfast bowls
-									with toppings</a>
+								<a href="#">迷克夏好喝到爆</a>
 							</h5>
 							<div class="wrap-hover-area">
-								<p>It with just a touch of sauce. saucy riff, more in the
-									style of takeout American Chinese kung pao. The sauce makes it
-									perfect for eating with rice.</p>
-								<a class="link-btn" href="<%=request.getContextPath()%>/blog-details.html">Read More</a>
+								<p>位在縣民大道跟民權路交叉口的齊味，離板南線的板橋站2號出口很近，交通上算是方便。齊味是愛吃麻辣鍋的好友夫妻檔大力推薦，住新莊的他們都會特地來板橋包齊味回去吃，我自己以前倒是常吃新莊的詹記，
+									齊味離我這麼近，怎麼可以錯過，今天就約</p>
+								<a class="link-btn" href="#">Read More</a>
 							</div>
 						</div>
 					</div>
@@ -167,7 +191,8 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-blog-wrap">
 						<div class="thumb">
-							<img src="<%=request.getContextPath()%>/assets/img/blog/2.png" alt="img">
+							<img src="<%=request.getContextPath()%>/images/testFA5.JPG"
+								alt="img">
 						</div>
 						<div class="wrap-details">
 							<span class="cat"> <span class="date"> <i
@@ -176,14 +201,12 @@
 							</a>
 							</span>
 							<h5>
-								<a href="<%=request.getContextPath()%>/blog-details.html">Broad beans, tomato, garlic &
-									cheese bruschetta </a>
+								<a href="#">Ashidori好好吃</a>
 							</h5>
 							<div class="wrap-hover-area">
-								<p>It with just a touch of sauce. saucy riff, more in the
-									style of takeout American Chinese kung pao. The sauce makes it
-									perfect for eating with rice.</p>
-								<a class="link-btn" href="<%=request.getContextPath()%>/blog-details.html">Read More</a>
+								<p>位在縣民大道跟民權路交叉口的齊味，離板南線的板橋站2號出口很近，交通上算是方便。齊味是愛吃麻辣鍋的好友夫妻檔大力推薦，住新莊的他們都會特地來板橋包齊味回去吃，我自己以前倒是常吃新莊的詹記，
+									齊味離我這麼近，怎麼可以錯過，今天就約</p>
+								<a class="link-btn" href="#">Read More</a>
 							</div>
 						</div>
 					</div>
@@ -191,7 +214,8 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="single-blog-wrap">
 						<div class="thumb">
-							<img src="<%=request.getContextPath()%>/assets/img/blog/3.png" alt="img">
+							<img src="<%=request.getContextPath()%>/images/testFA3.JPG"
+								alt="img">
 						</div>
 						<div class="wrap-details">
 							<span class="cat"> <span class="date"> <i
@@ -200,14 +224,12 @@
 							</a>
 							</span>
 							<h5>
-								<a href="<%=request.getContextPath()%>/blog-details.html">Make authentic Italian
-									margherita pizza at home </a>
+								<a href="#">齊味火鍋</a>
 							</h5>
 							<div class="wrap-hover-area">
-								<p>It with just a touch of sauce. saucy riff, more in the
-									style of takeout American Chinese kung pao. The sauce makes it
-									perfect for eating with rice.</p>
-								<a class="link-btn" href="<%=request.getContextPath()%>/blog-details.html">Read More</a>
+								<p>位在縣民大道跟民權路交叉口的齊味，離板南線的板橋站2號出口很近，交通上算是方便。齊味是愛吃麻辣鍋的好友夫妻檔大力推薦，住新莊的他們都會特地來板橋包齊味回去吃，我自己以前倒是常吃新莊的詹記，
+									齊味離我這麼近，怎麼可以錯過，今天就約</p>
+								<a class="link-btn" href="#">Read More</a>
 							</div>
 						</div>
 					</div>
@@ -218,7 +240,7 @@
 	<!-- blog Area End -->
 
 	<!-- footer area start -->
-	<%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp" %>
+	<%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp"%>
 	<!-- footer area end -->
 
 	<!-- back-to-top end -->
@@ -235,18 +257,22 @@
 	<script src="<%=request.getContextPath()%>/assets/js/counterup.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/waypoint.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/magnific.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/owl.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/tweenmax.min.js"></script>
 	<!-- main js  -->
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 
-	<%@ include file="/assets/webPageSnippet/jsSnippet_navbar_home_3.jsp" %>
+	<%@ include file="/assets/webPageSnippet/jsSnippet_navbar_home_3.jsp"%>
 
 
 </body>
