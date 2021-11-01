@@ -33,9 +33,17 @@ public class MessageServlet extends HttpServlet {
 				Integer articleNo =new Integer(req.getParameter("articleNo"));
 				System.out.println(articleNo);
 				
-				Integer userId =new Integer(req.getParameter("userId"));
-//				String rule1 = "^[0-9]{8}$";
-//				Integer userIdCheck= null;				
+				String userId = req.getParameter("userId");
+				String rule1 = "^[0-9]{8}$";
+				Integer userIdCheck= null;
+
+				if(userId == null || (userId.length()) == 0 ) {
+					errorMsgs.add("會員id: 請勿空白");
+				}else if(!userId.matches(rule1)){
+					errorMsgs.add("會員id只能是8個數字");
+				}else {
+				    userIdCheck =new Integer(userId);
+				}
 				
 				String msgContent = req.getParameter("msgContent");
 				if(msgContent == null ||msgContent.length() == 0  ) {
@@ -46,7 +54,7 @@ public class MessageServlet extends HttpServlet {
 												
 				/*把使用者塡好的資料裝進VO裡*/
 				MessageVO msgVO = new MessageVO();
-				msgVO.setUserId(userId);
+				msgVO.setUserId(userIdCheck);
 				msgVO.setMsgContent(msgContent);
 				msgVO.setSta(sta);
 				
@@ -71,7 +79,7 @@ public class MessageServlet extends HttpServlet {
 				}
 				
 				MessageService msgSVC = new MessageService();
-				msgSVC.addMessage(articleNo, userId, msgContent, sta);
+				msgSVC.addMessage(articleNo, userIdCheck, msgContent, sta);
 				List<MessageVO> msgList = msgSVC.getMsgsOfAr(articleNo);
 				
 				

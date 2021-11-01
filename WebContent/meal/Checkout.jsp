@@ -99,7 +99,7 @@
                     <div class="bill-payment-wrap">
                         <h5>Billing details
                         </h5>
-<!--                         <form class="default-form-wrap style-2" action="CheckoutServlet" method="post"> -->
+                        <form class="default-form-wrap style-2" action="<%=request.getContextPath()%>/CheckoutServlet" method="post">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label> Name</label>
@@ -130,7 +130,7 @@
 										
                                   </div>
                                 <input type="submit" class="btn btn-secondary w-100" value="PLACE ORDER" />
-                                <input type="hidden" name="action" value="insert"/>
+                                <input type="hidden" name="action" value="insert">
                             </div>                      
                     </div>                    
                 </div>

@@ -111,11 +111,11 @@ CREATE TABLE MemberInfo (
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
 VALUES ('1qaz@y.com', '1qaz@WSX', '謝依冰', '女', '1966-12-27', '0921562069', '這是大頭貼', '2000-11-26', 20, 100, 1001, '小之', 1, 20, 1);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('2wsx@y.com', '1qaz@WSX', '陳佳燕', '女', '1992-10-16', '0987459122', '這是大頭貼', '2019-09-24', 1000, 20, 1002, '南風', 2, 100, 4);
+VALUES ('2wsx@y.com', '1qaz@WSX', '陳佳燕', '女', '1992-10-16', '0987459122', '這是大頭貼', '2019-09-24', 1000, 20, 1002, '南風', 2, 100, 2);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('SteveMJackson@teleworm.us', 'PR3W9q2f', '王宜君', '女', '2006-01-12', '0921618067', '這是大頭貼', '2001-10-26', 20, 100, 1001, '雅亦', 1, 20, 4);
+VALUES ('SteveMJackson@teleworm.us', 'PR3W9q2f', '王宜君', '女', '2006-01-12', '0921618067', '這是大頭貼', '2001-10-26', 20, 100, 1001, '雅亦', 1, 20, 1);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('stevemjackson@fleckens.hu', 'gNbHkZh3', '潘君聿', '女', '2016-07-16', '0961036280', '這是大頭貼', '2004-04-08', 1000, 20, 1002, '飛琴', 2, 100, 5);
+VALUES ('stevemjackson@fleckens.hu', 'gNbHkZh3', '潘君聿', '女', '2016-07-16', '0961036280', '這是大頭貼', '2004-04-08', 1000, 20, 1002, '飛琴', 2, 100, 2);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
 VALUES ('AmyJWallace@teleworm.us', 'HAa7g3KC', '楊原妹', '女', '1926-07-02', '0961544146', '這是大頭貼', '2007-10-03', 20, 100, 1001, '白蘭', 1, 20, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
@@ -360,9 +360,9 @@ CREATE TABLE Card (
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
  	VALUES(20210012, '陳冠軒', 3597905196233614, '2023-12-31', '044', '台北市文山區萬美街一段85巷3號7樓', '269', 1);
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210013, '賴國滄', 4716390519622253, '2023-12-31', '466', '新竹市北區經國路一段238號', '632', 1);	
+ 	VALUES(20210012, '賴國滄', 4716390519622253, '2023-12-31', '466', '新竹市北區經國路一段238號', '632', 1);	
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210014, '黃志成', 4716329842905192, '2023-12-31', '466', '新竹市北區經國路一段238號', '632', 1);	
+ 	VALUES(20210012, '黃志成', 4716329842905192, '2023-12-31', '466', '新竹市北區經國路一段238號', '632', 1);	
    # 餐點訂單
 CREATE TABLE RsOrder (
 	orderid 		INT AUTO_INCREMENT NOT NULL,
@@ -371,14 +371,14 @@ CREATE TABLE RsOrder (
 	cardid       	INT NOT NULL,
 	deliveryaddid   INT NOT NULL,
 	deliverymethods INT,
-	orderday      	datetime timestamp default current_timestamp,
-	resstrtime 	    datetime timestamp default current_timestamp,
-    resendtime    	datetime timestamp default current_timestamp,
-    delstrtime    	datetime timestamp default current_timestamp,
-    delendtime    	datetime timestamp default current_timestamp,
+	orderday      	datetime default current_timestamp,
+	resstrtime 	    datetime default current_timestamp,
+    resendtime    	datetime default current_timestamp,
+    delstrtime    	datetime default current_timestamp,
+    delendtime    	datetime default current_timestamp,
     count    		INT,
     texts    		VARCHAR(50),
-    sta    			INT not null,
+    sta    			INT null,
 	CONSTRAINT RsOrder_userid_FK FOREIGN KEY (userid) REFERENCES MemberInfo (userid),
     CONSTRAINT RsOrder_orderid_PK PRIMARY KEY (orderid)
 ) AUTO_INCREMENT = 1;

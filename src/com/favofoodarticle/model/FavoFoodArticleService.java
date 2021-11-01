@@ -36,9 +36,5 @@ public class FavoFoodArticleService {
 		return dao.getall();
 	}
 	
-	public List<FavoFoodArticleVO> getUser(Integer userId){
-		return dao.getByUser(userId);
-	}
-	
 
 }

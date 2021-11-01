@@ -496,8 +496,10 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 					con.rollback();
 //					return false;
 				} catch (SQLException excep) {
+					excep.printStackTrace();
 					throw new RuntimeException("rollback error occured. "
 							+ excep.getMessage());
+					
 				}
 			}
 			throw new RuntimeException("A database error occured. "
