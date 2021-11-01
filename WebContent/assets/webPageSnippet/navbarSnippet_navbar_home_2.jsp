@@ -29,12 +29,12 @@
 			</div>
 
 <%
-				MemberInfoService memberSvc = new MemberInfoService();
+				MemberInfoService memberSvcHelper = new MemberInfoService();
 				Integer usrId = (Integer) session.getAttribute("userId");
-				MemberInfo memberVO = memberSvc.getOneMemberInfo(usrId);
+				MemberInfo memberValueObject = memberSvcHelper.getOneMemberInfo(usrId);
 
 				MonsterBookService mstrSvc = new MonsterBookService();
-				MonsterBook monsterVO = mstrSvc.getOneMonsterBook(memberVO.getMonsterId());
+				MonsterBook monsterValueObject = mstrSvc.getOneMonsterBook(memberValueObject.getMonsterId());
 			%>
 
 
@@ -51,7 +51,7 @@
 				<ul>
 					<li class="phone-contact"><a
 						href="/TFA103G2/login/memberinfo.do?action=getOne"><i
-							class="far fa-user"></i> <%=memberVO.getUserName()%></a></li>
+							class="far fa-user"></i> <%=memberValueObject.getUserName()%></a></li>
 					<li class="menu-cart"><a
 						href="<%=request.getContextPath()%>/meal/cart.jsp"><i
 							class="fas fa-shopping-cart"></i> <span>1</span></a></li>
@@ -78,10 +78,10 @@
 														alt="img">
 												</div>
 												<div class="wrap-details my-monster-detail">
-													<h4><%=memberVO.getMonsterNickName()%></h4>
-													<div>LV: <%= memberVO.getLv() %></div>
-													<div>EXP: <%=memberVO.getExp()%></div>
-													<div><%=monsterVO.getMonsterAbility()%></div>
+													<h4><%=memberValueObject.getMonsterNickName()%></h4>
+													<div>LV: <%= memberValueObject.getLv() %></div>
+													<div>EXP: <%=memberValueObject.getExp()%></div>
+													<div><%=monsterValueObject.getMonsterAbility()%></div>
 												</div>
 											</div>
 										</div>
@@ -122,7 +122,7 @@
 
 					<li class="phone-contact"><a
 						href="/TFA103G2/login/memberinfo.do?action=getOne"><i
-							class="far fa-user"></i> <%=memberVO.getUserName()%></a></li>
+							class="far fa-user"></i> <%=memberValueObject.getUserName()%></a></li>
 <%
 
  Achieve achieveVO = (Achieve)application.getAttribute("achieveMission");
