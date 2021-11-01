@@ -1,6 +1,26 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.memberinfo.model.*"%>
+<%@ page import="java.util.* ,com.orderlist.controller.Cart"%>
+<%@ page import="com.card.model.*" %>
+<%@ page import="com.address.model.*" %>
+<%@ page import="com.memberinfo.model.*" %>
+
+<%
+	Integer userId = (Integer) session.getAttribute("userId");
+
+	AddressService addressSvc = new AddressService();
+	Set<AddressVO> addressList = addressSvc.getAddressByUserId(userId);
+	pageContext.setAttribute("addressList",addressList); 	
+    
+    MemberInfoService memberSvc = new MemberInfoService();
+	MemberInfo memberVO = memberSvc.getOneMemberInfo(userId);
+	
+	CardDAOService cardSvc = new CardDAOService();
+	Set<CardVO> list = cardSvc.getCardByUserId(userId);
+	pageContext.setAttribute("list",list); 
+%>
+
 
 <%
  MemberInfo memberinfo = (MemberInfo) request.getAttribute("memberInfo");
@@ -49,6 +69,11 @@
 </head>
 
 <body class='sc5'>
+	<%
+		@SuppressWarnings("unchecked")
+		Vector<Cart> buylist = (Vector<Cart>) session.getAttribute("shoppingcart");
+	%>
+
     <!-- preloader area start -->
     <div class="preloader" id="preloader">
         <div class="preloader-inner">
@@ -63,7 +88,7 @@
     <!-- preloader area end -->
 
  <!-- navbar start -->
-<%@ include file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp" %>
+ <%@ include file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp" %> 
  <!-- navbar end -->
 
   <!-- checkout area start -->
@@ -74,85 +99,101 @@
                     <div class="bill-payment-wrap">
                         <h5>Billing details
                         </h5>
-                        <form class="default-form-wrap style-2">
+<!--                         <form class="default-form-wrap style-2" action="CheckoutServlet" method="post"> -->
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label>First Name</label>
+                                    <label> Name</label>
                                     <div class="single-input-wrap">
-                                        <input type="text" class="form-control" placeholder="Your Name">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Last Name</label>
-                                    <div class="single-input-wrap">
-                                        <input type="text" class="form-control" placeholder="Last Name">
+                                        <input type="text" class="form-control" value="<%=memberVO.getUserName()%>">
+                                        <input type="hidden" class="form-control" name="userId" value="<%=memberVO.getUserId()%>">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <label>Country</label>
-                                    <div class="single-input-wrap">
-                                        <input type="text" class="form-control" placeholder="Type Your Country">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
                                     <label>Street address</label>
-                                    <div class="single-input-wrap">
-                                        <input type="text" class="form-control" placeholder="Address">
-                                    </div>
+                                    <select class="form-select myselect" name="deliveryAddId" required>
+                                        	<option value="" >請選擇地址</option>
+											 <c:forEach var="addressVO" items="${addressList}"> 
+          									<option value="${addressVO.deliveryAddId}">${addressVO.deliverAddress}
+       										 </c:forEach>   
+									</select>
                                 </div>
-                                <div class="col-md-6">
-                                    <label>Permanent address</label>
-                                    <div class="single-input-wrap">
-                                        <input type="text" class="form-control" placeholder="Address">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                                <div class="col-md-12">
+                                    
+                      <jsp:useBean id="CardSvc" scope="page" class="com.card.model.CardDAOService" />              
+                                        <label>Credit Cart </label>
+                                        <select class="form-select myselect" name="cardId" required>
+                                        	<option value="" >請選擇信用卡</option>
+											 <c:forEach var="cardVO" items="${list}"> 
+          									<option value="${cardVO.cardId}" ${(memberVO.restaurantId==resVO.restaurantId)? 'selected':'' }  >${cardVO.cardNumber}
+       										 </c:forEach>   
+										</select>
+										
+                                  </div>
+                                <input type="submit" class="btn btn-secondary w-100" value="PLACE ORDER" />
+                                <input type="hidden" name="action" value="insert"/>
+                            </div>                      
                     </div>                    
                 </div>
                 <div class="col-lg-5">
                     <div class="order-area">
                         <h5 class="title">Your order</h5>
-                        <div class="order-product">
+                        <div class="order-product" style="align-items: center;text-align: center">
+                            <div class="thumb" style="width:90px">
+                                <h6></h6>
+                            </div>
+                            <div class="thumb" style="width:150px">
+                                <h6>產品</h6>
+                            </div>
+                            <div class="thumb" style="width:80px">
+                                <h6>數量</h6>
+                            </div>
                             <div class="thumb">
-                                <img src="assets/img/widget/01.png" alt="img">
-                            </div>
-                            <div class="details">
-                                <h6>All Season Gulliver Pizza</h6>
+                                <h6>價格</h6>
                             </div>
                         </div>
+					<%
+									for (int index = 0; index < buylist.size(); index++) {
+											Cart order = buylist.get(index);
+								%>
+                        <div class="order-product" style="align-items: center;text-align: center">
+                            <div class="thumb">
+                                <img src="<%=request.getContextPath()%>/CartImageUtil?Id=<%=order.getMealId()%>" alt="img">
+                            </div>
+                            <div class="thumb" style="width:90px;">
+                                <h6><%=order.getMealName()%></h6>
+                                <input type="hidden" name="mealName" value="<%=order.getMealName()%>">
+                            </div>
+                            <div class="thumb" style="width:80px">
+                                <h6><%=order.getQuantity()%></h6>
+                                <input type="hidden" name="quantity" value="<%=order.getQuantity()%>">
+                            </div>
+                            <div class="thumb">
+                                <h6><%=order.getUnitPrice()%></h6>
+                                <input type="hidden" name="unitPrice" value="<%=order.getUnitPrice()%>">
+                            </div>
+                        </div>
+<!--                         </form> -->
+                        <%}%>
                         <ul class="amount">
-                            <li>Subtotal<span>$50.00</span></li>
-                            <li class="total">Total<span>$50.00</span></li>
-                        </ul>
-                        <div class="peyment-method">
-                            <h6>Check payments</h6>
-                            <ul class="card-area">
-                                <li>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                        </label>
-                                    </div>
-                                    <div class="details">
-                                        <h6>Credit Cart <img src="assets/img/icon/peyment-card.png" alt="img"></h6>
-                                        <p>Pay with visa, Anex, MasterCard, Maestro,Discover and many other credit and debit credit vai paypal</p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                        <label class="form-check-label" for="flexRadioDefault2">
-                                        </label>
-                                    </div>
-                                    <div class="details">
-                                        <h6>PayPal <img src="assets/img/icon/paypal-card.png" alt="img"></h6>
-                                        <p>Pay easily, fast and secure with PayPal.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <a class="btn btn-secondary w-100" href="#"> PLACE ORDER</a>
+                        
+                        								
+		<%							if (buylist != null && (buylist.size() > 0)) {				
+									int itemUnitPrice, itemQuantity, amount, resultAmount = 0;
+									
+									for (int index = 0; index < buylist.size(); index++) {
+										Cart order = buylist.get(index);
+
+										itemUnitPrice = order.getUnitPrice();
+										itemQuantity = order.getQuantity();
+										amount = (itemUnitPrice * itemQuantity);
+										resultAmount += amount;
+		%>					
+								<li><%=order.getMealName()%><span>$<%=amount%>
+								</span></li>
+								<%}%>
+								<li class="total">Total<span>$<%=resultAmount%></span></li>
+								<%}%>
+                        </ul>     
                     </div>                
                 </div>
             </div>

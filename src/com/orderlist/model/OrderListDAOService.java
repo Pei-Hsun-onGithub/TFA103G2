@@ -12,7 +12,7 @@ public class OrderListDAOService {
 		dao = new OrderListDAO();
 	}
 
-	public OrderListVO addOrderListDAO( Integer orderId, Integer mealId, String quantity, String unitPrice, String note) {
+	public OrderListVO addOrderListDAO( Integer orderId, Integer mealId, Integer quantity, Integer unitPrice, String note) {
 		
 		OrderListVO orderListVO = new OrderListVO();
 		
@@ -26,7 +26,7 @@ public class OrderListDAOService {
 		return dao.insert(orderListVO);
 	}
 	
-	public OrderListVO updateOrderListDAO( Integer orderId, Integer mealId, String quantity, String unitPrice, String note) {
+	public OrderListVO updateOrderListDAO( Integer orderId, Integer mealId, Integer quantity, Integer unitPrice, String note) {
 		
 		OrderListVO orderListVO = new OrderListVO();
 		

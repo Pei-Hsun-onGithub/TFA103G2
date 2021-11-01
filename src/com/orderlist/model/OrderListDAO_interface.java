@@ -10,5 +10,9 @@ public interface OrderListDAO_interface {
 	public void delete(Integer orderListid);
 	public OrderListVO findByPK(Integer orderListid);
 	public List<OrderListVO> getAll();
+	
+	public void insertWithRsOrder (OrderListVO orderListVO, java.sql.Connection con);
+	
+	
 
 }
