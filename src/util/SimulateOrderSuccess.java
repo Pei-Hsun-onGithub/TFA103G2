@@ -18,6 +18,8 @@ import com.achieveprogress.model.AchieveProgress;
 import com.achieveprogress.model.AchieveProgressService;
 import com.foodarticle.model.FoodArticleService;
 import com.foodarticle.model.FoodArticleVO;
+import com.memberinfo.model.MemberInfo;
+import com.memberinfo.model.MemberInfoService;
 import com.rsorder.model.RsOrderDAOService;
 import com.rsorder.model.RsOrderVO;
 
@@ -51,6 +53,7 @@ public class SimulateOrderSuccess extends HttpServlet{
 			AchieveProgressService archieveProgressSvc = new AchieveProgressService();
 			RsOrderDAOService rsOrderSvc = new RsOrderDAOService();
 			FoodArticleService foodArticleSvc = new FoodArticleService();
+			MemberInfoService memeInfoSvc = new MemberInfoService();
 			
 			Integer userId = 20210001;
 			
@@ -80,6 +83,14 @@ public class SimulateOrderSuccess extends HttpServlet{
 			ArchieveChecker archieveChecker = new ArchieveChecker();
 			
 			if(archieveChecker.isComplete(achieveVO, userAchieveProgress)) {
+				// 給予獎勵(金幣、飼料)
+				Integer coinsFee = achieveVO.getGainGold();
+				Integer feedFee = achieveVO.getGainFeed();
+				MemberInfo memInfo = memeInfoSvc.getOneMemberInfo(userId);
+				memInfo.setGold(coinsFee);
+				memInfo.setFeed(feedFee);
+				// 更新獎勵至這位使用者
+				memeInfoSvc.updateMemberInfo(userId, memInfo.getEmail(), memInfo.getPwd(), memInfo.getUserName(), memInfo.getGender(), memInfo.getBirthday(), memInfo.getPhone(), memInfo.getPic(), memInfo.getRegisterDate(), coinsFee, feedFee, memInfo.getMonsterId(), memInfo.getMonsterNickName(), memInfo.getLv(), memInfo.getExp(), memInfo.getSta());
 				
 			}
 			
