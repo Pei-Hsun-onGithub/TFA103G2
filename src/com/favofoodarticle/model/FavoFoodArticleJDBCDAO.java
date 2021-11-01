@@ -17,6 +17,7 @@ public class FavoFoodArticleJDBCDAO implements FavoFoodArticleDAO_interface {
 	public static final String DELETE = "DELETE FROM FavoFoodArticle WHERE userId =? && articleNo=? ";
 	public static final String FIND_BY_PK = "SELECT * FROM FavoFoodArticle WHERE userId = ? && articleNo= ?";
 	public static final String GET_ALL = "SELECT * FROM FavoFoodArticle";
+	public static final String GET_BY_USER = "SELECT * FROM FavoFoodArticle WHERE userId =?";
 	
 	static {
 		try {
@@ -206,6 +207,59 @@ public class FavoFoodArticleJDBCDAO implements FavoFoodArticleDAO_interface {
 		}
 		
 		return favofooarList;
+	}
+
+	@Override
+	public List<FavoFoodArticleVO> getByUser(Integer userId) {
+		List<FavoFoodArticleVO> favoUserList = new ArrayList<>();
+		FavoFoodArticleVO favofooar = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(GET_BY_USER);			
+			rs = pstmt.executeQuery();
+			
+			
+			while(rs.next()) {
+				favofooar = new FavoFoodArticleVO();
+				favofooar.setArticleNo(rs.getInt("userId"));
+				favofooar.setUserId(rs.getInt("articleNo"));
+				favoUserList.add(favofooar);							
+			}
+		}catch(SQLException se) {
+			se.printStackTrace();
+		}finally{
+			
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}			
+			
+			if(pstmt != null) {
+				try {
+				pstmt.close();
+				}catch(SQLException se){
+					se.printStackTrace();
+				}
+			}
+				
+			if( con != null) {
+				try {
+					con.close();
+				}catch(SQLException se) {
+					se.printStackTrace();
+				}
+			}
+		}
+		
+		return favoUserList;
+		
 	}
 	
 }
