@@ -35,15 +35,15 @@ public class RestaurantStyleServlet extends HttpServlet {
 			RestaurantStyleService restStyleSvc = new RestaurantStyleService();
 			
 
-			// Â^¨ú¨Ó¦Û¨ä¥LControllerªº¸ê®Æ
+			// ï¿½^ï¿½ï¿½ï¿½Ó¦Û¨ï¿½LControllerï¿½ï¿½ï¿½ï¿½ï¿½
 			Integer styleId1 = (Integer) req.getAttribute("styleId1");
 			Integer styleId2 = (Integer) req.getAttribute("styleId2");
 			Integer styleId3 = (Integer) req.getAttribute("styleId3");
 			Integer restaurantId = (Integer) req.getAttribute("restaurantId");
-			RestaurantVO restVO = (RestaurantVO) req.getAttribute("restVO");
+			RestaurantVO restVO = (RestaurantVO) req.getAttribute("updatedRestVO");
 
 
-			// ¸ê®Æ¤J®w
+			// ï¿½ï¿½Æ¤Jï¿½w
 			if (styleId1 != null) {
 				RestaurantStyleVO restStyleVO = restStyleSvc.addRestaurantStyle(restaurantId, styleId1);
 				session.setAttribute("style1", restStyleVO.getStyleId());
@@ -58,7 +58,7 @@ public class RestaurantStyleServlet extends HttpServlet {
 				session.setAttribute("style3", restStyleVO.getStyleId());
 			}
 
-			// ¥]¸Ë­nkeep¦íªº¸ê®Æ¶Ç¦^viewÁÙ­ì¤w¶ñ¼gªº³¡¤À
+			// ï¿½]ï¿½Ë­nkeepï¿½ï¿½ï¿½ï¿½Æ¶Ç¦^viewï¿½Ù­ï¿½wï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 			req.setAttribute("restVO", restVO);
 
@@ -70,12 +70,12 @@ public class RestaurantStyleServlet extends HttpServlet {
 		if ("update".equals(action)) {
 			
 			RestaurantStyleService restStyleSvc = new RestaurantStyleService();
-			// Â^¨ú¨Ó¦Û¨ä¥LControllerªº¸ê®Æ
+			// ï¿½^ï¿½ï¿½ï¿½Ó¦Û¨ï¿½LControllerï¿½ï¿½ï¿½ï¿½ï¿½
 			Integer newStyleId1 = (Integer) req.getAttribute("styleId1");
 			Integer newStyleId2 = (Integer) req.getAttribute("styleId2");
 			Integer newStyleId3 = (Integer) req.getAttribute("styleId3");
 			
-			// session¤ºªºstyle¸ê®Æ¥Î¨Ó§@¬°§ó·s­¶­±¡Akeep¦í¸ê®Æ¥Î!
+			// sessionï¿½ï¿½ï¿½ï¿½styleï¿½ï¿½Æ¥Î¨Ó§@ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½Akeepï¿½ï¿½ï¿½Æ¥ï¿½!
 			Integer oldStyleId1 = (Integer) session.getAttribute("style1");
 			Integer oldStyleId2 = (Integer) session.getAttribute("style2");
 			Integer oldStyleId3 = (Integer) session.getAttribute("style3");
@@ -84,21 +84,21 @@ public class RestaurantStyleServlet extends HttpServlet {
 			RestaurantVO restVO = (RestaurantVO) req.getAttribute("updatedRestVO");
 			
 
-			// ¸ê®Æ§ó·s
+			// ï¿½ï¿½Æ§ï¿½s
 			if(newStyleId1 != null ) {
 				if(oldStyleId1 == null) {
-					//¨S¦³ÂÂªºstyle´N·s¼W¤@­Ó
+					//ï¿½Sï¿½ï¿½ï¿½Âªï¿½styleï¿½Nï¿½sï¿½Wï¿½@ï¿½ï¿½
 					RestaurantStyleVO updatedRestStyleVO = restStyleSvc.addRestaurantStyle(usedRestaurantId, newStyleId1);
 					session.setAttribute("style1", updatedRestStyleVO.getStyleId());
 				}
 				else {
-					//¤w¸g¦³style´N§ó·s¤@­Ó
+					//ï¿½wï¿½gï¿½ï¿½styleï¿½Nï¿½ï¿½sï¿½@ï¿½ï¿½
 					RestaurantStyleVO updatedRestStyleVO = restStyleSvc.updateRestaurantStyle(usedRestaurantId, newStyleId1, usedRestaurantId, oldStyleId1);
 					session.setAttribute("style1", updatedRestStyleVO.getStyleId());
 				}
 			} else { //newStyleId1 == null
 				if(oldStyleId1 != null) {
-					//±NÂÂªº§R°£
+					//ï¿½Nï¿½Âªï¿½ï¿½Rï¿½ï¿½
 					restStyleSvc.deleteRestaurantStyle(usedRestaurantId, oldStyleId1);
 					session.removeAttribute("style1");
 				}
@@ -117,7 +117,7 @@ public class RestaurantStyleServlet extends HttpServlet {
 				}
 			} else { //newStyleId2 == null
 				if(oldStyleId2 != null) {
-					//±NÂÂªº§R°£
+					//ï¿½Nï¿½Âªï¿½ï¿½Rï¿½ï¿½
 					restStyleSvc.deleteRestaurantStyle(usedRestaurantId, oldStyleId2);
 					session.removeAttribute("style2");
 				}
@@ -136,16 +136,16 @@ public class RestaurantStyleServlet extends HttpServlet {
 				}
 			} else { //newStyleId3 == null
 				if(oldStyleId3 != null) {
-					//±NÂÂªº§R°£
+					//ï¿½Nï¿½Âªï¿½ï¿½Rï¿½ï¿½
 					restStyleSvc.deleteRestaurantStyle(usedRestaurantId, oldStyleId3);
 					session.removeAttribute("style3");
 				}
 			}
 			
 
-			// ¥]¸Ë­nkeep¦íªº¸ê®Æ¶Ç¦^viewÁÙ­ì¤w¶ñ¼gªº³¡¤À
+			// ï¿½]ï¿½Ë­nkeepï¿½ï¿½ï¿½ï¿½Æ¶Ç¦^viewï¿½Ù­ï¿½wï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-			req.setAttribute("restVO", restVO);
+			session.setAttribute("restVO", restVO);
 
 			RequestDispatcher toView = req.getRequestDispatcher("/pei_pages/vendor_restaurant_updateInfo.jsp");
 			toView.forward(req, res);

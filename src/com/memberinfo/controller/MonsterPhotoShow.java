@@ -37,6 +37,15 @@ public class MonsterPhotoShow extends HttpServlet{
 		MemberInfo memberVO = memberSvc.getOneMemberInfo(userId);
 		MonsterBookService monsterBookSvc = new MonsterBookService();
 		MonsterBook monsterBookVO = monsterBookSvc.getOneMonsterBook(memberVO.getMonsterId());
+		String monsterLevel = request.getParameter("type");
+		
+		if("M".equals(monsterLevel)) {
+			Integer mediumMonsterId = monsterBookVO.getMonsterId() + 3;
+			monsterBookVO = monsterBookSvc.getOneMonsterBook(mediumMonsterId);
+		} else if("L".equals(monsterLevel)) {
+			Integer HighMonsterId = monsterBookVO.getMonsterId() + 6;
+			monsterBookVO = monsterBookSvc.getOneMonsterBook(HighMonsterId);
+		}
 		
 		try {
 

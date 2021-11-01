@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.achieve.model.Achieve;
+import com.achieve.model.AchieveService;
 import com.memberinfo.model.MemberInfo;
 import com.memberinfo.model.MemberInfoService;
 import com.monsterbook.model.MonsterBook;
@@ -53,7 +56,18 @@ public class MonsterServlet extends HttpServlet {
 					memInfo.getGender(), memInfo.getBirthday(), memInfo.getPhone(), memInfo.getPic(),
 					memInfo.getRegisterDate(), memInfo.getGold(), memInfo.getFeed(), monsterId, monsterNickName,
 					monsterLevel, monsterExp, memInfo.getSta());
-
+			
+/*	============= 在首次選取怪獸頁面之後，將預設的2004成就任務放入ServletContext==============  */
+			
+			AchieveService achieveSvc = new AchieveService();
+			Achieve achieveVO = achieveSvc.getOneAchieve(2004);
+			ServletContext servletContext = this.getServletContext();
+			
+			if(servletContext.getAttribute("achieveMission") == null) {
+				servletContext.setAttribute("achieveMission", achieveVO);
+			} 	
+/*	============================================================================  */			
+			
 			RequestDispatcher toHomeView = req.getRequestDispatcher("/home.jsp");
 			toHomeView.forward(req, res);
 		}

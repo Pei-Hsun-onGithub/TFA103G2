@@ -156,7 +156,7 @@ form div.my-img-btn-wrapper .my-btn {
 						</li>
 						<li class="menu-cart"><a href="#" style="visibility: hidden;">小鈴鐺 <span>4</span></a></li>
 						<li class="menu-cart"><a href="cart.html" style="visibility: hidden;">CART <span>1</span></a></li>
-						<li class="phone-contact"><a href="#">登出</a></li>
+						<li class="phone-contact"><a href="<%=request.getContextPath()%>/login/Login-login.jsp">登出</a></li>
 						
 						
 					</ul>
@@ -259,7 +259,7 @@ form div.my-img-btn-wrapper .my-btn {
 									<div class="col-md-5">
 
 										<!-- 隱藏的餐點狀態 START-->
-
+										<!-- 1:代表 「熱賣中」；2:下架   -->
 										<input type="hidden" class="form-control" name="sta"
 											value="<%=(mealVO == null) ? "1" : mealVO.getSta()%>">
 

@@ -35,7 +35,8 @@
 
 				MonsterBookService mstrSvc = new MonsterBookService();
 				MonsterBook monsterValueObject = mstrSvc.getOneMonsterBook(memberValueObject.getMonsterId());
-			%>
+				
+%>
 
 
 			<div class="collapse navbar-collapse" id="themefie_main_menu">
@@ -88,7 +89,7 @@
 										<div class="col-md-4 col-6">
 											<div class="single-item-wrap text-center">
 												<div class="thumb">
-													<img src="<%=request.getContextPath()%>/images/shh.jpg"
+													<img src="<%=request.getContextPath()%>/MonsterPhotoShow.do?type=M"
 														alt="img">
 												</div>
 												<div class="wrap-details my-monster-detail">
@@ -103,7 +104,7 @@
 										<div class="col-md-4 col-6">
 											<div class="single-item-wrap text-center">
 												<div class="thumb">
-													<img src="<%=request.getContextPath()%>/images/wthwt.jpg"
+													<img src="<%=request.getContextPath()%>/MonsterPhotoShow.do?type=L"
 														alt="img">
 												</div>
 												<div class="wrap-details">

@@ -38,12 +38,9 @@ public class AchieveQualifyServlet extends HttpServlet {
 			AchieveService achieveSvc = new AchieveService();
 			Achieve achieveVO = achieveSvc.getOneAchieve(archieveId);
 			
-			if(servletContext.getAttribute("achieveMission") != null) {
-				servletContext.removeAttribute("achieveMission");
+			
 				servletContext.setAttribute("achieveMission", achieveVO);
-			} else {
-				servletContext.setAttribute("achieveMission", achieveVO);
-			}
+			
 			
 			RequestDispatcher toBackgroungManagerView = request.getRequestDispatcher("/pei_pages/addAchievment.jsp");
 			toBackgroungManagerView.forward(request, response);
