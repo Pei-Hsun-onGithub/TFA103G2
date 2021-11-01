@@ -21,6 +21,7 @@ public class EvolutionCheckerTest {
 	
 	LevelExpService levelExpSvc;
 	List<LevelExp> levelExps;
+	List<MonsterBook> monsters;
 	EvolutionChecker evolutionChecker;
 	MonsterBookService monsterSvc;
 	MemberInfoService memeInfoSvc;
@@ -39,7 +40,8 @@ public class EvolutionCheckerTest {
 	public void setUp() throws Exception {
 		levelExpSvc = new LevelExpService();
 		levelExps = levelExpSvc.getAll();
-		evolutionChecker = new EvolutionChecker(levelExps);
+		monsters = new MonsterBookService().getAll();
+		evolutionChecker = new EvolutionChecker(levelExps, monsters);
 		memeInfoSvc = new MemberInfoService();
 		userId = 20210001;
 		memInfo = memeInfoSvc.getOneMemberInfo(userId);
@@ -60,6 +62,11 @@ public class EvolutionCheckerTest {
 		memInfo.setLv(2);
 		memInfo.setExp(60);
 		assertTrue(evolutionChecker.isTimeToGrowup(memInfo));
+		
+		memInfo.setLv(1);
+		memInfo.setExp(20);
+		assertTrue(evolutionChecker.isTimeToGrowup(memInfo));
+		
 	}
 	@Test
 	public void testIsTimeToEvolution() {
@@ -94,15 +101,23 @@ public class EvolutionCheckerTest {
 		assertEquals(biggestMonster.getMinDemandLevel(), evolutionChecker.getBiggerMonster(memInfo).getMinDemandLevel());
 		
 	}
-//	@Test
-//	public void testGetBiggerMonsterExpCheck() {
-//		
-//		MonsterBook midiumMonster = monsterSvc.getOneMonsterBook(1004);
-//		// 可以進化成中等怪獸的等級與經驗值
-//		memInfo.setLv(2);
-//		memInfo.setExp(50);
-//		
-//		assertEquals(midiumMonster.getMinDemandLevel(), evolutionChecker.getBiggerMonster(memInfo));
-//	}
+	@Test
+	public void testGetNewLevel() {
+		
+		
+		
+		memInfo.setLv(1);
+		memInfo.setExp(10);
+		assertEquals(new Integer(2), evolutionChecker.getNewLevel(memInfo));
+		
+		memInfo.setLv(3);
+		memInfo.setExp(88);
+		assertEquals(new Integer(3), evolutionChecker.getNewLevel(memInfo));
+		
+		memInfo.setLv(5);
+		memInfo.setExp(0);
+		assertEquals(new Integer(5), evolutionChecker.getNewLevel(memInfo));
+		
+	}
 
 }

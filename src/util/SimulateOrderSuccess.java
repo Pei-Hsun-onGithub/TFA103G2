@@ -22,6 +22,8 @@ import com.levelexp.model.LevelExp;
 import com.levelexp.model.LevelExpService;
 import com.memberinfo.model.MemberInfo;
 import com.memberinfo.model.MemberInfoService;
+import com.monsterbook.model.MonsterBook;
+import com.monsterbook.model.MonsterBookService;
 import com.rsorder.model.RsOrderDAOService;
 import com.rsorder.model.RsOrderVO;
 
@@ -47,7 +49,7 @@ public class SimulateOrderSuccess extends HttpServlet{
 			
 			RsOrderDAOService OrderItemSvc = new RsOrderDAOService();
 			// 模擬一筆訂單成功送出
-			RsOrderVO orderVO = OrderItemSvc.addRsOrderDAO(20210016, 7001, 1, 1, 0, Date.valueOf(LocalDate.of(2021, 4, 1)), Date.valueOf(LocalDate.of(2021, 4, 2)), Date.valueOf(LocalDate.of(2021, 4, 3)), Date.valueOf(LocalDate.of(2021, 4, 1)), Date.valueOf(LocalDate.of(2021, 4, 1)), 10, "很快送達", 1);
+			RsOrderVO orderVO = OrderItemSvc.addRsOrderDAO(20210020, 7001, 1, 1, 0, Date.valueOf(LocalDate.of(2021, 4, 1)), Date.valueOf(LocalDate.of(2021, 4, 2)), Date.valueOf(LocalDate.of(2021, 4, 3)), Date.valueOf(LocalDate.of(2021, 4, 1)), Date.valueOf(LocalDate.of(2021, 4, 1)), 10, "很快送達", 1);
 		
 			
 			// 使用到的Services
@@ -57,7 +59,7 @@ public class SimulateOrderSuccess extends HttpServlet{
 			FoodArticleService foodArticleSvc = new FoodArticleService();
 			MemberInfoService memeInfoSvc = new MemberInfoService();
 			
-			Integer userId = 20210016;
+			Integer userId = 20210020;
 			
 //			Achieve nowAchieve = archieveSvc.getOneAchieve(2003);
 			
@@ -71,6 +73,9 @@ public class SimulateOrderSuccess extends HttpServlet{
 			
 			List<RsOrderVO> orders = rsOrderSvc.getOrdersByUserId(userId);
 			List<FoodArticleVO> articles = foodArticleSvc.getArticlesByUserId(userId);
+			List<MonsterBook> monsters = new MonsterBookService().getAll();
+			
+			MemberInfo memInfo = memeInfoSvc.getOneMemberInfo(userId);
 			
 			// 如果是第一次參加任務成就，就新增一筆成就進度
 			if(archieveProgressSvc.getOneAchieveProgress(userId, achieveId) == null) {
@@ -85,37 +90,45 @@ public class SimulateOrderSuccess extends HttpServlet{
 			// 檢查達標
 			ArchieveChecker archieveChecker = new ArchieveChecker();
 			
+			// 如果達成訂單或食記目標就更新金幣與經驗值到這位使用者
 			if(archieveChecker.isComplete(achieveVO, userAchieveProgress)) {
-				System.out.println("有近來成就");
+				
 				// 給予獎勵(金幣、飼料)
 				Integer coinsFee = achieveVO.getGainGold();
 				Integer feedFee = achieveVO.getGainFeed();
-				MemberInfo memInfo = memeInfoSvc.getOneMemberInfo(userId);
-				Integer exp =new Integer(memInfo.getExp()) + new Integer(feedFee);
-				System.out.println("exp=" + exp);
-				// 更新獎勵至這位使用者
-				MemberInfo m = memeInfoSvc.updateMemberInfo(userId, memInfo.getEmail(), memInfo.getPwd(), memInfo.getUserName(), memInfo.getGender(), memInfo.getBirthday(), memInfo.getPhone(), memInfo.getPic(), memInfo.getRegisterDate(), coinsFee, feedFee, memInfo.getMonsterId(), memInfo.getMonsterNickName(), memInfo.getLv(), exp, memInfo.getSta());
-				 
-				System.out.println("更新後的memInfo=" + m);
+				memInfo = memeInfoSvc.getOneMemberInfo(userId);
+				Integer exp = new Integer(memInfo.getExp()) + new Integer(feedFee);
 				
+				// 更新獎勵至這位使用者
+				memeInfoSvc.updateMemberInfo(userId, memInfo.getEmail(), memInfo.getPwd(), memInfo.getUserName(), memInfo.getGender(), memInfo.getBirthday(), memInfo.getPhone(), memInfo.getPic(), memInfo.getRegisterDate(), coinsFee, feedFee, memInfo.getMonsterId(), memInfo.getMonsterNickName(), memInfo.getLv(), exp, memInfo.getSta());
+
 			}
 			
 			//飼料等於經驗值
 			
 			
-			//檢查怪獸是否可以進化
 			LevelExpService levelExpSvc = new LevelExpService();
 			List<LevelExp> levelExps = levelExpSvc.getAll();
-			EvolutionChecker evolutionChecker = new EvolutionChecker(levelExps);
+			EvolutionChecker evolutionChecker = new EvolutionChecker(levelExps, monsters);
 			
-			MemberInfo memInfo = memeInfoSvc.getOneMemberInfo(userId);
+			//檢查怪獸是否可以升等
+			if(evolutionChecker.isTimeToGrowup(memInfo)) {
+				//System.out.println("升等進入");
+				//如果可以升等就更新這位使用者的LV
+				Integer newLv = evolutionChecker.getNewLevel(memInfo);
+				// 升等之後，將Exp歸零(新等級重新開始累計經驗值)
+				Integer newExp = new Integer(0);
+				
+				// 更新這位使用者的經驗值和等級
+				MemberInfo m = memeInfoSvc.updateMemberInfo(userId, memInfo.getEmail(), memInfo.getPwd(), memInfo.getUserName(), memInfo.getGender(), memInfo.getBirthday(), memInfo.getPhone(), memInfo.getPic(), memInfo.getRegisterDate(), memInfo.getGold(), newExp, memInfo.getMonsterId(), memInfo.getMonsterNickName(), newLv, newExp, memInfo.getSta());
+				//System.out.println("升等後的LV=" + m);
+			}
+			
+			//檢查怪獸是否可以進化
+
 			if(evolutionChecker.isTimeToEvolution(memInfo)) {
 				
-				
-				
-				
-				
-				
+	
 			}
 			
 			
