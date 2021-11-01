@@ -85,7 +85,7 @@ div.my-btn-group-container {
 }
 
 div.my-btn-group {
-	margin-left: 430px;
+	margin-left: 400px;
 }
 
 div.img-container {
@@ -193,10 +193,10 @@ img.wario {
 		<div class="btn-group my-btn-group" role="group"
 			aria-label="Basic mixed styles example">
 			<a type="button" class="btn btn-danger"
-				href="<%=request.getContextPath()%>/pei_pages/listAllMonster.jsp">怪獸</a>
+				href="<%=request.getContextPath()%>/pei_pages/listAllMonster.jsp">怪獸上線</a>
 			<a type="button" class="btn btn-warning"
 				href="<%=request.getContextPath()%>/pei_pages/addAchievment.jsp">任務成就</a>
-			<button type="button" class="btn btn-success">Right</button>
+			<button type="button" class="btn btn-success">廣告看版</button>
 		</div>
 
 	</div>
