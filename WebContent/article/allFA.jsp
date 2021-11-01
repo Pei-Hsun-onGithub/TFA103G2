@@ -15,7 +15,9 @@
     pageContext.setAttribute("popularList",popularList); 
     
     // 小心MemberInfo 與 memberInfo!!!!
+
     MemberInfo userNow = (MemberInfo) session.getAttribute("memberInfo");
+
     session.setAttribute("userNow", userNow);
 
 %>

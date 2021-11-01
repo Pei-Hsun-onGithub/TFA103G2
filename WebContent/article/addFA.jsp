@@ -231,7 +231,9 @@ button.check_ok {
 						<button class="btn cancel" id="img_file">選擇圖片</button>
 						<input type="file" multiple="true" id="add_file" style="display: none;" name="imgfile" >
 						</div>
+
 						<div class ="pic_list"></div>						
+
 
 
 						<div class="row">
@@ -253,7 +255,7 @@ button.check_ok {
 				</div>
 
 				<!-- 右邊 -->
-				<div class="col-md-3"></div>
+				<div class="col-md-3">hello</div>
 			</div>
 		</div>
 	</div>
@@ -342,7 +344,7 @@ button.check_ok {
         	
         })
         
-        
+
         
         
         

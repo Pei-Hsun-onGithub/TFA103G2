@@ -282,7 +282,12 @@ p.myP{
 					<form class="default-form-wrap" method="post" action="msg.do">
 						<h5 class="title">留言</h5>
 						<div class="row">
-							
+
+							<div class="col-md-6"></div>
+							<div class="col-md-6">								
+
+							</div>
+
 							<div class="col-12">
 								<div class="single-textarea-wrap">
 
@@ -297,7 +302,7 @@ p.myP{
 									<input id="myarticleno" type="hidden" name="articleNo" value="<%=faVO.getArticleNo()%>"/>										 
 								</div>
 							</div>
-							<div class="col-md-6"></div>								
+															
 							
 						</div>
 						<button type="submit" class="btn btn-base">Submit your

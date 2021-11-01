@@ -278,8 +278,10 @@ public class FoodArticleServlet extends HttpServlet {
 				Integer userId =new Integer (req.getParameter("userId"));
 				System.out.println("userId"+userId);
 				
+
 				String restaurant = req.getParameter("restaurantId");
 				
+
 				Integer restaurantId = null;				
 				if (restaurant == null || (restaurant.length()) == 0) {
 					errorMsgs.add("請選擇餐廳");

@@ -23,6 +23,7 @@ public class FavoArticleServlet extends HttpServlet {
 //		String action = req.getParameter("action");
 		
 
+
 					
 			Integer articleNo = new Integer(req.getParameter("articleNo"));
 			Integer userId = new Integer(req.getParameter("userId"));						
