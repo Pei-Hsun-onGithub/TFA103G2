@@ -360,22 +360,22 @@ CREATE TABLE Card (
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
  	VALUES(20210012, '陳冠軒', 3597905196233614, '2023-12-31', '044', '台北市文山區萬美街一段85巷3號7樓', '269', 1);
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210013, '賴國滄', 4716390519622253, '2023-12-31', '466', '新竹市北區經國路一段238號', '632', 1);	
+ 	VALUES(20210001, '賴國滄', 4716329842362253, '2023-12-31', '466', '新竹市北區經國路一段238號', '632', 1);	
  INSERT INTO Card (userid, cardholder, cardnumber, deadline, cvv, billaddress, zipcode, sta)
- 	VALUES(20210014, '黃志成', 4716329842905192, '2023-12-31', '466', '新竹市北區經國路一段238號', '632', 1);	
+ 	VALUES(20210001, '黃志成', 4716329842362253, '2023-12-31', '466', '新竹市北區經國路一段238號', '632', 1);	
    # 餐點訂單
 CREATE TABLE RsOrder (
 	orderid 		INT AUTO_INCREMENT NOT NULL,
 	userid     		INT NOT NULL,
-	restaurantid    INT ,
+	restaurantid    INT NOT NULL,
 	cardid       	INT NOT NULL,
 	deliveryaddid   INT NOT NULL,
 	deliverymethods INT,
-	orderday      	datetime timestamp default current_timestamp,
-	resstrtime 	    datetime timestamp default current_timestamp,
-    resendtime    	datetime timestamp default current_timestamp,
-    delstrtime    	datetime timestamp default current_timestamp,
-    delendtime    	datetime timestamp default current_timestamp,
+	orderday      	datetime,
+	resstrtime 	    datetime,
+    resendtime    	datetime,
+    delstrtime    	datetime,
+    delendtime    	datetime,
     count    		INT,
     texts    		VARCHAR(50),
     sta    			INT not null,
@@ -404,8 +404,8 @@ CREATE TABLE OrderList (
 	orderlistid    INT AUTO_INCREMENT NOT NULL,
 	orderid    	   INT NOT NULL,
 	mealId         INT NOT NULL,
-	quantity       INT NOT NULL,
-	unitprice      INT NOT NULL,
+	quantity       VARCHAR(10) NOT NULL,
+	unitprice      VARCHAR(10) NOT NULL,
 	note     	   text,
 
     CONSTRAINT OrderList_orderid_FK FOREIGN KEY (orderid) REFERENCES RsOrder (orderid),
@@ -414,7 +414,7 @@ CREATE TABLE OrderList (
 ) AUTO_INCREMENT = 1;
 
 INSERT INTO OrderList (orderid, mealId, quantity, unitprice, note) 
-			VALUES (1, 501, 33, 33, 'NULL');
+			VALUES (1, 501, '錢錢', '一百', 'NULL');
 
 
 # 收藏餐廳
@@ -500,6 +500,5 @@ values(20210002,7001,'肯德基好好吃',now(),'青花椒麻雞香辣,太辣!!!
 		primary key(userid,articleno)
     
     );
-    
     
     insert into FavoFoodArticle (userid,articleno) values (20210001,1),(20210001,2);

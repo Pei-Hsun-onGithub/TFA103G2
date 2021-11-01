@@ -6,6 +6,7 @@
 <%@ page import="com.picturebase.model.*"%>
 <%@ page import="com.meal.model.*"%>
 <%@ page import="com.memberinfo.model.*"%>
+<%@ page import="com.favofoodarticle.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%
@@ -21,14 +22,15 @@
   List<FoodArticleVO> popularList = faSvc.getPopularArticle();
   pageContext.setAttribute("popularList",popularList);
   
-  MemberInfo userNow = (MemberInfo) session.getAttribute("MemberInfo");
+  MemberInfo userNow = (MemberInfo) session.getAttribute("memberInfo");
+  session.setAttribute("userNow", userNow);
 
 %>
 
 <jsp:useBean id="memtSvc" scope="page" class="com.memberinfo.model.MemberInfoService" />
 
 <% MemberInfo oneMebVO = memtSvc.getOneMemberInfo(faVO.getUserId());
-pageContext.setAttribute("oneMebVO",oneMebVO);
+   pageContext.setAttribute("oneMebVO",oneMebVO);
 %>
 
 <!DOCTYPE html>
@@ -180,10 +182,9 @@ p.myP{
 							<div class="authorname">${oneMebVO.userName}</div>			                                                                                       
                         </div>
                         
-                        <div class="thumb">                                    
-                            <a class="fav-btn" href="<%=request.getContextPath()%>/favofoodarticle/FavoArticle.do?action=insertFavoArticle&articleNo=<%=faVO.getArticleNo()%>&userId=<%=userNow.getUserId()%>">
-                            <i class="ri-heart-line"></i></a>
-                         </div>
+<!--                         <div class="thumb">                                     -->
+                            
+<!--                          </div> -->
 						
 						<span class="cat"> <span class="date"> <i
 								class="ri-calendar-todo-fill"></i> <%=faVO.getArticleDate()%>
@@ -213,11 +214,23 @@ p.myP{
 						<div class="row">
 							<div class="col-sm-6 align-self-center">
 								<div class="tag-inner">
-									<form>
-									input
-									
-									
-									</form>> 
+								  <ul class="social-area mt-md-0 mt-2">
+								  	<li>收藏</li>
+							  	 
+								  	<c:if test="${not empty favfooVO }">
+								  	<li id="mycollect">                                 	
+                                  	<a class="fav-btn" >
+                                  	<i id="myheart" class="fas fa-heart"></i></a>
+                                  	</li>
+                                  	</c:if>
+                                  	
+                                  	<c:if test="${empty favfooVO }">
+                                  	<li id="mycollect">                                 	
+                                  	<a class="fav-btn" >
+                                  	<i id="myheart" class="ri-heart-line"></i></a>
+                                  	</li>
+                                  </c:if>
+                                  </ul>
 								</div>
 							</div>
 							<div class="col-sm-6 mt-3 mt-sm-0 align-items-center">
@@ -265,23 +278,11 @@ p.myP{
 <%-- <%MemberInfo meVO =(MemberInfo)session.getAttribute("MemberInfo");%> --%>
 
 
-  
-
-
 
 					<form class="default-form-wrap" method="post" action="msg.do">
 						<h5 class="title">留言</h5>
 						<div class="row">
-							<div class="col-md-6">
-								<div class="single-input-wrap">
-									<input type="hidden" class="form-control" name="userId" value="<%=userNow.getUserId() %>">
-									<input type="hidden" name="articleNo" value="<%=faVO.getArticleNo()%>"/>
-										 
-								</div>
-							</div>
-							<div class="col-md-6">								
-
-							</div>
+							
 							<div class="col-12">
 								<div class="single-textarea-wrap">
 
@@ -290,6 +291,14 @@ p.myP{
 
 								</div>
 							</div>
+							<div class="col-md-6">
+								<div class="single-input-wrap">
+									<input id="myid" type="hidden" class="form-control" name="userId" value="<%=userNow.getUserId() %>">
+									<input id="myarticleno" type="hidden" name="articleNo" value="<%=faVO.getArticleNo()%>"/>										 
+								</div>
+							</div>
+							<div class="col-md-6"></div>								
+							
 						</div>
 						<button type="submit" class="btn btn-base">Submit your
 							Message</button>
@@ -313,7 +322,7 @@ p.myP{
 										</div>
 										<div class="media-body">
 											<h6 class="title">
-												<a href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${latestfaVO.articleNo}">${latestfaVO.articleTitle}</a>
+												<a href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${latestfaVO.articleNo}&userId=${userNow.userId}">${latestfaVO.articleTitle}</a>
 											</h6>
 										</div>
 									</div>
@@ -392,5 +401,47 @@ p.myP{
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 	
 	<%@ include file="/assets/webPageSnippet/jsSnippet_navbar_home_3.jsp" %>
+	
+	<script>
+	var favoURL ="<%=request.getContextPath()%>/favofoodarticle/FavoArticle.do";
+	
+	$("#myheart").on("click", function(){
+		  if($("#myheart").hasClass("ri-heart-line")){
+			  
+			  var articleno =$("#myarticleno").val();
+			  var userid = $("#myid").val();
+			  
+			  $.ajax({
+				  type:"POST",
+				  url:favoURL,
+				  data:{
+					  "action":"Insert",
+					  "articleNo":articleno,
+					  "userId":userid					  
+				  },				  
+				  datatype: "json",
+				  success: function(data){
+					  console.log("haha");
+					  $("#myheart").removeClass("ri-heart-line").addClass("fas fa-heart");
+				  }				  
+			  })
+			  
+			  
+			  
+		  }else{
+			  $("#myheart").removeClass("fas fa-heart").addClass("ri-heart-line");
+		  }
+		
+	});
+	
+		
+	
+	
+	
+	
+	
+	
+	
+	</script>
 </body>
 </html>

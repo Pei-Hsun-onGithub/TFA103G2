@@ -6,7 +6,7 @@
 
 <%
 	FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO");
-    MemberInfo userNow = (MemberInfo) session.getAttribute("MemberInfo");
+    MemberInfo userNow = (MemberInfo) session.getAttribute("memberInfo");
 
 %>
 <!DOCTYPE html>
@@ -126,15 +126,9 @@ textarea.editor {
 }
 
 
-div.preview_img {
-	margin-top: 5px;
-	border: solid 2px black;
+div.preview_imgs {	
 	width: 300px;
-	min-height: 200px;
-}
-
-div.preview_imgs span {
-	border: solid 2px red;
+	height: 300px;
 }
 
 button.cancel {
@@ -235,13 +229,15 @@ button.check_ok {
 						<input type="hidden" name="sta" size="2" value="1" />
 						 								
 						<div>
-						<button class="btn cancel" id="img_file">選擇圖片</button>
-						<input type="file" multiple id="add_file" style="display: none;" name="imgfile" >
+							<button class="btn cancel" id="img_file">選擇圖片</button>
+							<input type="file" multiple id="add_file" style="display: none;" name="imgfile" >
 						
-						<div class="preview_img">
-							<c:forEach var="oldpicVO" items="${list}" varStatus="index">
-							<img src="<%=request.getContextPath()%>/PictureBasesServlet?id=${index.index}">						
-							</c:forEach>
+						<div class ="pic_list">
+							<div class="preview_imgs">
+								<c:forEach var="oldpicVO" items="${list}" varStatus="index">
+									<img src="<%=request.getContextPath()%>/PictureBasesServlet?id=${index.index}">						
+								</c:forEach>
+							</div>
 						</div>
 						
 						

@@ -44,8 +44,8 @@ public class OrderListDAO implements OrderListDAO_interface{
 			
 			pstmt.setInt(1, orderListVO.getOrderId());
 			pstmt.setInt(2, orderListVO.getMealId());
-			pstmt.setInt(3, orderListVO.getQuantity());
-			pstmt.setInt(4, orderListVO.getUnitPrice());
+			pstmt.setString(3, orderListVO.getQuantity());
+			pstmt.setString(4, orderListVO.getUnitPrice());
 			pstmt.setString(5, orderListVO.getNote());
 
 
@@ -105,8 +105,8 @@ public class OrderListDAO implements OrderListDAO_interface{
 
 			pstmt.setInt(1, orderListVO.getOrderId());
 			pstmt.setInt(2, orderListVO.getMealId());
-			pstmt.setInt(3, orderListVO.getQuantity());
-			pstmt.setInt(4, orderListVO.getUnitPrice());
+			pstmt.setString(3, orderListVO.getQuantity());
+			pstmt.setString(4, orderListVO.getUnitPrice());
 			pstmt.setString(5, orderListVO.getNote());
 			pstmt.setInt(6, orderListVO.getOrderListId());
 
@@ -190,8 +190,8 @@ public class OrderListDAO implements OrderListDAO_interface{
 				ord.setOrderListId(rs.getInt("orderListId"));
 				ord.setOrderId(rs.getInt("orderId"));
 				ord.setMealId(rs.getInt("mealId"));
-				ord.setQuantity(rs.getInt("quantity"));
-				ord.setUnitPrice(rs.getInt("unitPrice"));
+				ord.setQuantity(rs.getString("quantity"));
+				ord.setUnitPrice(rs.getString("unitPrice"));
 				ord.setNote(rs.getString("note"));
 			
 			}
@@ -244,8 +244,8 @@ public class OrderListDAO implements OrderListDAO_interface{
 				ord = new OrderListVO();
 				ord.setOrderId(rs.getInt("orderId"));
 				ord.setMealId(rs.getInt("mealId"));
-				ord.setQuantity(rs.getInt("quantity"));
-				ord.setUnitPrice(rs.getInt("unitPrice"));
+				ord.setQuantity(rs.getString("mealId"));
+				ord.setQuantity(rs.getString("quantity"));
 				ord.setNote(rs.getString("note"));
 				ord.setOrderListId(rs.getInt("orderListId"));
 				orderList.add(ord);
@@ -280,46 +280,4 @@ public class OrderListDAO implements OrderListDAO_interface{
 		return orderList;
 	}
 
-	@Override
-	public void insertWithRsOrder(OrderListVO orderListVO, Connection con) {
-		PreparedStatement pstmt = null;
-		
-		try {
-			pstmt=con.prepareStatement(INSERT);
-			pstmt.setInt(1, orderListVO.getOrderId());
-			pstmt.setInt(2, orderListVO.getMealId());
-			pstmt.setInt(3, orderListVO.getQuantity());
-			pstmt.setInt(4, orderListVO.getUnitPrice());
-			pstmt.setString(5, orderListVO.getNote());
-			pstmt.executeUpdate();
-						
-		} catch (SQLException se) {
-			se.printStackTrace();
-		} finally {
-			
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-	}
 }

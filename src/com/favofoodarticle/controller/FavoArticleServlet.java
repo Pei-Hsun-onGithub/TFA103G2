@@ -20,25 +20,25 @@ public class FavoArticleServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res)throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
-		String action = req.getParameter("action");
+//		String action = req.getParameter("action");
 		
 
-		
-		if("insertFavoArticle".equals(action)) {
-						
+					
 			Integer articleNo = new Integer(req.getParameter("articleNo"));
-			Integer userId = new Integer(req.getParameter("userId"));
+			Integer userId = new Integer(req.getParameter("userId"));						
 			
-//			System.out.println("articleNo"+articleNo);
-//			System.out.println("userId"+userId);
+			System.out.println("articleNo"+articleNo);
+			System.out.println("userId"+userId);
 			
 			FavoFoodArticleService favoarSc =new FavoFoodArticleService();
 			FavoFoodArticleVO favfooVO = favoarSc.addFavoFoodArticle(userId, articleNo);
+		
+		
+		
 			
 			
 			
-			
-		}
+		
 	
 	}
 }
