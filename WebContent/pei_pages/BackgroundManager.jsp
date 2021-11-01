@@ -196,7 +196,8 @@ img.wario {
 				href="<%=request.getContextPath()%>/pei_pages/listAllMonster.jsp">怪獸上線</a>
 			<a type="button" class="btn btn-warning"
 				href="<%=request.getContextPath()%>/pei_pages/addAchievment.jsp">任務成就</a>
-			<button type="button" class="btn btn-success">廣告看版</button>
+			<a type="button" class="btn btn-success"
+				href="#">即將推出</a>
 		</div>
 
 	</div>
