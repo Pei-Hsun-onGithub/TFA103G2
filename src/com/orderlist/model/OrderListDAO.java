@@ -9,14 +9,13 @@ import java.util.*;
 
 import util.Util;
 
-public class OrderListDAO implements OrderListDAO_interface{
+public class OrderListDAO implements OrderListDAO_interface {
 
 	private static final String INSERT = "INSERT INTO OrderList (orderId,mealId,quantity,unitPrice,note) VALUES (?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE OrderList set orderId =?, mealId =?, quantity =?, unitPrice =?, note=? WHERE orderListId = ?";
-	private static final String DELETE = "DELETE FROM OrderList WHERE orderListId = ?";	
+	private static final String DELETE = "DELETE FROM OrderList WHERE orderListId = ?";
 	private static final String GET_ALL = "SELECT * FROM OrderList";
 	private static final String FIND_BY_PK = "SELECT * FROM OrderList WHERE orderListId = ?";
-
 
 	static {
 		try {
@@ -25,13 +24,12 @@ public class OrderListDAO implements OrderListDAO_interface{
 			ce.printStackTrace();
 		}
 	}
-	
-	
+
 	@Override
 	public OrderListVO insert(OrderListVO orderListVO) {
 
 		Connection con = null;
-		
+
 		String[] cols = { "orderListId" };
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -41,29 +39,27 @@ public class OrderListDAO implements OrderListDAO_interface{
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
 			pstmt = con.prepareStatement(INSERT, cols);
 
-			
 			pstmt.setInt(1, orderListVO.getOrderId());
 			pstmt.setInt(2, orderListVO.getMealId());
 			pstmt.setInt(3, orderListVO.getQuantity());
 			pstmt.setInt(4, orderListVO.getUnitPrice());
 			pstmt.setString(5, orderListVO.getNote());
 
-
 			pstmt.executeUpdate();
-			
+
 			rs = pstmt.getGeneratedKeys();
-			
+
 			if (rs.next()) {
 				Integer key = rs.getInt(1); // �u�䴩�����ޭȨ��o�ۼW�D���
 				orderListVO.setOrderListId(key);
 //				System.out.println("�ۼW�D��� = " + key + "(��s�W���\���\�I�s��)");
-			} 
+			}
 
 			// Handle any driver errors
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} finally {
-			
+
 			if (rs != null) {
 				try {
 					rs.close();
@@ -71,7 +67,7 @@ public class OrderListDAO implements OrderListDAO_interface{
 					se.printStackTrace(System.err);
 				}
 			}
-			
+
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -79,7 +75,7 @@ public class OrderListDAO implements OrderListDAO_interface{
 					se.printStackTrace(System.err);
 				}
 			}
-			
+
 			if (con != null) {
 				try {
 					con.close();
@@ -99,7 +95,6 @@ public class OrderListDAO implements OrderListDAO_interface{
 
 		try {
 
-			
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
 			pstmt = con.prepareStatement(UPDATE);
 
@@ -109,7 +104,6 @@ public class OrderListDAO implements OrderListDAO_interface{
 			pstmt.setInt(4, orderListVO.getUnitPrice());
 			pstmt.setString(5, orderListVO.getNote());
 			pstmt.setInt(6, orderListVO.getOrderListId());
-
 
 			pstmt.executeUpdate();
 
@@ -147,9 +141,9 @@ public class OrderListDAO implements OrderListDAO_interface{
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, orderListId);
-			
+
 			pstmt.executeUpdate();
-			
+
 		} catch (SQLException se) {
 			se.printStackTrace();
 			// Clean up JDBC resources
@@ -193,7 +187,7 @@ public class OrderListDAO implements OrderListDAO_interface{
 				ord.setQuantity(rs.getInt("quantity"));
 				ord.setUnitPrice(rs.getInt("unitPrice"));
 				ord.setNote(rs.getString("note"));
-			
+
 			}
 
 		} catch (SQLException se) {
@@ -283,41 +277,35 @@ public class OrderListDAO implements OrderListDAO_interface{
 	@Override
 	public void insertWithRsOrder(OrderListVO orderListVO, Connection con) {
 		PreparedStatement pstmt = null;
-		
+
 		try {
-			pstmt=con.prepareStatement(INSERT);
+			pstmt = con.prepareStatement(INSERT);
 			pstmt.setInt(1, orderListVO.getOrderId());
 			pstmt.setInt(2, orderListVO.getMealId());
 			pstmt.setInt(3, orderListVO.getQuantity());
 			pstmt.setInt(4, orderListVO.getUnitPrice());
 			pstmt.setString(5, orderListVO.getNote());
 			pstmt.executeUpdate();
-						
+
 		} catch (SQLException se) {
-			se.printStackTrace();
-		} finally {
-			
 			if (con != null) {
 				try {
-					con.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-emp");
+					con.rollback();
+				} catch (SQLException excep) {
+					throw new RuntimeException("rollback error occured. " + excep.getMessage());
 				}
 			}
-			
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
 			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException se) {
 					se.printStackTrace(System.err);
-				}
-			}
-			
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
 				}
 			}
 		}
