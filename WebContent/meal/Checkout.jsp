@@ -7,16 +7,16 @@
 <%@ page import="com.memberinfo.model.*" %>
 
 <%
-	CardDAOService cardSvc = new CardDAOService();
-	
-    
-    
-    AddressService addressSvc = new AddressService();
-    List<AddressVO> list2 = addressSvc.getAll();
+	Integer userId = (Integer) session.getAttribute("userId");
+
+	AddressService addressSvc = new AddressService();
+	Set<AddressVO> addressList = addressSvc.getAddressByUserId(userId);
+	pageContext.setAttribute("addressList",addressList); 	
     
     MemberInfoService memberSvc = new MemberInfoService();
-	Integer userId = (Integer) session.getAttribute("userId");
 	MemberInfo memberVO = memberSvc.getOneMemberInfo(userId);
+	
+	CardDAOService cardSvc = new CardDAOService();
 	Set<CardVO> list = cardSvc.getCardByUserId(userId);
 	pageContext.setAttribute("list",list); 
 %>
@@ -99,36 +99,39 @@
                     <div class="bill-payment-wrap">
                         <h5>Billing details
                         </h5>
-                        <form class="default-form-wrap style-2">
+<!--                         <form class="default-form-wrap style-2" action="CheckoutServlet" method="post"> -->
                             <div class="row">
                                 <div class="col-md-6">
                                     <label> Name</label>
                                     <div class="single-input-wrap">
                                         <input type="text" class="form-control" value="<%=memberVO.getUserName()%>">
+                                        <input type="hidden" class="form-control" name="userId" value="<%=memberVO.getUserId()%>">
                                     </div>
                                 </div>
                                 <div class="col-md-12">
                                     <label>Street address</label>
-                                    <div class="single-input-wrap">
-                                        <input type="text" class="form-control" placeholder="Address">
-                                    </div>
+                                    <select class="form-select myselect" name="deliveryAddId" required>
+                                        	<option value="" >請選擇地址</option>
+											 <c:forEach var="addressVO" items="${addressList}"> 
+          									<option value="${addressVO.deliveryAddId}">${addressVO.deliverAddress}
+       										 </c:forEach>   
+									</select>
                                 </div>
-                                <div class="details">
+                                <div class="col-md-12">
                                     
                       <jsp:useBean id="CardSvc" scope="page" class="com.card.model.CardDAOService" />              
-                                        <h6>Credit Cart </h6>
-                                        <select class="form-select myselect" name="userId">
+                                        <label>Credit Cart </label>
+                                        <select class="form-select myselect" name="cardId" required>
                                         	<option value="" >請選擇信用卡</option>
 											 <c:forEach var="cardVO" items="${list}"> 
-          									<option value="${cardVO.cardId}" ${(cardVO.restaurantId==resVO.restaurantId)? 'selected':'' }  >${cardVO.cardNumber}
+          									<option value="${cardVO.cardId}" ${(memberVO.restaurantId==resVO.restaurantId)? 'selected':'' }  >${cardVO.cardNumber}
        										 </c:forEach>   
 										</select>
 										
-                                    </div>
-                                <a class="btn btn-secondary w-100" href="#"> PLACE ORDER</a>
-                                
-                            </div>
-                        </form>
+                                  </div>
+                                <input type="submit" class="btn btn-secondary w-100" value="PLACE ORDER" />
+                                <input type="hidden" name="action" value="insert"/>
+                            </div>                      
                     </div>                    
                 </div>
                 <div class="col-lg-5">
@@ -138,7 +141,7 @@
                             <div class="thumb" style="width:90px">
                                 <h6></h6>
                             </div>
-                            <div class="thumb" style="width:80px">
+                            <div class="thumb" style="width:150px">
                                 <h6>產品</h6>
                             </div>
                             <div class="thumb" style="width:80px">
@@ -158,21 +161,23 @@
                             </div>
                             <div class="thumb" style="width:90px;">
                                 <h6><%=order.getMealName()%></h6>
+                                <input type="hidden" name="mealName" value="<%=order.getMealName()%>">
                             </div>
                             <div class="thumb" style="width:80px">
                                 <h6><%=order.getQuantity()%></h6>
+                                <input type="hidden" name="quantity" value="<%=order.getQuantity()%>">
                             </div>
                             <div class="thumb">
-                                <h6 ><%=order.getUnitPrice()%></h6>
+                                <h6><%=order.getUnitPrice()%></h6>
+                                <input type="hidden" name="unitPrice" value="<%=order.getUnitPrice()%>">
                             </div>
                         </div>
-                        
+<!--                         </form> -->
                         <%}%>
                         <ul class="amount">
-                        								<%
-									if (buylist != null && (buylist.size() > 0)) {
-									
-								
+                        
+                        								
+		<%							if (buylist != null && (buylist.size() > 0)) {				
 									int itemUnitPrice, itemQuantity, amount, resultAmount = 0;
 									
 									for (int index = 0; index < buylist.size(); index++) {
@@ -182,7 +187,7 @@
 										itemQuantity = order.getQuantity();
 										amount = (itemUnitPrice * itemQuantity);
 										resultAmount += amount;
-								%>
+		%>					
 								<li><%=order.getMealName()%><span>$<%=amount%>
 								</span></li>
 								<%}%>
