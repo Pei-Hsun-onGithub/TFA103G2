@@ -10,4 +10,5 @@ public interface FavoFoodArticleDAO_interface {
 	public void delete(Integer userId, Integer articleNo);
 	FavoFoodArticleVO findByPrimaryKey(Integer userId, Integer articleNo);
 	List<FavoFoodArticleVO> getall();
+	List <FavoFoodArticleVO> getByUser(Integer userId);
 }
