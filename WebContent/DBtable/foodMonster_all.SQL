@@ -39,13 +39,22 @@ CREATE TABLE MonsterBook (
 INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
 VALUES (1, '小小怪', '訂單加成', '我是圖片');
 INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
-VALUES (10, '中中怪', '訂單加成', '我是圖片');
-INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
-VALUES (20, '大大怪', '訂單加成', '我是圖片');
-INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
 VALUES (1, '小小獸', '偏好食記', '我是圖片');
 INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
 VALUES (1, '小小鬼', '訂餐最愛', '我是圖片');
+INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
+VALUES (3, '中中怪', '訂單加成', '我是圖片');
+INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
+VALUES (3, '中中獸', '訂單加成', '我是圖片');
+INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
+VALUES (3, '中中鬼', '訂單加成', '我是圖片');
+INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
+VALUES (6, '大大怪', '訂單加成', '我是圖片');
+INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
+VALUES (6, '大大獸', '訂單加成', '我是圖片');
+INSERT INTO MonsterBook (minDemandLevel, monsterName, monsterAbility, monsterPic)  
+VALUES (6, '大大鬼', '訂單加成', '我是圖片');
+
 
 
 
@@ -58,9 +67,11 @@ CREATE TABLE LevelExp (
 ) AUTO_INCREMENT = 1;
 
 INSERT INTO LevelExp (expLow, expUp)  VALUES (0, 10);
-INSERT INTO LevelExp (expLow, expUp)  VALUES (10, 100);
-INSERT INTO LevelExp (expLow, expUp)  VALUES (100, 1000);
-
+INSERT INTO LevelExp (expLow, expUp)  VALUES (10, 50);
+INSERT INTO LevelExp (expLow, expUp)  VALUES (50, 100);
+INSERT INTO LevelExp (expLow, expUp)  VALUES (100, 150);
+INSERT INTO LevelExp (expLow, expUp)  VALUES (150, 200);
+INSERT INTO LevelExp (expLow, expUp)  VALUES (200, 250);
 
 # 成就資料
 CREATE TABLE Achieve (
@@ -83,7 +94,10 @@ INSERT INTO Achieve (achiName, descript, openDate, validDays, achiArticle, achiO
 VALUES ('綜合王', '成功完成25筆訂單25筆食記可獲得50個飼料50個金幣', '2021-09-09 00:00:00', 90, 25, 25, 50, 50, '這是圖片');
 INSERT INTO Achieve (achiName, descript, openDate, validDays, achiArticle, achiOrder, gainFeed, gainGold, achiPic) 
 VALUES ('知識王', '成功完成50篇食記可獲得100個金幣', '2021-09-10 00:00:00', 60, 50, 0, 0, 100, '這是圖片');
-
+INSERT INTO Achieve (achiName, descript, openDate, validDays, achiArticle, achiOrder, gainFeed, gainGold, achiPic) 
+VALUES ('訂單入門款', '成功完成3筆訂單0筆食記可獲得20個飼料20個金幣', '2021-09-10 00:00:00', 3, 0, 3, 20, 20, '這是圖片');
+INSERT INTO Achieve (achiName, descript, openDate, validDays, achiArticle, achiOrder, gainFeed, gainGold, achiPic) 
+VALUES ('食記入門款', '成功完成0筆訂單3筆食記可獲得20個飼料20個金幣', '2021-09-10 00:00:00', 3, 3, 0, 20, 20, '這是圖片');
 
 #會員資料	sta:4,5
 CREATE TABLE MemberInfo (

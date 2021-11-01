@@ -18,6 +18,8 @@ import com.achieveprogress.model.AchieveProgress;
 import com.achieveprogress.model.AchieveProgressService;
 import com.foodarticle.model.FoodArticleService;
 import com.foodarticle.model.FoodArticleVO;
+import com.levelexp.model.LevelExp;
+import com.levelexp.model.LevelExpService;
 import com.memberinfo.model.MemberInfo;
 import com.memberinfo.model.MemberInfoService;
 import com.rsorder.model.RsOrderDAOService;
@@ -45,7 +47,7 @@ public class SimulateOrderSuccess extends HttpServlet{
 			
 			RsOrderDAOService OrderItemSvc = new RsOrderDAOService();
 			// 模擬一筆訂單成功送出
-			RsOrderVO orderVO = OrderItemSvc.addRsOrderDAO(20210001, 7001, 1, 1, 0, Date.valueOf(LocalDate.of(2021, 4, 1)), Date.valueOf(LocalDate.of(2021, 4, 2)), Date.valueOf(LocalDate.of(2021, 4, 3)), Date.valueOf(LocalDate.of(2021, 4, 1)), Date.valueOf(LocalDate.of(2021, 4, 1)), 10, "很快送達", 1);
+			RsOrderVO orderVO = OrderItemSvc.addRsOrderDAO(20210016, 7001, 1, 1, 0, Date.valueOf(LocalDate.of(2021, 4, 1)), Date.valueOf(LocalDate.of(2021, 4, 2)), Date.valueOf(LocalDate.of(2021, 4, 3)), Date.valueOf(LocalDate.of(2021, 4, 1)), Date.valueOf(LocalDate.of(2021, 4, 1)), 10, "很快送達", 1);
 		
 			
 			// 使用到的Services
@@ -55,7 +57,7 @@ public class SimulateOrderSuccess extends HttpServlet{
 			FoodArticleService foodArticleSvc = new FoodArticleService();
 			MemberInfoService memeInfoSvc = new MemberInfoService();
 			
-			Integer userId = 20210001;
+			Integer userId = 20210016;
 			
 //			Achieve nowAchieve = archieveSvc.getOneAchieve(2003);
 			
@@ -64,6 +66,7 @@ public class SimulateOrderSuccess extends HttpServlet{
 //			servletContext.setAttribute("achieveMission", nowAchieve);
 			
 			Achieve achieveVO = archieveSvc.getAvailableAchieve(servletContext);
+			//System.out.println("achieveVO=" + achieveVO);
 			Integer achieveId = achieveVO.getAchiId();
 			
 			List<RsOrderVO> orders = rsOrderSvc.getOrdersByUserId(userId);
@@ -83,21 +86,42 @@ public class SimulateOrderSuccess extends HttpServlet{
 			ArchieveChecker archieveChecker = new ArchieveChecker();
 			
 			if(archieveChecker.isComplete(achieveVO, userAchieveProgress)) {
+				System.out.println("有近來成就");
 				// 給予獎勵(金幣、飼料)
 				Integer coinsFee = achieveVO.getGainGold();
 				Integer feedFee = achieveVO.getGainFeed();
 				MemberInfo memInfo = memeInfoSvc.getOneMemberInfo(userId);
-				memInfo.setGold(coinsFee);
-				memInfo.setFeed(feedFee);
+				Integer exp =new Integer(memInfo.getExp()) + new Integer(feedFee);
+				System.out.println("exp=" + exp);
 				// 更新獎勵至這位使用者
-				memeInfoSvc.updateMemberInfo(userId, memInfo.getEmail(), memInfo.getPwd(), memInfo.getUserName(), memInfo.getGender(), memInfo.getBirthday(), memInfo.getPhone(), memInfo.getPic(), memInfo.getRegisterDate(), coinsFee, feedFee, memInfo.getMonsterId(), memInfo.getMonsterNickName(), memInfo.getLv(), memInfo.getExp(), memInfo.getSta());
+				MemberInfo m = memeInfoSvc.updateMemberInfo(userId, memInfo.getEmail(), memInfo.getPwd(), memInfo.getUserName(), memInfo.getGender(), memInfo.getBirthday(), memInfo.getPhone(), memInfo.getPic(), memInfo.getRegisterDate(), coinsFee, feedFee, memInfo.getMonsterId(), memInfo.getMonsterNickName(), memInfo.getLv(), exp, memInfo.getSta());
+				 
+				System.out.println("更新後的memInfo=" + m);
+				
+			}
+			
+			//飼料等於經驗值
+			
+			
+			//檢查怪獸是否可以進化
+			LevelExpService levelExpSvc = new LevelExpService();
+			List<LevelExp> levelExps = levelExpSvc.getAll();
+			EvolutionChecker evolutionChecker = new EvolutionChecker(levelExps);
+			
+			MemberInfo memInfo = memeInfoSvc.getOneMemberInfo(userId);
+			if(evolutionChecker.isTimeToEvolution(memInfo)) {
+				
+				
+				
+				
+				
 				
 			}
 			
 			
-			System.out.println("orders=" + orders);
-			System.out.println("此使用者訂單總數=" + orders.size());
-			System.out.println("AchiName = " + achieveVO.getAchiName());
+//			System.out.println("orders=" + orders);
+//			System.out.println("此使用者訂單總數=" + orders.size());
+//			System.out.println("AchiName = " + achieveVO.getAchiName());
 		//	System.out.println("achieveProgressVO : " + "userId = " + achieveProgressVO.getUserId()+ " achieveId " + achieveProgressVO.getAchiId());
 			
 			//servletContext.removeAttribute("achieveMission");
