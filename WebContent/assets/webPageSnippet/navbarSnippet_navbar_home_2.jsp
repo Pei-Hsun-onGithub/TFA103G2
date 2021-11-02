@@ -42,7 +42,7 @@
 			<div class="collapse navbar-collapse" id="themefie_main_menu">
 				<ul class="navbar-nav menu-open">
 					<li><a href="<%=request.getContextPath()%>/meal/Meal-list.jsp">訂餐</a></li>
-					<li><a href="<%=request.getContextPath()%>/meal/checkout.jsp">直接結帳</a></li>
+					<li><a href="<%=request.getContextPath()%>/meal/Checkout.jsp">直接結帳</a></li>
 					<li><a href="<%=request.getContextPath()%>/article/allFA.jsp">查詢食記</a></li>
 					<li><a href="<%=request.getContextPath()%>/article/addFA.jsp">食記撰寫</a></li>
 				</ul>
@@ -158,7 +158,7 @@ if(achiProgress == null) {
 						<div id="arrow" data-popper-arrow></div>
 					</div>
 
-					<li><a href="<%=request.getContextPath()%>/meal/cart.jsp"><i
+					<li><a href="<%=request.getContextPath()%>/meal/Cart.jsp"><i
 							class="fas fa-shopping-cart"></i> <span>1</span></a></li>
 					<li><i class="fas fa-crown"></i> <span>23</span></li>
 				</ul>
