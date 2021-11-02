@@ -61,9 +61,13 @@ public class TsetFoodArticle {
 //			System.out.println(far3.getSta());
 //			System.out.println();
 //		}
-		 String words ="肯";
-		List<FoodArticleVO> List = dao.searchKeyWord(words);
-		System.out.println(List);
+//		 String words ="肯";
+//		List<FoodArticleVO> List = dao.searchKeyWord(words);
+//		System.out.println(List);
+//		
+		Integer userId = 20210001;
+		List<FoodArticleVO> articleList = dao.getByUserId(userId);
+		System.out.println(articleList);
 		
 		
 		

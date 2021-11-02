@@ -6,7 +6,7 @@
 
 <%
 	FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO");
-    MemberInfo userNow = (MemberInfo) session.getAttribute("MemberInfo");
+    MemberInfo userNow = (MemberInfo) session.getAttribute("memberInfo");
 
 %>
 <!DOCTYPE html>
@@ -126,15 +126,9 @@ textarea.editor {
 }
 
 
-div.preview_img {
-	margin-top: 5px;
-	border: solid 2px black;
+div.preview_imgs {	
 	width: 300px;
-	min-height: 200px;
-}
-
-div.preview_imgs span {
-	border: solid 2px red;
+	height: 300px;
 }
 
 button.cancel {
@@ -237,15 +231,17 @@ button.check_ok {
 						<div>
 						<button class="btn cancel" id="img_file">選擇圖片</button>
 						<input type="file" multiple id="add_file" style="display: none;" name="imgfile" >
-						
-						<div class="preview_img">
-							<c:forEach var="oldpicVO" items="${list}" varStatus="index">
-							<img src="<%=request.getContextPath()%>/PictureBasesServlet?id=${index.index}">						
-							</c:forEach>
 						</div>
 						
+						<div class =pic_list>
 						
-						
+						<c:forEach var="oldpicVO" items="${list}" varStatus="index">
+						<div class="preview_img">
+							
+							<img src="<%=request.getContextPath()%>/PictureBasesServlet?id=${index.index}">						
+							
+						</div>
+						</c:forEach>																
 						</div>						
 
 <!-- 						<div class="preview_img"> -->
@@ -333,22 +329,26 @@ button.check_ok {
         
         /*===============預覽圖=================*/
         
-        var img_file_el = document.getElementById("add_file");
+        
+       
         img_file_el.addEventListener("change",function(e){
-//        	var preview_img_el =document.getElementsByClassName("preview_img")[0];
-//         	console.log(preview_img_el);
-//         	console.log("hello");
- 
-        	
+       	
+            var pic_list_el =document.getElementsByClassName("pic_list")[0];
+            pic_list_el.innerHTML="";
+ //   	    console.log(pic_list_el);
+//         	console.log("hello");      	     		
+      	
         	for(let i=0;i<this.files.length;i++){
+//        		preview_img_el.innerHTML = "";
         		let reader = new FileReader();
         		reader.readAsDataURL(this.files[i]);
         		reader.addEventListener("load",function(){
         			let img_tag = "<div class=\"preview_imgs\">"  +"<img src=" + reader.result +  " \" class=\"XXX\" >"+"</div>";
-        			img_file_el.insertAdjacentHTML("afterend", img_tag);
+        			pic_list_el.insertAdjacentHTML("beforeend", img_tag);
         		})
         		
         	}
+      		
         	
         })
         	                                

@@ -16,4 +16,5 @@ public interface FoodArticleDAO_interface {
 	public void insertWithPic(FoodArticleVO foodArticleVO, List<PictureBaseVO> list);
 	List<FoodArticleVO> getPopular();
 	List<FoodArticleVO> searchKeyWord (String words);
+	
 }
