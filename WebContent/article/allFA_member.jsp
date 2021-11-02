@@ -13,11 +13,11 @@
 	MemberInfoService memSvc = new MemberInfoService();
 	String email ="1qaz@y.com";
 	String pwd ="1qaz@WSX";
-	MemberInfo userNow = memSvc.findByEmail2(email, pwd);
-
-	out.println(userNow);
+	MemberInfo memberInfo = memSvc.findByEmail2(email, pwd);
+	session.setAttribute("memberInfo",memberInfo);
+//	out.println(userNow);
 //	MemberInfo userNow = (MemberInfo) session.getAttribute("memberInfo");
-	pageContext.setAttribute("userNow", userNow);
+//	pageContext.setAttribute("userNow", userNow);
 	
 %>
 <!DOCTYPE html>
@@ -194,7 +194,7 @@ th.th2 {
 											style="margin-bottom: 0px;">
 											<input type="submit" value="閱讀"> 
 											<input type="hidden" name="articleNo" value="${faVO.articleNo}">
-											<input type="hidden" name="userId" value="${userNow.userId}">
+											<input type="hidden" name="userId" value="${memberInfo.userId}">
 											<input type="hidden" name="action" value="getOne_For_Display">	 
 												
 										</FORM>
@@ -206,7 +206,7 @@ th.th2 {
 											style="margin-bottom: 0px;">
 											<input type="submit" value="修改"> 
 											<input type="hidden" name="articleNo" value="${faVO.articleNo}">
-											<input type="hidden" name="userId" value="${userNow.userId}">
+											<input type="hidden" name="userId" value="${memberInfo.userId}">
 											<input type="hidden" name="action" value="getOne_For_Update">
 											
 										</FORM>

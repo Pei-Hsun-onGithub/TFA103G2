@@ -128,11 +128,7 @@ div.preview_imgs {
 	width: 300px;
 	height: 300px;
 }
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 591ff0d946daedee1f8a6b85e1532d7e480bb32b
 
 button.cancel {
 	margin-top: 20px;
@@ -234,13 +230,10 @@ button.check_ok {
 						<button class="btn cancel" id="img_file">選擇圖片</button>
 						<input type="file" multiple="true" id="add_file" style="display: none;" name="imgfile" >
 						</div>
-<<<<<<< HEAD
+					
 
-						<div class ="pic_list"></div>						
 
-=======
 						<div class =pic_list></div>						
->>>>>>> 591ff0d946daedee1f8a6b85e1532d7e480bb32b
 
 
 						<div class="row">
