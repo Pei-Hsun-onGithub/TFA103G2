@@ -15,8 +15,13 @@
     pageContext.setAttribute("popularList",popularList); 
     
     // 小心MemberInfo 與 memberInfo!!!!
+
+
     MemberInfo userNow = (MemberInfo) session.getAttribute("memberInfo");
+
     session.setAttribute("userNow", userNow);
+    pageContext.setAttribute("popularList",popularList);   	
+
 
 %>
 
@@ -212,7 +217,7 @@
                         </div>
                        
                         <div class="widget widget-recent-post">
-                            <h4 class="widget-title">熱門餐廳</h4>
+                            <h4 class="widget-title">熱門餐點</h4>
                             <ul>
                                 <c:forEach var="popfaVO" items="${popularList}" >
                                 <li>
@@ -238,19 +243,7 @@
                 <div class="col-12">
                     <nav>
                         <ul class="pagination">
-                            <li class="page-item">
-                            <a class="page-link" href="#">
-                                <i class="ri-arrow-left-s-line"></i>
-                            </a>
-                            </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                            <a class="page-link" href="#">
-                                <i class="ri-arrow-right-s-line"></i>
-                            </a>
-                            </li>
+                            
                         </ul>
                     </nav>
                 </div>

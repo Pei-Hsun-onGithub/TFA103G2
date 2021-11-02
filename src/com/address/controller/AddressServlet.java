@@ -32,15 +32,17 @@ public class AddressServlet extends HttpServlet {
 			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
 			req.setAttribute("memberinfo", mem);
 			Integer member = mem.getUserId();
+			System.out.println("yyyy");
 			AddressService addressSvc = new AddressService();
 			Set<AddressVO> addressset = addressSvc.getAddressByUserId(member);
 			req.setAttribute("addressset", addressset);
 			String url = "/Gary_pages/Member04.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
 			successView.forward(req, res);
+			System.out.println("yyyy");
 
 		}
-		
+
 		if ("showInsertAddress".equals(action)) {
 			MemberInfoService memberSvc = new MemberInfoService();
 			HttpSession session = req.getSession();
@@ -49,10 +51,237 @@ public class AddressServlet extends HttpServlet {
 			String url = "/Gary_pages/Member04-addaddress.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
 			successView.forward(req, res);
-		
+
+		}
+
+		if ("showUpdateAddress".equals(action)) {
+			MemberInfoService memberSvc = new MemberInfoService();
+			HttpSession session = req.getSession();
+			MemberInfo member = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
+			req.setAttribute("memberinfo", member);
+			System.out.println("yyyy");
+System.out.println("xxxxx =" +req.getParameter("deliveryAddId"));
+			Integer deliveryAddId = new Integer(req.getParameter("deliveryAddId"));
+			AddressService addressSvc = new AddressService();
+			AddressVO address = addressSvc.getOneAddress(deliveryAddId);
+			req.setAttribute("addressvo", address);
+
+			String url = "/Gary_pages/Member04-editaddress.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
+			successView.forward(req, res);
+		}
+
+		if ("insertOneAddress".equals(action)) {
+			System.out.println("aaa");
+			MemberInfoService memberSvc = new MemberInfoService();
+			HttpSession session = req.getSession();
+			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
+			req.setAttribute("memberinfo", mem);
+System.out.println("aaa");
+			List<String> errorMsgs = new LinkedList<String>();
+//			System.out.println("1="+errorMsgs);
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				Integer userId = new Integer(req.getParameter("userId"));
+				String customerName = req.getParameter("customerName");
+				String customerNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+
+				if (customerName == null || customerName.trim().length() == 0) {
+					errorMsgs.add("姓名不得為空白");
+				} else if (!customerName.trim().matches(customerNameReg)) { // �H�U�m�ߥ��h(�W)��ܦ�(regular-expression)
+					errorMsgs.add("客戶名稱輸入錯誤");
+				}
+
+				String deliverPhone = req.getParameter("deliverPhone");
+				String deliverPhoneReg = "^09\\d{2}(\\d{6}|-\\d{3}-\\d{3})$";
+				if (deliverPhone == null || (deliverPhone.trim().length() == 0)) {
+					errorMsgs.add("電話不得為空白");
+				} else if (!deliverPhone.trim().matches(deliverPhoneReg)) { // �H�U�m�ߥ��h(�W)���ܦ�(regular-expression)
+					errorMsgs.add("請輸入正確的手機電話格式，須為09開頭且共10碼");
+				}
+
+				String deliverAddress = req.getParameter("deliverAddress");
+				String deliverAddressReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{1,100}$";
+				if (deliverAddress == null || deliverAddress.trim().length() == 0) {
+					errorMsgs.add("外送地址為空");
+				} else if (!deliverAddress.trim().matches(deliverAddressReg)) { // 以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("地址: 只能是中、英文字母、數字 , 且長度必需在100之間");
+				}
+
+				String buildingName = req.getParameter("buildingName");
+				String note = req.getParameter("note");
+
+				AddressVO addressVO = new AddressVO();
+				addressVO.setUserId(userId);
+				addressVO.setCustomerName(customerName);
+				addressVO.setDeliverPhone(deliverPhone);
+				addressVO.setDeliverAddress(deliverAddress);
+				addressVO.setBuildingName(buildingName);
+				addressVO.setNote(note);
+
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("addressvo", addressVO); // �t����J�榡���~��empVO����,�]�s�Jreq
+					RequestDispatcher failureView = req.getRequestDispatcher("/Gary_pages/Member04-addaddress.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+
+				AddressService addressSvc = new AddressService();
+				addressVO = addressSvc.addAddress(userId, customerName, deliverPhone, deliverAddress,
+						buildingName, note, 1);
+				Integer member = mem.getUserId();
+				Set<AddressVO> addressset = addressSvc.getAddressByUserId(member);
+				req.setAttribute("addressset", addressset);
+				String url = "/Gary_pages/Member04.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
+				successView.forward(req, res);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsgs.add("錯誤:" + e.getMessage());
+				System.out.println("2=" + errorMsgs);
+				System.out.println(e);
+				RequestDispatcher failureView = req.getRequestDispatcher("/Gary_pages/Member04-addaddress.jsp");
+				failureView.forward(req, res);
+			}
+
+		}
+
+		if ("updateOneAddress".equals(action)) {
+			MemberInfoService memberSvc = new MemberInfoService();
+			HttpSession session = req.getSession();
+			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
+			req.setAttribute("memberinfo", mem);
+
+			List<String> errorMsgs = new LinkedList<String>();
+//			System.out.println("1="+errorMsgs);
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				Integer deliveryAddId = new Integer(req.getParameter("deliveryAddId"));
+
+				Set<AddressVO> addressset = (Set<AddressVO>) session.getAttribute("addressset");
+
+				AddressVO waitingForUpdatecAddressVO = null;
+
+				for (AddressVO addressvo : addressset) {
+					if (deliveryAddId.equals(addressvo.getDeliveryAddId())) {
+						waitingForUpdatecAddressVO = addressvo;
+					}
+				}
+
+				Integer userId = new Integer(req.getParameter("userId"));
+				String customerName = req.getParameter("customerName");
+				String customerNameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+
+				if (customerName == null || customerName.trim().length() == 0) {
+					errorMsgs.add("姓名不得為空白");
+				} else if (!customerName.trim().matches(customerNameReg)) { // �H�U�m�ߥ��h(�W)��ܦ�(regular-expression)
+					errorMsgs.add("客戶名稱輸入錯誤");
+				}
+
+				String deliverPhone = req.getParameter("deliverPhone");
+				String deliverPhoneReg = "^09\\d{2}(\\d{6}|-\\d{3}-\\d{3})$";
+				if (deliverPhone == null || (deliverPhone.trim().length() == 0)) {
+					errorMsgs.add("電話不得為空白");
+				} else if (!deliverPhone.trim().matches(deliverPhoneReg)) { // �H�U�m�ߥ��h(�W)���ܦ�(regular-expression)
+					errorMsgs.add("請輸入正確的手機電話格式，須為09開頭且共10碼");
+				}
+
+				String deliverAddress = req.getParameter("deliverAddress");
+				String deliverAddressReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{1,100}$";
+				if (deliverAddress == null || deliverAddress.trim().length() == 0) {
+					errorMsgs.add("外送地址為空");
+				} else if (!deliverAddress.trim().matches(deliverAddressReg)) { // 以下練習正則(規)表示式(regular-expression)
+					errorMsgs.add("地址: 只能是中、英文字母、數字 , 且長度必需在100之間");
+				}
+
+				String buildingName = req.getParameter("buildingName");
+				String note = req.getParameter("note");
+				
+				Integer sta = new Integer(req.getParameter("sta"));
+
+				
+				waitingForUpdatecAddressVO.setDeliveryAddId(deliveryAddId);
+				waitingForUpdatecAddressVO.setUserId(userId);
+				waitingForUpdatecAddressVO.setCustomerName(customerName);
+				waitingForUpdatecAddressVO.setDeliverPhone(deliverPhone);
+				waitingForUpdatecAddressVO.setDeliverAddress(deliverAddress);
+				waitingForUpdatecAddressVO.setBuildingName(buildingName);
+				waitingForUpdatecAddressVO.setNote(note);
+				waitingForUpdatecAddressVO.setSta(sta);
+				
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("addressvo", waitingForUpdatecAddressVO); // �t����J�榡���~��empVO����,�]�s�Jreq
+					RequestDispatcher failureView = req.getRequestDispatcher("/Gary_pages/Member04-editaddress.jsp");
+					failureView.forward(req, res);
+					return;
+				}
+				
+				AddressService addressSvc = new AddressService();
+				waitingForUpdatecAddressVO = addressSvc.updateAddress(userId, customerName, deliverPhone, deliverAddress,
+						buildingName, note, sta, deliveryAddId);
+				
+				req.setAttribute("addressset", addressset);
+				session.setAttribute("addressset", addressset);
+				
+				String url = "/Gary_pages/Member04.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
+				successView.forward(req, res);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsgs.add("�s�W����:" + e.getMessage());
+//				System.out.println("2="+errorMsgs);
+//				System.out.println(e);
+				RequestDispatcher failureView = req.getRequestDispatcher("/Gary_pages/Member03-editcard.jsp");
+				e.printStackTrace();
+				failureView.forward(req, res);
+			}
 		}
 		
-		
+		if("deleteAddress".equals(action)) {
+			MemberInfoService memberSvc = new MemberInfoService();
+			HttpSession session = req.getSession();
+			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
+			req.setAttribute("memberinfo", mem);
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			
+		try {
+			
+			Integer deliveryAddId = new Integer(req.getParameter("deliveryAddId"));
+			
+			Set<AddressVO> addressset = (Set<AddressVO>) session.getAttribute("addressset");
+			
+			AddressService addressSvc = new AddressService();
+			AddressVO addressVO = addressSvc.getOneAddress(deliveryAddId);
+			addressSvc.deleteAddress(deliveryAddId);
+			
+			addressset.remove(addressVO);
+			
+			req.setAttribute("addressset", addressset);
+			session.setAttribute("addressset", addressset);
+			System.out.println("aaa");
+			String url = "/Gary_pages/Member04.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
+			successView.forward(req, res);
+			
+		}catch (Exception e) {
+			errorMsgs.add("刪除資料失敗:" + e.getMessage());
+			RequestDispatcher failureView = req.getRequestDispatcher("/Gary_pages/Member04.jsp");
+			failureView.forward(req, res);
+		}
+		}
+
 		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
 			System.out.println("hello--1");
 
@@ -279,14 +508,14 @@ public class AddressServlet extends HttpServlet {
 				Integer userId = null;
 				try {
 					userId = new Integer(req.getParameter("userId").trim());
-System.out.println("1.userId="+userId);
+					System.out.println("1.userId=" + userId);
 				} catch (NumberFormatException e) {
 					userId = 0;
 					errorMsgs.add("請填會員編號");
 				}
 
 				String customerName = req.getParameter("customerName");
-System.out.println("2.customerName="+ customerName);
+				System.out.println("2.customerName=" + customerName);
 				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{2,10}$";
 				if (customerName == null || customerName.trim().length() == 0) {
 					errorMsgs.add("取餐人姓名: 請勿空白");
@@ -295,7 +524,7 @@ System.out.println("2.customerName="+ customerName);
 				}
 
 				String deliverPhone = req.getParameter("deliverPhone");
-System.out.println("3.deliverPhone="+deliverPhone);
+				System.out.println("3.deliverPhone=" + deliverPhone);
 				String deliverPhoneReg = "^09\\d{2}(\\d{6}|-\\d{3}-\\d{3})$";
 				if (deliverPhone == null || deliverPhone.trim().length() == 0) {
 					errorMsgs.add("電話號碼: 請勿空白");
@@ -304,7 +533,7 @@ System.out.println("3.deliverPhone="+deliverPhone);
 				}
 
 				String deliverAddress = req.getParameter("deliverAddress");
-System.out.println("4.deliverAddress="+ deliverAddress);
+				System.out.println("4.deliverAddress=" + deliverAddress);
 				String AddressReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9)]{1,100}$";
 				if (deliverAddress == null || deliverAddress.trim().length() == 0) {
 					errorMsgs.add("地址: 請勿空白");
@@ -313,14 +542,14 @@ System.out.println("4.deliverAddress="+ deliverAddress);
 				}
 
 				String buildingName = req.getParameter("buildingName");
-System.out.println("5.buildingName="+ buildingName);
+				System.out.println("5.buildingName=" + buildingName);
 
 				String note = req.getParameter("note");
-System.out.println("6.note="+note);
+				System.out.println("6.note=" + note);
 
 				Integer sta = new Integer(req.getParameter("sta").trim());
 //因為是get get都是字串。數字回來要轉型，所以用new。
-System.out.println("7.sta="+sta);
+				System.out.println("7.sta=" + sta);
 
 //				Integer deliveryAddId = new Integer(req.getParameter("deliveryAddId").trim());
 //System.out.println("8.deliveryAddId="+deliveryAddId);

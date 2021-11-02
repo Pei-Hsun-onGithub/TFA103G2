@@ -26,7 +26,7 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 	public static final String GET_ALL = "SELECT * FROM FoodArticle";
 	public static final String GET_POPULAR ="SELECT * FROM FoodArticle ORDER BY articleno DESC LIMIT 4";
 	public static final String GET_KEYWORD ="SELECT * FROM FoodArticle WHERE articletitle like ?";
-	public static final String GET_BY_USERID ="SELECT * FROM FoodArticle WHERE userid = ?";
+	public static final String GET_BY_USERID ="SELECT * FROM FoodArticle WHERE userid = ? ORDER BY articleno DESC";
 	
 	
 	static {
@@ -529,5 +529,6 @@ public class FoodArticleJDBCDAO implements FoodArticleDAO_interface {
 		return keyWordList;
 		
 	}
+
 	
 }

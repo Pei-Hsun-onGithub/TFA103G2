@@ -146,6 +146,7 @@ public class CardServlet extends HttpServlet {
 
 				CardDAOService cardSvc = new CardDAOService();
 				cardVO = cardSvc.addCardDAO(userId, cardHolder, cardNumber, deadLine, cvv, billAddress, zipCode, 1);
+				System.out.println("bbb");
 				Integer member = mem.getUserId();
 				Set<CardVO> cardset = cardSvc.getCardByUserId(member);
 				req.setAttribute("cardset", cardset);
