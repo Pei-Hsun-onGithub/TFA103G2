@@ -46,23 +46,8 @@ public class LoginHandler extends HttpServlet {
 			out.println("請按此重新登入 <A HREF=" + req.getContextPath() + "/login/Login-login.jsp>重新登入</A>");
 			out.println("</BODY></HTML>");
 // 【轉會員】			
-		} else if (memberInfo2.getSta().equals(1)) { 
-			Integer userId = memberInfo2.getUserId();
-			HttpSession session = req.getSession();
-			session.setAttribute("email", email);
-			session.setAttribute("userId", userId);
-			session.setAttribute("memberInfo", memberInfo2);
-			
-			String location = (String) session.getAttribute("location");
-//*工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
-			if (location != null) {
-				session.removeAttribute("location"); // 
-				res.sendRedirect(location);
-				return;
-			} else {
-				res.sendRedirect(req.getContextPath() + "/pei_pages/monsterChoose.jsp"); 															// (-->如無來源網頁:則重導至login_success.jsp)
-			}
-		} else if (memberInfo2.getSta().equals(2)) { 
+		 
+		} else if (memberInfo2.getSta().equals(2)||memberInfo2.getSta().equals(1)) { 
 			Integer userId = memberInfo2.getUserId();
 			HttpSession session = req.getSession();
 			session.setAttribute("email", email);
