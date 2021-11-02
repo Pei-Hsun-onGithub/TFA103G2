@@ -196,7 +196,7 @@ button.check_ok {
 	List<RestaurantVO> resList = reSvc.getAllRes();
 	pageContext.setAttribute("resList",resList);
 	
-	MemberInfo userNow = (MemberInfo) session.getAttribute("MemberInfo");
+	MemberInfo userNow = (MemberInfo) session.getAttribute("memberInfo");
 	
 %>				
 
@@ -206,7 +206,7 @@ button.check_ok {
 				<div class="col-md-7">
 					<form class="article" method="post" action="fa.do" name="form1" enctype="multipart/form-data">
 					    					    
-						<input type="hidden" name="userId" value="<%=(faVO == null) ? "" : userNow.getUserId()%>">
+						<input type="hidden" name="userId" value="<%= userNow.getUserId()%>">
 						
 						<p class="p1">餐廳</p>
 						<select class="form-select myselect" name="restaurantId">
