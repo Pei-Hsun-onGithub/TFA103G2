@@ -74,7 +74,7 @@
                     <div class="bill-payment-wrap">
                         <h5>Billing details
                         </h5>
-                        <form class="default-form-wrap style-2">
+                        <form class="default-form-wrap style-2" action="<%=request.getContextPath()%>/CheckoutServlet" method="post">
                             <div class="row">
                                 <div class="col-md-6">
                                     <label>First Name</label>
@@ -100,14 +100,21 @@
                                         <input type="text" class="form-control" placeholder="Address">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label>Permanent address</label>
-                                    <div class="single-input-wrap">
-                                        <input type="text" class="form-control" placeholder="Address">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                                <div class="col-md-12">
+                                    
+                      <jsp:useBean id="CardSvc" scope="page" class="com.card.model.CardDAOService" />              
+                                        <label>Credit Cart </label>
+                                        <select class="form-select myselect" name="cardId" required>
+                                        	<option value="" >請選擇信用卡</option>
+											 <c:forEach var="cardVO" items="${list}"> 
+          									<option value="${cardVO.cardId}" ${(memberVO.restaurantId==resVO.restaurantId)? 'selected':'' }  >${cardVO.cardNumber}
+       										 </c:forEach>   
+										</select>
+										
+                                  </div>
+                                <input type="submit" class="btn btn-secondary w-100" value="PLACE ORDER" />
+                                <input type="hidden" name="action" value="insert">
+                            </div>                      
                     </div>                    
                 </div>
                 <div class="col-lg-5">

@@ -261,8 +261,8 @@
 	  let chosenAbility = "";	  
 	  let chosenLV = "";
 	  let monster1Id = "1001";
-	  let monster2Id = "1004";
-	  let monster3Id = "1005";
+	  let monster2Id = "1002";
+	  let monster3Id = "1003";
 	  
 	  $('div.my-5>ul.thumbnail>li').on('click', function() {
 		  

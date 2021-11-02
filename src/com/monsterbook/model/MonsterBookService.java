@@ -55,10 +55,10 @@ public class MonsterBookService {
 			return this.dao.findByPK(1001);
 		
 		else if("2".equals(num)) 
-			return this.dao.findByPK(1004);
+			return this.dao.findByPK(1002);
 		
 		else if("3".equals(num)) 
-			return this.dao.findByPK(1005);
+			return this.dao.findByPK(1003);
 		
 		else
 			return null;

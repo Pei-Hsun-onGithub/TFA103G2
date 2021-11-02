@@ -1,19 +1,15 @@
+<%@page import="java.util.List"%>
+<%@page import="com.meal.model.MealService"%>
+<%@page import="com.meal.model.MealVO"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.List"%>
-<%@ page import="com.meal.model.*"%>
-
-
-
-
-
 
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>ListAll</title>
+<title>Advertisement</title>
 <!--fivicon icon-->
 <link rel="icon"
 	href="<%=request.getContextPath()%>/assets/img/fevicon.png">
@@ -42,7 +38,8 @@
 	href="<%=request.getContextPath()%>/assets/css/style.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/responsive.css">
-
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.css" />
 
 <!--Google Fonts-->
 <link
@@ -52,32 +49,100 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/vendors/DataTables/datatables.css">
 <style>
+* {
+	list-style: none;
+}
 
 header.my-navbar-area {
-
 	background: #a30481;
 	border-bottom: none;
 }
 
-section.breadcrumb-area {
-	height: 80px;
+div.my-content {
+	margin-top: 110px;
 }
 
-section.work-area {
+div.my-aside-left-container img {
+	width: 42px;
+	height: 42px;
+}
+
+.timepicker div.title {
+	display: none;
+}
+
+div.my-btn-wrapper {
 	margin-top: 50px;
 }
 
-input.my-btn {
+.default-form-wrap.style-2 select.myclass-select-lauchdays {
+	width: 150px;
+}
+
+div.my-img-zone {
+	border: dashed 2px #d7d9d2;
+	width: 310px;
+	height: 300px;
+	margin: 0 auto;
+	margin-top: 80px;
+	position: relative;
+}
+
+div.my-preview-img-container div.my-img-zone span {
+	color: #d7d9d2;
+	position: absolute;
+	display: inline-block;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+div.my-preview-img-container div.my-img-zone img.preview_img {
+	max-height: 100%;
+	max-width: 100%;
+}
+
+form .my-btn {
 	padding: 0px 10px;
-	width: 53px;
-	height: 30px;
+	width: 56px;
+	height: 36px;
 	line-height: 10px;
 	border-radius: 10px;
 }
 
-table tr td img {
-	width: 60px;
+div.my-time-setting-block label {
+	margin-bottom: 0px;
+}
+
+div.my-time-setting-block label:after {
+	content: "";
+}
+
+div.my-time-setting-block-weekly-picker label.form-check-label:after {
+	content: "";
+}
+
+div.my-chooseType>ul {
+	
+}
+
+div.my-chooseType>ul>li {
+	display: inline-block;
+}
+
+div.my-chooseType ul li button {
+	width: 100px;
 	height: 50px;
+	border-radius: 5px;
+	background: white;
+	text-align: center;
+	vertical-align: middle;
+	border: 1px solid #198754;
+	color: #198754;
+	line-height: 56px;
+	text-align: center;
+	margin-left: 3px;
+	font-weight: 600px;
 }
 </style>
 
@@ -85,7 +150,6 @@ table tr td img {
 <body class='sc5'>
 
 
-	<!-- navbar start -->
 	<header class="navbar-area my-navbar-area">
 		<nav class="navbar navbar-expand-lg">
 			<div class="container nav-container">
@@ -97,7 +161,7 @@ table tr td img {
 					</button>
 				</div>
 				<div class="logo">
-					<a class="main-logo" href="<%=request.getContextPath()%>/pei_pages/vendor_restaurant_updateInfo.jsp"><img
+					<a class="main-logo" href="<%=request.getContextPath()%>/pei_pages/BackgroundManager.jsp"><img
 						src="<%=request.getContextPath()%>/assets/img/logo.png" alt="img"></a>
 				</div>
 				<div class="collapse navbar-collapse" id="themefie_main_menu">
@@ -127,19 +191,21 @@ table tr td img {
 				</div>
 				<div class="nav-right-part nav-right-part-desktop">
 					<ul>
-						<li style="visibility: hidden;"><a class="search" href="#"><i class="ri-search-line"></i></a>
-						</li>
-						<li class="menu-cart"><a href="#" style="visibility: hidden;">小鈴鐺 <span>4</span></a></li>
-						<li class="menu-cart"><a href="cart.html" style="visibility: hidden;">CART <span>1</span></a></li>
-						<li class="phone-contact"><a href="<%=request.getContextPath()%>/login/Login-login.jsp">登出</a></li>
-						
-						
+						<li style="visibility: hidden;"><a class="search" href="#"><i
+								class="ri-search-line"></i></a></li>
+						<li class="menu-cart"><a href="#" style="visibility: hidden;">小鈴鐺
+								<span>4</span>
+						</a></li>
+						<li class="menu-cart"><a href="cart.html"
+							style="visibility: hidden;">CART <span>1</span></a></li>
+
+
+
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
-	<!-- navbar end -->
 
 	<!-- bredcrumb Area Start-->
 	<section class="breadcrumb-area">
@@ -154,10 +220,32 @@ table tr td img {
 	<!-- Content Area Start -->
 	<section class="work-area">
 		<div class="container my-content">
-
 			<div class="row justify-content-center">
-				<table id="table_id" class="display">
-					<thead>
+				<!-- add content here  -->
+
+				<div class="card text-center">
+					<div class="card-header">
+						<ul class="nav nav-tabs card-header-tabs">
+							<!-- using active | disabled  -->
+							<li class="nav-item"><a class="nav-link model1 active"
+								aria-current="true" href="#">Achieve</a></li>
+						</ul>
+					</div>
+					<div class="card-body model1-body active">
+						<h5 class="card-title">廣告看板</h5>
+
+						<div style="overflow: hidden;">
+							<h4 class="my-query-title" style="float: left;">餐廳圖片清單</h4>
+						</div>
+
+						<!-- RestaurantList start -->
+						<section class="work-area">
+							<div class="container my-content">
+
+								<div class="row justify-content-center">
+								
+									<table id="table_id" class="display">
+										<thead>
 						<tr>
 							<th>餐點編號</th>
 							<th>狀態</th>
@@ -175,8 +263,13 @@ table tr td img {
 					</thead>
 					<tbody>
 
-						<jsp:useBean id="list" scope="request"
-							type="java.util.List<MealVO>" />
+						<%
+						
+						MealService mealSvc = new MealService();
+						List<MealVO> list = mealSvc.getAll();
+						request.setAttribute("list", list);
+						
+						%>
 
 						<c:forEach var="mealVO" items="${list}">
 
@@ -216,17 +309,108 @@ table tr td img {
 							</tr>
 						</c:forEach>
 					</tbody>
-				</table>
+									</table>
+									
+									
+								</div>
+								
+							</div>
+						</section>
+						<!-- RestaurantList End -->
+					
+					
+					<br>
+					
+					<div style="overflow: hidden;">
+							<h4 class="my-query-title" style="float: left;">食記清單</h4>
+						</div>
+
+						<!-- FoodArticle start -->
+						<section class="work-area">
+							<div class="container my-content">
+
+								<div class="row justify-content-center">
+								
+									<table id="table_id" class="display">
+										<thead>
+											<tr>
+												<th>成就編號</th>
+												<th>成就名稱</th>
+												<th>描述</th>
+												<th>開始日期</th>
+												<th>有效天數</th>
+												<th>達標食記數量</th>
+												<th>達標訂單數量</th>
+												<th>獲得飼料數目</th>
+												<th>獲得金幣數目</th>
+												<th>徽章圖案</th>
+
+												<th></th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+				
+
+											<c:forEach var="achieveVO" items="${lis}">
+
+											<tr>
+													<td>${achieveVO.achiId}</td>
+													<td>${achieveVO.achiName}</td>
+													<td>${achieveVO.descript}</td>
+													<td>${achieveVO.openDate}</td>
+													<td>${achieveVO.validDays}</td>
+													<td>${achieveVO.achiArticle}</td>
+													<td>${achieveVO.achiOrder}</td>
+													<td>${achieveVO.gainFeed}</td>
+													<td>${achieveVO.gainGold}</td>
+													<td><img
+														src="/TFA103G2/meal/photoServlet?id=${achieveVO.achiId}" /></td>
+
+													<td>
+														<FORM METHOD="post"
+															ACTION="/TFA103G2/meal/meal.do?action=getOne_For_Update"
+															style="margin-bottom: 0px;">
+															<input type="submit" class="btn btn-warning my-btn"
+																value="修改"> <input type="hidden" name="mealId"
+																value="${achieveVO.achiId}">
+														</FORM>
+													</td>
+													<td>
+														<FORM METHOD="post"
+															ACTION="/TFA103G2/achieve/AchieveQualify.do?action=triggerAchieveMission&achieveId=${achieveVO.achiId}"
+															style="margin-bottom: 0px;">
+
+															<input type="submit" class="btn btn-warning my-btn"
+																id="my-delete-submit" value="上線"> <input
+																type="hidden" name="mealId" value="${achieveVO.achiId}">
+
+
+														</FORM>
+													</td>
+													
+													
+
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+									
+									
+								</div>
+								
+							</div>
+						</section>
+						<!-- FoodArticle End -->
+					
+					</div>
+
+
+				</div>
 			</div>
 		</div>
 	</section>
 	<!-- Content Area End -->
-
-
-
-
-
-
 
 
 	<!-- all plugins here -->
@@ -262,5 +446,7 @@ table tr td img {
 
 		});
 	</script>
+
+
 </body>
 </html>

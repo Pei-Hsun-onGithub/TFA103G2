@@ -377,4 +377,86 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 		}
 		return rsOrderList;
 	}
+
+	@Override
+	public void insertWithOl(RsOrderVO rsOrderVO, List<OrderListVO> list) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		String[] cols = { "orderId" };
+		
+		try {
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			
+			//先關閉AutoCommit在executeUpdate之前
+			con.setAutoCommit(false);
+			
+			//先新增文章
+			
+			pstmt=con.prepareStatement(INSERT2, cols);
+			pstmt.setInt(1, rsOrderVO.getUserId());
+			pstmt.setInt(2, rsOrderVO.getCardId());
+			pstmt.setInt(3, rsOrderVO.getDeliveryAddId());
+						
+			pstmt.executeUpdate();
+			
+			//抓出剛剛新增的rsorderpk
+			
+			String new_orderid =null;
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if(rs.next()) {
+				new_orderid = rs.getString(1);
+			}
+			rs.close();
+			
+			//在同時另外一個OrderListDAO
+			
+			OrderListDAO orderListDAO = new OrderListDAO();
+			
+			for(OrderListVO orderListVO: list ) {
+				System.out.println("orderListVO="+orderListVO);
+				orderListVO.setOrderId(new Integer(new_orderid));
+				orderListDAO.insertWithRsOrder(orderListVO, con);
+				
+			}
+			
+			con.commit();
+			con.setAutoCommit(true);
+
+			
+		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					// 3●設定於當有exception發生時之catch區塊內
+					System.err.print("Transaction is being ");
+					System.err.println("rolled back-由-dept");
+					con.rollback();
+//					return false;
+				} catch (SQLException excep) {
+					excep.printStackTrace();
+					throw new RuntimeException("rollback error occured. "
+							+ excep.getMessage());
+					
+				}
+			}
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+	}
 }

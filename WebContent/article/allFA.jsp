@@ -19,6 +19,7 @@
     MemberInfo userNow = (MemberInfo) session.getAttribute("memberInfo");
 
     session.setAttribute("userNow", userNow);
+    pageContext.setAttribute("popularList",popularList);   	
 
 %>
 
@@ -177,7 +178,7 @@
                                     <div class="wrap-hover-area">
                                         <p class="ellipsis"> ${faVO.articleContent}
                                         </p> 
-                                        <a class="link-btn" href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${faVO.articleNo}&userId=${userNow.userId}">Read More</a> 
+                                        <a class="link-btn" href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${faVO.articleNo}">Read More</a> 
                                     </div>                       
                                 </div> 
                             </div>                                                                                  

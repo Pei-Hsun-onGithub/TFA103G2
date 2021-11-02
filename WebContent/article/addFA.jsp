@@ -179,8 +179,8 @@ button.check_ok {
 	                 <font style="color:red">請修正以下錯誤:</font>
 	                 <ul>
 		               <c:forEach var="message" items="${errorMsgs}">
-			           		<li style="color:red">${message}</li>
-		         		</c:forEach>
+			           <li style="color:red">${message}</li>
+		          </c:forEach>
 	                 </ul>
 	                 </div>
                   </c:if>																	
@@ -202,11 +202,11 @@ button.check_ok {
 				<div class="col-md-7">
 					<form class="article" method="post" action="fa.do" name="form1" enctype="multipart/form-data">
 					    					    
-						<input type="hidden" name="userId" value="<%=userNow.getUserId()%>">
+						<input type="hidden" name="userId" value="<%=(faVO == null) ? "" : userNow.getUserId()%>">
 						
 						<p class="p1">餐廳</p>
 						<select class="form-select myselect" name="restaurantId">
-							<option value="" >請選擇餐廳</option>
+							<option >請選擇餐廳</option>
 							<c:forEach  var="resVO" items="${resList}" >							
 							<option value="${resVO.restaurantId }" ${(faVO.restaurantId==resVO.restaurantId)? 'selected':'' }>${resVO.restaurantName}</option>	   
 							</c:forEach>							
@@ -243,7 +243,9 @@ button.check_ok {
 								<div>
 									<button type="reset" class="cancel">清除</button>
 									<button type="submit" class="check_ok">送出</button>
-									<input type="hidden" name="action" value="insert">																		
+									<input type="hidden" name="action" value="insert">
+									
+									
 								</div>
 
 
@@ -255,11 +257,10 @@ button.check_ok {
 				</div>
 
 				<!-- 右邊 -->
-				<div class="col-md-3">hello</div>
+				<div class="col-md-3"></div>
 			</div>
 		</div>
 	</div>
-	
 	<%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp" %>
 	
 
@@ -322,32 +323,23 @@ button.check_ok {
         /*===============預覽圖=================*/
         
         var img_file_el = document.getElementById("add_file");
-       
         img_file_el.addEventListener("change",function(e){
-       	
-            var pic_list_el =document.getElementsByClassName("pic_list")[0];
-            pic_list_el.innerHTML="";
- //   	    console.log(pic_list_el);
-//         	console.log("hello");      	     		
-      	
+//        	var preview_img_el =document.getElementsByClassName("preview_img")[0];
+//         	console.log(preview_img_el);
+//         	console.log("hello");
+ 
+        	
         	for(let i=0;i<this.files.length;i++){
-//        		preview_img_el.innerHTML = "";
         		let reader = new FileReader();
         		reader.readAsDataURL(this.files[i]);
         		reader.addEventListener("load",function(){
         			let img_tag = "<div class=\"preview_imgs\">"  +"<img src=" + reader.result +  " \" class=\"XXX\" >"+"</div>";
-        			pic_list_el.insertAdjacentHTML("beforeend", img_tag);
+        			img_file_el.insertAdjacentHTML("afterend", img_tag);
         		})
         		
         	}
-      		
         	
         })
-        
-
-        
-        
-        
         	                                
 	});
 </script>
