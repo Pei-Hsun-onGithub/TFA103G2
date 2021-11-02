@@ -4,6 +4,8 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.achieve.model.Achieve;
+import com.achieve.model.AchieveService;
 import com.memberinfo.model.MemberInfo;
 import com.memberinfo.model.MemberInfoService;
 
@@ -20,6 +22,19 @@ public class LoginHandler extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("text/html; charset=UTF-8");
 
+		/*	============= 在首次選取怪獸頁面之後，將預設的2004成就任務放入ServletContext==============  */
+		
+		AchieveService achieveSvc = new AchieveService();
+		Achieve achieveVO = achieveSvc.getOneAchieve(2004);
+		ServletContext servletContext = this.getServletContext();
+		
+		if(servletContext.getAttribute("achieveMission") == null) {
+			servletContext.setAttribute("achieveMission", achieveVO);
+		} 	
+/*	============================================================================  */	
+		
+		
+		
 		PrintWriter out = res.getWriter();
 
 		// 【取得使用者 帳號(email) 密碼(pwd)】

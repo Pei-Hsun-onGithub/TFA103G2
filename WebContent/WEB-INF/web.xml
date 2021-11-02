@@ -110,7 +110,7 @@
 	
 	
 
-<!--
+
 	<error-page>
         <error-code>
             400
@@ -147,7 +147,6 @@
         </location>
     </error-page>
 
--->
 
 <!-- 楚鈞 -->
 	<servlet>
