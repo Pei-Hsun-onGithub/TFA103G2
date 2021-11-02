@@ -381,7 +381,7 @@ CREATE TABLE Card (
 CREATE TABLE RsOrder (
 	orderid 		INT AUTO_INCREMENT NOT NULL,
 	userid     		INT NOT NULL,
-	restaurantid    INT ,
+	restaurantid    INT NOT NULL,
 	cardid       	INT NOT NULL,
 	deliveryaddid   INT NOT NULL,
 	deliverymethods INT,
@@ -418,8 +418,8 @@ CREATE TABLE OrderList (
 	orderlistid    INT AUTO_INCREMENT NOT NULL,
 	orderid    	   INT NOT NULL,
 	mealId         INT NOT NULL,
-	quantity       INT NOT NULL,
-	unitprice      INT NOT NULL,
+	quantity       VARCHAR(10) NOT NULL,
+	unitprice      VARCHAR(10) NOT NULL,
 	note     	   text,
 
     CONSTRAINT OrderList_orderid_FK FOREIGN KEY (orderid) REFERENCES RsOrder (orderid),
@@ -428,7 +428,7 @@ CREATE TABLE OrderList (
 ) AUTO_INCREMENT = 1;
 
 INSERT INTO OrderList (orderid, mealId, quantity, unitprice, note) 
-			VALUES (1, 501, 33, 33, 'NULL');
+			VALUES (1, 501, '錢錢', '一百', 'NULL');
 
 
 # 收藏餐廳
@@ -514,6 +514,5 @@ values(20210002,7001,'肯德基好好吃',now(),'青花椒麻雞香辣,太辣!!!
 		primary key(userid,articleno)
     
     );
-    
     
     insert into FavoFoodArticle (userid,articleno) values (20210001,1),(20210001,2);

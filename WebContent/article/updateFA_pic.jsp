@@ -229,6 +229,7 @@ button.check_ok {
 						<input type="hidden" name="sta" size="2" value="1" />
 						 								
 						<div>
+<<<<<<< HEAD
 						<button class="btn cancel" id="img_file">選擇圖片</button>
 						<input type="file" multiple id="add_file" style="display: none;" name="imgfile" >
 						</div>
@@ -240,6 +241,17 @@ button.check_ok {
 							
 							<img src="<%=request.getContextPath()%>/PictureBasesServlet?id=${index.index}">						
 							
+=======
+							<button class="btn cancel" id="img_file">選擇圖片</button>
+							<input type="file" multiple id="add_file" style="display: none;" name="imgfile" >
+						
+						<div class ="pic_list">
+							<div class="preview_imgs">
+								<c:forEach var="oldpicVO" items="${list}" varStatus="index">
+									<img src="<%=request.getContextPath()%>/PictureBasesServlet?id=${index.index}">						
+								</c:forEach>
+							</div>
+>>>>>>> 09064d6b7e085706bc47b7e8fcc50c63f06af16c
 						</div>
 						</c:forEach>																
 						</div>						
@@ -329,7 +341,11 @@ button.check_ok {
         
         /*===============預覽圖=================*/
         
+<<<<<<< HEAD
         
+=======
+        var img_file_el = document.getElementById("add_file");
+>>>>>>> 09064d6b7e085706bc47b7e8fcc50c63f06af16c
        
         img_file_el.addEventListener("change",function(e){
        	

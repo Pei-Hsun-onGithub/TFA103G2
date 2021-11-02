@@ -93,11 +93,11 @@
 														alt="img">
 												</div>
 												<div class="wrap-details my-monster-detail">
-													<h4>舔舔獸</h4>
-													<div>XS: $2.99</div>
-													<div>S: $3.99</div>
-													<div>M: $4.99</div>
-													<div>L: $5.99</div>
+													<h4>尚未升等</h4>
+													<div></div>
+													<div></div>
+													<div></div>
+													<div></div>
 												</div>
 											</div>
 										</div>
@@ -108,9 +108,9 @@
 														alt="img">
 												</div>
 												<div class="wrap-details">
-													<h4>舔舔獸</h4>
-													<h5>LV 5</h5>
-													<p>愛吃糖果 愛吃糖果 愛吃糖果 愛吃糖果 愛吃糖果 愛吃糖果 愛吃糖果 愛吃糖果 愛吃糖果</p>
+													<h4>尚未升等</h4>
+													<h5></h5>
+													<p></p>
 												</div>
 											</div>
 										</div>
@@ -126,8 +126,7 @@
 							class="far fa-user"></i> <%=memberValueObject.getUserName()%></a></li>
 <%
 
- Achieve achieveVO = (Achieve)application.getAttribute("achieveMission");
-
+Achieve achieveVO = (Achieve)application.getAttribute("achieveMission");
 
 AchieveProgressService achieveProgressSvc = new AchieveProgressService();
 Integer nowUserId = (Integer)session.getAttribute("userId");
@@ -137,11 +136,10 @@ if(achiProgress == null) {
 	achiProgress = achieveProgressSvc.addAchieveProgress(nowUserId, achiId, 0, 0,  new java.sql.Date(System.currentTimeMillis()), 13);
 }
 
-
 %>
 					<li><a id="my-bell" href="#" onclick="toggleTheTooltip()"><i
 							class="far fa-bell"></i> <span>1</span></a></li>
-<!-- 					  放入想要提醒的事項!    -->
+					<!--   放入想要提醒的事項!    -->
 					<div id="tooltip" role="tooltip">
 						<div class="my-mission-title">今日任務</div>
 						<div class="my-mission-content"><%= achieveVO.getAchiName() %></div>

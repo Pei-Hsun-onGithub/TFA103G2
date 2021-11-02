@@ -162,10 +162,10 @@
 								<input type="hidden" name="action" value="updateOneCard">
 								<button type="submit" name="submit">確定</button>
 							</div>
-							<div class="backbutton">
-								<button type="reset" name="button">重填</button>
+<!-- 							<div class="backbutton"> -->
+<!-- 								<button type="reset" name="button">重填</button> -->
 
-							</div>
+<!-- 							</div> -->
 						</div>
 					</div>
 				</div>

@@ -278,9 +278,6 @@ p.myP{
 <%-- <%MemberInfo meVO =(MemberInfo)session.getAttribute("MemberInfo");%> --%>
 
 
-  
-
-
 
 					<form class="default-form-wrap" method="post" action="msg.do">
 						<h5 class="title">留言</h5>
@@ -295,6 +292,7 @@ p.myP{
 							<div class="col-md-6">								
 
 							</div>
+
 							<div class="col-12">
 								<div class="single-textarea-wrap">
 
@@ -303,6 +301,14 @@ p.myP{
 
 								</div>
 							</div>
+							<div class="col-md-6">
+								<div class="single-input-wrap">
+									<input id="myid" type="hidden" class="form-control" name="userId" value="<%=userNow.getUserId() %>">
+									<input id="myarticleno" type="hidden" name="articleNo" value="<%=faVO.getArticleNo()%>"/>										 
+								</div>
+							</div>
+															
+							
 						</div>
 						<button type="submit" class="btn btn-base">Submit your
 							Message</button>

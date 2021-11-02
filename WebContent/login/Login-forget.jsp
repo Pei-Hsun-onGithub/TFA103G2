@@ -102,10 +102,8 @@
 					<fieldset>
 						<h1 class="lgd" style="color: black;">尋找密碼</h1>
 						<p>輸入你電子郵件地址</p>
-						<input type="username" id="username" class="username_email"
-							name="username" placeholder="您的電子郵件地址" required> <input
-							type="button" value="送出" class="btn" id="submit"
-							onclick="myFormCheck()" padd />
+						<input type="username" id="username" class="username_email" name="username" placeholder="您的電子郵件地址" required> 
+						<input type="button" value="送出" class="btn" id="submit" onclick="myFormCheck()" padd />
 					</fieldset>
 				</div>
 			</form>

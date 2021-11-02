@@ -152,8 +152,8 @@
 								</div>
 							</div>
 							<div class="storebutton">
-								<input type="hidden" name="cardId" value=""> <input
-									type="hidden" name="action" value="insertOneCard">
+								<input type="hidden" name="cardId" value=""> 
+								<input type="hidden" name="action" value="insertOneCard">
 								<button type="submit" id="certain" name="submit">確定</button>
 							</div>
 							<div class="backbutton">
