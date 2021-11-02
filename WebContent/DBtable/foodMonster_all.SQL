@@ -127,7 +127,7 @@ VALUES ('1qaz@y.com', '1qaz@WSX', '謝依冰', '女', '1966-12-27', '0921562069'
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
 VALUES ('2wsx@y.com', '1qaz@WSX', '陳佳燕', '女', '1992-10-16', '0987459122', '這是大頭貼', '2019-09-24', 1000, 20, 1002, '南風', 2, 100, 2);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('SteveMJackson@teleworm.us', 'PR3W9q2f', '王宜君', '女', '2006-01-12', '0921618067', '這是大頭貼', '2001-10-26', 20, 100, 1001, '雅亦', 1, 20, 1);
+VALUES ('4rfv@y.com', '1qaz@WSX', '王宜君', '女', '2006-01-12', '0921618067', '這是大頭貼', '2001-10-26', 20, 100, 1001, '雅亦', 1, 20, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
 VALUES ('stevemjackson@fleckens.hu', 'gNbHkZh3', '潘君聿', '女', '2016-07-16', '0961036280', '這是大頭貼', '2004-04-08', 1000, 20, 1002, '飛琴', 2, 100, 2);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 

@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//WebContent/DBtable/foodMonster_all.SQL=UTF-8
 encoding//WebContent/DBtable/foodMonster_custom_order.sql=UTF-8
 encoding//WebContent/Gary_pages/Member01.jsp=UTF-8
@@ -12,5 +13,7 @@ encoding//src/com/meal/controller/MealGetOne.java=UTF-8
 encoding//src/com/memberinfo/model/TestJDBCDAO.java=UTF-8
 encoding//src/com/picturebase/model/TestPictureBase.java=UTF-8
 encoding//src/com/restaurant/controller/RestInsert.java=UTF-8
+=======
+>>>>>>> 591ff0d946daedee1f8a6b85e1532d7e480bb32b
 encoding//src/util/DistrictCityMapping.java=MS950
 encoding/<project>=UTF-8

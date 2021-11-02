@@ -28,230 +28,7 @@ public class MemberInfoServlet extends HttpServlet {
 		String action = req.getParameter("action");
 
 
-//		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp?��?��?
-//
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//
-//			try {
-//				/***************************1.?�收請�??�數 - 輸入?��??�錯誤�???*********************/
-//				String str = req.getParameter("empno");
-//				if (str == null || (str.trim()).length() == 0) {
-//					errorMsgs.add("請輸?�員工編??);
-//				}
-//				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/emp/select_page.jsp");
-//					failureView.forward(req, res);
-//					return;//程�?中斷
-//				}
-//
-//				Integer empno = null;
-//				try {
-//					empno = new Integer(str);
-//				} catch (Exception e) {
-//					errorMsgs.add("?�工編�??��?不正��?);
-//				}
-//				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/emp/select_page.jsp");
-//					failureView.forward(req, res);
-//					return;//程�?中斷
-//				}
-//
-//				/***************************2.?��??�詢資�?*****************************************/
-//				EmpService empSvc = new EmpService();
-//				EmpVO empVO = empSvc.getOneEmp(empno);
-//				if (empVO == null) {
-//					errorMsgs.add("?�無資�?");
-//				}
-//				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/emp/select_page.jsp");
-//					failureView.forward(req, res);
-//					return;//程�?中斷
-//				}
-//
-//				/***************************3.?�詢完�?,準�?轉交(Send the Success view)*************/
-//				req.setAttribute("empVO", empVO); // 資�?庫�??��?empVO?�件,存入req
-//				String url = "/emp/listOneEmp.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url); // ?��?轉交 listOneEmp.jsp
-//				successView.forward(req, res);
-//
-//				/***************************?��??�能?�錯誤�???************************************/
-//			} catch (Exception e) {
-//				errorMsgs.add("?��??��?資�?:" + e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/emp/select_page.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
-//
-//
-//		if ("getOne_For_Update".equals(action)) { // 來自listAllEmp.jsp?��?��?
-//
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//
-//			try {
-//				/***************************1.?�收請�??�數****************************************/
-//				Integer empno = new Integer(req.getParameter("empno"));
-//
-//				/***************************2.?��??�詢資�?****************************************/
-//				EmpService empSvc = new EmpService();
-//				EmpVO empVO = empSvc.getOneEmp(empno);
-//
-//				/***************************3.?�詢完�?,準�?轉交(Send the Success view)************/
-//				req.setAttribute("empVO", empVO);         // 資�?庫�??��?empVO?�件,存入req
-//				String url = "/emp/update_emp_input.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url);// ?��?轉交 update_emp_input.jsp
-//				successView.forward(req, res);
-//
-//				/***************************?��??�能?�錯誤�???*********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add("?��??��?要修?��?資�?:" + e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/emp/listAllEmp.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
-//
-//
-//		if ("update".equals(action)) { // 來自update_emp_input.jsp?��?��?
-//
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//
-//			try {
-//				/***************************1.?�收請�??�數 - 輸入?��??�錯誤�???*********************/
-//Integer empno = new Integer(req.getParameter("empno").trim());
-//
-//String ename = req.getParameter("ename");
-//				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
-//				if (ename == null || ename.trim().length() == 0) {
-//					errorMsgs.add("?�工姓�?: 請勿空白");
-//				} else if(!ename.trim().matches(enameReg)) { //以�?練�?��??(��?表示��?regular-expression)
-//					errorMsgs.add("?�工姓�?: ?�能?�中?�英?��?母、數字�?_ , 且長度�??�????0之�?");
-//	            }
-//
-//String job = req.getParameter("job").trim();
-//				if (job == null || job.trim().length() == 0) {
-//					errorMsgs.add("?��?請勿空白");
-//				}
-//
-//				java.sql.Date hiredate = null;
-//				try {
-//hiredate = java.sql.Date.valueOf(req.getParameter("hiredate").trim());
-//				} catch (IllegalArgumentException e) {
-//					hiredate=new java.sql.Date(System.currentTimeMillis());
-//					errorMsgs.add("請輸?�日??");
-//				}
-//
-//				Double sal = null;
-//				try {
-//					sal = new Double(req.getParameter("sal").trim());
-//				} catch (NumberFormatException e) {
-//					sal = 0.0;
-//					errorMsgs.add("?�水請填?��?.");
-//				}
-//
-//				Double comm = null;
-//				try {
-//					comm = new Double(req.getParameter("comm").trim());
-//				} catch (NumberFormatException e) {
-//					comm = 0.0;
-//					errorMsgs.add("?��?請填?��?.");
-//				}
-//
-//Integer deptno = new Integer(req.getParameter("deptno").trim());
-//
-//				EmpVO empVO = new EmpVO();
-//				empVO.setEmpno(empno);
-//				empVO.setEname(ename);
-//				empVO.setJob(job);
-//				empVO.setHiredate(hiredate);
-//				empVO.setSal(sal);
-//				empVO.setComm(comm);
-//				empVO.setDeptno(deptno);
-//
-//				// Send the use back to the form, if there were errors
-//				if (!errorMsgs.isEmpty()) {
-//					req.setAttribute("empVO", empVO); // ?��?輸入?��??�誤?�empVO?�件,也�??�req
-//					RequestDispatcher failureView = req
-//							.getRequestDispatcher("/emp/update_emp_input.jsp");
-//					failureView.forward(req, res);
-//					return; //程�?中斷
-//				}
-//
-//				/***************************2.?��?修改資�?*****************************************/
-//				EmpService empSvc = new EmpService();
-//				empVO = empSvc.updateEmp(empno, ename, job, hiredate, sal,comm, deptno);
-//
-//				/***************************3.修改完�?,準�?轉交(Send the Success view)*************/
-//				req.setAttribute("empVO", empVO); // 資�?庫update?��?��?��?��?��?empVO?�件,存入req
-//				String url = "/emp/listOneEmp.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改?��?��?轉交listOneEmp.jsp
-//				successView.forward(req, res);
-//
-//				/***************************?��??�能?�錯誤�???************************************/
-//			} catch (Exception e) {
-//				errorMsgs.add("修改資�?失�?:"+e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/emp/update_emp_input.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
-//		if ("delete".equals(action)) { // 來自listAllEmp.jsp
-//
-//			List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//			req.setAttribute("errorMsgs", errorMsgs);
-//
-//			try {
-//				/***************************1.?�收請�??�數***************************************/
-//				Integer empno = new Integer(req.getParameter("empno"));
-//
-//				/***************************2.?��??�除資�?***************************************/
-//				EmpService empSvc = new EmpService();
-//				empSvc.deleteEmp(empno);
-//
-//				/***************************3.?�除完�?,準�?轉交(Send the Success view)***********/
-//				String url = "/emp/listAllEmp.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url);// ?�除?��?��?轉交?�送出?�除?��?源網??
-//				successView.forward(req, res);
-//
-//				/***************************?��??�能?�錯誤�???*********************************/
-//			} catch (Exception e) {
-//				errorMsgs.add("?�除資�?失�?:"+e.getMessage());
-//				RequestDispatcher failureView = req
-//						.getRequestDispatcher("/emp/listAllEmp.jsp");
-//				failureView.forward(req, res);
-//			}
-//		}
 
-//        if ("insert".equals(action)) { // 來自addEmp.jsp?��?��?
-//
-//		// List<String> errorMsgs = new LinkedList<String>();
-//			// Store this set in the request scope, in case we need to
-//			// send the ErrorPage view.
-//		//	req.setAttribute("errorMsgs", errorMsgs);
-//			MemberInfoService memberSvc1 = new MemberInfoService();
-//			MemberInfo member1 = memberSvc1.getOneMemberInfo(20210001);
-//			req.setAttribute("memberinfo", member1);
-//			String url = "/Gary_pages/Member01.jsp";
-//			RequestDispatcher successView = req.getRequestDispatcher(url); // ���\����?listOneEmp.jsp
-//			successView.forward(req, res);
-//		}
 
 		/*************************************
 		 * ?�員中�?
@@ -506,7 +283,7 @@ public class MemberInfoServlet extends HttpServlet {
 		}
 
 		/*************************************
-		 * ?�員註�?
+		 會員註冊
 		 ***************************************/
 
 		if ("insert".equals(action)) {
@@ -522,15 +299,15 @@ public class MemberInfoServlet extends HttpServlet {
 				String email = req.getParameter("email");
 				String emailReg = "^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z]+$";
 				if (email == null || email.trim().length() == 0) {
-					errorMsgs.add("?��??�件: 請勿空白");
-				} else if (!email.trim().matches(emailReg)) { // 以�?練�?��??(��?表示��?regular-expression)
-					errorMsgs.add("?��??�件: 不符?�電子郵件命?��?��?");
+					errorMsgs.add("電子郵件: 請勿空白");
+				} else if (!email.trim().matches(emailReg)) { 
+					errorMsgs.add("電子郵件: 不符合電子郵件命名規則");
 				} else {
 					MemberInfoService memberInfoSvc = new MemberInfoService();
 					boolean MemberInfo = memberInfoSvc.findByEmail(email);
 
 					if (MemberInfo) {
-						errorMsgs.add("此帳?�已註�?");
+						errorMsgs.add("此帳號已註冊");
 					}
 				}
 
@@ -539,14 +316,14 @@ public class MemberInfoServlet extends HttpServlet {
 				if (pwd == null || pwd.trim().length() == 0) {
 					errorMsgs.add("密碼: 請勿空白");
 				} else if (!pwd.trim().matches(pwdlReg)) {
-					errorMsgs.add("密碼: 密碼?�度?��??�該設�? 8 碼以上�??��?要混?�大小寫?��?字�??�數字�??��?符�?");
+					errorMsgs.add("密碼長度至少應該設定 8 碼以上，而且要混合大小寫英文字母、數字和特殊符號。");
 				}
 
 				String pwd2 = req.getParameter("pwd2");
 				if (pwd2 == null || pwd2.trim().length() == 0) {
-					errorMsgs.add("密碼2: 請勿空白");
+					errorMsgs.add("密碼: 請勿空白");
 				} else if (pwd.equals(pwd2) == false) {
-					errorMsgs.add("密碼: ?�兩次輸?��?碼�?一??");
+					errorMsgs.add("密碼: 兩次輸入一樣");
 				}
 
 				java.sql.Date birthday = null;
@@ -554,15 +331,15 @@ public class MemberInfoServlet extends HttpServlet {
 					birthday = java.sql.Date.valueOf(req.getParameter("birthday").trim());
 				} catch (IllegalArgumentException e) {
 					birthday = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸?�日??");
+					errorMsgs.add("請輸入日期");
 				}
 
 				String userName = req.getParameter("userName");
 				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (userName == null || userName.trim().length() == 0) {
-					errorMsgs.add("姓�?: 請勿空白");
-				} else if (!userName.trim().matches(enameReg)) { // 以�?練�?��??(��?表示��?regular-expression)
-					errorMsgs.add("姓�?: ?�能?�中?�英?��?母、數字�?_ , 且長度�??�????0之�?");
+					errorMsgs.add("姓名: 請勿空白");
+				} else if (!userName.trim().matches(enameReg)) { 
+					errorMsgs.add("姓名: 請符合命名規則，中英文且不超過10字");
 				}
 
 				String gender = req.getParameter("gender");
@@ -570,9 +347,9 @@ public class MemberInfoServlet extends HttpServlet {
 				String phone = req.getParameter("phone");
 				String phoneReg = "^09\\d{2}(\\d{6}|-\\d{3}-\\d{3})$";
 				if (phone == null || phone.trim().length() == 0) {
-					errorMsgs.add("?�話?�碼: 請勿空白");
-				} else if (!phone.trim().matches(phoneReg)) { // 以�?練�?��??(��?表示��?regular-expression)
-					errorMsgs.add("?�話?�碼:?��? , 且長度�??�??0，�??�為09?�頭");
+					errorMsgs.add("電話號碼: 請勿空白");
+				} else if (!phone.trim().matches(phoneReg)) { 
+					errorMsgs.add("電話號碼:長度不超過10碼，且為09開頭");
 				}
 
 				java.sql.Date registerDate = new java.sql.Date(System.currentTimeMillis());
@@ -592,7 +369,7 @@ public class MemberInfoServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("memberInfo", memberInfo); // ?��?輸入?��??�誤?�empVO?�件,也�??�req
+					req.setAttribute("memberInfo", memberInfo); 
 					req.setAttribute("memberInfo2", memberInfo2);
 					RequestDispatcher failureView = req.getRequestDispatcher("/login/Login-custome-regist.jsp");
 					failureView.forward(req, res);
@@ -604,7 +381,7 @@ public class MemberInfoServlet extends HttpServlet {
 				 ***************************************/
 				MemberInfoService memberInfoSvc = new MemberInfoService();
 				memberInfo = memberInfoSvc.addMemberInfo(email, pwd, userName, gender, birthday, phone, null,
-						registerDate, 0, 0, 1001, null, 1, 0, 1);
+						registerDate, 0, 0, 1001, null, 1, 0, 2);
 				HttpSession session = req.getSession();
 				session.setAttribute("userId", memberInfo.getUserId());
 				session.setAttribute("memberInfo", memberInfo);
@@ -618,14 +395,14 @@ public class MemberInfoServlet extends HttpServlet {
 				/*************************** ?��??�能?�錯誤�??? *********************************/
 			} catch (Exception e) {
 //				e.printStackTrace();
-				errorMsgs.add("註�?失�?:" + e.getMessage());
+				errorMsgs.add("註冊失敗" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/login/Login-custome-regist.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
 		/************************************
-		 * 廠�?註�?
+		 廠商註冊
 		 ************************************/
 
 		if ("insert2".equals(action)) { // 來自addEmp.jsp?��?��?
@@ -641,15 +418,15 @@ public class MemberInfoServlet extends HttpServlet {
 				String email = req.getParameter("email");
 				String emailReg = "^\\w+((-\\w+)|(\\.\\w+))*\\@[A-Za-z0-9]+((\\.|-)[A-Za-z0-9]+)*\\.[A-Za-z]+$";
 				if (email == null || email.trim().length() == 0) {
-					errorMsgs.add("?��??�件: 請勿空白");
-				} else if (!email.trim().matches(emailReg)) { // 以�?練�?��??(��?表示��?regular-expression)
-					errorMsgs.add("?��??�件: 不符?�電子郵件命?��?��?");
+					errorMsgs.add("電子郵件: 請勿空白");
+				} else if (!email.trim().matches(emailReg)) { 
+					errorMsgs.add("電子郵件: 不符合電子郵件命名規則");
 				} else {
 					MemberInfoService memberInfoSvc = new MemberInfoService();
 					boolean MemberInfo = memberInfoSvc.findByEmail(email);
 
 					if (MemberInfo) {
-						errorMsgs.add("此帳?�已註�?");
+						errorMsgs.add("此帳號已註冊");
 					}
 				}
 
@@ -658,14 +435,14 @@ public class MemberInfoServlet extends HttpServlet {
 				if (pwd == null || pwd.trim().length() == 0) {
 					errorMsgs.add("密碼: 請勿空白");
 				} else if (!pwd.trim().matches(pwdlReg)) {
-					errorMsgs.add("密碼: 密碼?�度?��??�該設�? 8 碼以上�??��?要混?�大小寫?��?字�??�數字�??��?符�?");
+					errorMsgs.add("密碼長度至少應該設定 8 碼以上，而且要混合大小寫英文字母、數字和特殊符號。");
 				}
 
 				String pwd2 = req.getParameter("pwd2");
 				if (pwd2 == null || pwd2.trim().length() == 0) {
-					errorMsgs.add("密碼2: 請勿空白");
+					errorMsgs.add("密碼: 請勿空白");
 				} else if (pwd.equals(pwd2) == false) {
-					errorMsgs.add("密碼: ?�兩次輸?��?碼�?一??");
+					errorMsgs.add("密碼:兩次輸入一樣");
 				}
 
 				java.sql.Date birthday = null;
@@ -673,15 +450,15 @@ public class MemberInfoServlet extends HttpServlet {
 					birthday = java.sql.Date.valueOf(req.getParameter("birthday").trim());
 				} catch (IllegalArgumentException e) {
 					birthday = new java.sql.Date(System.currentTimeMillis());
-					errorMsgs.add("請輸?�日??");
+					errorMsgs.add("請輸入日期");
 				}
 
 				String userName = req.getParameter("userName");
 				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 				if (userName == null || userName.trim().length() == 0) {
-					errorMsgs.add("姓�?: 請勿空白");
+					errorMsgs.add("姓名: 請勿空白");
 				} else if (!userName.trim().matches(enameReg)) { // 以�?練�?��??(��?表示��?regular-expression)
-					errorMsgs.add("姓�?: ?�能?�中?�英?��?母、數字�?_ , 且長度�??�????0之�?");
+					errorMsgs.add("姓名: 請符合命名規則，中英文且不超過10字");
 				}
 
 				String gender = req.getParameter("gender");
@@ -689,9 +466,9 @@ public class MemberInfoServlet extends HttpServlet {
 				String phone = req.getParameter("phone");
 				String phoneReg = "^09\\d{2}(\\d{6}|-\\d{3}-\\d{3})$";
 				if (phone == null || phone.trim().length() == 0) {
-					errorMsgs.add("?�話?�碼: 請勿空白");
+					errorMsgs.add("電話號碼: 請勿空白");
 				} else if (!phone.trim().matches(phoneReg)) { // 以�?練�?��??(��?表示��?regular-expression)
-					errorMsgs.add("?�話?�碼:?��? , 且長度�??�??0，�??�為09?�頭");
+					errorMsgs.add("電話號碼:長度不超過10碼，且為09開頭");
 				}
 
 				java.sql.Date registerDate = new java.sql.Date(System.currentTimeMillis());
@@ -711,7 +488,7 @@ public class MemberInfoServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 
 				if (!errorMsgs.isEmpty()) {
-					req.setAttribute("memberInfo", memberInfo); // ?��?輸入?��??�誤?�empVO?�件,也�??�req
+					req.setAttribute("memberInfo", memberInfo);
 					req.setAttribute("memberInfo2", memberInfo2);
 					RequestDispatcher failureView = req.getRequestDispatcher("/login/Login-vendor-regist.jsp");
 					failureView.forward(req, res);
@@ -737,7 +514,7 @@ public class MemberInfoServlet extends HttpServlet {
 				/*************************** ?��??�能?�錯誤�??? *********************************/
 			} catch (Exception e) {
 //				e.printStackTrace();
-				errorMsgs.add("註�?失�?:" + e.getMessage());
+				errorMsgs.add("註冊失敗" + e.getMessage());
 				RequestDispatcher failureView = req.getRequestDispatcher("/login/Login-vendor-regist.jsp");
 				failureView.forward(req, res);
 			}
