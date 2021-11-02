@@ -6,7 +6,7 @@
 
 <%
 	FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO");
-    MemberInfo userNow = (MemberInfo) session.getAttribute("memberInfo");
+//    MemberInfo userNow = (MemberInfo) session.getAttribute("memberInfo");
 
 %>
 <!DOCTYPE html>
@@ -330,21 +330,25 @@ button.check_ok {
         /*===============預覽圖=================*/
         
         var img_file_el = document.getElementById("add_file");
+       
         img_file_el.addEventListener("change",function(e){
-//        	var preview_img_el =document.getElementsByClassName("preview_img")[0];
-//         	console.log(preview_img_el);
-//         	console.log("hello");
- 
-        	
+       	
+            var pic_list_el =document.getElementsByClassName("pic_list")[0];
+            pic_list_el.innerHTML="";
+ //   	    console.log(pic_list_el);
+//         	console.log("hello");      	     		
+      	
         	for(let i=0;i<this.files.length;i++){
+//        		preview_img_el.innerHTML = "";
         		let reader = new FileReader();
         		reader.readAsDataURL(this.files[i]);
         		reader.addEventListener("load",function(){
         			let img_tag = "<div class=\"preview_imgs\">"  +"<img src=" + reader.result +  " \" class=\"XXX\" >"+"</div>";
-        			img_file_el.insertAdjacentHTML("afterend", img_tag);
+        			pic_list_el.insertAdjacentHTML("beforeend", img_tag);
         		})
         		
         	}
+      		
         	
         })
         	                                
