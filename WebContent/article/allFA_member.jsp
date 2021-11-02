@@ -2,11 +2,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.foodarticle.model.*"%>
 <%@ page import="java.util.*"%>
-
+<%@ page import="com.memberinfo.model.*"%>
 <%
 	FoodArticleService faSVC = new FoodArticleService();
 	List<FoodArticleVO> faList = faSVC.getall();
 	pageContext.setAttribute("faList", faList);
+	
+//測試	
+	
+	MemberInfoService memSvc = new MemberInfoService();
+	String email ="1qaz@y.com";
+	String pwd ="1qaz@WSX";
+	MemberInfo userNow = memSvc.findByEmail2(email, pwd);
+
+	out.println(userNow);
+//	MemberInfo userNow = (MemberInfo) session.getAttribute("memberInfo");
+	pageContext.setAttribute("userNow", userNow);
+	
 %>
 <!DOCTYPE html>
 
@@ -58,7 +70,7 @@
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.css" />
 
-<%@ include file="/assets/webPageSnippet/cssSnippet_navbar_home_1.jsp"%>
+<%-- <%@ include file="/assets/webPageSnippet/cssSnippet_navbar_home_1.jsp"%> --%>
 
 <style>
 body {
@@ -113,8 +125,8 @@ th.th2 {
 
 <body>
 
-	<%@ include
-		file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp"%>
+<%-- 	<%@ include --%>
+<%-- 		file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp"%> --%>
 
 	<div class="main">
 
@@ -180,9 +192,11 @@ th.th2 {
 										<FORM method="post"
 											action="<%=request.getContextPath()%>/article/fa.do"
 											style="margin-bottom: 0px;">
-											<input type="submit" value="閱讀"> <input type="hidden"
-												name="articleNo" value="${faVO.articleNo}"> <input
-												type="hidden" name="action" value="getOne_For_Display">
+											<input type="submit" value="閱讀"> 
+											<input type="hidden" name="articleNo" value="${faVO.articleNo}">
+											<input type="hidden" name="userId" value="${userNow.userId}">
+											<input type="hidden" name="action" value="getOne_For_Display">	 
+												
 										</FORM>
 									</td>
 
@@ -190,9 +204,11 @@ th.th2 {
 										<FORM method="post"
 											action="<%=request.getContextPath()%>/article/fa.do"
 											style="margin-bottom: 0px;">
-											<input type="submit" value="修改"> <input type="hidden"
-												name="articleNo" value="${faVO.articleNo}"> <input
-												type="hidden" name="action" value="getOne_For_Update">
+											<input type="submit" value="修改"> 
+											<input type="hidden" name="articleNo" value="${faVO.articleNo}">
+											<input type="hidden" name="userId" value="${userNow.userId}">
+											<input type="hidden" name="action" value="getOne_For_Update">
+											
 										</FORM>
 									</td>
 								</tr>
@@ -244,7 +260,7 @@ th.th2 {
 	<script
 		src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
 
-	<%@ include file="/assets/webPageSnippet/jsSnippet_navbar_home_3.jsp"%>
+<%-- 	<%@ include file="/assets/webPageSnippet/jsSnippet_navbar_home_3.jsp"%> --%>
 
 
 
