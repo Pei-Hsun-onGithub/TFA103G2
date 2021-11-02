@@ -101,10 +101,9 @@ public class EvolutionCheckerTest {
 		assertEquals(biggestMonster.getMinDemandLevel(), evolutionChecker.getBiggerMonster(memInfo).getMinDemandLevel());
 		
 	}
+	
 	@Test
 	public void testGetNewLevel() {
-		
-		
 		
 		memInfo.setLv(1);
 		memInfo.setExp(10);
