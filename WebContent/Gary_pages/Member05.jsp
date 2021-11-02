@@ -1,33 +1,23 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page import="com.address.model.*"%>
 <%@ page import="com.memberinfo.model.*"%>
 
 <%
 	MemberInfo memberinfo = (MemberInfo) request.getAttribute("memberinfo");
 %>
 
-<%
-	AddressVO addressVO = (AddressVO) request.getAttribute("addressvo");
-%>
-
-<%
-  response.setHeader("Cache-Control","no-store"); //HTTP 1.1
-  response.setHeader("Pragma","no-cache");        //HTTP 1.0
-  response.setDateHeader ("Expires", 0);
-%>
 
 
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>會員中心-外送地址管理</title>
-<!--fivicon icon-->
-<link rel="icon"
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>會員中心-歷史訂單</title>
+    <!--fivicon icon-->
+    <link rel="icon"
 	href="<%=request.getContextPath()%>/assets/img/Image4.png">
 
 <!-- Stylesheet -->
@@ -54,33 +44,32 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/responsive.css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/assets/css/Member04.css">
+	href="<%=request.getContextPath()%>/assets/css/Member05.css">
 
-<!--Google Fonts-->
+ <!--Google Fonts-->
 <link
 	href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap"
 	rel="stylesheet">
-<%@ include file="/assets/webPageSnippet/cssSnippet_navbar_home_1.jsp"%>
+<%@ include file="/assets/webPageSnippet/cssSnippet_navbar_home_1.jsp" %>
 
 </head>
 <body style="background-color: #dbdbdb">
-	<%@ include
-		file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp"%>
+	<%@ include file="/assets/webPageSnippet/navbarSnippet_navbar_home_2.jsp" %>
+ 
 
-	<div class="total" style="width: 1000px; height: 700px;">
-		<div class="profile">
+<div class="total" style="width:1000px;height:700px;">
+  <div class="profile">
 			<img
 				src="/TFA103G2/memberinfo/MemberPic.do?userId=<%=memberinfo.getUserId()%>"
 				alt="img">
 			<ul>
 				<li class="nickname"><%=memberinfo.getUserName()%></li>
-				<li class="edit"><a
-					href="/TFA103G2/login/memberinfo.do?action=getOne">編輯個人資料</a></li>
+				<li class="edit"><a href="/TFA103G2/login/memberinfo.do?action=getOne">編輯個人資料</a></li>
 			</ul>
 		</div>
 
-		<div class="memberlist">
-			<ul>
+  <div class="memberlist">
+    		<ul>
 				<li class="one"><a
 					href="<%=request.getContextPath()%>/login/memberinfo.do?action=getOne">個人檔案</a></li>
 				<li class="two"><a
@@ -90,85 +79,75 @@
 				<li class="four"><a
 					href="<%=request.getContextPath()%>/address/address.do?action=getAllAddress">外送地址管理</a></li>
 				<li class="five"><a
-					href="<%=request.getContextPath()%>/Member05.html">歷史訂單</a></li>
+					href="<%=request.getContextPath()%>/memberinfo/OrderListServlet.do?action=getAllOrderList">歷史訂單</a></li>
 				<li class="six"><a
 					href="<%=request.getContextPath()%>/Member06.html">文章管理</a></li>
 				<li class="seven"><a href="#">我的收藏</a></li>
 			</ul>
-		</div>
+  </div>
 
-		<div class="content" style="overflow-x: hidden; overflow-y: auto;">
-			<div class="title">
-				<div class="titlebigname">外送地址管理DeliverAddress</div>
-				<div class="titlesmallname">管理您的外送地址</div>
+  <div class="content" style="overflow-x: hidden; overflow-y: auto;">
+    <div class="title">
+      <div class="titlebigname">
+        歷史訂單OrderHistory
+      </div>
+      <div class="titlesmallname">
+        管理您過去訂購的外送商品
+      </div>
+      <div class="showinfo">
 
-				<div class="showinfo">
-					<div class="addressNo">編號</div>
-					<div class="customerName">顧客姓名</div>
-					<div class="deliverPhone">電話號碼</div>
-					<div class="deliverAddress">地址</div>
-					<div class="delete">
-						<button type="button" name="button">刪除</button>
-					</div>
-					<div class="edit">
-						<button type="button" name="button">編輯</button>
-					</div>
-				</div>
-				
-<%
+        <div class="no">編號
+        </div>
+        <div class="ordernumber">訂單編號
+        </div>
+        <div class="orderday">訂單完成日期
+        </div>
+        <div class="ordername">訂購者姓名
+        </div>
+        <div class="totalprice">總金額
+        </div>
+        <div class="showtrack">
+          <button type="button" name="button">詳細訂單明細</button>
+        </div>
+      </div>
+      <div class="showinfo2">
 
-	session.setAttribute("addressset", request.getAttribute("addressset"));
+        <div class="no">1
+        </div>
+        <div class="ordernumber">20210001
+        </div>
+        <div class="orderday">2021-05-05 08:00:00
+        </div>
+        <div class="ordername">黃楚鈞
+        </div>
+        <div class="totalprice">NT$180
+        </div>
+        <div class="showtrack">
+          <button type="button" name="button">詳細訂單明細</button>
+        </div>
+      </div>
+      <div class="showinfo3">
 
-%>				
+        <div class="no">2
+        </div>
+        <div class="ordernumber">20210002
+        </div>
+        <div class="orderday">2021-05-05 08:00:00
+        </div>
+        <div class="ordername">黃楚鈞
+        </div>
+        <div class="totalprice">NT$180
+        </div>
+        <div class="showtrack">
+          <button type="button" name="button">詳細訂單明細</button>
+        </div>
+      </div>
 
-				<c:forEach var="AddressVO" items="${addressset}" varStatus="count">
-					<div class="showinfo2">
-						<div class="addressNo">${count.count}</div>
-						<div class="customerName">${AddressVO.customerName}</div>
-						<div class="deliverPhone">${AddressVO.deliverPhone}</div>
-						<div class="deliverAddress">${AddressVO.deliverAddress}</div>
-						<div class="deleteaddress">
-							<input type="hidden" name="userId"
-								value="<%=memberinfo.getUserId()%>"> <input
-								type="hidden" name="buildingName"
-								value="${AddressVO.buildingName}"> <input type="hidden"
-								name="note" value="${AddressVO.note}"> <input
-								type="hidden" name="sta" value="${AddressVO.sta}">
-							<FORM METHOD="post" ACTION="/TFA103G2/address/address.do"
-								style="margin-bottom: 0px;">
-								<input type="submit" class="delete" value="刪除"> <input
-									type="hidden" name="deliveryAddId"
-									value="${AddressVO.deliveryAddId}"> <input
-									type="hidden" name="action" value="deleteAddress">
-							</FORM>
-						</div>
-						<div class="editaddress">
-							<FORM METHOD="post" ACTION="/TFA103G2/address/address.do"
-								style="margin-bottom: 0px;">
-								<input type="submit" class="edit" value="編輯"> <input
-									type="hidden" name="deliveryAddId"
-									value="${AddressVO.deliveryAddId}"> <input
-									type="hidden" name="action" value="showUpdateAddress">
-							</FORM>
-						</div>
-					</div>
-				</c:forEach>
-				
-				<div class="newaddress">
-				<FORM METHOD="post" ACTION="/TFA103G2/address/address.do"
-						style="margin-bottom: 0px;">
-						<input type="submit" class="insertaddress" value="新增外送地址"> <input
-							type="hidden" name="action" value="showInsertAddress">
-					</FORM>
-				</div>
-			</div>
-		</div>
+    </div>
+  </div>
 
-	</div>
-
-
-
-	<%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp"%>
+  </div>
+  <%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp" %>
 
 	<script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/jquery-ui.min.js"></script>
@@ -196,7 +175,8 @@
 		src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.js"></script>
 	<script
 		src="<%=request.getContextPath()%>/vendors/datetimepicker/jquery.datetimepicker.full.js"></script>
-	<%@ include file="/assets/webPageSnippet/jsSnippet_navbar_home_3.jsp"%>
+	<%@ include file="/assets/webPageSnippet/jsSnippet_navbar_home_3.jsp" %>
+
 
 </body>
 </html>

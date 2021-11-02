@@ -7,38 +7,38 @@ public class TestCardDAO {
 	public static void main(String[] args) {
 		CardDAO_interface dao = new CardDAO();
 
-		// ï¿½sï¿½W
+		// ·s¼W
 		CardVO card1 = new CardVO();
 		card1.setUserId(20210001);
-		card1.setCardHolder("ï¿½Gï¿½ì°·");
+		card1.setCardHolder("¾G¥ì°·");
 		card1.setCardNumber("1234567812345678");
 		card1.setDeadLine(java.sql.Date.valueOf("2023-12-31"));
 		card1.setCvv("466");
 		System.out.println(card1.getCvv());
-		card1.setBillAddress("ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê¿³ï¿½ï¿½Tï¿½ï¿½27ï¿½ï¿½ï¿½ï¿½");
+		card1.setBillAddress("¶³ªL¿¤ªê§ÀÂíªê¿³¦è¤Tµó27¸¹´Î");
 		card1.setZipCode("632");
 		card1.setSta(1);
 		dao.insert(card1);
 
-		// ï¿½×§ï¿½
+		// ­×§ï
 //		CardVO card2 = new CardVO();
 //		card2.setCardId(1);
 //		card2.setUserId(1);
-//		card2.setCardHolder("ï¿½Â¾^ï¿½W");
+//		card2.setCardHolder("ÁÂ¾^¾W");
 //		card2.setCardNumber("7890567834566789");
 //		card2.setDeadLine(java.sql.Date.valueOf("2023-12-31"));
 //		card2.setCvv("123");
-//		card2.setBillAddress("ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê¿³ï¿½ï¿½Tï¿½ï¿½27ï¿½ï¿½ï¿½ï¿½");
+//		card2.setBillAddress("¶³ªL¿¤ªê§ÀÂíªê¿³¦è¤Tµó27¸¹´Î");
 //		card2.setZipCode("632");
 //		card2.setSta(1);
 
 //		dao.update(card2);
 		
-		// ï¿½Rï¿½ï¿½
+		// §R°£
 //		dao.delete(1);
 		
 
-		// ï¿½dï¿½ï¿½
+		// ¬d¸ß
 //		CardVO card3 = dao.findByPK(2);
 //		System.out.println(card3.toString());	
 //		System.out.print(card3.getCardId() + ",");
@@ -53,7 +53,7 @@ public class TestCardDAO {
 //		System.out.println(card3.getSta() + ",");
 //		System.out.println("---------------------------------------------");
 
-		// ï¿½dï¿½ï¿½
+		// ¬d¸ß
 //		List<CardVO> list = dao.getAll();
 //		for (CardVO card4 : list) {
 //		System.out.println(card4.toString());
@@ -68,11 +68,6 @@ public class TestCardDAO {
 //		System.out.print(card4.getSta() +  ",");
 //		System.out.println(card4.getSta() + ",");
 //		System.out.println();
-		
-
-		
-		
-		
 		
 //		}
 	}

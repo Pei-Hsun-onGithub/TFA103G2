@@ -118,6 +118,7 @@ public class FoodArticleServlet extends HttpServlet {
 
 				/*-------------其他錯誤處理----------*/
 			} catch (Exception e) {
+				
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 				RequestDispatcher failure = req.getRequestDispatcher("/listallFA.jsp");
 				failure.forward(req, res);
@@ -285,6 +286,20 @@ public class FoodArticleServlet extends HttpServlet {
 				Integer restaurantId = null;				
 				if (restaurant == null || (restaurant.length()) == 0) {
 					errorMsgs.add("請選擇餐廳");
+<<<<<<< HEAD
+				} else {
+					userIdCheck = new Integer(userId);
+				}
+				String rule2 = "^[0-9]{4}$";
+				String restaurantId = (req.getParameter("restaurantId").trim());
+				Integer resIdCheck = null;
+				if (restaurantId == null || (restaurantId.length()) == 0) {
+					errorMsgs.add("餐廳id: 請勿空白");
+
+				} else if (!restaurantId.matches(rule2)) {
+					errorMsgs.add("餐廳id只能是4個數字");
+=======
+>>>>>>> 591ff0d946daedee1f8a6b85e1532d7e480bb32b
 				} else {
 					restaurantId = new Integer(restaurant);
 				}
