@@ -32,12 +32,14 @@ public class AddressServlet extends HttpServlet {
 			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
 			req.setAttribute("memberinfo", mem);
 			Integer member = mem.getUserId();
+			System.out.println("yyyy");
 			AddressService addressSvc = new AddressService();
 			Set<AddressVO> addressset = addressSvc.getAddressByUserId(member);
 			req.setAttribute("addressset", addressset);
 			String url = "/Gary_pages/Member04.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
 			successView.forward(req, res);
+			System.out.println("yyyy");
 
 		}
 
@@ -57,10 +59,11 @@ public class AddressServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			MemberInfo member = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
 			req.setAttribute("memberinfo", member);
-
-			Integer deliverytaddid = new Integer(req.getParameter("deliverytAddId"));
+			System.out.println("yyyy");
+System.out.println("xxxxx =" +req.getParameter("deliveryAddId"));
+			Integer deliveryAddId = new Integer(req.getParameter("deliveryAddId"));
 			AddressService addressSvc = new AddressService();
-			AddressVO address = addressSvc.getOneAddress(deliverytaddid);
+			AddressVO address = addressSvc.getOneAddress(deliveryAddId);
 			req.setAttribute("addressvo", address);
 
 			String url = "/Gary_pages/Member04-editaddress.jsp";
@@ -69,11 +72,12 @@ public class AddressServlet extends HttpServlet {
 		}
 
 		if ("insertOneAddress".equals(action)) {
+			System.out.println("aaa");
 			MemberInfoService memberSvc = new MemberInfoService();
 			HttpSession session = req.getSession();
 			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
 			req.setAttribute("memberinfo", mem);
-
+System.out.println("aaa");
 			List<String> errorMsgs = new LinkedList<String>();
 //			System.out.println("1="+errorMsgs);
 			// Store this set in the request scope, in case we need to
@@ -139,7 +143,7 @@ public class AddressServlet extends HttpServlet {
 				e.printStackTrace();
 				errorMsgs.add("錯誤:" + e.getMessage());
 				System.out.println("2=" + errorMsgs);
-//				System.out.println(e);
+				System.out.println(e);
 				RequestDispatcher failureView = req.getRequestDispatcher("/Gary_pages/Member04-addaddress.jsp");
 				failureView.forward(req, res);
 			}
@@ -246,7 +250,7 @@ public class AddressServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
 			req.setAttribute("memberinfo", mem);
-
+			
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
 			// send the ErrorPage view.
@@ -266,7 +270,7 @@ public class AddressServlet extends HttpServlet {
 			
 			req.setAttribute("addressset", addressset);
 			session.setAttribute("addressset", addressset);
-			
+			System.out.println("aaa");
 			String url = "/Gary_pages/Member04.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); // ���\��� listOneEmp.jsp
 			successView.forward(req, res);

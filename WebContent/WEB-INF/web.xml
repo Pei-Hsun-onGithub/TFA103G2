@@ -179,6 +179,18 @@
 		<servlet-name>CardServlet</servlet-name>
 		<url-pattern>/memberinfo/CardServlet.do</url-pattern>
 	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>MemberOrderListServlet</servlet-name>
+		<servlet-class>com.orderlist.controller.MemberOrderListServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CardServlet</servlet-name>
+		<url-pattern>/memberinfo/OrderListServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	
 
 
 
