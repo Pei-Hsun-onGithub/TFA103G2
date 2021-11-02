@@ -113,6 +113,8 @@ System.out.println("5.cardId="+cardId);
 				String url = "/home.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
 				successView.forward(req, res);
+				
+				session.removeAttribute("shoppingcart");
 				return;
 
 				/*************************** 其他可能的錯誤處理 *************************************/
