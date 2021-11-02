@@ -131,6 +131,7 @@ public class FoodArticleServlet extends HttpServlet {
 
 				/*-------------其他錯誤處理----------*/
 			} catch (Exception e) {
+				
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
 				RequestDispatcher failure = req.getRequestDispatcher("/listallFA.jsp");
 				failure.forward(req, res);
@@ -307,14 +308,16 @@ public class FoodArticleServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				String userId = (req.getParameter("userId")).trim();
-				String rule1 = "^[0-9]{8}$";
-				Integer userIdCheck = null;
+				Integer userId =new Integer (req.getParameter("userId"));
+				System.out.println("userId"+userId);
+				
 
-				if (userId == null || (userId.length()) == 0) {
-					errorMsgs.add("會員id: 請勿空白");
-				} else if (!userId.matches(rule1)) {
-					errorMsgs.add("會員id只能是8個數字");
+				String restaurant = req.getParameter("restaurantId");
+				
+
+				Integer restaurantId = null;				
+				if (restaurant == null || (restaurant.length()) == 0) {
+					errorMsgs.add("請選擇餐廳");
 				} else {
 					userIdCheck = new Integer(userId);
 				}

@@ -12,6 +12,13 @@
     List<FoodArticleVO> faList =faSvc.getall();
     List<FoodArticleVO> popularList = faSvc.getPopularArticle();
     pageContext.setAttribute("faList",faList);
+    pageContext.setAttribute("popularList",popularList); 
+    
+    // 小心MemberInfo 與 memberInfo!!!!
+
+    MemberInfo userNow = (MemberInfo) session.getAttribute("memberInfo");
+
+    session.setAttribute("userNow", userNow);
     pageContext.setAttribute("popularList",popularList);   	
 
 %>
@@ -197,7 +204,7 @@
                                         </div>
                                         <div class="media-body">
 
-                                            <h6 class="title"><a href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${popfaVO.articleNo}"> ${popfaVO.articleTitle} </a></h6>
+                                            <h6 class="title"><a href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${popfaVO.articleNo}&userId=${userNow.userId}"> ${popfaVO.articleTitle} </a></h6>
 
                                         </div>
                                     </div>

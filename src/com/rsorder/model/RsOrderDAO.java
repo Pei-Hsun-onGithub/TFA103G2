@@ -7,21 +7,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-import com.orderlist.model.OrderListDAO;
-import com.orderlist.model.OrderListVO;
-
 import util.Util;
+
+
 
 public class RsOrderDAO implements RsOrderDAO_interface{
 
 	private static final String INSERT = "INSERT INTO RsOrder (userId,restaurantId,cardId,deliveryAddId,deliveryMethods,orderDay,resstrtime,resEndTime,delStrTime,delEndTime,count,texts,sta) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String INSERT2 = "INSERT INTO RsOrder (userId,cardId,deliveryAddId) VALUES (?,?,?)";
 	private static final String UPDATE = "UPDATE RsOrder set userId =?, restaurantId =?, cardId =?, deliveryAddId =?, deliveryMethods =?, orderDay =?, delEndTime =?, resEndTime =?, delStrTime =?, delEndTime =?, count =? , texts =? , sta =? WHERE orderId = ?";
 	private static final String DELETE = "DELETE FROM RsOrder WHERE orderId = ?";	
 	private static final String FIND_BY_PK = "SELECT * FROM RsOrder WHERE orderId = ?";
 	private static final String GET_ALL = "SELECT * FROM RsOrder";
 	private static final String GET_ALL_BY_USERID = "SELECT * FROM RsOrder WHERE userId = ?";
-	
 	
 	static {
 		try {
@@ -102,68 +99,7 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 		return rsOrderVO;
 
 	}
-	
-	@Override
-	public RsOrderVO insert2(RsOrderVO rsOrderVO) {
 
-		Connection con = null;
-		
-		String[] cols = { "orderId" };
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-
-			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			pstmt = con.prepareStatement(INSERT, cols);
-
-			pstmt.setInt(1, rsOrderVO.getUserId());
-			pstmt.setInt(2, rsOrderVO.getCardId());
-			pstmt.setInt(3, rsOrderVO.getDeliveryAddId());
-						
-			pstmt.executeUpdate();
-			
-			rs = pstmt.getGeneratedKeys();
-			
-			if (rs.next()) {
-				Integer key = rs.getInt(1); 
-				rsOrderVO.setOrderId(key);
-
-			} 
-
-			// Handle any driver errors
-		} catch (SQLException se) {
-			se.printStackTrace();
-		} finally {
-			
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		
-		return rsOrderVO;
-
-	}
-	
 	@Override
 	public void update(RsOrderVO rsOrderVO) {
 

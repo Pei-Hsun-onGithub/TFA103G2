@@ -124,16 +124,12 @@ textarea.editor {
 }
 
 
-div.preview_img {
-	margin-top: 5px;
-	border: solid 2px black;
+div.preview_imgs {	
 	width: 300px;
-	min-height: 200px;
+	height: 300px;
 }
 
-div.preview_imgs span {
-	border: solid 2px red;
-}
+
 
 button.cancel {
 	margin-top: 20px;
@@ -196,7 +192,7 @@ button.check_ok {
 	List<RestaurantVO> resList = reSvc.getAllRes();
 	pageContext.setAttribute("resList",resList);
 	
-	MemberInfo userNow = (MemberInfo) session.getAttribute("MemberInfo");
+	MemberInfo userNow = (MemberInfo) session.getAttribute("memberInfo");
 	
 %>				
 
@@ -234,7 +230,10 @@ button.check_ok {
 						<div>
 						<button class="btn cancel" id="img_file">選擇圖片</button>
 						<input type="file" multiple="true" id="add_file" style="display: none;" name="imgfile" >
-						</div>						
+						</div>
+
+						<div class ="pic_list"></div>						
+
 
 
 						<div class="row">

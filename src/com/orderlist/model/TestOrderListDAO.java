@@ -7,37 +7,37 @@ public class TestOrderListDAO {
 	public static void main(String[] args) {
 		OrderListDAO_interface dao = new OrderListDAO();
 
-		// ï¿½sï¿½W
+		// ·s¼W
 //		OrderListVO ord1 = new OrderListVO();
 //		ord1.setOrderId(1);
 //		ord1.setMealId(2);
 //		ord1.setQuantity("12");
 //		ord1.setUnitPrice("2023-12-31");
-//		ord1.setNote("ï¿½ï¿½ï¿½nï¿½Y");
+//		ord1.setNote("¤£¦n¦Y");
 //		dao.insert(ord1);
 
-		// ï¿½×§ï¿½
+		// ­×§ï
 		OrderListVO ord2 = new OrderListVO();
 		ord2.setOrderId(1);
 		ord2.setMealId(2);
-		ord2.setQuantity(2);
-		ord2.setUnitPrice(2);;
-		ord2.setNote("ï¿½ï¿½ï¿½Y");
+		ord2.setQuantity("123478");
+		ord2.setUnitPrice("20");;
+		ord2.setNote("¤£¦Y");
 		ord2.setOrderListId(2);
 		
 
 //		dao.update(ord2);
 		
-		// ï¿½Rï¿½ï¿½
+		// §R°£
 //		dao.delete(1);
 		
 
-		// ï¿½dï¿½ï¿½
+		// ¬d¸ß
 //		OrderListVO ord3 = dao.findByPK(1);
 //		System.out.println(ord3.toString());	
 //		System.out.println("---------------------------------------------");
 
-		// ï¿½dï¿½ï¿½
+		// ¬d¸ß
 		List<OrderListVO> list = dao.getAll();
 		for (OrderListVO ord4 : list) {
 		System.out.println(ord4.toString());

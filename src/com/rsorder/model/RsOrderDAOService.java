@@ -3,7 +3,7 @@ package com.rsorder.model;
 import java.sql.Date;
 import java.util.List;
 
-import com.orderlist.model.OrderListVO;
+
 import com.rsorder.model.RsOrderVO;
 
 public class RsOrderDAOService {
@@ -37,19 +37,6 @@ public class RsOrderDAOService {
 		return dao.insert(rsOrderVO);
 	}
 
-	public RsOrderVO addRsOrderDAO2(Integer userId, Integer cardId, Integer deliveryAddId) 
-	
-	{
-
-		RsOrderVO rsOrderVO = new RsOrderVO();
-
-		rsOrderVO.setUserId(userId);
-		rsOrderVO.setCardId(cardId);
-		rsOrderVO.setDeliveryAddId(deliveryAddId);
-
-		return dao.insert2(rsOrderVO);
-	}
-	
 	public RsOrderVO updateRsOrderDAO(Integer userId, Integer restaurantId, Integer cardId, Integer deliveryAddId,
 			Integer deliveryMethods, Date orderDay, Date resStrTime, Date resEndTime, Date delStrTime, Date delEndTime,
 			Integer count, String texts, Integer sta) {
@@ -89,11 +76,4 @@ public class RsOrderDAOService {
 		
 		return this.dao.getOrdersByUserId(userId);
 	}
-	
-	public void insertWithOl(RsOrderVO rsOrderVO, List<OrderListVO> list) {
-		dao.insertWithOl(rsOrderVO, list);
-	}
 }
-	
-	
-
