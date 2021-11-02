@@ -12,6 +12,11 @@
 	AddressVO addressVO = (AddressVO) request.getAttribute("addressvo");
 %>
 
+<%
+  response.setHeader("Cache-Control","no-store"); //HTTP 1.1
+  response.setHeader("Pragma","no-cache");        //HTTP 1.0
+  response.setDateHeader ("Expires", 0);
+%>
 
 
 <!DOCTYPE html>
@@ -109,6 +114,12 @@
 						<button type="button" name="button">編輯</button>
 					</div>
 				</div>
+				
+<%
+
+	session.setAttribute("addressset", request.getAttribute("addressset"));
+
+%>				
 
 				<c:forEach var="AddressVO" items="${addressset}" varStatus="count">
 					<div class="showinfo2">
@@ -126,7 +137,7 @@
 							<FORM METHOD="post" ACTION="/TFA103G2/address/address.do"
 								style="margin-bottom: 0px;">
 								<input type="submit" class="delete" value="刪除"> <input
-									type="hidden" name="deliverytAddId"
+									type="hidden" name="deliveryAddId"
 									value="${AddressVO.deliveryAddId}"> <input
 									type="hidden" name="action" value="deleteAddress">
 							</FORM>
@@ -135,7 +146,7 @@
 							<FORM METHOD="post" ACTION="/TFA103G2/address/address.do"
 								style="margin-bottom: 0px;">
 								<input type="submit" class="edit" value="編輯"> <input
-									type="hidden" name="deliverytAddId"
+									type="hidden" name="deliveryAddId"
 									value="${AddressVO.deliveryAddId}"> <input
 									type="hidden" name="action" value="showUpdateAddress">
 							</FORM>

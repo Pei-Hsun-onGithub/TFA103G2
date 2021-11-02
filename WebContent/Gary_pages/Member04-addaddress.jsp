@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.address.model.*"%>
 <%@ page import="com.memberinfo.model.*"%>
+<%@ page import="java.util.Set"%>
 
 <%
 	MemberInfo memberinfo = (MemberInfo) request.getAttribute("memberinfo");
@@ -49,7 +50,7 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/assets/css/responsive.css">
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/assets/css/Member04-insertaddress.css">
+	href="<%=request.getContextPath()%>/assets/css/Member04-addaddress.css">
 
 <!--Google Fonts-->
 <link
@@ -92,54 +93,72 @@
 			</ul>
 		</div>
 
-		<div class="content">
-			<div class="title">
-				<div class="titlebigname">新增外送地址AddAddress</div>
-				<div class="titlesmallname">新增外送地址資訊</div>
-				<div class="editarea">
+
+		<form method="post" action="/TFA103G2/address/address.do"
+			enctype="multipart/form-data">
+			<div class="content">
+				<div class="title">
+					<div class="titlebigname">新增外送地址AddAddress</div>
+					<div class="titlesmallname">新增外送地址資訊</div>
+					<div class="editarea">
 
 
-					<div class="information">
-						<div class="customername">
-							<div class="lebel1">取餐者姓名</div>
-							<div class="input1">
-								<input type="text" name="" maxlength="255" value="">
+						<div class="information">
+							<div class="customername">
+								<div class="lebel1">取餐者姓名</div>
+								<div class="input1">
+									<input type="hidden" maxlength="255" name="userId"
+										value="<%=memberinfo.getUserId()%>"> <input
+										type="text" name="customerName" maxlength="255" value="">
+								</div>
 							</div>
-						</div>
-						<div class="deliverphone">
-							<div class="lebel2">連絡電話</div>
-							<div class="input2">
-								<input type="text" name="" maxlength="255" value="">
+							<div class="deliverphone">
+								<div class="lebel2">連絡電話</div>
+								<div class="input2">
+									<input type="text" name="deliverPhone" maxlength="255" value="">
+								</div>
 							</div>
-						</div>
-						<div class="deliveraddress">
-							<div class="lebel3">外送地址</div>
-							<div class="input3">
-								<input type="text" name="" maxlength="255" value="">
+							<div class="deliveraddress">
+								<div class="lebel3">外送地址</div>
+								<div class="input3">
+									<input type="text" name="deliverAddress" maxlength="255" value="">
+								</div>
 							</div>
-						</div>
-						<div class="buildingname">
-							<div class="lebel4">大樓名稱(選填)</div>
-							<div class="input4">
-								<input type="text" name="" maxlength="255" value="">
+							<div class="buildingname">
+								<div class="lebel4">大樓名稱(選填)</div>
+								<div class="input4">
+									<input type="text" name="buildingName" maxlength="255" value="">
+								</div>
 							</div>
-						</div>
-						<div class="note">
-							<div class="lebel5">備註(選填)</div>
-							<div class="input5">
-								<input type="text" name="" maxlength="255" value="">
+							<div class="note">
+								<div class="lebel5">備註(選填)</div>
+								<div class="input5">
+									<input type="text" name="note" maxlength="255" value="">
+								</div>
 							</div>
-						</div>
-						<div class="storebutton">
-							<button type="button" name="button">確定</button>
-						</div>
-						<div class="backbutton">
-							<button type="button" name="button">取消</button>
+							<div class="storebutton">
+							<input type="hidden" name="deliveryAddId" value="">
+							<input type="hidden" name="action" value="insertOneAddress">
+							<button type="submit" id="certain" name="submit">確定</button>
+							</div>
+							<div class="backbutton">
+								<button type="reset" name="button">重填</button>
+							</div>
 						</div>
 					</div>
 				</div>
+				<c:if test="${not empty errorMsgs}">
+					<div style="margin-top: 300px; margin-left: 750px">
+						<font style="color: red">請修正以下錯誤:</font>
+						<ul>
+							<c:forEach var="message" items="${errorMsgs}">
+								<li style="color: red">${message}</li>
+							</c:forEach>
+						</ul>
+					</div>
+				</c:if>
 			</div>
-		</div>
+		</form>
 
 	</div>
 
