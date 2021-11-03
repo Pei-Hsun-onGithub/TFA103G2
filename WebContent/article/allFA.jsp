@@ -4,6 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.foodarticle.model.*"%>
 <%@ page import="com.picturebase.model.*"%>
+<%@ page import="com.meal.model.*"%>
 
 
 <% 
@@ -20,7 +21,11 @@
     MemberInfo userNow = (MemberInfo) session.getAttribute("memberInfo");
 
     session.setAttribute("userNow", userNow);
-    pageContext.setAttribute("popularList",popularList);   	
+    pageContext.setAttribute("popularList",popularList);   
+    
+    MealService mealSc = new MealService();
+    List<MealVO> mealList = mealSc.getMealNew();
+    pageContext.setAttribute("mealList",mealList);
 
 
 %>
@@ -170,9 +175,7 @@
                                         <span class="date">
                                             <i class="ri-calendar-todo-fill"></i>${faVO.articleDate}
                                         </span>
-                                        <a href="#" class="tag me-0">
-                                            <i class="ri-price-tag-3-fill"></i>Burgar
-                                        </a>
+                                        
                                     </span>
 
                                      <h5><a href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${faVO.articleNo}">${faVO.articleTitle}
@@ -196,7 +199,7 @@
                     <div class="sidebar-area">
                         
                         <div class="widget widget-recent-post">
-                            <h4 class="widget-title">熱門食記</h4>
+                            <h4 class="widget-title">最新食記</h4>
                             <ul>
                                 <c:forEach var="popfaVO" items="${popularList}" >
                                 <li>
@@ -217,17 +220,17 @@
                         </div>
                        
                         <div class="widget widget-recent-post">
-                            <h4 class="widget-title">熱門餐點</h4>
+                            <h4 class="widget-title">精選餐點</h4>
                             <ul>
-                                <c:forEach var="popfaVO" items="${popularList}" >
+                                <c:forEach var="mealVO" items="${mealList}">
                                 <li>
                                     <div class="media">
                                         <div class="media-left">
-                                            <img src="<%=request.getContextPath()%>/article/pic.do?Id=${popfaVO.articleNo}" alt="widget">
+                                            <img src="<%=request.getContextPath()%>/article/mealpic.do?Id=${mealVO.mealId}" alt="圖片">
                                         </div>
                                         <div class="media-body">
 
-                                            <h6 class="title"><a href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${popfaVO.articleNo}&userId=${userNow.userId}"> ${popfaVO.articleTitle} </a></h6>
+                                            <h6 class="title"><a href="<%=request.getContextPath()%>/Mealsingle?mealId=${mealVO.mealId}">${mealVO.mealName}</a></h6>
 
                                         </div>
                                     </div>
