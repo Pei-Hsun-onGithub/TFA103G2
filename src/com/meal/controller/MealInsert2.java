@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -39,14 +40,14 @@ public class MealInsert2 extends Command {
 		// 1. 抓取表單資料，錯誤資料處理
 		try {
 
-			String mealName = req.getParameter("mealName");
-			String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
-
-			if (!mealName.trim().matches(enameReg)) {
-				errMsgs.add("請輸入正確中英文與0~9的數字");
-			} else if (mealName == null || mealName.trim().length() == 0) {
-				errMsgs.add("請輸入資料，不要空白");
-			}
+//			String mealName = req.getParameter("mealName");
+//			String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+//
+//			if (!mealName.trim().matches(enameReg)) {
+//				errMsgs.add("請輸入正確中英文與0~9的數字");
+//			} else if (mealName == null || mealName.trim().length() == 0) {
+//				errMsgs.add("請輸入資料，不要空白");
+//			}
 
 
 			Integer sta = null;
@@ -57,7 +58,10 @@ public class MealInsert2 extends Command {
 			}
 			String mealType = req.getParameter("mealType");
 
+			
+			
 			Integer unitPrice = null;
+			
 			try {
 				unitPrice = new Integer(req.getParameter("unitPrice"));
 			} catch (NumberFormatException e) {
@@ -98,9 +102,54 @@ public class MealInsert2 extends Command {
 //
 //			}
 			
+			String mealName = new String();
 			
+			List<String> myList = new ArrayList<String>();
+			List<Integer> unitPr = new ArrayList<>();
 			
-			
+	        myList.add("天使雞排");
+	        unitPr.add(60);
+	        myList.add("壽喜燒牛丼");
+	        unitPr.add(150);
+	        myList.add("茶碗蒸");
+	        unitPr.add(30);
+	        myList.add("番茄麵");
+	        unitPr.add(150);
+	        myList.add("牛肉麵");
+	        unitPr.add(230);
+	        myList.add("餛飩麵");
+	        unitPr.add(120);
+	        myList.add("玉子丼");
+	        unitPr.add(130);
+	        myList.add("雞肉飯");
+	        unitPr.add(30);
+	        myList.add("雞肉串");
+	        unitPr.add(30);
+	        myList.add("豬頭皮");  //10
+	        unitPr.add(30);
+	        myList.add("陽春麵");
+	        unitPr.add(30);
+	        myList.add("清湯麵");
+	        unitPr.add(30);
+	        myList.add("油麵");
+	        unitPr.add(40);
+	        myList.add("鐵蛋");
+	        unitPr.add(10);
+	        myList.add("貢丸湯");
+	        unitPr.add(20);
+	        myList.add("意麵");
+	        unitPr.add(30);
+	        myList.add("雞胗");
+	        unitPr.add(40);
+	        myList.add("蔬菜湯");
+	        unitPr.add(30);
+	        myList.add("白斬雞");
+	        unitPr.add(100);
+
+	       
+	        
+	        
+	        
 			if (!errMsgs.isEmpty()) {
 				MealVO errMealVO = new MealVO();
 				errMealVO.setMealName(mealName);
@@ -131,7 +180,7 @@ public class MealInsert2 extends Command {
 			for (int i = 0; i < s.length; i++) {
 				String img = path + "\\" + s[i];
 				mealImg = getPictureByteArray(img);
-				mealVO = service.addMeal(sta, mealName + i, mealType, unitPrice, launchDate, launchDays,
+				mealVO = service.addMeal(sta, myList.get(i) , mealType, unitPr.get(i), launchDate, launchDays,
 						mealDescription, mealImg, restaurantId);
 			}
 			
