@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import javax.servlet.*;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
 import com.address.model.*;
@@ -12,6 +13,8 @@ import com.card.model.CardDAOService;
 import com.card.model.CardVO;
 import com.memberinfo.model.MemberInfo;
 import com.memberinfo.model.MemberInfoService;
+
+@MultipartConfig
 
 public class AddressServlet extends HttpServlet {
 
