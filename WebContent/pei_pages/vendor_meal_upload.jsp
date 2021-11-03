@@ -208,6 +208,7 @@ form div.my-img-btn-wrapper .my-btn {
 
 							<%
 								MealVO mealVO = (MealVO) request.getAttribute("UpdatingMealVO");
+							
 							%>
 
 							
@@ -267,7 +268,7 @@ form div.my-img-btn-wrapper .my-btn {
 
 										<!-- 隱藏的餐廳編號 START -->
 										<input type="hidden" class="form-control" name="restaurantId"
-											value="<%=(mealVO == null) ? "7002" : mealVO.getRestaurantId()%>">
+											value="<%= session.getAttribute("restaurantId") %>">
 										<!-- 隱藏的餐廳編號 END -->
 
 

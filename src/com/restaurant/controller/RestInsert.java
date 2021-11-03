@@ -97,7 +97,6 @@ public class RestInsert extends Command {
 		
 		
 		
-		// 3.1 ��e��ƨ����p���ORestaurantStyle��controller�ӱN��ƤJ�w,��restaurantstyle��controller��forward��view
 		
 		req.setAttribute("restVO", restVO);
 		
@@ -108,7 +107,7 @@ public class RestInsert extends Command {
 		req.setAttribute("styleId3", styleId3);
 		
 		HttpSession session = req.getSession();
-		// �O�s�s�W���\���\�U�s��
+
 		session.setAttribute("restaurantId", restaurantId);
 		
 		
@@ -132,10 +131,10 @@ public class RestInsert extends Command {
 		StringBuffer weeklyLeaveBuilder = new StringBuffer();
 		for(String day : days) {
 			if("on".equals(day)) 
-				// ����~
+			
 				weeklyLeaveBuilder.append("1");
 			else
-				//��~
+				
 				weeklyLeaveBuilder.append("0");
 		}
 		return weeklyLeaveBuilder.toString();

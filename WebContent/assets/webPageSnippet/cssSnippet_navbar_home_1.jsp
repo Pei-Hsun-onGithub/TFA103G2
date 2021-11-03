@@ -26,10 +26,11 @@ div.nav-right-part ul.category-menu li.category-wrap div.my-monster-detail {
 
 #tooltip div.my-mission-title {
 	font-size: 18px;
+	color: #cf0846;
 }
 
 #tooltip div.my-mission-content {
-
+	color: #01265d;
 }
 /*********  tooltipªºCSS ¶}©l  ********/
 #tooltip {
