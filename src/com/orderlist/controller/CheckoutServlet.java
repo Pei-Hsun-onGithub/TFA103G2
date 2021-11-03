@@ -34,7 +34,6 @@ public class CheckoutServlet extends HttpServlet {
 		System.out.println(action);
 		
 		if ("insert".equals(action)) { 
-			System.out.println("裡面");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
