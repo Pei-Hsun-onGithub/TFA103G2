@@ -69,13 +69,11 @@ public class MealService {
 	public List<MealVO> findMealByRestaurant(Integer restaurantId) {
 		
 		List<MealVO> list = new ArrayList<MealVO>();
-		RestaurantService restSvc = new RestaurantService();
 		for(MealVO meal : this.getAll()) {
 			if(meal.getRestaurantId() == restaurantId) {
 				list.add(meal);
 			}
 		}
-		
 		return list;
 	}
 	

@@ -177,14 +177,22 @@ table tr td img {
 					</thead>
 					<tbody>
 
- 						<jsp:useBean id="list" scope="request" 
- 							type="java.util.List<MealVO>" /> 
-<%-- 
- 	MealService mealSvc = new MealService();
- 	List<MealVO> list = mealSvc.findMealByRestaurant(restaurantId)
+<%--  						<jsp:useBean id="list" scope="request"  --%>
+<%--  							type="java.util.List<MealVO>" />  --%>
+
+
+
+<%
+	Integer restaurantId = (Integer)session.getAttribute("restaurantId");
+	MealService mealSvc = new MealService();
+	List<MealVO> list = mealSvc.findMealByRestaurant(restaurantId);
+	request.setAttribute("list", list);
+ 
+%>
+ 	
 	
 	
---%>
+
 
 						<c:forEach var="mealVO" items="${list}">
 
