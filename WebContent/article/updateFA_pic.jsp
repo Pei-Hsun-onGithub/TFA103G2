@@ -191,10 +191,6 @@ button.check_ok {
 	List<RestaurantVO> resList = reSvc.getAllRes();
 	pageContext.setAttribute("resList",resList);	
 %>				
-<%-- 	<%	out.print(resList.toString());%>		 --%>
-				
-<!-- 				<p class="p1">選擇餐廳</p> -->
-<!-- 				<input class="res_input" name="restaurantId"> -->
 				
 				
 				<!-- 中間 -->
@@ -241,9 +237,10 @@ button.check_ok {
 							<div class="preview_imgs">								
 									<img src="<%=request.getContextPath()%>/PictureBasesServlet?id=${index.index}">														
 							</div>
+							</c:forEach>
 						</div>
-						</c:forEach>																
-						</div>						
+																						
+												
 
 
 
