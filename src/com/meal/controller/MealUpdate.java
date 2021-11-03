@@ -10,13 +10,14 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.meal.model.MealService;
 import com.meal.model.MealVO;
 
 public class MealUpdate extends Command {
-	
+
 	private HttpServletRequest req;
 	private HttpServletResponse res;
 	private String forwardTo;
@@ -27,9 +28,10 @@ public class MealUpdate extends Command {
 		this.res = res;
 
 	}
+
 	@Override
 	public void execute() throws ServletException, IOException {
-		
+
 		MealService service = new MealService();
 		// 1. 抓取頁面送來的PK值
 
@@ -76,7 +78,8 @@ public class MealUpdate extends Command {
 
 			Integer restaurantId = null;
 			try {
-				restaurantId = new Integer(req.getParameter("restaurantId"));
+				HttpSession session = req.getSession();
+				restaurantId = (Integer) session.getAttribute("restaurantId");
 			} catch (NumberFormatException e) {
 				errMsgs.put("restaurantId", "餐廳編號請輸入數字");
 			}
@@ -98,7 +101,7 @@ public class MealUpdate extends Command {
 
 			// 3. 轉交至展示層
 
-			req.setAttribute("list", service.getAll());
+			req.setAttribute("list", service.findMealByRestaurant(restaurantId));
 			RequestDispatcher toListallView = req.getRequestDispatcher(this.forwardTo);
 			toListallView.forward(req, res);
 
@@ -106,19 +109,18 @@ public class MealUpdate extends Command {
 			e.printStackTrace();
 		}
 
-		
 	}
 
 	@Override
 	public void setForwardURL(String url) {
 		this.forwardTo = url;
-		
+
 	}
 
 	@Override
 	public void setErrorURL(String url) {
 		this.ErrorTo = url;
-		
+
 	}
 
 }

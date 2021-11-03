@@ -7,6 +7,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.meal.model.MealService;
 import com.meal.model.MealVO;
@@ -28,9 +29,10 @@ public class MealGetAll extends Command {
 	public void execute() throws ServletException, IOException {
 		
 		MealService service = new MealService();
-		List<MealVO> list = service.getAll();
+		HttpSession session = req.getSession();
+		Integer restaurantId = (Integer) session.getAttribute("restaurantId");
+		List<MealVO> list = service.findMealByRestaurant(restaurantId);
 		req.setAttribute("list", list);
-
 		RequestDispatcher toView = req.getRequestDispatcher(this.forwardTo);
 	
 		toView.forward(req, res);

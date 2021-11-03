@@ -178,21 +178,10 @@ table tr td img {
 					<tbody>
 
 <%--  						<jsp:useBean id="list" scope="request"  --%>
-<%--  							type="java.util.List<MealVO>" />  --%>
+<%-- 							type="java.util.List<MealVO>" />   --%>
 
 
-
-<%
-	Integer restaurantId = (Integer)session.getAttribute("restaurantId");
-	MealService mealSvc = new MealService();
-	List<MealVO> list = mealSvc.findMealByRestaurant(restaurantId);
-	request.setAttribute("list", list);
- 
-%>
- 	
-	
-	
-
+					<!-- "list" key 由mealServlet的action=getAll註冊 -->
 
 						<c:forEach var="mealVO" items="${list}">
 
