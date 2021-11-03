@@ -141,14 +141,11 @@ VALUES ('JeffreyBBalling@armyspy.com', 'p8WA9Au5', '沈寶昆', '女', '1922-06-
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
 VALUES ('RandyDSnyder@jourrapide.com', 'bZY9CHxw', '王靖惟', '女', '1926-07-02', '0953417861', '這是大頭貼', '2018-11-16', 20, 100, 1001, '幼雙', 1, 20, 5);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('
-SusanJArviso@jourrapide.com', 'pvswkPP3', '蔡民柏', '男', '1978-07-17', '0934263542', '這是大頭貼', '2019-03-07', 1000, 20, 1002, '香琴', 2, 100, 4);
+VALUES ('SusanJArviso@jourrapide.com', 'pvswkPP3', '蔡民柏', '男', '1978-07-17', '0934263542', '這是大頭貼', '2019-03-07', 1000, 20, 1002, '香琴', 2, 100, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('
-LeighRPang@armyspy.com', 'V8qG6x8U', '陳財喜', '男', '1991-02-27', '0921090574', '這是大頭貼', '2013-07-08', 20, 100, 1001, '平柔', 1, 20, 5);
+VALUES ('LeighRPang@armyspy.com', 'V8qG6x8U', '陳財喜', '男', '1991-02-27', '0921090574', '這是大頭貼', '2013-07-08', 20, 100, 1001, '平柔', 1, 20, 5);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('
-OdellVOritz@dayrep.com', 'KsxD5ngR', '賴丹泰', '男', '1995-04-29', '0914918600', '這是大頭貼', '2008-10-04', 1000, 20, 1002, '新露', 2, 100, 4);
+VALUES ('OdellVOritz@dayrep.com', 'KsxD5ngR', '賴丹泰', '男', '1995-04-29', '0914918600', '這是大頭貼', '2008-10-04', 1000, 20, 1002, '新露', 2, 100, 4);
 
 # 成就進度	sta13,14,15
 CREATE TABLE AchieveProgress (
@@ -381,7 +378,7 @@ CREATE TABLE Card (
 CREATE TABLE RsOrder (
 	orderid 		INT AUTO_INCREMENT NOT NULL,
 	userid     		INT NOT NULL,
-	restaurantid    INT NOT NULL,
+	restaurantid    INT ,
 	cardid       	INT NOT NULL,
 	deliveryaddid   INT NOT NULL,
 	deliverymethods INT,
