@@ -18,6 +18,8 @@ import com.orderlist.model.OrderListVO;
 import com.rsorder.model.RsOrderDAOService;
 import com.rsorder.model.RsOrderVO;
 
+import util.OrderAchieveHelper;
+
 
 @WebServlet("/CheckoutServlet")
 public class CheckoutServlet extends HttpServlet {
@@ -105,6 +107,9 @@ System.out.println("5.cardId="+cardId);
 				
 				rsorderSvc.insertWithOl(rsOrderVO, orList);
 				
+				/******* 更新訂單成就進度  **********/
+				OrderAchieveHelper orderAchieveHelper = new OrderAchieveHelper(this.getServletContext());
+				orderAchieveHelper.updateOrderAchieve(userId);
 				
 
 				/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
