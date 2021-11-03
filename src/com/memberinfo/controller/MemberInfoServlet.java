@@ -323,7 +323,7 @@ public class MemberInfoServlet extends HttpServlet {
 				if (pwd2 == null || pwd2.trim().length() == 0) {
 					errorMsgs.add("密碼: 請勿空白");
 				} else if (pwd.equals(pwd2) == false) {
-					errorMsgs.add("密碼: 兩次輸入一樣");
+					errorMsgs.add("密碼: 兩次輸入不一樣");
 				}
 
 				java.sql.Date birthday = null;
@@ -442,7 +442,7 @@ public class MemberInfoServlet extends HttpServlet {
 				if (pwd2 == null || pwd2.trim().length() == 0) {
 					errorMsgs.add("密碼: 請勿空白");
 				} else if (pwd.equals(pwd2) == false) {
-					errorMsgs.add("密碼:兩次輸入一樣");
+					errorMsgs.add("密碼:兩次輸入不一樣");
 				}
 
 				java.sql.Date birthday = null;

@@ -1,7 +1,11 @@
 package com.meal.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
+
+import com.restaurant.model.RestaurantService;
+import com.restaurantstyle.model.RestaurantStyleVO;
 
 public class MealService {
 
@@ -60,6 +64,19 @@ public class MealService {
 	public List<MealVO> getAll() {
 
 		return this.dao.getAll();
+	}
+	
+	public List<MealVO> findMealByRestaurant(Integer restaurantId) {
+		
+		List<MealVO> list = new ArrayList<MealVO>();
+		RestaurantService restSvc = new RestaurantService();
+		for(MealVO meal : this.getAll()) {
+			if(meal.getRestaurantId() == restaurantId) {
+				list.add(meal);
+			}
+		}
+		
+		return list;
 	}
 	
 	

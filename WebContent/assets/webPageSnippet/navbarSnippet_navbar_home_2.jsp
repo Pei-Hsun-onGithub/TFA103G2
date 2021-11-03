@@ -138,7 +138,7 @@ if(achiProgress == null) {
 
 %>
 					<li><a id="my-bell" href="#" onclick="toggleTheTooltip()"><i
-							class="far fa-bell"></i> <span>1</span></a></li>
+							class="far fa-bell"></i></a></li>
 					<!--   放入想要提醒的事項!    -->
 					<div id="tooltip" role="tooltip">
 						<div class="my-mission-title">今日任務</div>
@@ -157,8 +157,8 @@ if(achiProgress == null) {
 					</div>
 
 					<li><a href="<%=request.getContextPath()%>/meal/Cart.jsp"><i
-							class="fas fa-shopping-cart"></i> <span>1</span></a></li>
-					<li><i class="fas fa-crown"></i> <span>23</span></li>
+							class="fas fa-shopping-cart"></i></a></li>
+					<li><i class="fas fa-crown"></i></li>
 				</ul>
 			</div>
 

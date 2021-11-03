@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.restaurant.model.RestaurantService"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
@@ -175,8 +177,14 @@ table tr td img {
 					</thead>
 					<tbody>
 
-						<jsp:useBean id="list" scope="request"
-							type="java.util.List<MealVO>" />
+ 						<jsp:useBean id="list" scope="request" 
+ 							type="java.util.List<MealVO>" /> 
+<%-- 
+ 	MealService mealSvc = new MealService();
+ 	List<MealVO> list = mealSvc.findMealByRestaurant(restaurantId)
+	
+	
+--%>
 
 						<c:forEach var="mealVO" items="${list}">
 
