@@ -8,6 +8,7 @@
 <%@ page import="com.memberinfo.model.*"%>
 <%@ page import="com.favofoodarticle.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
   FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO"); //FoodArticleServlet.java(Concroller), 存入req的faVO物件
@@ -262,7 +263,7 @@ p.myP{
 									</c:if>
 									</c:forEach>
 									</p>																	
-									<span>${msgVO.msgDate}</span>
+									<span><fmt:formatDate value="${msgVO.msgDate}" pattern="yyyy-MM-dd HH:mm"/></span>
 									<p>${msgVO.msgContent}</p>
 									<input type="hidden" value="${msgVO.sta}">
 								</div>
