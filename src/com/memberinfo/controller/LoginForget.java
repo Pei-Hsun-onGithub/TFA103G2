@@ -110,11 +110,8 @@ public class LoginForget extends HttpServlet {
 			try {
 
 				String email = req.getParameter("email");
-				System.out.println(email);
 				MemberInfoService memberInfoSvc = new MemberInfoService();
-				MemberInfo memberInfo2 = memberInfoSvc.findByEmail3(email);
-				System.out.println(memberInfo2);
-				
+				MemberInfo memberInfo2 = memberInfoSvc.findByEmail3(email);	
 
 				if (memberInfo2 == null || !memberInfo2.getEmail().equals(email)) {
 					errorMsgs.add("輸入帳號不存在");
@@ -145,7 +142,11 @@ public class LoginForget extends HttpServlet {
 				MailService mailService = new MailService();
 				mailService.sendMail(to, subject, messageText);
 				System.out.println(passRandom);
-
+				memberInfoSvc.updateMemberInfo(memberInfo2.getUserId(), memberInfo2.getEmail(), passRandom, userName, memberInfo2.getGender(), memberInfo2.getBirthday(), memberInfo2.getPhone(), memberInfo2.getPic(), memberInfo2.getRegisterDate(), memberInfo2.getGold(), memberInfo2.getFeed(), memberInfo2.getMonsterId(), memberInfo2.getMonsterNickName(), memberInfo2.getLv(), memberInfo2.getExp()
+						,memberInfo2.getSta());
+			
+				memberInfo2.setPwd(passRandom);
+				
 				req.setAttribute("memberInfo2", memberInfo2);
 				String url = "/login/Login-login.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneEmp.jsp
