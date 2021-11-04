@@ -174,6 +174,11 @@ public class FoodArticleServlet extends HttpServlet {
 				/*=========== 更新多筆圖片 ==============*/
 
 				PictureBaseService picBaseSvc = new PictureBaseService();
+				
+				HttpSession session = req.getSession();
+				
+				
+				
 				List<PictureBaseVO> oldPicBases = picBaseSvc.getPicturesOfAr(articleNo);
 				
 				int oldPicBasesSize = oldPicBases.size();
@@ -189,6 +194,7 @@ public class FoodArticleServlet extends HttpServlet {
 				 * getParts會把form表單裡不管是文字還是檔案都抓進來, 所以先用getName取元素的name的值, 去比對篩掉檔案以外的文字
 				 */
 
+				
 				for (Part part : parts) {
 					String partName = part.getName();
 
@@ -219,10 +225,22 @@ public class FoodArticleServlet extends HttpServlet {
 								index++;
 							}
 						} else {
-							errorMsgs.add("請新增最少一張圖片");
+							
+							for(PictureBaseVO existedPic : oldPicBases) {
+								existedPic = oldPicBases.get(index);
+								picBaseSvc.updatePictureBase(existedPic.getPicNo(), existedPic.getPic());
+								index++;
+							}
+							//errorMsgs.add("請新增最少一張圖片");
 						}
 					}
 				}
+				
+				
+				
+				
+				
+				
 
 				// 當原本的圖片數量已經多過獲得的圖片數量，就把多餘的「刪除」
 				if (oldPicBases.size() > pictureObtainedCount) {
