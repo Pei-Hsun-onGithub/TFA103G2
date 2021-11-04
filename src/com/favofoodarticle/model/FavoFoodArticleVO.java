@@ -1,6 +1,11 @@
 package com.favofoodarticle.model;
 
 public class FavoFoodArticleVO implements java.io.Serializable {
+	@Override
+	public String toString() {
+		return "FavoFoodArticleVO [userId=" + userId + ", articleNo=" + articleNo + "]";
+	}
+
 	private Integer userId;
 	private Integer articleNo;
 	

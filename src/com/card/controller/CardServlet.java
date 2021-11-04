@@ -11,7 +11,11 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.*;
 
 import com.card.model.*;
+import com.favofoodarticle.model.FavoFoodArticleService;
+import com.favofoodarticle.model.FavoFoodArticleVO;
 import com.memberinfo.model.*;
+import com.rsorder.model.RsOrderDAOService;
+import com.rsorder.model.RsOrderVO;
 
 @MultipartConfig
 
@@ -25,7 +29,13 @@ public class CardServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-
+		RsOrderDAOService rsOrderSvc = new RsOrderDAOService();
+		Set<RsOrderVO> rsorderset = rsOrderSvc.getRsOrderByUserId(20210001);
+		System.out.println(rsorderset);
+		FavoFoodArticleService favofoodarticleSvc = new FavoFoodArticleService();
+		Set<FavoFoodArticleVO> favofoodarticleset = favofoodarticleSvc
+				.getAllFavoFoodArticleByUserId(20210001);
+		System.out.println(favofoodarticleset);
 		if ("getAllCard".equals(action)) {
 			MemberInfoService memberSvc = new MemberInfoService();
 			HttpSession session = req.getSession();

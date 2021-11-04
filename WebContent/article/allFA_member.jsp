@@ -92,10 +92,11 @@
 				<li class="four"><a
 					href="<%=request.getContextPath()%>/address/address.do?action=getAllAddress">外送地址管理</a></li>
 				<li class="five"><a
-					href="<%=request.getContextPath()%>/memberinfo/OrderListServlet.do?action=getAllOrderList">歷史訂單</a></li>
+					href="<%=request.getContextPath()%>/memberinfo/HistoryOrderServlet.do?action=getAllOrderList">歷史訂單</a></li>
 				<li class="six"><a
 					href="<%=request.getContextPath()%>/article/allFA_member.jsp">文章管理</a></li>
-				<li class="seven"><a href="#">我的收藏</a></li>
+				<li class="seven"><a
+					href="<%=request.getContextPath()%>/Gary_pages/Member07.jsp">我的收藏</a></li>
 			</ul>
 		</div>
 
@@ -106,9 +107,12 @@
 
 				<div class="showinfo">
 
-					<div class="no">編號</div>
-					<div class="ordernumber">文章標題</div>
-					<div class="orderday">撰寫日期</div>
+					<div class="no" style="text-align: left; display: flex; align-items: center">編號</div>
+					<div class="ordernumber"
+						style="width: 500px; height: 100px;
+	/* margin-left: 50px; */ font-size: 16px; line-height: 100px; text-align: left; */
+	/* display:inline; */ vertical-align: middle; display: flex; align-items: center">文章標題</div>
+					<div class="orderday" style="text-align: left">撰寫日期</div>
 
 					<div class="showtrack">
 						<button type="button" name="button">查詢</button>
@@ -124,27 +128,30 @@
 
 					<div class="showinfo2">
 
-						<div class="no">${count.count}</div>
-						<div class="ordernumber">${faVO.articleTitle}</div>
-						<div class="orderday">${faVO.articleDate}</div>
+						<div class="no" style="text-align: left">${count.count}</div>
+						<div class="ordernumber"
+							style="width: 500px; height: 60px;
+	/* margin-left: 50px; */ font-size: 16px; text-align: left;
+	/* display:inline; */ vertical-align: middle;display: flex; align-items: center;">${faVO.articleTitle}</div>
+						<div class="orderday" style="text-align: left">${faVO.articleDate}</div>
 
 						<div class="showtrack">
 							<FORM method="post"
 								action="<%=request.getContextPath()%>/article/fa.do"
 								style="margin-bottom: 0px;">
-								<input type="submit" class="read" value="閱讀"> 
-								<input type="hidden" name="articleNo" value="${faVO.articleNo}">
+								<input type="submit" class="read" value="閱讀"> <input
+									type="hidden" name="articleNo" value="${faVO.articleNo}">
 								<input type="hidden" name="userId" value="${memberInfo.userId}">
 								<input type="hidden" name="action" value="getOne_For_Display">
 							</FORM>
-						
+
 						</div>
 						<div class="showtrack">
 							<FORM method="post"
 								action="<%=request.getContextPath()%>/article/fa.do"
 								style="margin-bottom: 0px;">
-								<input type="submit" class="edit" value="修改"> 
-								<input type="hidden" name="articleNo" value="${faVO.articleNo}"> 
+								<input type="submit" class="edit" value="修改"> <input
+									type="hidden" name="articleNo" value="${faVO.articleNo}">
 								<input type="hidden" name="action" value="getOne_For_Update">
 							</FORM>
 						</div>
@@ -164,11 +171,11 @@
 
 			</div>
 
-			
+
 		</div>
 	</div>
 
-<%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp"%>
+	<%@ include file="/assets/webPageSnippet/footerSnippet_home.jsp"%>
 
 
 	<script src="<%=request.getContextPath()%>/assets/js/jquery.3.6.min.js"></script>

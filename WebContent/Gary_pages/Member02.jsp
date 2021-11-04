@@ -69,7 +69,7 @@
 		</div>
 
 		<div class="memberlist">
-						<ul>
+				<ul>
 				<li class="one"><a
 					href="<%=request.getContextPath()%>/login/memberinfo.do?action=getOne">個人檔案</a></li>
 				<li class="two"><a
@@ -79,10 +79,11 @@
 				<li class="four"><a
 					href="<%=request.getContextPath()%>/address/address.do?action=getAllAddress">外送地址管理</a></li>
 				<li class="five"><a
-					href="<%=request.getContextPath()%>/Member05.html">歷史訂單</a></li>
+					href="<%=request.getContextPath()%>/memberinfo/HistoryOrderServlet.do?action=getAllOrderList">歷史訂單</a></li>
 				<li class="six"><a
-					href="<%=request.getContextPath()%>/Member06.html">文章管理</a></li>
-				<li class="seven"><a href="#">我的收藏</a></li>
+					href="<%=request.getContextPath()%>/article/allFA_member.jsp">文章管理</a></li>
+				<li class="seven"><a
+					href="<%=request.getContextPath()%>/Gary_pages/Member07.jsp">我的收藏</a></li>
 			</ul>
 		</div>
 
@@ -99,7 +100,7 @@
 							<div class="nowpassword">
 								<div class="lebel1">請輸入當前密碼</div>
 								<div class="input1">
-								<input class="nowpwd" type="text" name="nowpwd" maxlength="255"
+								<input class="nowpwd" type="password" name="nowpwd" maxlength="255"
 										value="">
 									<input type="hidden" name="userId"
 										value="<%=memberinfo.getUserId()%>"> <input
@@ -131,14 +132,14 @@
 							<div class="newpassword">
 								<div class="lebel2">輸入新的密碼</div>
 								<div class="input2">
-									<input class="newpwd" type="text" name="newpwd" maxlength="255"
+									<input class="newpwd" type="password" name="newpwd" maxlength="255"
 										value="">
 								</div>
 							</div>
 							<div class="newpassword2">
 								<div class="lebel3">再次輸入新密碼</div>
 								<div class="input3">
-									<input class="newpwd2" type="text" name="newpwd2"
+									<input class="newpwd2" type="password" name="newpwd2"
 										maxlength="255" value="">
 								</div>
 							</div>
