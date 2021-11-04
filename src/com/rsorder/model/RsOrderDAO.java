@@ -7,22 +7,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+
 import com.orderlist.model.OrderListDAO;
 import com.orderlist.model.OrderListVO;
 
 import util.Util;
 
-public class RsOrderDAO implements RsOrderDAO_interface{
+public class RsOrderDAO implements RsOrderDAO_interface {
 
 	private static final String INSERT = "INSERT INTO RsOrder (userId,restaurantId,cardId,deliveryAddId,deliveryMethods,orderDay,resstrtime,resEndTime,delStrTime,delEndTime,count,texts,sta) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String INSERT2 = "INSERT INTO RsOrder (userId,cardId,deliveryAddId) VALUES (?,?,?)";
 	private static final String UPDATE = "UPDATE RsOrder set userId =?, restaurantId =?, cardId =?, deliveryAddId =?, deliveryMethods =?, orderDay =?, delEndTime =?, resEndTime =?, delStrTime =?, delEndTime =?, count =? , texts =? , sta =? WHERE orderId = ?";
-	private static final String DELETE = "DELETE FROM RsOrder WHERE orderId = ?";	
+	private static final String DELETE = "DELETE FROM RsOrder WHERE orderId = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM RsOrder WHERE orderId = ?";
 	private static final String GET_ALL = "SELECT * FROM RsOrder";
 	private static final String GET_ALL_BY_USERID = "SELECT * FROM RsOrder WHERE userId = ?";
+	private static final String GET_RSORDER_BY_USERID = "SELECT * FROM RsOrder WHERE userId = ? order by orderId";
 	
-	
+
 	static {
 		try {
 			Class.forName(Util.DRIVER);
@@ -30,13 +32,12 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 			ce.printStackTrace();
 		}
 	}
-	
-	
+
 	@Override
 	public RsOrderVO insert(RsOrderVO rsOrderVO) {
 
 		Connection con = null;
-		
+
 		String[] cols = { "orderId" };
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -59,22 +60,22 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 			pstmt.setInt(11, rsOrderVO.getCount());
 			pstmt.setString(12, rsOrderVO.getTexts());
 			pstmt.setInt(13, rsOrderVO.getSta());
-			
+
 			pstmt.executeUpdate();
-			
+
 			rs = pstmt.getGeneratedKeys();
-			
+
 			if (rs.next()) {
 				Integer key = rs.getInt(1); // �u�䴩�����ޭȨ��o�ۼW�D���
 				rsOrderVO.setOrderId(key);
 //				System.out.println("�ۼW�D��� = " + key + "(��s�W���\���\�I�s��)");
-			} 
+			}
 
 			// Handle any driver errors
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} finally {
-			
+
 			if (rs != null) {
 				try {
 					rs.close();
@@ -89,7 +90,7 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 					se.printStackTrace(System.err);
 				}
 			}
-			
+
 			if (con != null) {
 				try {
 					con.close();
@@ -98,16 +99,16 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 				}
 			}
 		}
-		
+
 		return rsOrderVO;
 
 	}
-	
+
 	@Override
 	public RsOrderVO insert2(RsOrderVO rsOrderVO) {
 
 		Connection con = null;
-		
+
 		String[] cols = { "orderId" };
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -120,22 +121,22 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 			pstmt.setInt(1, rsOrderVO.getUserId());
 			pstmt.setInt(2, rsOrderVO.getCardId());
 			pstmt.setInt(3, rsOrderVO.getDeliveryAddId());
-						
+
 			pstmt.executeUpdate();
-			
+
 			rs = pstmt.getGeneratedKeys();
-			
+
 			if (rs.next()) {
-				Integer key = rs.getInt(1); 
+				Integer key = rs.getInt(1);
 				rsOrderVO.setOrderId(key);
 
-			} 
+			}
 
 			// Handle any driver errors
 		} catch (SQLException se) {
 			se.printStackTrace();
 		} finally {
-			
+
 			if (rs != null) {
 				try {
 					rs.close();
@@ -150,7 +151,7 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 					se.printStackTrace(System.err);
 				}
 			}
-			
+
 			if (con != null) {
 				try {
 					con.close();
@@ -159,11 +160,11 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 				}
 			}
 		}
-		
+
 		return rsOrderVO;
 
 	}
-	
+
 	@Override
 	public void update(RsOrderVO rsOrderVO) {
 
@@ -172,7 +173,6 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 
 		try {
 
-			
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
 			pstmt = con.prepareStatement(UPDATE);
 
@@ -190,8 +190,7 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 			pstmt.setString(12, rsOrderVO.getTexts());
 			pstmt.setInt(13, rsOrderVO.getSta());
 			pstmt.setInt(14, rsOrderVO.getOrderId());
-			
-			
+
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -228,9 +227,9 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 			pstmt = con.prepareStatement(DELETE);
 
 			pstmt.setInt(1, orderId);
-			
+
 			pstmt.executeUpdate();
-			
+
 		} catch (SQLException se) {
 			se.printStackTrace();
 			// Clean up JDBC resources
@@ -282,7 +281,7 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 				ord.setCount(rs.getInt("count"));
 				ord.setTexts(rs.getString("texts"));
 				ord.setSta(rs.getInt("sta"));
-				
+
 			}
 
 		} catch (SQLException se) {
@@ -376,10 +375,10 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 		}
 		return rsOrderList;
 	}
-	
+
 	@Override
 	public List<RsOrderVO> getOrdersByUserId(Integer userId) {
-		
+
 		List<RsOrderVO> rsOrderList = new ArrayList<>();
 		RsOrderVO ord = null;
 		Connection con = null;
@@ -394,7 +393,7 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				
+
 				ord = new RsOrderVO();
 				ord.setOrderId(rs.getInt("orderId"));
 				ord.setUserId(rs.getInt("userId"));
@@ -447,46 +446,45 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String[] cols = { "orderId" };
-		
+
 		try {
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			
-			//先關閉AutoCommit在executeUpdate之前
+
+			// 先關閉AutoCommit在executeUpdate之前
 			con.setAutoCommit(false);
-			
-			//先新增文章
-			
-			pstmt=con.prepareStatement(INSERT2, cols);
+
+			// 先新增文章
+
+			pstmt = con.prepareStatement(INSERT2, cols);
 			pstmt.setInt(1, rsOrderVO.getUserId());
 			pstmt.setInt(2, rsOrderVO.getCardId());
 			pstmt.setInt(3, rsOrderVO.getDeliveryAddId());
-						
+
 			pstmt.executeUpdate();
-			
-			//抓出剛剛新增的rsorderpk
-			
-			String new_orderid =null;
+
+			// 抓出剛剛新增的rsorderpk
+
+			String new_orderid = null;
 			ResultSet rs = pstmt.getGeneratedKeys();
-			if(rs.next()) {
+			if (rs.next()) {
 				new_orderid = rs.getString(1);
 			}
 			rs.close();
-			
-			//在同時另外一個OrderListDAO
-			
+
+			// 在同時另外一個OrderListDAO
+
 			OrderListDAO orderListDAO = new OrderListDAO();
-			
-			for(OrderListVO orderListVO: list ) {
-				System.out.println("orderListVO="+orderListVO);
+
+			for (OrderListVO orderListVO : list) {
+				System.out.println("orderListVO=" + orderListVO);
 				orderListVO.setOrderId(new Integer(new_orderid));
 				orderListDAO.insertWithRsOrder(orderListVO, con);
-				
+
 			}
-			
+
 			con.commit();
 			con.setAutoCommit(true);
 
-			
 		} catch (SQLException se) {
 			if (con != null) {
 				try {
@@ -497,13 +495,11 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 //					return false;
 				} catch (SQLException excep) {
 					excep.printStackTrace();
-					throw new RuntimeException("rollback error occured. "
-							+ excep.getMessage());
-					
+					throw new RuntimeException("rollback error occured. " + excep.getMessage());
+
 				}
 			}
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
+			throw new RuntimeException("A database error occured. " + se.getMessage());
 			// Clean up JDBC resources
 		} finally {
 			if (pstmt != null) {
@@ -521,6 +517,70 @@ public class RsOrderDAO implements RsOrderDAO_interface{
 				}
 			}
 		}
-		
+
 	}
+
+	@Override
+	public Set<RsOrderVO> getRsOrderByUserId(Integer userId) {
+		Set<RsOrderVO> rsorderset = new LinkedHashSet<RsOrderVO>();
+		RsOrderVO rsorder = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(GET_RSORDER_BY_USERID);
+			pstmt.setInt(1, userId);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				rsorder = new RsOrderVO();
+				rsorder.setOrderId(rs.getInt("orderId"));
+				rsorder.setUserId(rs.getInt("userId"));
+				rsorder.setRestaurantId(rs.getInt("restaurantId"));
+				rsorder.setCardId(rs.getInt("cardId"));
+				rsorder.setDeliveryAddId(rs.getInt("deliveryAddId"));
+				rsorder.setDeliveryMethods(rs.getInt("deliveryMethods"));
+				rsorder.setOrderDay(rs.getDate("orderDay"));
+				rsorder.setResStrTime(rs.getDate("delEndTime"));
+				rsorder.setResEndTime(rs.getDate("resEndTime"));
+				rsorder.setDelStrTime(rs.getDate("delStrTime"));
+				rsorder.setDelEndTime(rs.getDate("delEndTime"));
+				rsorder.setCount(rs.getInt("count"));
+				rsorder.setTexts(rs.getString("texts"));
+				rsorder.setSta(rs.getInt("sta"));
+				rsorderset.add(rsorder);
+			}
+		} catch (SQLException se) {
+			se.printStackTrace();
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return rsorderset;
+	}
+	
+
 }
