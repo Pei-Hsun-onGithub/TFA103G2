@@ -23,7 +23,7 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 	private static final String FIND_MEMBER_PWD = "SELECT * FROM MEMBERINFO WHERE PWD = ?";
 
 	private static final String FIND_BY_EMAIL2 = "SELECT * FROM MEMBERINFO WHERE EMAIL = ? AND PWD = ?";
-
+	private static final String FIND_BY_EMAIL3 = "SELECT * FROM MEMBERINFO WHERE EMAIL = ?";
 
 	static {
 		try {
@@ -378,6 +378,70 @@ public class MemberInfoDAOImpl implements MemberInfoDAO {
 			pstmt = con.prepareStatement(FIND_BY_EMAIL2);
 			pstmt.setString(1, email);
 			pstmt.setString(2, pwd);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				mem = new MemberInfo();
+				mem.setUserId(rs.getInt("USERID"));
+				mem.setEmail(rs.getString("EMAIL"));
+				mem.setPwd(rs.getString("PWD"));
+				mem.setUserName(rs.getString("USERNAME"));
+				mem.setGender(rs.getString("GENDER"));
+				mem.setBirthday(rs.getDate("BIRTHDAY"));
+				mem.setPhone(rs.getString("PHONE"));
+				mem.setPic(rs.getBytes("PIC"));
+				mem.setRegisterDate(rs.getDate("REGISTERDATE"));
+				mem.setGold(rs.getInt("GOLD"));
+				mem.setFeed(rs.getInt("FEED"));
+				mem.setMonsterId(rs.getInt("MONSTERID"));
+				mem.setMonsterNickName(rs.getString("MONSTERNICKNAME"));
+				mem.setLv(rs.getInt("LV"));
+				mem.setExp(rs.getInt("EXP"));
+				mem.setSta(rs.getInt("STA"));
+
+			}
+		} catch (SQLException se) {
+				se.printStackTrace();
+				// Clean up JDBC resources
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+
+
+		return mem;
+	}
+	
+	@Override
+	public MemberInfo selectEmail3(String email) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		MemberInfo mem = null;
+		try {
+
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(FIND_BY_EMAIL3);
+			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 
 			while(rs.next()) {

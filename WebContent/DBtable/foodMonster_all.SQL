@@ -103,7 +103,7 @@ VALUES ('食記入門款', '成功完成0筆訂單3筆食記可獲得20個飼料
 CREATE TABLE MemberInfo (
 	userId				INT AUTO_INCREMENT NOT NULL,
     email				VARCHAR(50),
-    pwd					VARCHAR(25),
+    pwd					VARCHAR(100),
     userName			VARCHAR(25),
     gender				VARCHAR(10),
     birthday			DATETIME,
@@ -129,7 +129,7 @@ VALUES ('2wsx@y.com', '1qaz@WSX', '陳佳燕', '女', '1992-10-16', '0987459122'
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
 VALUES ('4rfv@y.com', '1qaz@WSX', '王宜君', '女', '2006-01-12', '0921618067', '這是大頭貼', '2001-10-26', 20, 100, 1001, '雅亦', 1, 20, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
-VALUES ('stevemjackson@fleckens.hu', 'gNbHkZh3', '潘君聿', '女', '2016-07-16', '0961036280', '這是大頭貼', '2004-04-08', 1000, 20, 1002, '飛琴', 2, 100, 2);
+VALUES ('stevemjackson@fleckens.hu', 'gNbHkZh3', '潘君聿', '女', '2016-07-16', '0961036280', '這是大頭貼', '2004-04-08', 1000, 20, 1002, '飛琴', 2, 100, 5);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
 VALUES ('AmyJWallace@teleworm.us', 'HAa7g3KC', '楊原妹', '女', '1926-07-02', '0961544146', '這是大頭貼', '2007-10-03', 20, 100, 1001, '白蘭', 1, 20, 4);
 INSERT INTO MemberInfo (email, pwd, userName, gender, birthday, phone, pic, registerDate, gold, feed, monsterId, monsterNickName, Lv, exp, sta) 
