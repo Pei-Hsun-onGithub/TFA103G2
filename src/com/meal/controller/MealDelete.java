@@ -6,6 +6,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.meal.model.MealService;
 
@@ -24,18 +25,20 @@ public class MealDelete extends Command {
 	@Override
 	public void execute() throws ServletException, IOException {
 		MealService service = new MealService();
-		// 1. §ì¨ú­¶­±°e¨ÓªºPK­È
+		// 1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½eï¿½Óªï¿½PKï¿½ï¿½
 
 		Integer mealid = new Integer(req.getParameter("mealId"));
 		
 
-		// 2.¤U¬[¸ê®Æ®wÀÉ®×
+		// 2.ï¿½Uï¿½[ï¿½ï¿½Æ®wï¿½É®ï¿½
 		service.changeMealStateAsOffShelf(mealid);
 		
 
-		// 3.®i¥Ü¼h¤Ï¬Mµ²ªG
-
-		req.setAttribute("list", service.getAll());
+		// 3.ï¿½iï¿½Ü¼hï¿½Ï¬Mï¿½ï¿½ï¿½G
+	
+		HttpSession session = req.getSession();
+		Integer restaurantId = (Integer) session.getAttribute("restaurantId");
+		req.setAttribute("list", service.findMealByRestaurant(restaurantId));
 		RequestDispatcher toListallView = req.getRequestDispatcher(this.forwardTo);
 		toListallView.forward(req, res);
 		

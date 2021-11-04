@@ -177,14 +177,11 @@ table tr td img {
 					</thead>
 					<tbody>
 
- 						<jsp:useBean id="list" scope="request" 
- 							type="java.util.List<MealVO>" /> 
-<%-- 
- 	MealService mealSvc = new MealService();
- 	List<MealVO> list = mealSvc.findMealByRestaurant(restaurantId)
-	
-	
---%>
+<%--  						<jsp:useBean id="list" scope="request"  --%>
+<%-- 							type="java.util.List<MealVO>" />   --%>
+
+
+					<!-- "list" key 由mealServlet的action=getAll註冊 -->
 
 						<c:forEach var="mealVO" items="${list}">
 

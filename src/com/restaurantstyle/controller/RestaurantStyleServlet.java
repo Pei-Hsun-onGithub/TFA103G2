@@ -40,7 +40,7 @@ public class RestaurantStyleServlet extends HttpServlet {
 			Integer styleId2 = (Integer) req.getAttribute("styleId2");
 			Integer styleId3 = (Integer) req.getAttribute("styleId3");
 			Integer restaurantId = (Integer) req.getAttribute("restaurantId");
-			RestaurantVO restVO = (RestaurantVO) req.getAttribute("updatedRestVO");
+			RestaurantVO restVO = (RestaurantVO) req.getAttribute("restVO");
 
 
 			// ��ƤJ�w
@@ -60,7 +60,7 @@ public class RestaurantStyleServlet extends HttpServlet {
 
 			// �]�˭nkeep����ƶǦ^view�٭�w��g������
 
-			req.setAttribute("restVO", restVO);
+			session.setAttribute("restVO", restVO);
 
 			RequestDispatcher toView = req.getRequestDispatcher("/pei_pages/vendor_restaurant_updateInfo.jsp");
 			toView.forward(req, res);

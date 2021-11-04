@@ -12,35 +12,66 @@ public class TestPictureBase {
 
 						
 		PictureBaseVO pbd1 = new PictureBaseVO();
-		byte[] pic1 = getPictureByteArray("C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\article\\testImages\\testFA1.JPG");
+		byte[] pic1 = getPictureByteArray("C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\article\\testImages\\FA1-1.JPG");
 		pbd1.setArticleNo(1);
 		pbd1.setPic(pic1);
 		dao.add(pbd1);
 		
 		PictureBaseVO pbd2 = new PictureBaseVO();
-		byte[] pic2 = getPictureByteArray("C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\article\\testImages\\testFA2.JPG");
-		pbd2.setArticleNo(2);
+		byte[] pic2 = getPictureByteArray("C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\article\\testImages\\FA1-2.JPG");
+		pbd2.setArticleNo(1);
 		pbd2.setPic(pic2);
 		dao.add(pbd2);
 //		
 		
 		PictureBaseVO pbd3 = new PictureBaseVO();
-		byte[] pic3 =getPictureByteArray("C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\article\\testImages\\testFA3.JPG");		
+		byte[] pic3 =getPictureByteArray("C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\article\\testImages\\FA2-1.JPG");		
 		pbd3.setPic(pic3);		
-		pbd3.setArticleNo(3);
+		pbd3.setArticleNo(2);
 		dao.add(pbd3);
 		
 		PictureBaseVO pbd4 = new PictureBaseVO();
-		byte[] pic4 =getPictureByteArray("C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\article\\testImages\\testFA4.JPG");		
+		byte[] pic4 =getPictureByteArray("C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\article\\testImages\\FA2-2.JPG");		
 		pbd4.setPic(pic4);		
-		pbd4.setArticleNo(4);
+		pbd4.setArticleNo(2);
 		dao.add(pbd4);
 //		
 		PictureBaseVO pbd5 = new PictureBaseVO();
-		byte[] pic5 =getPictureByteArray("C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\article\\testImages\\testFA5.JPG");		
+		byte[] pic5 =getPictureByteArray("C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\article\\testImages\\FA3.JPG");		
 		pbd5.setPic(pic5);		
-		pbd5.setArticleNo(5);
+		pbd5.setArticleNo(3);
 		dao.add(pbd5);
+		
+		PictureBaseVO pbd6 = new PictureBaseVO();
+		byte[] pic6 =getPictureByteArray("C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\article\\testImages\\FA4.JPG");		
+		pbd6.setPic(pic6);		
+		pbd6.setArticleNo(4);
+		dao.add(pbd6);
+		
+		PictureBaseVO pbd7 = new PictureBaseVO();
+		byte[] pic7 =getPictureByteArray("C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\article\\testImages\\FA5.JPG");		
+		pbd7.setPic(pic7);		
+		pbd7.setArticleNo(5);
+		dao.add(pbd7);
+		
+		PictureBaseVO pbd8 = new PictureBaseVO();
+		byte[] pic8 =getPictureByteArray("C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\article\\testImages\\FA6-1.JPG");		
+		pbd8.setPic(pic8);		
+		pbd8.setArticleNo(6);
+		dao.add(pbd8);
+		
+		PictureBaseVO pbd9 = new PictureBaseVO();
+		byte[] pic9 =getPictureByteArray("C:\\TFA103_WebApp\\eclipse_WTP_workspace1\\TFA103G2\\WebContent\\article\\testImages\\FA6-2.JPG");		
+		pbd9.setPic(pic9);		
+		pbd9.setArticleNo(6);
+		dao.add(pbd9);
+		
+		
+		
+		
+		
+		
+		
 		
 //		byte[] pic3 =getPictureByteArray("C:\\Users\\Tibame_T14\\Desktop\\tomcat2.gif");		
 //		pbd.setPic(pic3);		

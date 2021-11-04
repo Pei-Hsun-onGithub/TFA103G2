@@ -92,7 +92,7 @@ public class LoginHandler extends HttpServlet {
 				res.sendRedirect(location);
 				return;
 			} else {
-				res.sendRedirect(req.getContextPath() + "/pei_pages/vendor_meal_upload.jsp"); 														// (-->如無來源網頁:則重導至login_success.jsp)
+				res.sendRedirect(req.getContextPath() + "/pei_pages/vendor_restaurant_updateInfo.jsp"); 														// (-->如無來源網頁:則重導至login_success.jsp)
 			}
 		}
 	}

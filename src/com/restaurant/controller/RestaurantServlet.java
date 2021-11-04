@@ -124,7 +124,6 @@ public class RestaurantServlet extends HttpServlet {
 				return;
 				
 			}
-
 		}
 	}
 }

@@ -316,14 +316,8 @@ form textarea {
 								<div class="col-sm-6"></div>
 							</div>
 							
-							<div class="row">
-								<label class="col-sm-3 col-form-label">餐廳</label>
-								<div class="col-sm-3">
-									<input type="text" class="form-control" name="restaurantId"
-										value="<%=(mealVO == null) ? "7002" : mealVO.getRestaurantId()%>">
-								</div>
-								<div class="col-sm-6"></div>
-							</div>
+						
+						
 							
 							<%--         送出的按鈕                --%>
 

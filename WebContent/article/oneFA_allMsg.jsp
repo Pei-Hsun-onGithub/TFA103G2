@@ -8,6 +8,7 @@
 <%@ page import="com.memberinfo.model.*"%>
 <%@ page import="com.favofoodarticle.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%
   FoodArticleVO faVO = (FoodArticleVO) request.getAttribute("faVO"); //FoodArticleServlet.java(Concroller), 存入req的faVO物件
@@ -78,7 +79,7 @@
 <style>
 
 div.author {
-	display:inline-block;
+
 
 }
 
@@ -182,9 +183,6 @@ p.myP{
 							<div class="authorname">${oneMebVO.userName}</div>			                                                                                       
                         </div>
                         
-<!--                         <div class="thumb">                                     -->
-                            
-<!--                          </div> -->
 						
 						<span class="cat"> <span class="date"> <i
 								class="ri-calendar-todo-fill"></i> <%=faVO.getArticleDate()%>
@@ -265,7 +263,7 @@ p.myP{
 									</c:if>
 									</c:forEach>
 									</p>																	
-									<span>${msgVO.msgDate}</span>
+									<span><fmt:formatDate value="${msgVO.msgDate}" pattern="yyyy-MM-dd HH:mm"/></span>
 									<p>${msgVO.msgContent}</p>
 									<input type="hidden" value="${msgVO.sta}">
 								</div>
@@ -281,38 +279,30 @@ p.myP{
 
 					<form class="default-form-wrap" method="post" action="msg.do">
 						<h5 class="title">留言</h5>
+						
 						<div class="row">
-							<div class="col-md-6">
-								<div class="single-input-wrap">
-									<input id="myid" type="hidden" class="form-control" name="userId" value="<%=userNow.getUserId() %>">
-									<input id="myarticleno" type="hidden" name="articleNo" value="<%=faVO.getArticleNo()%>"/>
-										 
-								</div>
-							</div>
-							<div class="col-md-6">								
-
-							</div>
-
 							<div class="col-12">
 								<div class="single-textarea-wrap">
 
 									<textarea rows="4" placeholder="Message..." name="msgContent"></textarea>
 									<input type="hidden" value="1" name="sta">
-
 								</div>
 							</div>
+							
+							<div class="col-md-6">
+								<button type="submit" class="btn btn-base">Submit your Message</button>						
+								<input type="hidden" name="action" value="msgAdd">
+							</div>
+							
 							<div class="col-md-6">
 								<div class="single-input-wrap">
 									<input id="myid" type="hidden" class="form-control" name="userId" value="<%=userNow.getUserId() %>">
 									<input id="myarticleno" type="hidden" name="articleNo" value="<%=faVO.getArticleNo()%>"/>										 
 								</div>
-							</div>
-															
-							
+							</div>						
 						</div>
-						<button type="submit" class="btn btn-base">Submit your
-							Message</button>
-						<input type="hidden" name="action" value="msgAdd">
+						
+						
 					</form>
 				</div>
 				

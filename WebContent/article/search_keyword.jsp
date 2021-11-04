@@ -168,7 +168,7 @@
                                     <div class="wrap-hover-area">
                                         <p class="ellipsis"> ${somefaVO.articleContent}
                                         </p> 
-                                        <a class="link-btn" href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${somefaVO.articleNo}">Read More</a> 
+                                        <a class="link-btn" href="<%=request.getContextPath()%>/article/fa.do?action=getOne_For_Display&articleNo=${somefaVO.articleNo}&userId=${userNow.userId}">Read More</a> 
                                     </div>                       
                                 </div> 
                             </div>                                                                                  
