@@ -2,6 +2,7 @@ package com.rsorder.model;
 
 import java.util.*;
 
+
 import com.orderlist.model.OrderListVO;
 
 public interface RsOrderDAO_interface {
@@ -13,6 +14,7 @@ public interface RsOrderDAO_interface {
 	public RsOrderVO findByPK(Integer orderId);
 	public List<RsOrderVO> getAll();
 	public List<RsOrderVO> getOrdersByUserId(Integer userId);
+	public Set<RsOrderVO> getRsOrderByUserId(Integer userId);
 	public void insertWithOl (RsOrderVO rsOrderVO, List<OrderListVO> list);
-
+	
 }
