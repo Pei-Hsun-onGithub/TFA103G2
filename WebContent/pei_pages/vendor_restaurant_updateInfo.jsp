@@ -265,6 +265,11 @@ div.my-chooseType ul li button{
 							<%
 								RestaurantVO restVO = (RestaurantVO) session.getAttribute("restVO");
 								session.setAttribute("restVO", restVO);
+								Integer restaurantId = (Integer)session.getAttribute("restaurantId");
+								
+								RestaurantService restSvc = new RestaurantService();
+								RestaurantVO registeredRestaurantData = restSvc.getRestaurantByPrimaryKey(restaurantId);
+								
 							%>
 
 
@@ -274,7 +279,7 @@ div.my-chooseType ul li button{
 									<div class="single-input-wrap">
 
 										<input type="text" class="form-control" name="restaurantName"
-											value="<%=(restVO == null) ? "欣葉日本料理" : restVO.getRestaurantName()%>" onkeyup="errorHandler(0);">
+											value="<%=(restVO == null) ? registeredRestaurantData.getRestaurantName() : restVO.getRestaurantName()%>" onkeyup="errorHandler(0);">
 									</div>
 								</div>
 								
@@ -329,9 +334,7 @@ pageContext.setAttribute("now", now);
 
 							</div>
 
-<%
-RestaurantService restSvc = new RestaurantService();
-%>
+
 
 							<div class="row">
 								<div class="col-md-2 my-time-setting-block">
