@@ -6,7 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+
+import com.card.model.CardVO;
 
 import util.copy.Util;
 
@@ -17,6 +21,7 @@ public class FavoFoodArticleJDBCDAO implements FavoFoodArticleDAO_interface {
 	public static final String DELETE = "DELETE FROM FavoFoodArticle WHERE userId =? && articleNo=? ";
 	public static final String FIND_BY_PK = "SELECT * FROM FavoFoodArticle WHERE userId = ? && articleNo= ?";
 	public static final String GET_ALL = "SELECT * FROM FavoFoodArticle";
+	public static final String GET_ALL_FAVO_FOOD_ARTICLE_BY_USER_ID = "SELECT * FROM FAVOFOODARTICLE WHERE USERID = ?";
 	
 	static {
 		try {
@@ -206,6 +211,57 @@ public class FavoFoodArticleJDBCDAO implements FavoFoodArticleDAO_interface {
 		}
 		
 		return favofooarList;
+	}
+	
+	@Override
+	public Set<FavoFoodArticleVO> getAllFavoFoodArticleByUserId(Integer userId) {
+		Set<FavoFoodArticleVO> favofoodarticleset = new LinkedHashSet<FavoFoodArticleVO>();
+		FavoFoodArticleVO favofoodarticle = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(GET_ALL_FAVO_FOOD_ARTICLE_BY_USER_ID);
+			pstmt.setInt(1, userId);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				favofoodarticle = new FavoFoodArticleVO();
+				favofoodarticle.setArticleNo(rs.getInt("articleNo"));
+				favofoodarticle.setUserId(rs.getInt("userId"));
+				favofoodarticleset.add(favofoodarticle);							
+			}
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return favofoodarticleset;
 	}
 	
 }

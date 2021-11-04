@@ -78,7 +78,7 @@
 		</div>
 
 		<div class="memberlist">
-							<ul>
+				<ul>
 				<li class="one"><a
 					href="<%=request.getContextPath()%>/login/memberinfo.do?action=getOne">個人檔案</a></li>
 				<li class="two"><a
@@ -91,7 +91,8 @@
 					href="<%=request.getContextPath()%>/memberinfo/HistoryOrderServlet.do?action=getAllOrderList">歷史訂單</a></li>
 				<li class="six"><a
 					href="<%=request.getContextPath()%>/article/allFA_member.jsp">文章管理</a></li>
-				<li class="seven"><a href="#">我的收藏</a></li>
+				<li class="seven"><a
+					href="<%=request.getContextPath()%>/Gary_pages/Member07.jsp">我的收藏</a></li>
 			</ul>
 		</div>
 

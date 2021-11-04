@@ -101,7 +101,7 @@
   border-bottom: 1px black solid;
 }
 
-.showinfo2, .showinfo3{
+.showinfo2{
   width:900px;
   height:60px;
   margin:0px auto;
@@ -137,8 +137,7 @@
 
 
 .showinfo .no,
-.showinfo2 .no,
-.showinfo3 .no{
+.showinfo2 .no{
   width:40px;
   height:60px;
   /* margin-left: 50px; */
@@ -151,21 +150,19 @@
 
 
 .showinfo .ordernumber,
-.showinfo2 .ordernumber,
-.showinfo3 .ordernumber{
-  width:200px;
-  height:60px;
+.showinfo2 .ordernumber{
+  width:500px;
+  height:100px;
   /* margin-left: 50px; */
   font-size: 16px;
-  line-height: 60px;
+/*   line-height: 60px; */
   text-align: center;
   /* display:inline; */
   vertical-align:middle;
 }
 
 .showinfo .orderday,
-.showinfo2 .orderday,
-.showinfo3 .orderday{
+.showinfo2 .orderday{
   width:100px;
   height:60px;
   /* margin-left: 30px; */
@@ -176,19 +173,6 @@
   vertical-align:middle;
 }
 
-.showinfo .ordername,
-.showinfo2 .ordername,
-.showinfo3 .ordername{
-  width:100px;
-  height:60px;
-  /* margin-left: 80px; */
-  /* font-size: 30px; */
-  /* display:inline; */
-  line-height:60px;
-  font-size: 16px;
-  text-align: center;
-  vertical-align:middle;
-}
 
 
 
