@@ -1,0 +1,142 @@
+.profile {
+  width:180px;
+  height:80px;
+  position:absolute;
+  left:200px;
+  top:120px;
+  border-bottom: 1px solid lightgray;
+}
+.profile img {
+  margin-bottom: 45px;
+  width:50px;
+  height:50px;
+  /* border: 1px black solid; */
+  /* display: inline-block; */
+}
+.profile ul {
+  display: inline-block;
+}
+
+.profile .nickname {
+  font-size: 20px;
+  font-weight:bold;
+  list-style: none;
+}
+
+.profile .edit {
+  font-size: 15px;
+  color: gray;
+  list-style: none;
+}
+
+.memberlist {
+  font-size: 20px;
+  position:absolute;
+  left:200px;
+  top:230px;
+}
+.memberlist ul {
+  padding:0px;
+}
+
+.memberlist li {
+  width:180px;
+  margin:0 auto;
+  border-top: 1px lightgray solid;
+  border-bottom: 1px lightgray solid;
+  list-style: none;
+  padding-left: 10px;
+}
+
+.memberlist li.seven {
+  background-color: rgba(88, 169, 175, 1);
+  color: white;
+  font-weight:bold;
+}
+
+.content {
+  position:absolute;
+  background-color: #f5f4f3;
+  left:450px;
+  top:120px;
+  width:1000px;
+  height: 550px;
+  border: 1px lightgray solid;
+}
+
+.title {
+  width: 1000px;
+  height: 80px;
+  background-color: rgba(88, 169, 175, 1);
+}
+
+.title div.titlebigname {
+  width: 1000px;
+  height:35px;
+  font-size:25px;
+  padding-top: 8px;
+  padding-left: 20px;
+  /* line-height:40px; */
+  color:white;
+}
+
+.title div.titlesmallname {
+  width: 1000px;
+  height:30px;
+  padding-top: 8px;
+  padding-left: 22px;
+  color:white;
+}
+
+.showinfo{
+  width:900px;
+  height:150px;
+  position:relative;
+  top:40px;
+  margin:0px auto;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-around; */
+  align-items: center;
+  border-bottom: 1px  lightgray solid;
+  border-top: 1px  lightgray solid;
+}
+
+
+
+.showinfo .pic{
+  width:150px;
+  /* height: 150px; */
+  line-height: 150px;
+    /* border: 1px lightgray solid; */
+}
+
+
+.showinfo .articlename{
+  margin-left:20px;
+  height: 110px;
+  width:550px;
+  font-size: 20px;
+  /* text-align: center; */
+  /* line-height: 60px; */
+  font-weight: bold;
+  /* text-align: center; */
+  /* line-height: 30px; */
+  /* border: 1px lightgray solid; */
+}
+
+
+
+.showinfo .detail{
+  margin-left:50px;
+  width:150px;
+  /* height: 50px; */
+  font-size: 16px;
+  text-align: right;
+  /* line-height: 100px; */
+  color:black;
+}
+
+.total {
+  zoom:80%;
+  }
