@@ -12,6 +12,8 @@ import javax.servlet.http.*;
 
 import com.card.model.*;
 import com.memberinfo.model.*;
+import com.rsorder.model.RsOrderDAOService;
+import com.rsorder.model.RsOrderVO;
 
 @MultipartConfig
 
@@ -25,7 +27,9 @@ public class CardServlet extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-
+		RsOrderDAOService rsOrderSvc = new RsOrderDAOService();
+		Set<RsOrderVO> rsorderset = rsOrderSvc.getRsOrderByUserId(20210001);
+		System.out.println(rsorderset);
 		if ("getAllCard".equals(action)) {
 			MemberInfoService memberSvc = new MemberInfoService();
 			HttpSession session = req.getSession();

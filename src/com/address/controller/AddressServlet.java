@@ -35,7 +35,7 @@ public class AddressServlet extends HttpServlet {
 			MemberInfo mem = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
 			req.setAttribute("memberinfo", mem);
 			Integer member = mem.getUserId();
-			System.out.println("yyyy");
+//			System.out.println("yyyy");
 			AddressService addressSvc = new AddressService();
 			Set<AddressVO> addressset = addressSvc.getAddressByUserId(member);
 			req.setAttribute("addressset", addressset);
@@ -62,7 +62,7 @@ public class AddressServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			MemberInfo member = memberSvc.getOneMemberInfo((Integer) session.getAttribute("userId"));
 			req.setAttribute("memberinfo", member);
-			System.out.println("yyyy");
+//			System.out.println("yyyy");
 System.out.println("xxxxx =" +req.getParameter("deliveryAddId"));
 			Integer deliveryAddId = new Integer(req.getParameter("deliveryAddId"));
 			AddressService addressSvc = new AddressService();

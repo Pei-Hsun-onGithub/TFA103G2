@@ -49,7 +49,7 @@ public class SimulateOrderSuccess extends HttpServlet{
 			
 			RsOrderDAOService OrderItemSvc = new RsOrderDAOService();
 			// 模擬一筆訂單成功送出
-			RsOrderVO orderVO = OrderItemSvc.addRsOrderDAO(20210020, 7001, 1, 1, 0, Date.valueOf(LocalDate.of(2021, 4, 1)), Date.valueOf(LocalDate.of(2021, 4, 2)), Date.valueOf(LocalDate.of(2021, 4, 3)), Date.valueOf(LocalDate.of(2021, 4, 1)), Date.valueOf(LocalDate.of(2021, 4, 1)), 10, "很快送達", 1);
+//			RsOrderVO orderVO = OrderItemSvc.addRsOrderDAO(20210020, 7001, 1, 1, 0, .valueOf(LocalDate.of(2021, 4, 1)), Date.valueOf(LocalDate.of(2021, 4, 2)), Date.valueOf(LocalDate.of(2021, 4, 3)), Date.valueOf(LocalDate.of(2021, 4, 1)), Date.valueOf(LocalDate.of(2021, 4, 1)), 10, "很快送達", 1);
 		
 			
 			// 使用到的Services

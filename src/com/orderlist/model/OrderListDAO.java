@@ -16,8 +16,10 @@ public class OrderListDAO implements OrderListDAO_interface {
 	private static final String DELETE = "DELETE FROM OrderList WHERE orderListId = ?";
 	private static final String GET_ALL = "SELECT * FROM OrderList";
 	private static final String FIND_BY_PK = "SELECT * FROM OrderList WHERE orderListId = ?";
-
-	static {
+	private static final String GET_TOTAL_PRICE_BT_ORDER_ID = "select sum(quantity * unitprice) as total from orderlist where orderid = ?";
+	private static final String GET_ALL_ORDERLIST_BY_ORDER_ID = "SELECT * FROM ORDERLIST WHERE ORDERID = ? ";
+	
+			static {
 		try {
 			Class.forName(Util.DRIVER);
 		} catch (ClassNotFoundException ce) {
@@ -310,4 +312,113 @@ public class OrderListDAO implements OrderListDAO_interface {
 			}
 		}
 	}
+	
+	@Override
+	public Integer getTotalPriceByOrderId(Integer orderId) {
+		Integer total = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(GET_TOTAL_PRICE_BT_ORDER_ID);
+			pstmt.setInt(1, orderId);
+			rs = pstmt.executeQuery();
+			
+			
+			while (rs.next()) {
+				total = rs.getInt(1);	
+			}
+			
+			
+			
+			
+		}catch (SQLException se) {
+			se.printStackTrace();
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return total;
+		
+	}
+	
+	@Override
+	public Set<OrderListVO> getAllOrderListByOrderId(Integer orderId) {
+		Set<OrderListVO> orderlistset = new LinkedHashSet<OrderListVO>();
+		OrderListVO orderlist = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(GET_ALL_ORDERLIST_BY_ORDER_ID);
+			pstmt.setInt(1, orderId);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				
+				orderlist = new OrderListVO();
+				orderlist.setOrderId(rs.getInt("orderId"));
+				orderlist.setMealId(rs.getInt("mealId"));
+				orderlist.setQuantity(rs.getInt("quantity"));
+				orderlist.setUnitPrice(rs.getInt("unitPrice"));
+				orderlist.setNote(rs.getString("note"));
+				orderlist.setOrderListId(rs.getInt("orderListId"));
+				orderlistset.add(orderlist);
+				
+			}
+			
+	}catch (SQLException se) {
+		se.printStackTrace();
+		// Clean up JDBC resources
+	} finally {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace(System.err);
+			}
+		}
+	}
+	return orderlistset;
+		}
 }
