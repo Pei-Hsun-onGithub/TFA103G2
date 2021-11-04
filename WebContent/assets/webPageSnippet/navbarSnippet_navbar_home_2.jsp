@@ -158,7 +158,8 @@ if(achiProgress == null) {
 
 					<li><a href="<%=request.getContextPath()%>/meal/Cart.jsp"><i
 							class="fas fa-shopping-cart"></i></a></li>
-					<li><i class="fas fa-crown"></i></li>
+					
+					<li><a href="<%=request.getContextPath()%>/Signout">µn¥X</a></li>
 				</ul>
 			</div>
 
