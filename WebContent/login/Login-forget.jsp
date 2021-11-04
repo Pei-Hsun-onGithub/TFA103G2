@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,28 +44,27 @@
 <link rel="stylesheet"
 	href=https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&family=Bebas+Neue&family=Satisfy&family=Quattrocento:wght@400;700&display=swap>
 
-    <style>
-        div.overlay{
-            /* display:block !important; */
-            z-index:100;
-        }
-    </style>
+<style>
+div.overlay {
+	/* display:block !important; */
+	z-index: 100;
+}
+</style>
 </head>
 
 <body class='sc5'>
-    <!-- preloader area start -->
-    <div class="preloader" id="preloader">
-        <div class="preloader-inner">
-            <div id="wave1">
-            </div>
-            <div class="spinner">
-                <div class="dot1"></div>
-                <div class="dot2"></div>
-            </div>
-        </div>
-    </div>
-    <!-- preloader area end -->
-    
+	<!-- preloader area start -->
+	<div class="preloader" id="preloader">
+		<div class="preloader-inner">
+			<div id="wave1"></div>
+			<div class="spinner">
+				<div class="dot1"></div>
+				<div class="dot2"></div>
+			</div>
+		</div>
+	</div>
+	<!-- preloader area end -->
+
 	<!-- navbar start -->
 	<header class="navbar-area">
 		<nav class="navbar navbar-expand-lg">
@@ -97,15 +97,29 @@
 			</div>
 
 			<!---------------------------------- table內帳號輸入 ---------------------------------->
-			<form class="content content1" action="javascript:;" method="post">
+
+			<FORM class="content content1" id="forgetform" METHOD="post"
+				ACTION="<%=request.getContextPath()%>/LoginForget">
 				<div id="right" class="two-thirds">
 					<fieldset>
 						<h1 class="lgd" style="color: black;">尋找密碼</h1>
 						<p>輸入你電子郵件地址</p>
-						<input type="username" id="username" class="username_email" name="username" placeholder="您的電子郵件地址" required> 
-						<input type="button" value="送出" class="btn" id="submit" onclick="myFormCheck()" padd />
+						<%-- 錯誤表列 --%>
+						
+						<c:if test="${not empty errorMsgs}">
+							<ul>
+								<c:forEach var="message" items="${errorMsgs}">
+									<li style="color: red">${message}</li>
+								</c:forEach>
+							</ul>
+						</c:if>
+						<input type="text" id="username" class="username_email"
+							name="email" placeholder="您的電子郵件地址" required> <input
+							type="button" value="送出" class="btn" id="submitext"> <input
+							type="hidden" name="action" value="forgot">
 					</fieldset>
 				</div>
+
 			</form>
 		</div>
 	</div>
@@ -147,11 +161,15 @@
 	<script src="<%=request.getContextPath()%>/assets/js/counterup.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/waypoint.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/magnific.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/isotope.pkgd.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/nice-select.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/fontawesome.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/owl.min.js"></script>
-	<script src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/assets/js/slick-slider.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/wow.min.js"></script>
 	<script src="<%=request.getContextPath()%>/assets/js/tweenmax.min.js"></script>
 
@@ -159,6 +177,12 @@
 	<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
 	<!-- new js   -->
 	<script src="<%=request.getContextPath()%>/assets/js/Login-forget.js"></script>
+<script>
+	$("input#submitext").on("click", function(){
+		$("form#forgetform").submit();
+	});
 
+
+</script>
 </body>
 </html>

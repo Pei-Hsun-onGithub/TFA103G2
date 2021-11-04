@@ -129,6 +129,10 @@ public class MemberInfoService {
 	public MemberInfo findByEmail2(String email, String pwd) {
 		return dao.selectEmail2(email, pwd);
 	}
+	
+	public MemberInfo findByEmail3(String email) {
+		return dao.selectEmail3(email);
+	}
 
 
 }
