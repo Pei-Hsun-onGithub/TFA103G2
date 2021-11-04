@@ -36,7 +36,7 @@ public class MealSingle extends HttpServlet {
 		List<MealVO> mealList = new ArrayList<>();
 		List<Integer> choice = new ArrayList<>();
 		while (choice.size() < 3) {
-			int a = (int) (Math.random() * (mealListall.size()) + 500);
+			int a = (int) (Math.random() * (mealListall.size()) + 501);
 			if (!choice.contains(a)) {
 				choice.add(a);
 			}
