@@ -79,7 +79,7 @@
 				<li class="four"><a
 					href="<%=request.getContextPath()%>/address/address.do?action=getAllAddress">外送地址管理</a></li>
 				<li class="five"><a
-					href="<%=request.getContextPath()%>/memberinfo/OrderListServlet.do?action=getAllOrderList">歷史訂單</a></li>
+					href="<%=request.getContextPath()%>/memberinfo/HistoryOrderServlet.do?action=getAllOrderList">歷史訂單</a></li>
 				<li class="six"><a
 					href="<%=request.getContextPath()%>/article/allFA_member.jsp">文章管理</a></li>
 				<li class="seven"><a href="#">我的收藏</a></li>

@@ -181,12 +181,22 @@
 	
 		<servlet>
 		<servlet-name>MemberOrderListServlet</servlet-name>
-		<servlet-class>com.orderlist.controller.MemberOrderListServlet</servlet-class>
+		<servlet-class>com.rsorder.controller.MemberHistoryOrderServlet</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>CardServlet</servlet-name>
-		<url-pattern>/memberinfo/OrderListServlet.do</url-pattern>
+		<servlet-name>MemberOrderListServlet</servlet-name>
+		<url-pattern>/memberinfo/HistoryOrderServlet.do</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>MemberMealPic</servlet-name>
+		<servlet-class>com.rsorder.controller.MemberMealPic</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MemberMealPic</servlet-name>
+		<url-pattern>/memberinfo/MemberMealPic.do</url-pattern>
 	</servlet-mapping>
 	
 	

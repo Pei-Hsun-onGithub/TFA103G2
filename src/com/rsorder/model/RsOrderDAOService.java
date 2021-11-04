@@ -2,6 +2,7 @@ package com.rsorder.model;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 import com.orderlist.model.OrderListVO;
 import com.rsorder.model.RsOrderVO;
@@ -88,6 +89,10 @@ public class RsOrderDAOService {
 	public List<RsOrderVO> getOrdersByUserId(Integer userId) {
 		
 		return this.dao.getOrdersByUserId(userId);
+	}
+	
+	public Set<RsOrderVO> getRsOrderByUserId(Integer userId) {
+		return dao.getRsOrderByUserId(userId);
 	}
 	
 	public void insertWithOl(RsOrderVO rsOrderVO, List<OrderListVO> list) {

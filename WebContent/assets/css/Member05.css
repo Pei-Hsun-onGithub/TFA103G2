@@ -222,8 +222,7 @@ display:hidden;
    visibility:hidden;
 }
 
-.showinfo2 .showtrack  button,
-.showinfo3 .showtrack  button{
+.showinfo2 .showtrack  .detail{
   background-color: rgba(88, 169, 175, 1);
   width:120px;
   height:40px;

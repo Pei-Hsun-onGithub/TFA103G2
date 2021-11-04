@@ -490,7 +490,7 @@ public class MemberInfoServlet extends HttpServlet {
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("memberInfo", memberInfo);
 					req.setAttribute("memberInfo2", memberInfo2);
-					RequestDispatcher failureView = req.getRequestDispatcher("/login/Login-vendor-regist.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/pei_pages/vendor_restaurant_addInfo.jsp");
 					failureView.forward(req, res);
 					return;
 				}
